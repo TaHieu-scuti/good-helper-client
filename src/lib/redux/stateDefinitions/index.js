@@ -1,3 +1,4 @@
 export default {
-  me: null
+  me: null,
+  http: null
 }

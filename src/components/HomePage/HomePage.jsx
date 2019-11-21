@@ -1,4 +1,12 @@
 import React, { Component } from 'react';
+import Header from './../Layouts/Header';
+import Footer from './../Layouts/Footer';
+import Category from './Category';
+import RatingHelper from './RatingHelper';
+import Working from './Working';
+import Total from './Total';
+import Feedback from './Feedback';
+import Content from './Content';
 
 export class HomePage extends Component {
   constructor(props) {
@@ -7,8 +15,15 @@ export class HomePage extends Component {
   }
   render() {
     return (
-      <div>
-        <h1>Hello world</h1>
+      <div id="main-wrapper">
+        <Header />
+        <Category />
+        <RatingHelper />
+        <Content />
+        <Working />
+        <Total />
+        <Feedback />
+        <Footer />
       </div>
     )
   }

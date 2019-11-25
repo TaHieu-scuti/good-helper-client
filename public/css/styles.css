@@ -6724,8 +6724,17 @@ button.close:hover, button.close:focus{
   background:#d83325; 
 }
 .pop-login {
+  width: 100%;
+  padding-top: 40px;
+    margin-left: 0%;
     margin-top:8px;
   border-radius:4px;
+}
+
+.form-group.css {
+  width: 50%;
+  margin: auto;
+  padding-top: 30px;
 }
 
 

@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import { injectIntl, FormattedMessage } from "react-intl";
 
 export class HomePage extends Component {
   constructor(props) {
@@ -6,12 +7,16 @@ export class HomePage extends Component {
     this.state = {};
   }
   render() {
+    console.log(this.props);
     return (
       <div>
-        <h1>Hello world</h1>
+        <h1> {this.props.intl.formatMessage({ id: "login" })}</h1>
+        <FormattedMessage id="login">
+          
+        </FormattedMessage>
       </div>
-    )
+    );
   }
 }
 
-export default HomePage
+export default injectIntl(HomePage);

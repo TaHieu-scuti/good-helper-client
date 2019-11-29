@@ -2,6 +2,7 @@ export default {
       'login': 'Đăng nhập',
       'email': 'Email',
       'password': 'Mật khẩu',
+      'sign_up': 'Đăng kí',
       'forget-password': 'Quên mật khẩu',
        'home': 'Trang chủ',
        'job': 'Công việc',

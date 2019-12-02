@@ -35,21 +35,19 @@ class LoginPage extends Component {
       password: this.state.password
     };
     this.props.http({
-      url: 'api/auth/login',
+      url: '/auth/login',
       method: 'POST',
-      data: data,
+      data: data
     })
     .then(res => { 
-      const token = res.data.original.result.token;
+      let token = res.data.response.token
       this.props.http({
-        url: 'api/auth/user/get',
-        method: 'GET',
+        url: '/auth/user/get',
         headers: {
-          'Authorization': 'bearer ' + token
+          'Authorization': 'Bearer ' + token
         }
-      })
-      .then(res => {
-        console.log(res.data)
+      }).then(res => {
+        console.log(res)
       })
     })
     .catch(err => {
@@ -57,11 +55,8 @@ class LoginPage extends Component {
     });
   
   };
-  
-  
 
   render() {
-    console.log(this.props.error_description);
     return (
       <div id="main-wrapper">
         <div className="topbar tp-rlt" id="top">

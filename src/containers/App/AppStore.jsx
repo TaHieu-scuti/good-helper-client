@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
-
 import storage from 'redux-persist/es/storage';
 import {persistReducer, persistStore} from 'redux-persist';
 import {PersistGate} from 'redux-persist/integration/react';
@@ -26,9 +25,9 @@ class Store extends Component {
      * @type {AxiosInstance}
      */
     const http = axios.create({
-      baseURL: 'http://localhost:8000/',
+      baseURL: 'http://3.15.37.125/api',
     });
-    
+
     this.store.dispatch(setHttpClient(http));
     this.persistor = persistStore(this.store);
   }

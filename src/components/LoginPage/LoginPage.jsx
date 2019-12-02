@@ -1,8 +1,67 @@
 import React, { Component } from "react";
 import image from "../../assets/img/logo.png";
+import { injectIntl, FormattedMessage } from "react-intl";
+import { connect } from 'react-redux';
+import { raiseError } from '../../lib/redux/actions';
 
 class LoginPage extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      password: "",
+      errors: []
+    };
+  }
+
+  handleChangeEmail = event => {
+    this.setState({
+      email: event.target.value
+    });
+  };
+
+  handleChangePass = event => {
+    this.setState({
+      password: event.target.value
+    } );
+  };
+
+  login = event => {
+    event.preventDefault();
+
+    const data = {
+      email: this.state.email,
+      password: this.state.password
+    };
+    this.props.http({
+      url: 'api/auth/login',
+      method: 'POST',
+      data: data,
+    })
+    .then(res => { 
+      const token = res.data.original.result.token;
+      this.props.http({
+        url: 'api/auth/user/get',
+        method: 'GET',
+        headers: {
+          'Authorization': 'bearer ' + token
+        }
+      })
+      .then(res => {
+        console.log(res.data)
+      })
+    })
+    .catch(err => {
+      this.props.raiseError(err.response.data.errors)
+    });
+  
+  };
+  
+  
+
   render() {
+    console.log(this.props.error_description);
     return (
       <div id="main-wrapper">
         <div className="topbar tp-rlt" id="top">
@@ -36,7 +95,7 @@ class LoginPage extends Component {
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
-                        Trang chủ
+                        <FormattedMessage id="home"/>
                       </a>
                     </li>
                     <li className="nav-item dropdown">
@@ -48,22 +107,23 @@ class LoginPage extends Component {
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
-                        Công việc <i className="fa fa-angle-down m-l-5" />
+                        <FormattedMessage id="job"/> <i className="fa fa-angle-down m-l-5" />
                       </a>
                       <ul className="b-none dropdown-menu font-14 animated fadeInUp">
                         <li>
                           <a className="dropdown-item" href="blog.html">
-                            Việc cần gấp
+                          <FormattedMessage id="urgent_job"/>
                           </a>
                         </li>
                         <li>
                           <a className="dropdown-item" href="pricing.html">
-                            Việc trong ngày
+                          <FormattedMessage id="the_work_is_done_in_day"/>
                           </a>
                         </li>
                         <li>
                           <a className="dropdown-item" href="login.html">
-                            Việc dài hạn
+                          <FormattedMessage id="long_term_job"/>
+
                           </a>
                         </li>
                       </ul>
@@ -76,7 +136,7 @@ class LoginPage extends Component {
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
-                        Giới thiệu{" "}
+                        <FormattedMessage id="about"/>{" "}
                       </a>
                     </li>
                     <li className="nav-item ">
@@ -87,7 +147,7 @@ class LoginPage extends Component {
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
-                        Liên hệ{" "}
+                        <FormattedMessage id="contact"/>{" "}
                       </a>
                     </li>
                   </ul>
@@ -99,7 +159,7 @@ class LoginPage extends Component {
                       data-target="#login"
                     >
                       <i className="ti-shift-right mr-2" />
-                      Sign In
+                      <FormattedMessage id="login"/>
                     </a>
                   </div>
                 </div>
@@ -113,26 +173,30 @@ class LoginPage extends Component {
               <div className="col-lg-8 col-md-8 col-sm-12">
                 <div className="modal-body">
                   <div className="login-form">
-                    <form>
-                      <h4 className="modal-header-title">Đăng nhập</h4>
+                    <form onSubmit={this.login}>
+                      <h4 className="modal-header-title"><FormattedMessage id="login"/></h4>
                       <div className="form-group css">
-                        <label>Email</label>
+                        <label><FormattedMessage id="email"/></label>
                         <div className="input-with-icon">
                           <input
                             type="text"
                             className="form-control ip"
-                            placeholder="Email"
+                            placeholder="email"
+                            value={this.state.email}
+                            onChange={this.handleChangeEmail}
                           />
                           <i className="ti-user" />
                         </div>
                       </div>
                       <div className="form-group css">
-                        <label>Password</label>
+                        <label><FormattedMessage id="password"/></label>
                         <div className="input-with-icon">
                           <input
                             type="password"
                             className="form-control ip"
                             placeholder="*******"
+                            value={this.state.password}
+                            onChange={this.handleChangePass}
                           />
                           <i className="ti-unlock" />
                         </div>
@@ -142,7 +206,7 @@ class LoginPage extends Component {
                           type="submit"
                           className="btn btn-primary btn-md full-width pop-login"
                         >
-                          Đăng nhập
+                          <FormattedMessage id="login"/>
                         </button>
                       </div>
                     </form>
@@ -157,13 +221,13 @@ class LoginPage extends Component {
                             data-dismiss="modal"
                           >
                             {" "}
-                            Đăng kí
+                            <FormattedMessage id="sign_up"/>
                           </a>
                         </div>
                         <div className="col-6 tx">
                           <a href="#">
                             <i className="ti-help" />
-                            Quên mật khẩu{" "}
+                            <FormattedMessage id="forget_password"/>{" "}
                           </a>
                         </div>
                       </div>
@@ -178,4 +242,22 @@ class LoginPage extends Component {
     );
   }
 }
-export default LoginPage;
+
+const mapStateToProps = (stateStore, ownProps) => {
+  let newState = Object.assign({}, ownProps);
+
+  newState.error_description = stateStore.error_des;
+  newState.http = stateStore.http;
+  return newState; 
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    raiseError: (err) => dispatch(raiseError(err))
+  }
+}
+
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

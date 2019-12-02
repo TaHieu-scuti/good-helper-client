@@ -1,5 +1,5 @@
 export default (state, {payload}) => {
   let newState = Object.assign({}, state);
-  newState.me = payload;
+  newState.errordes = payload;
   return newState;
 }

@@ -2,7 +2,8 @@ import React, { Component, Suspense } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import routes from "../../routes";
 import Header from "./Header";
-import Footer from "./Footer"
+import Footer from "./Footer";
+
 
 export class Layout extends Component {
   constructor(props) {

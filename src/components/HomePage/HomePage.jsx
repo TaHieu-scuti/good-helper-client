@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 export class HomePage extends Component {
   constructor(props) {
@@ -14,4 +15,10 @@ export class HomePage extends Component {
   }
 }
 
-export default HomePage
+const mapStateToProps = (stateStore, ownProps) => {
+  let newState = Object.assign({}, ownProps);
+  console.log(stateStore);
+  return newState;
+}
+
+export default connect(mapStateToProps)(HomePage);

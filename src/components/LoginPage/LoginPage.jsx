@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import image from "../../assets/img/logo.png";
 import { injectIntl, FormattedMessage } from "react-intl";
 import { connect } from 'react-redux';
-import { raiseError } from '../../lib/redux/actions';
+import { raiseError, setTokenOnHttpClient, updateMe, updateIdentity } from '../../lib/redux/actions';
 
 class LoginPage extends Component {
 
@@ -13,6 +13,7 @@ class LoginPage extends Component {
       password: "",
       errors: []
     };
+    this.onLoginButton = this.onLoginButton.bind(this);
   }
 
   handleChangeEmail = event => {
@@ -27,33 +28,9 @@ class LoginPage extends Component {
     } );
   };
 
-  login = event => {
-    event.preventDefault();
-
-    const data = {
-      email: this.state.email,
-      password: this.state.password
-    };
-    this.props.http({
-      url: '/auth/login',
-      method: 'POST',
-      data: data
-    })
-    .then(res => { 
-      let token = res.data.response.token
-      this.props.http({
-        url: '/auth/user/get',
-        headers: {
-          'Authorization': 'Bearer ' + token
-        }
-      }).then(res => {
-        console.log(res)
-      })
-    })
-    .catch(err => {
-      this.props.raiseError(err.response.data.errors)
-    });
-  
+  onLoginButton(e) {
+    e.preventDefault();
+    this.props.onLoginButton({component: this, event: e, http: this.props.http});
   };
 
   render() {
@@ -168,7 +145,7 @@ class LoginPage extends Component {
               <div className="col-lg-8 col-md-8 col-sm-12">
                 <div className="modal-body">
                   <div className="login-form">
-                    <form onSubmit={this.login}>
+                    <form onSubmit={this.onLoginButton}>
                       <h4 className="modal-header-title"><FormattedMessage id="login"/></h4>
                       <div className="form-group css">
                         <label><FormattedMessage id="email"/></label>
@@ -248,7 +225,27 @@ const mapStateToProps = (stateStore, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    raiseError: (err) => dispatch(raiseError(err))
+    onLoginButton: ({component, http}) => {
+      http({
+        url: '/auth/login',
+        method: 'POST',
+        data: {
+          email: component.state.email,
+          password: component.state.password,
+        }
+      }).then(res => {
+        dispatch(updateIdentity(res.data.response));
+        dispatch(setTokenOnHttpClient(res.data.response));
+        http({
+          url: '/auth/user/get',
+        }).then(({data}) => {
+          dispatch(updateMe({me: data.response}));
+          component.props.history.push('/')
+        });
+      }).catch(error => {
+        dispatch(raiseError(error.response.data.errors))
+      });
+    }
   }
 }
 

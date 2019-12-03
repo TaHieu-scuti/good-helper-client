@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import storage from 'redux-persist/es/storage';
 import {persistReducer, persistStore} from 'redux-persist';
 import {PersistGate} from 'redux-persist/integration/react';
-import { setHttpClient } from '../../lib/redux/actions';
+import { setHttpClient, setTokenOnHttpClient } from '../../lib/redux/actions';
 import reducers from '../../lib/redux/reducers';
 import axios from 'axios';
 
@@ -29,7 +29,12 @@ class Store extends Component {
     });
 
     this.store.dispatch(setHttpClient(http));
-    this.persistor = persistStore(this.store);
+    this.persistor = persistStore(this.store, null, () => {
+      const states = this.store.getState();
+      if (states.identity.token) {
+        this.store.dispatch(setTokenOnHttpClient(states.identity));
+      }
+    });
   }
 
   subscriber(store) {

@@ -16,6 +16,10 @@ class LoginPage extends Component {
     this.onLoginButton = this.onLoginButton.bind(this);
   }
 
+  if ({}) {
+    
+  }
+
   handleChangeEmail = event => {
     this.setState({
       email: event.target.value
@@ -35,119 +39,24 @@ class LoginPage extends Component {
 
   render() {
     console.log(this.props.is_error)
+    const is_error = this.props.is_error;
+    let err;
+
+    if (is_error) {
+      err = (<div>
+        <span>{this.this.props.is_error}</span>
+      </div>);
+    } else {
+      err = (<div></div>);
+    }
     return (
    
       <div id="main-wrapper"> 
-        <div className="topbar tp-rlt" id="top">
-          <div className="header light">
-            <div className="container po-relative">
-              <nav className="navbar navbar-expand-lg header-nav-bar">
-                <a href="index.html" className="navbar-brand">
-                  <img src={image} className="default-logo" alt="drizvato" />
-                </a>
-                <button
-                  className="navbar-toggler"
-                  type="button"
-                  data-toggle="collapse"
-                  data-target="#navigation"
-                  aria-controls="navigation"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
-                >
-                  <span className="ti-align-right" />
-                </button>
-                <div
-                  className="collapse navbar-collapse hover-dropdown font-14 ml-auto"
-                  id="navigation"
-                >
-                  <ul className="navbar-nav ml-auto">
-                    <li className="nav-item ">
-                      {" "}
-                      <a
-                        className="nav-link"
-                        href="javascript:void(0)"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        <FormattedMessage id="home"/>
-                      </a>
-                    </li>
-                    <li className="nav-item dropdown">
-                      {" "}
-                      <a
-                        className="nav-link dropdown-toggle"
-                        href="javascript:void(0)"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        <FormattedMessage id="job"/> <i className="fa fa-angle-down m-l-5" />
-                      </a>
-                      <ul className="b-none dropdown-menu font-14 animated fadeInUp">
-                        <li>
-                          <a className="dropdown-item" href="blog.html">
-                          <FormattedMessage id="urgent_job"/>
-                          </a>
-                        </li>
-                        <li>
-                          <a className="dropdown-item" href="pricing.html">
-                          <FormattedMessage id="the_work_is_done_in_day"/>
-                          </a>
-                        </li>
-                        <li>
-                          <a className="dropdown-item" href="login.html">
-                          <FormattedMessage id="long_term_job"/>
-
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li className="nav-item ">
-                      {" "}
-                      <a
-                        className="nav-link"
-                        href="javascript:void(0)"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        <FormattedMessage id="about"/>{" "}
-                      </a>
-                    </li>
-                    <li className="nav-item ">
-                      {" "}
-                      <a
-                        className="nav-link"
-                        href="javascript:void(0)"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        <FormattedMessage id="contact"/>{" "}
-                      </a>
-                    </li>
-                  </ul>
-                  <div className="act-buttons">
-                    <a
-                      className="btn btn-info font-14"
-                      href="javascript:void(0)"
-                      data-toggle="modal"
-                      data-target="#login"
-                    >
-                      <i className="ti-shift-right mr-2" />
-                      <FormattedMessage id="login"/>
-                    </a>
-                  </div>
-                </div>
-              </nav>
-            </div>
-          </div>
-        </div>
         <section>
           <div className="container">
             <div className="row justify-content-center">
               <div className="col-lg-8 col-md-8 col-sm-12">
-                <div>
-                  <span>{this.props.is_error ? this.props.error_description : ""}</span>
-                </div>
+                {err}
                 <div className="modal-body">
                   <div className="login-form">
                     <form onSubmit={this.onLoginButton}>

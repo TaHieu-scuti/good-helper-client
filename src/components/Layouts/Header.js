@@ -2,13 +2,7 @@ import React, { Component } from "react";
 import logo from "../../assets/img/logo-light.png";
 import banner from "../../assets/img/bn-4.jpg";
 import { connect } from "react-redux";
-import {
-  raiseError,
-  setTokenOnHttpClient,
-  updateMe,
-  updateIdentity
-} from "../../lib/redux/actions";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { NavLink } from 'react-router-dom'
 
 class Header extends Component {
   constructor(props) {
@@ -22,6 +16,7 @@ class Header extends Component {
     this.props.onLogoutButton({ component: this, event: e });
   }
 
+
   render() {
     const is_logined = this.props.is_logined;
     let button;
@@ -29,29 +24,19 @@ class Header extends Component {
     if (is_logined) {
       button = (
         <div className="act-buttons">
-          <Link
-            to="/logout"
-            className="btn btn-info font-14"
-            data-toggle="modal"
-            data-target="#login"
-          >
-            <i className="ti-shift-right mr-2" />
-            Đăng xuất
-          </Link>
+          <NavLink to="/logout"
+            className="btn btn-info font-14">
+              <i className="ti-shift-right mr-2" />
+              Đăng xuất</NavLink>
         </div>
       );
     } else {
       button = (
         <div className="act-buttons">
-          <Link
-            to="/login"
-            className="btn btn-info font-14"
-            data-toggle="modal"
-            data-target="#login"
-          >
-            <i className="ti-shift-right mr-2" />
-            Đăng nhập
-          </Link>
+          <NavLink to="/login"
+            className="btn btn-info font-14">
+              <i className="ti-shift-right mr-2" />
+              Đăng nhập</NavLink>
         </div>
       );
     }
@@ -143,7 +128,7 @@ class Header extends Component {
                     </li>
                   </ul>
                   {button}
-                </div>
+    </div>
               </nav>
             </div>
           </div>

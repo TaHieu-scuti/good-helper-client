@@ -4,6 +4,7 @@ import Loadable from 'react-loadable';
 import './App.scss';
 import Store from './AppStore';
 import IntlProvider from "./IntlProvider";
+import Login from "../../components/LoginPage"
 
 const loading = () => <div className="animated fadeIn pt-3 text-center"><div className="sk-spinner sk-spinner-pulse"></div></div>;
 
@@ -30,7 +31,7 @@ class App extends React.Component {
         <HashRouter>
           <Switch>
             <Route path='/' name='home' component={DefaultLayout} />
-            <Route path='/login' name='login' component={LoginLayout} />
+            <Route path='/login' name='login' component={Login} />
             <Route path='/logout' name='logout' component={LogoutLayout} />
           </Switch>
         </HashRouter>

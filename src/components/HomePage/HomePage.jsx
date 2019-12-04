@@ -6,7 +6,7 @@ export class HomePage extends Component {
     this.state = {};
   }
 
-  render() {
+  render() {  
     return (
       <div>
         <h1>Hello world</h1>
@@ -18,7 +18,6 @@ export class HomePage extends Component {
 const mapStateToProps = (stateStore, ownProps) => {
   let newState = Object.assign({}, ownProps);
   newState.http = stateStore.http;
-  console.log(stateStore);
   return newState;
 }
 

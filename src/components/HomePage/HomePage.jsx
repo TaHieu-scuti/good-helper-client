@@ -15,10 +15,4 @@ export class HomePage extends Component {
   }
 } 
 
-const mapStateToProps = (stateStore, ownProps) => {
-  let newState = Object.assign({}, ownProps);
-  newState.http = stateStore.http;
-  return newState;
-}
-
-export default connect(mapStateToProps)(HomePage);
+export default HomePage;

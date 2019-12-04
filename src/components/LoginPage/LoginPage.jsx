@@ -51,7 +51,7 @@ class LoginPage extends Component {
               <div className="col-lg-8 col-md-8 col-sm-12">
                 { is_error && 
                   <div>
-                    <span>{this.this.props.is_error}</span>
+                    <span>{this.props.is_error}</span>
                   </div>
                 }
                 <div className="modal-body">
@@ -135,9 +135,9 @@ class LoginPage extends Component {
 const mapStateToProps = (stateStore, ownProps) => {
   let newState = Object.assign({}, ownProps);
 
-  newState.error_description = stateStore.error_des;
+  newState.error_description = stateStore.error_descriptions;
   newState.http = stateStore.http;
-  newState.is_error = stateStore.error_des.length > 0;
+  newState.is_error = stateStore.error_descriptions.length > 0;
   return newState;
 };
 

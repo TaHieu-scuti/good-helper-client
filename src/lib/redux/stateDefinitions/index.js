@@ -7,6 +7,6 @@ export default {
   me: null,
 
   http: null,
-  error_des : '',
+  error_descriptions : '',
   is_requesting : false,
 }

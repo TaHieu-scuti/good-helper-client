@@ -49,7 +49,7 @@ class LoginPage extends Component {
               <div className="col-lg-8 col-md-8 col-sm-12">
                 { this.props.is_error && 
                   <div>
-                    <span>{this.props.is_error}</span>
+                    <span style= {{color: "red"}}>{this.props.is_error}</span>
                   </div>
                 }
                 <div className="modal-body">

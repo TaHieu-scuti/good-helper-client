@@ -1,7 +1,7 @@
 export default {
 	'login': 'Đăng nhập',
 	'email': 'Email',
-	'logout' : 'Logout',
+	'logout' : 'Đăng xuất',
 	'password': 'Mật khẩu',
 	'sign_up': 'Đăng kí',
 	'forget_password': 'Quên mật khẩu',

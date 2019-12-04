@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { NavLink , Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { FormattedMessage } from "react-intl";
 
 class Footer extends Component {
   render() {
@@ -10,32 +11,32 @@ class Footer extends Component {
             <div className="row">
               <div className="col-lg-3 col-md-6">
                 <div className="footer-widget">
-                  <h4 className="widget-title">Giới thiệu</h4>
-                  <p>Bạn có thể tìm kiếm các công việc và người giúp.</p>
+                  <h4 className="widget-title"><FormattedMessage id="about" /></h4>
+                  <p><FormattedMessage id="find_and_share_job" /></p>
                 </div>
               </div>
               <div className="col-lg-3 col-md-6">
                 <div className="footer-widget">
-                  <h4 className="widget-title">Danh mục</h4>
+                  <h4 className="widget-title"><FormattedMessage id="category" /></h4>
                   <ul className="footer-menu">
                     <li>
-                      <Link href="#">Trang chủ</Link>
+                      <Link href="#"><FormattedMessage id="home" /></Link>
                     </li>
                     <li>
-                      <Link href="#">Công việc</Link>
+                      <Link href="#"><FormattedMessage id="job" /></Link>
                     </li>
                     <li>
-                      <Link href="#">Giới thiệu</Link>
+                      <Link href="#"><FormattedMessage id="about" /></Link>
                     </li>
                     <li>
-                      <Link href="#">Liên hệ</Link>
+                      <Link href="#"><FormattedMessage id="contact" /></Link>
                     </li>
                   </ul>
                 </div>
               </div>
               <div className="col-lg-3 col-md-6">
                 <div className="footer-widget">
-                  <h4 className="widget-title">Thông tin liên hệ</h4>
+                  <h4 className="widget-title"><FormattedMessage id="information" /></h4>
                   <div className="fw-address-wrap">
                     <div className="fw fw-location">
                       107, Nguyễn Phong Sắc, Cầu Giấy, Hà Nội

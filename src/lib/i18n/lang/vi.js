@@ -1,6 +1,7 @@
 export default {
 	'login': 'Đăng nhập',
 	'email': 'Email',
+	'logout' : 'Logout',
 	'password': 'Mật khẩu',
 	'sign_up': 'Đăng kí',
 	'forget_password': 'Quên mật khẩu',
@@ -12,9 +13,9 @@ export default {
 	'typical_helper' : 'Helper tiêu biểu',
 	'how_do_we_do' : 'Chúng tôi làm việc thế nào?',
 	'what_did_the_customer_feel' : 'Khách hàng đã có cảm nhận gì ?',
-	'about' : 'giới thiệu',
+	'about' : 'Giới thiệu',
 	'contact': 'Liên hệ',
-	'category':'danh mục',
+	'category':'Danh mục',
 	'feed_back_of_customer': 'Đánh giá của khách hàng',
 	'Our_successes_and_awards' : 'Những thành công và giải thưởng của chúng tôi',
 	'create_acc': 'Tạo tài khoản',
@@ -23,9 +24,12 @@ export default {
 	'news_job_and_popular_job': 'Những công việc mới và đang nổi',
 	'posts': 'Bài viết',
 	'location': 'Địa điểm',
-	'type_name_job': 'nhập tên công việc',
+	'type_name_job': 'Nhập tên công việc',
 	'let_get_best_jobs': 'Hãy nhận những công việc tốt nhất',
 	'urgent_job': 'Công việc cần gấp',
-	'the_work_is_done_in_day': 'công việc làm trong ngày',
-	'long_term_job': 'công việc dài hạn'
+	'the_work_is_done_in_day': 'Công việc làm trong ngày',
+	'long_term_job': 'Công việc dài hạn',
+	'information' : 'Thông tin liên hệ',
+	'search' : 'Tìm kiếm',
+	'fill': 'Nhập tên công việc'
 };

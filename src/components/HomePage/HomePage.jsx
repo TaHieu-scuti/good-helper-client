@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-export class HomePage extends Component {
+
+class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {};

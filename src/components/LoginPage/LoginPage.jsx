@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import image from "../../assets/img/logo.png";
-import { injectIntl, FormattedMessage } from "react-intl";
+import { injectIntl ,FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
 import {
   raiseError,
   setTokenOnHttpClient,
@@ -41,15 +41,13 @@ class LoginPage extends Component {
   }
 
   render() {
-    const is_error = this.props.is_error;
-    
     return (
       <div id="main-wrapper">
         <section>
           <div className="container">
             <div className="row justify-content-center">
               <div className="col-lg-8 col-md-8 col-sm-12">
-                { is_error && 
+                { this.props.is_error && 
                   <div>
                     <span>{this.props.is_error}</span>
                   </div>
@@ -68,7 +66,7 @@ class LoginPage extends Component {
                           <input
                             type="text"
                             className="form-control ip"
-                            placeholder="email"
+                            placeholder={this.props.intl.formatMessage({ id: "email" })}
                             value={this.state.email}
                             onChange={this.handleChangeEmail}
                           />
@@ -103,21 +101,17 @@ class LoginPage extends Component {
                       <div className="row">
                         <div className="col-6 tx">
                           <i className="ti-user" />
-                          <a
-                            href="javascript:void(0)"
-                            data-toggle="modal"
-                            data-target
-                            data-dismiss="modal"
+                          <Link
                           >
                             {" "}
                             <FormattedMessage id="sign_up" />
-                          </a>
+                          </Link>
                         </div>
                         <div className="col-6 tx">
-                          <a href="#">
+                          <Link href="#">
                             <i className="ti-help" />
                             <FormattedMessage id="forget_password" />{" "}
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -169,4 +163,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(LoginPage));

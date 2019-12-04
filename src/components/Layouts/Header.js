@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import logo from "../../assets/img/logo-light.png";
 import banner from "../../assets/img/bn-4.jpg";
 import { connect } from "react-redux";
-import { NavLink , Link } from 'react-router-dom'
+import { NavLink , Link } from 'react-router-dom';
+import { injectIntl ,FormattedMessage } from "react-intl";
 
 class Header extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class Header extends Component {
         <NavLink to="/login"
           className="btn btn-info font-14">
             <i className="ti-shift-right mr-2" />
-            Đăng nhập</NavLink>
+            <FormattedMessage id="login" /></NavLink>
       </div>
     );
 
@@ -33,7 +34,7 @@ class Header extends Component {
           <NavLink to="/logout"
             className="btn btn-info font-14">
               <i className="ti-shift-right mr-2" />
-              Đăng xuất</NavLink>
+              <FormattedMessage id="logout" /></NavLink>
         </div>
       );
     }
@@ -70,7 +71,7 @@ class Header extends Component {
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
-                        Trang chủ{" "}
+                        <FormattedMessage id="home" />{" "}
                       </Link>
                     </li>
                     <li className="nav-item dropdown">
@@ -81,22 +82,22 @@ class Header extends Component {
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
-                        Công việc <i className="fa fa-angle-down m-l-5" />
+                        <FormattedMessage id="job" /> <i className="fa fa-angle-down m-l-5" />
                       </Link>
                       <ul className="b-none dropdown-menu font-14 animated fadeInUp">
                         <li>
                         <Link href="#" className="dropdown-item">
-                            Việc cần gấp
+                        <FormattedMessage id="urgent_job" />
                           </Link>
                         </li>
                         <li>
                         <Link href="#" className="dropdown-item">
-                            Việc trong ngày
+                        <FormattedMessage id="long_term_job" />
                           </Link>
                         </li>
                         <li>
                         <Link href="#" className="dropdown-item">
-                            Việc dài hạn
+                        <FormattedMessage id="the_work_is_done_in_day" />
                           </Link>
                         </li>
                       </ul>
@@ -109,7 +110,7 @@ class Header extends Component {
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
-                        Giới thiệu
+                       <FormattedMessage id="about" />
                       </Link>
                     </li>
                     <li className="nav-item dropdown">
@@ -120,7 +121,7 @@ class Header extends Component {
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
-                        Liên hệ{" "}
+                        <FormattedMessage id="contact" />{" "}
                       </Link>
                     </li>
                   </ul>
@@ -138,8 +139,7 @@ class Header extends Component {
           {" "}
           --&gt;
           <div className="container">
-            <h2>Hãy nhận những công việc tốt nhất </h2>
-            <p className="lead">Tìm việc , người giúp</p>
+            <h2><FormattedMessage id="let_get_best_jobs" /></h2>
             <form className="search-big-form no-border search-shadow">
               <div className="row m-0">
                 <div
@@ -151,7 +151,7 @@ class Header extends Component {
                     <input
                       type="text"
                       className="form-control b-r"
-                      placeholder="Nhập tên công việc"
+                      placeholder={this.props.intl.formatMessage({ id: "fill" })}
                       style={{ height: "40px" }}
                     />
                   </div>
@@ -162,7 +162,7 @@ class Header extends Component {
                     <input
                       type="text"
                       className="form-control b-r"
-                      placeholder="Địa điểm"
+                      placeholder={this.props.intl.formatMessage({ id: "location" })}
                     />
                   </div>
                 </div>
@@ -170,7 +170,7 @@ class Header extends Component {
                   <div className="form-group">
                     <select
                       className="js-states form-control"
-                      placeholder="chọn danh mục"
+                      placeholder={this.props.intl.formatMessage({ id: "category" })}
                     >
                       <option value>Chọn danh mục</option>
                       <option value={1}>Giúp việc nhà</option>
@@ -185,7 +185,7 @@ class Header extends Component {
                 </div>
                 <div className="col-lg-2 col-md-2 col-sm-12 p-0">
                   <button type="button" className="btn btn-info full-width">
-                    Tìm kiếm
+                  <FormattedMessage id="search" />
                   </button>
                 </div>
               </div>
@@ -206,4 +206,4 @@ const mapStateToProps = (stateStore, ownProps) => {
   return newState;
 };
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps) (injectIntl(Header));

@@ -12,6 +12,16 @@ const DefaultLayout = Loadable({
   loading
 })
 
+const LoginLayout = Loadable({
+  loader: () => import('../../components/LoginPage'),
+  loading
+})
+
+const LogoutLayout = Loadable({
+  loader: () => import('../../components/Logout'),
+  loading
+})
+
 class App extends React.Component {
   render() {
     return (
@@ -20,6 +30,8 @@ class App extends React.Component {
         <HashRouter>
           <Switch>
             <Route path='/' name='home' component={DefaultLayout} />
+            <Route path='/login' name='login' component={LoginLayout} />
+            <Route path='/logout' name='logout' component={LogoutLayout} />
           </Switch>
         </HashRouter>
       </Store>

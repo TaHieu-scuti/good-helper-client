@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { NavLink , Link } from 'react-router-dom'
 
 class Footer extends Component {
   render() {
@@ -18,16 +19,16 @@ class Footer extends Component {
                   <h4 className="widget-title">Danh mục</h4>
                   <ul className="footer-menu">
                     <li>
-                      <a href="#">Trang chủ</a>
+                      <Link href="#">Trang chủ</Link>
                     </li>
                     <li>
-                      <a href="#">Công việc</a>
+                      <Link href="#">Công việc</Link>
                     </li>
                     <li>
-                      <a href="#">Giới thiệu</a>
+                      <Link href="#">Giới thiệu</Link>
                     </li>
                     <li>
-                      <a href="#">Liên hệ</a>
+                      <Link href="#">Liên hệ</Link>
                     </li>
                   </ul>
                 </div>

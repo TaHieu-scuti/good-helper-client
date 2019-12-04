@@ -12,7 +12,6 @@ class Store extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-
     const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
     this.store = createStore(

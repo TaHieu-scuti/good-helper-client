@@ -1,23 +1,22 @@
 import React, { Component } from "react";
 import image from "../../assets/img/logo.png";
 import { injectIntl, FormattedMessage } from "react-intl";
-import { connect } from 'react-redux';
-import { raiseError, setTokenOnHttpClient, updateMe, updateIdentity } from '../../lib/redux/actions';
+import { connect } from "react-redux";
+import {
+  raiseError,
+  setTokenOnHttpClient,
+  updateMe,
+  updateIdentity
+} from "../../lib/redux/actions";
 
 class LoginPage extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       email: "",
-      password: "",
-      
+      password: ""
     };
     this.onLoginButton = this.onLoginButton.bind(this);
-  }
-
-  if ({}) {
-    
   }
 
   handleChangeEmail = event => {
@@ -29,40 +28,42 @@ class LoginPage extends Component {
   handleChangePass = event => {
     this.setState({
       password: event.target.value
-    } );
+    });
   };
 
   onLoginButton(e) {
     e.preventDefault();
-    this.props.onLoginButton({component: this, event: e, http: this.props.http});
-  };
+    this.props.onLoginButton({
+      component: this,
+      event: e,
+      http: this.props.http
+    });
+  }
 
   render() {
-    console.log(this.props.is_error)
     const is_error = this.props.is_error;
-    let err;
-
-    if (is_error) {
-      err = (<div>
-        <span>{this.this.props.is_error}</span>
-      </div>);
-    } else {
-      err = (<div></div>);
-    }
+    
     return (
-   
-      <div id="main-wrapper"> 
+      <div id="main-wrapper">
         <section>
           <div className="container">
             <div className="row justify-content-center">
               <div className="col-lg-8 col-md-8 col-sm-12">
-                {err}
+                { is_error && 
+                  <div>
+                    <span>{this.this.props.is_error}</span>
+                  </div>
+                }
                 <div className="modal-body">
                   <div className="login-form">
                     <form onSubmit={this.onLoginButton}>
-                      <h4 className="modal-header-title"><FormattedMessage id="login"/></h4>
+                      <h4 className="modal-header-title">
+                        <FormattedMessage id="login" />
+                      </h4>
                       <div className="form-group css">
-                        <label><FormattedMessage id="email"/></label>
+                        <label>
+                          <FormattedMessage id="email" />
+                        </label>
                         <div className="input-with-icon">
                           <input
                             type="text"
@@ -75,7 +76,9 @@ class LoginPage extends Component {
                         </div>
                       </div>
                       <div className="form-group css">
-                        <label><FormattedMessage id="password"/></label>
+                        <label>
+                          <FormattedMessage id="password" />
+                        </label>
                         <div className="input-with-icon">
                           <input
                             type="password"
@@ -92,7 +95,7 @@ class LoginPage extends Component {
                           type="submit"
                           className="btn btn-primary btn-md full-width pop-login"
                         >
-                          <FormattedMessage id="login"/>
+                          <FormattedMessage id="login" />
                         </button>
                       </div>
                     </form>
@@ -107,13 +110,13 @@ class LoginPage extends Component {
                             data-dismiss="modal"
                           >
                             {" "}
-                            <FormattedMessage id="sign_up"/>
+                            <FormattedMessage id="sign_up" />
                           </a>
                         </div>
                         <div className="col-6 tx">
                           <a href="#">
                             <i className="ti-help" />
-                            <FormattedMessage id="forget_password"/>{" "}
+                            <FormattedMessage id="forget_password" />{" "}
                           </a>
                         </div>
                       </div>
@@ -135,34 +138,35 @@ const mapStateToProps = (stateStore, ownProps) => {
   newState.error_description = stateStore.error_des;
   newState.http = stateStore.http;
   newState.is_error = stateStore.error_des.length > 0;
-  return newState; 
-}
+  return newState;
+};
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    onLoginButton: ({component, http}) => {
+    onLoginButton: ({ component, http }) => {
       http({
-        url: '/auth/login',
-        method: 'POST',
+        url: "/auth/login",
+        method: "POST",
         data: {
           email: component.state.email,
-          password: component.state.password,
+          password: component.state.password
         }
-      }).then(res => {
-        dispatch(updateIdentity(res.data.response));
-        dispatch(setTokenOnHttpClient(res.data.response));
-        http({
-          url: '/auth/user/get',
-        }).then(({data}) => {
-          dispatch(updateMe(data.response));
-          component.props.history.push('/')
+      })
+        .then(res => {
+          dispatch(updateIdentity(res.data.response));
+          dispatch(setTokenOnHttpClient(res.data.response));
+          http({
+            url: "/auth/user/get"
+          }).then(({ data }) => {
+            dispatch(updateMe(data.response));
+            component.props.history.push("/");
+          });
+        })
+        .catch(error => {
+          dispatch(raiseError(error.response.data.errors));
         });
-      }).catch(error => {
-        dispatch(raiseError(error.response.data.errors))
-      });
     }
-}
-}
-
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

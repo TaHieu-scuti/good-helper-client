@@ -4,7 +4,6 @@ import routes from "../../routes";
 import Header from "./Header";
 import Footer from "./Footer";
 
-
 export class Layout extends Component {
   constructor(props) {
     super(props);
@@ -17,9 +16,9 @@ export class Layout extends Component {
       </div>
     );
   }
+  
   render() {
     return (
-
       <div className="app">
         <Header/>
         <div className="app-body">

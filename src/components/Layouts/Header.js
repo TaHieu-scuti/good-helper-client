@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import logo from "../../assets/img/logo-light.png";
 import banner from "../../assets/img/bn-4.jpg";
 import { connect } from "react-redux";
-import { NavLink } from 'react-router-dom'
+import { NavLink , Link } from 'react-router-dom'
 
 class Header extends Component {
   constructor(props) {
@@ -16,10 +16,16 @@ class Header extends Component {
     this.props.onLogoutButton({ component: this, event: e });
   }
 
-
   render() {
     const is_logined = this.props.is_logined;
-    let button;
+    let button = (
+      <div className="act-buttons">
+        <NavLink to="/login"
+          className="btn btn-info font-14">
+            <i className="ti-shift-right mr-2" />
+            Đăng nhập</NavLink>
+      </div>
+    );
 
     if (is_logined) {
       button = (
@@ -30,15 +36,6 @@ class Header extends Component {
               Đăng xuất</NavLink>
         </div>
       );
-    } else {
-      button = (
-        <div className="act-buttons">
-          <NavLink to="/login"
-            className="btn btn-info font-14">
-              <i className="ti-shift-right mr-2" />
-              Đăng nhập</NavLink>
-        </div>
-      );
     }
 
     return (
@@ -47,9 +44,9 @@ class Header extends Component {
           <div className="header exchange-logo">
             <div className="container po-relative">
               <nav className="navbar navbar-expand-lg header-nav-bar">
-                <a className="navbar-brand">
+                <Link className="navbar-brand">
                   <img src={logo} className="default-logo" alt="Workio" />{" "}
-                </a>
+                </Link>
                 <button
                   className="navbar-toggler"
                   type="button"
@@ -68,63 +65,63 @@ class Header extends Component {
                   <ul className="navbar-nav ml-auto">
                     <li className="nav-item dropdown">
                       {" "}
-                      <a
+                      <Link
                         className="nav-link "
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
                         Trang chủ{" "}
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item dropdown">
                       {" "}
-                      <a
+                      <Link
                         className="nav-link dropdown-toggle"
                         data-toggle="dropdown"
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
                         Công việc <i className="fa fa-angle-down m-l-5" />
-                      </a>
+                      </Link>
                       <ul className="b-none dropdown-menu font-14 animated fadeInUp">
                         <li>
-                          <a href="#" className="dropdown-item">
+                        <Link href="#" className="dropdown-item">
                             Việc cần gấp
-                          </a>
+                          </Link>
                         </li>
                         <li>
-                          <a href="#" className="dropdown-item">
+                        <Link href="#" className="dropdown-item">
                             Việc trong ngày
-                          </a>
+                          </Link>
                         </li>
                         <li>
-                          <a href="#" className="dropdown-item">
+                        <Link href="#" className="dropdown-item">
                             Việc dài hạn
-                          </a>
+                          </Link>
                         </li>
                       </ul>
                     </li>
                     <li className="nav-item dropdown">
                       {" "}
-                      <a
+                      <Link
                         className="nav-link dropdown-toggle"
                         data-toggle="dropdown"
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
                         Giới thiệu
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item dropdown">
                       {" "}
-                      <a
+                      <Link
                         className="nav-link dropdown-toggle"
                         data-toggle="dropdown"
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
                         Liên hệ{" "}
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                   {button}

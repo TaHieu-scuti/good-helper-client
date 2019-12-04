@@ -31,6 +31,7 @@ class Store extends Component {
     this.store.dispatch(setHttpClient(http));
     this.persistor = persistStore(this.store, null, () => {
       const states = this.store.getState();
+      console.log(states.identity.token);
       if (states.identity.token) {
         this.store.dispatch(setTokenOnHttpClient(states.identity));
       }

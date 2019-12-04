@@ -11,7 +11,7 @@ class LoginPage extends Component {
     this.state = {
       email: "",
       password: "",
-      errors: []
+      
     };
     this.onLoginButton = this.onLoginButton.bind(this);
   }
@@ -34,8 +34,10 @@ class LoginPage extends Component {
   };
 
   render() {
+    console.log(this.props.is_error)
     return (
-      <div id="main-wrapper">
+   
+      <div id="main-wrapper"> 
         <div className="topbar tp-rlt" id="top">
           <div className="header light">
             <div className="container po-relative">
@@ -143,6 +145,9 @@ class LoginPage extends Component {
           <div className="container">
             <div className="row justify-content-center">
               <div className="col-lg-8 col-md-8 col-sm-12">
+                <div>
+                  <span>{this.props.is_error ? this.props.error_description : ""}</span>
+                </div>
                 <div className="modal-body">
                   <div className="login-form">
                     <form onSubmit={this.onLoginButton}>
@@ -220,6 +225,7 @@ const mapStateToProps = (stateStore, ownProps) => {
 
   newState.error_description = stateStore.error_des;
   newState.http = stateStore.http;
+  newState.is_error = stateStore.error_des.length > 0;
   return newState; 
 }
 
@@ -239,17 +245,15 @@ const mapDispatchToProps = (dispatch) => {
         http({
           url: '/auth/user/get',
         }).then(({data}) => {
-          dispatch(updateMe({me: data.response}));
+          dispatch(updateMe(data.response));
           component.props.history.push('/')
         });
       }).catch(error => {
         dispatch(raiseError(error.response.data.errors))
       });
     }
-  }
 }
-
-
+}
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

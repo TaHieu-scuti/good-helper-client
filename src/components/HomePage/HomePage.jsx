@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 export class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
   render() {
     return (
       <div>
@@ -13,10 +13,11 @@ export class HomePage extends Component {
       </div>
     )
   }
-}
+} 
 
 const mapStateToProps = (stateStore, ownProps) => {
   let newState = Object.assign({}, ownProps);
+  newState.http = stateStore.http;
   console.log(stateStore);
   return newState;
 }

@@ -1,9 +1,61 @@
 import React, { Component } from "react";
 import logo from "../../assets/img/logo-light.png";
 import banner from "../../assets/img/bn-4.jpg";
+import { connect } from "react-redux";
+import {
+  raiseError,
+  setTokenOnHttpClient,
+  updateMe,
+  updateIdentity
+} from "../../lib/redux/actions";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.onLogoutButton = this.onLogoutButton.bind(this);
+  }
+
+  onLogoutButton(e) {
+    e.preventDefault();
+    this.props.onLogoutButton({ component: this, event: e });
+  }
+
   render() {
+    const is_logined = this.props.is_logined;
+    let button;
+
+    if (is_logined) {
+      button = (
+        <div className="act-buttons">
+          <Link
+            to="/logout"
+            className="btn btn-info font-14"
+            data-toggle="modal"
+            data-target="#login"
+          >
+            <i className="ti-shift-right mr-2" />
+            Đăng xuất
+          </Link>
+        </div>
+      );
+    } else {
+      button = (
+        <div className="act-buttons">
+          <Link
+            to="/login"
+            className="btn btn-info font-14"
+            data-toggle="modal"
+            data-target="#login"
+          >
+            <i className="ti-shift-right mr-2" />
+            Đăng nhập
+          </Link>
+        </div>
+      );
+    }
+
     return (
       <div>
         <div className="topbar" id="top">
@@ -41,7 +93,7 @@ class Header extends Component {
                     </li>
                     <li className="nav-item dropdown">
                       {" "}
-                      <a 
+                      <a
                         className="nav-link dropdown-toggle"
                         data-toggle="dropdown"
                         aria-haspopup="true"
@@ -51,13 +103,19 @@ class Header extends Component {
                       </a>
                       <ul className="b-none dropdown-menu font-14 animated fadeInUp">
                         <li>
-                          <a href="#" className="dropdown-item">Việc cần gấp</a>
+                          <a href="#" className="dropdown-item">
+                            Việc cần gấp
+                          </a>
                         </li>
                         <li>
-                          <a href="#" className="dropdown-item">Việc trong ngày</a>
+                          <a href="#" className="dropdown-item">
+                            Việc trong ngày
+                          </a>
                         </li>
                         <li>
-                          <a href="#" className="dropdown-item">Việc dài hạn</a>
+                          <a href="#" className="dropdown-item">
+                            Việc dài hạn
+                          </a>
                         </li>
                       </ul>
                     </li>
@@ -84,16 +142,7 @@ class Header extends Component {
                       </a>
                     </li>
                   </ul>
-                  <div className="act-buttons">
-                    <a href="#"
-                      className="btn btn-info font-14"
-                      data-toggle="modal"
-                      data-target="#login"
-                    >
-                      <i className="ti-shift-right mr-2" />
-                      Đăng nhập
-                    </a>
-                  </div>
+                  {button}
                 </div>
               </nav>
             </div>
@@ -166,4 +215,13 @@ class Header extends Component {
   }
 }
 
-export default Header;
+const mapStateToProps = (stateStore, ownProps) => {
+  let newState = Object.assign({}, ownProps);
+  newState.http = stateStore.http;
+  newState.me = stateStore.me;
+  newState.is_logined = stateStore.me != null;
+
+  return newState;
+};
+
+export default connect(mapStateToProps)(Header);

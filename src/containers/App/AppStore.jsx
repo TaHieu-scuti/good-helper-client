@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
-
 import storage from 'redux-persist/es/storage';
 import {persistReducer, persistStore} from 'redux-persist';
 import {PersistGate} from 'redux-persist/integration/react';
-import { setHttpClient } from '../../lib/redux/actions';
+import { setHttpClient, setTokenOnHttpClient } from '../../lib/redux/actions';
 import reducers from '../../lib/redux/reducers';
 import axios from 'axios';
 
@@ -13,7 +12,6 @@ class Store extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-
     const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
     this.store = createStore(
@@ -26,11 +24,16 @@ class Store extends Component {
      * @type {AxiosInstance}
      */
     const http = axios.create({
-      baseURL: 'http://localhost:3000/',
+      baseURL: 'http://3.15.37.125/api',
     });
-    
+
     this.store.dispatch(setHttpClient(http));
-    this.persistor = persistStore(this.store);
+    this.persistor = persistStore(this.store, null, () => {
+      const states = this.store.getState();
+      if (states.identity.token) {
+        this.store.dispatch(setTokenOnHttpClient(states.identity));
+      }
+    });
   }
 
   subscriber(store) {

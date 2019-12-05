@@ -1,5 +1,6 @@
 export default (storeState, { payload }) => {
   let newState = Object.assign({}, storeState);
-  newState.http = payload;
+  newState.me = null;
+  newState.identity.token = null;
   return newState;
 };

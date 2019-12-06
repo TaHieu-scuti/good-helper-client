@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from "react-intl";
+import { IoIosWater } from "react-icons/io";
+import { IoIosCall } from "react-icons/io";
+import { IoIosMail } from "react-icons/io";
 
 class Footer extends Component {
   render() {
@@ -11,40 +14,27 @@ class Footer extends Component {
             <div className="row">
               <div className="col-lg-3 col-md-6">
                 <div className="footer-widget">
-                  <h4 className="widget-title"><FormattedMessage id="about" /></h4>
-                  <p><FormattedMessage id="find_and_share_job" /></p>
+                  <h4 className="widget-title"><FormattedMessage id="About" /></h4>
+                  <p><FormattedMessage id="Let get best jobs" /></p>
                 </div>
               </div>
               <div className="col-lg-3 col-md-6">
                 <div className="footer-widget">
-                  <h4 className="widget-title"><FormattedMessage id="category" /></h4>
+                  <h4 className="widget-title"><FormattedMessage id="Category" /></h4>
                   <ul className="footer-menu">
                     <li>
-                      <Link href="#"><FormattedMessage id="home" /></Link>
-                    </li>
-                    <li>
-                      <Link href="#"><FormattedMessage id="job" /></Link>
-                    </li>
-                    <li>
-                      <Link href="#"><FormattedMessage id="about" /></Link>
-                    </li>
-                    <li>
-                      <Link href="#"><FormattedMessage id="contact" /></Link>
+                      <Link to="/home"><FormattedMessage id="Home" /></Link>
                     </li>
                   </ul>
                 </div>
               </div>
               <div className="col-lg-3 col-md-6">
                 <div className="footer-widget">
-                  <h4 className="widget-title"><FormattedMessage id="information" /></h4>
+                  <h4 className="widget-title"><FormattedMessage id="Information" /></h4>
                   <div className="fw-address-wrap">
-                    <div className="fw fw-location">
-                      107, Nguyễn Phong Sắc, Cầu Giấy, Hà Nội
-                    </div>
-                    <div className="fw fw-mail">smatrjob@gmail.com</div>
-                    <div className="fw fw-call">+91 254 584 7584</div>
-                    <div className="fw fw-skype">drizvato77</div>
-                    <div className="fw fw-web">www.smartjob.com</div>
+                    <p><IoIosWater /> 107, Nguyễn Phong Sắc, Cầu Giấy, Hà Nội</p>
+                    <p><IoIosMail /> smatrjob@gmail.com</p>
+                    <p><IoIosCall /> 0123456789</p>
                   </div>
                 </div>
               </div>

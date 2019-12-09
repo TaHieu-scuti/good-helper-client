@@ -12,7 +12,7 @@ const reducers = {
   RAISE_ERROR,
   UPDATE_IDENTITY,
   SET_TOKEN_ON_HTTP_CLIENT,
-  LOGOUT
+  LOGOUT,
 }
 
 export default (state = initialState, action = {}) => {

@@ -13,11 +13,6 @@ const DefaultLayout = Loadable({
   loading
 })
 
-const LoginLayout = Loadable({
-  loader: () => import('../../components/LoginPage'),
-  loading
-})
-
 const LogoutLayout = Loadable({
   loader: () => import('../../components/Logout'),
   loading

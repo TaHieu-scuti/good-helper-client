@@ -31,5 +31,6 @@ export default {
 	'long_term_job': 'Công việc dài hạn',
 	'information' : 'Thông tin liên hệ',
 	'search' : 'Tìm kiếm',
-	'fill': 'Nhập tên công việc'
+	'fill': 'Nhập tên công việc',
+	'Email or Password is incorrect': 'Tài khoản hoặc mật khẩu không chính xác'
 };

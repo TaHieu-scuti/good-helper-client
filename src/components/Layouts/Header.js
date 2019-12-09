@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import logo from "../../assets/img/logo-light.png";
 import banner from "../../assets/img/bn-4.jpg";
 import { connect } from "react-redux";
-import { NavLink , Link } from 'react-router-dom';
-import { injectIntl ,FormattedMessage } from "react-intl";
+import { NavLink, Link } from "react-router-dom";
+import { injectIntl, FormattedMessage } from "react-intl";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
 class Header extends Component {
   constructor(props) {
@@ -18,24 +19,40 @@ class Header extends Component {
   }
 
   render() {
-    const is_logined = this.props.is_logined;
     let button = (
       <div className="act-buttons">
-        <NavLink to="/login"
-          className="btn btn-info font-14">
-            <i className="ti-shift-right mr-2" />
-            <FormattedMessage id="login" /></NavLink>
+        <NavLink to="/login" className="btn btn-info font-14">
+          <i className="ti-shift-right mr-2" />
+          <FormattedMessage id="login" />
+        </NavLink>
       </div>
     );
 
-    if (is_logined) {
+    if (this.props.is_logined) {
       button = (
-        <div className="act-buttons">
-          <NavLink to="/logout"
-            className="btn btn-info font-14">
-              <i className="ti-shift-right mr-2" />
-              <FormattedMessage id="logout" /></NavLink>
-        </div>
+        <nav className="navbar navbar-expand-lg header-nav-bar">
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item dropdown">
+              <NavDropdown title={this.props.me.last_name} id="nav-dropdown">
+                <NavDropdown.Item eventKey="4.1">
+                  <Link to="/logout" className="link">
+                    <FormattedMessage id="logout" />
+                  </Link>
+                </NavDropdown.Item>
+              </NavDropdown>
+            </li>
+          </ul>
+          <ul className="navbar-nav">
+            <li>
+              <img
+                src={this.props.me.avatar}
+                className="img-fluid mx-auto img-circle"
+                style={{ width: "30px" }}
+                alt=""
+              />
+            </li>
+          </ul>
+        </nav>
       );
     }
 
@@ -45,7 +62,7 @@ class Header extends Component {
           <div className="header exchange-logo">
             <div className="container po-relative">
               <nav className="navbar navbar-expand-lg header-nav-bar">
-                <Link className="navbar-brand">
+                <Link className="navbar-brand" to="home">
                   <img src={logo} className="default-logo" alt="Workio" />{" "}
                 </Link>
                 <button
@@ -67,6 +84,7 @@ class Header extends Component {
                     <li className="nav-item dropdown">
                       {" "}
                       <Link
+                        to="/home"
                         className="nav-link "
                         aria-haspopup="true"
                         aria-expanded="false"
@@ -74,59 +92,9 @@ class Header extends Component {
                         <FormattedMessage id="home" />{" "}
                       </Link>
                     </li>
-                    <li className="nav-item dropdown">
-                      {" "}
-                      <Link
-                        className="nav-link dropdown-toggle"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        <FormattedMessage id="job" /> <i className="fa fa-angle-down m-l-5" />
-                      </Link>
-                      <ul className="b-none dropdown-menu font-14 animated fadeInUp">
-                        <li>
-                        <Link href="#" className="dropdown-item">
-                        <FormattedMessage id="urgent_job" />
-                          </Link>
-                        </li>
-                        <li>
-                        <Link href="#" className="dropdown-item">
-                        <FormattedMessage id="long_term_job" />
-                          </Link>
-                        </li>
-                        <li>
-                        <Link href="#" className="dropdown-item">
-                        <FormattedMessage id="the_work_is_done_in_day" />
-                          </Link>
-                        </li>
-                      </ul>
-                    </li>
-                    <li className="nav-item dropdown">
-                      {" "}
-                      <Link
-                        className="nav-link dropdown-toggle"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                       <FormattedMessage id="about" />
-                      </Link>
-                    </li>
-                    <li className="nav-item dropdown">
-                      {" "}
-                      <Link
-                        className="nav-link dropdown-toggle"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        <FormattedMessage id="contact" />{" "}
-                      </Link>
-                    </li>
                   </ul>
                   {button}
-    </div>
+                </div>
               </nav>
             </div>
           </div>
@@ -139,7 +107,9 @@ class Header extends Component {
           {" "}
           --&gt;
           <div className="container">
-            <h2><FormattedMessage id="let_get_best_jobs" /></h2>
+            <h2>
+              <FormattedMessage id="let_get_best_jobs" />
+            </h2>
             <form className="search-big-form no-border search-shadow">
               <div className="row m-0">
                 <div
@@ -151,7 +121,9 @@ class Header extends Component {
                     <input
                       type="text"
                       className="form-control b-r"
-                      placeholder={this.props.intl.formatMessage({ id: "fill" })}
+                      placeholder={this.props.intl.formatMessage({
+                        id: "fill"
+                      })}
                       style={{ height: "40px" }}
                     />
                   </div>
@@ -162,7 +134,9 @@ class Header extends Component {
                     <input
                       type="text"
                       className="form-control b-r"
-                      placeholder={this.props.intl.formatMessage({ id: "location" })}
+                      placeholder={this.props.intl.formatMessage({
+                        id: "location"
+                      })}
                     />
                   </div>
                 </div>
@@ -170,7 +144,9 @@ class Header extends Component {
                   <div className="form-group">
                     <select
                       className="js-states form-control"
-                      placeholder={this.props.intl.formatMessage({ id: "category" })}
+                      placeholder={this.props.intl.formatMessage({
+                        id: "category"
+                      })}
                     >
                       <option value>Chọn danh mục</option>
                       <option value={1}>Giúp việc nhà</option>
@@ -185,7 +161,7 @@ class Header extends Component {
                 </div>
                 <div className="col-lg-2 col-md-2 col-sm-12 p-0">
                   <button type="button" className="btn btn-info full-width">
-                  <FormattedMessage id="search" />
+                    <FormattedMessage id="search" />
                   </button>
                 </div>
               </div>
@@ -206,4 +182,4 @@ const mapStateToProps = (stateStore, ownProps) => {
   return newState;
 };
 
-export default connect(mapStateToProps) (injectIntl(Header));
+export default connect(mapStateToProps)(injectIntl(Header));

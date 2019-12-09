@@ -29,6 +29,7 @@ export default class AutoPlayCarousel extends React.Component {
     }
 
     this.tick = this.tick.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
@@ -54,7 +55,7 @@ export default class AutoPlayCarousel extends React.Component {
     const carouselItems = this.props.listPost.map(item => (
       <SlideItem key={item}>
         <div className="job-grid style-1 job">
-          <div className="job-grid-wrap">
+          <div className="job-grid-wrap" style={{ height: "400px" }}>
             <div className="featured-job">
               <IoMdArrowRoundDown />
             </div>

@@ -7,7 +7,7 @@ const ListHelper = props => {
       {props.helper.map((item, idx) => {
         return (
           <div className="col-lg-3 col-md-4 col-sm-6" key={idx}>
-            <div className="best-candidate">
+            <div className="best-candidate" style={{ height: "300px" }}>
               <div className="best-candidate-wrap">
                 <div className="best-candidate-thumb">
                   <img
@@ -20,7 +20,7 @@ const ListHelper = props => {
                   </div>
                 </div>
                 <span className="can-post">
-                  {item.first_name} {item.last_name}
+                  {item.user_name}
                 </span>
                 <div className="best-candidate-info">
                   <div className="year-exp">

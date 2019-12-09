@@ -4,8 +4,22 @@ import { FormattedMessage } from "react-intl";
 import { IoIosWater } from "react-icons/io";
 import { IoIosCall } from "react-icons/io";
 import { IoIosMail } from "react-icons/io";
+import { connect } from "react-redux";
 
 class Footer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      information: []
+    };
+  }
+
+  componentDidMount() {
+    this.props.http("auth/setting").then(res => {
+      this.setState({ information: res.data.response });
+    });
+  }
+
   render() {
     return (
       <footer className="dark-footer skin-dark-footer">
@@ -32,9 +46,9 @@ class Footer extends Component {
                 <div className="footer-widget">
                   <h4 className="widget-title"><FormattedMessage id="Information" /></h4>
                   <div className="fw-address-wrap">
-                    <p><IoIosWater /> 107, Nguyễn Phong Sắc, Cầu Giấy, Hà Nội</p>
-                    <p><IoIosMail /> smatrjob@gmail.com</p>
-                    <p><IoIosCall /> 0123456789</p>
+                    <p><IoIosWater /> {this.state.information.address}</p>
+                    <p><IoIosMail /> {this.state.information.email}</p>
+                    <p><IoIosCall /> {this.state.information.phone}</p>
                   </div>
                 </div>
               </div>
@@ -58,4 +72,12 @@ class Footer extends Component {
   }
 }
 
-export default Footer;
+const mapStateToProps = (stateStore, ownProps) => {
+  let newState = Object.assign({}, ownProps);
+
+  newState.http = stateStore.http;
+
+  return newState;
+};
+
+export default connect(mapStateToProps)(Footer);

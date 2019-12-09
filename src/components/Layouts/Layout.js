@@ -1,49 +1,48 @@
-import React, { Component, Suspense } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
-import routes from "../../routes";
-import Header from "./Header";
-import Footer from "./Footer";
+import React, { Component, Suspense } from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import routes from '../../routes';
+import Header from './Header';
+import Footer from './Footer';
 
 export class Layout extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+  constructor (props) {
+    super(props)
+    this.state = {}
   }
-  loading() {
+
+  loading () {
     return (
       <div className="animated fadeIn pt-1 text-center">
         <div className="sk-spinner sk-spinner-pulse" />
       </div>
-    );
+    )
   }
-  
-  render() {
+
+  render () {
     return (
-      <div className="app">
-        <Header/>
-        <div className="app-body">
-          <main className="main">
-            <Suspense fallback={this.loading()}>
-              <Switch>
-                {routes.map((route, idx) => {
-                  return route.component ? (
-                    <Route
-                      key={idx}
-                      path={route.path}
-                      exact={route.exact}
-                      name={route.name}
-                      render={props => <route.component {...props} />}
-                    />
-                  ) : null;
-                })}
-                <Redirect from="/" to="/home" />
-              </Switch>
-            </Suspense>
-          </main>
-        </div>
+      <div id="main-wrapper">
+        <Header />
+        <main className="main">
+          <Suspense fallback={this.loading()}>
+            <Switch>
+              {routes.map((route, idx) => {
+                return route.component ? (
+                  <Route
+                    key={idx}
+                    path={route.path}
+                    exact={route.exact}
+                    name={route.name}
+                    render={props => <route.component {...props} />}
+                  />
+                ) : null
+              })}
+              <Redirect from="/" to="/home" />
+            </Switch>
+          </Suspense>
+        </main>
         <Footer />
       </div>
-    );
+    )
   }
 }
 

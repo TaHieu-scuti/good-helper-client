@@ -1,8 +1,25 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from "react-intl";
+import { IoIosWater } from "react-icons/io";
+import { IoIosCall } from "react-icons/io";
+import { IoIosMail } from "react-icons/io";
+import { connect } from "react-redux";
 
 class Footer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      information: []
+    };
+  }
+
+  componentDidMount() {
+    this.props.http("auth/setting").then(res => {
+      this.setState({ information: res.data.response });
+    });
+  }
+
   render() {
     return (
       <footer className="dark-footer skin-dark-footer">
@@ -11,40 +28,27 @@ class Footer extends Component {
             <div className="row">
               <div className="col-lg-3 col-md-6">
                 <div className="footer-widget">
-                  <h4 className="widget-title"><FormattedMessage id="about" /></h4>
-                  <p><FormattedMessage id="find_and_share_job" /></p>
+                  <h4 className="widget-title"><FormattedMessage id="About" /></h4>
+                  <p><FormattedMessage id="Let get best jobs" /></p>
                 </div>
               </div>
               <div className="col-lg-3 col-md-6">
                 <div className="footer-widget">
-                  <h4 className="widget-title"><FormattedMessage id="category" /></h4>
+                  <h4 className="widget-title"><FormattedMessage id="Category" /></h4>
                   <ul className="footer-menu">
                     <li>
-                      <Link href="#"><FormattedMessage id="home" /></Link>
-                    </li>
-                    <li>
-                      <Link href="#"><FormattedMessage id="job" /></Link>
-                    </li>
-                    <li>
-                      <Link href="#"><FormattedMessage id="about" /></Link>
-                    </li>
-                    <li>
-                      <Link href="#"><FormattedMessage id="contact" /></Link>
+                      <Link to="/home"><FormattedMessage id="Home" /></Link>
                     </li>
                   </ul>
                 </div>
               </div>
               <div className="col-lg-3 col-md-6">
                 <div className="footer-widget">
-                  <h4 className="widget-title"><FormattedMessage id="information" /></h4>
+                  <h4 className="widget-title"><FormattedMessage id="Information" /></h4>
                   <div className="fw-address-wrap">
-                    <div className="fw fw-location">
-                      107, Nguyễn Phong Sắc, Cầu Giấy, Hà Nội
-                    </div>
-                    <div className="fw fw-mail">smatrjob@gmail.com</div>
-                    <div className="fw fw-call">+91 254 584 7584</div>
-                    <div className="fw fw-skype">drizvato77</div>
-                    <div className="fw fw-web">www.smartjob.com</div>
+                    <p><IoIosWater /> {this.state.information.address}</p>
+                    <p><IoIosMail /> {this.state.information.email}</p>
+                    <p><IoIosCall /> {this.state.information.phone}</p>
                   </div>
                 </div>
               </div>
@@ -68,4 +72,12 @@ class Footer extends Component {
   }
 }
 
-export default Footer;
+const mapStateToProps = (stateStore, ownProps) => {
+  let newState = Object.assign({}, ownProps);
+
+  newState.http = stateStore.http;
+
+  return newState;
+};
+
+export default connect(mapStateToProps)(Footer);

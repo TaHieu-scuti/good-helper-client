@@ -1,2 +1,47 @@
 // Spinkit
 @import '~spinkit/spinkit.min.css';
+
+.owl-carousel .owl-stage-outer .owl-stage {
+  .owl-item {
+    .owl-item.cloned {
+      width: 100%;
+      .item {
+        width: 720px;
+        margin: 0 auto;
+      }
+    }
+
+    .owl-item.cloned-job {
+      width: 100%;
+    }
+  }
+}
+
+.owl-theme .owl-nav {
+  text-align: center;
+  margin-top: 20px;
+  .owl-prev, .owl-next {
+    width: 40px;
+    height: 40px;
+    background: #ffffff !important;
+    display: inline-block;
+    font-size: 13px !important;
+    border-radius: 50%;
+    margin: 5px;
+    color: #3389ff;
+    outline: none !important;
+    -webkit-box-shadow: 0 0 20px 0 rgba(62,28,131,0.2);
+    -moz-box-shadow: 0 0 20px 0 rgba(62,28,131,0.2);
+    box-shadow: 0 0 20px 0 rgba(62,28,131,0.2);
+    padding: 10px;
+    &:hover {
+      color: #3389ff;
+    }
+  }
+}
+
+.owl-theme .owl-dots .owl-dot {
+  display: inline-block;
+  zoom: 1;
+  display: none;
+}

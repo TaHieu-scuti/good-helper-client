@@ -8,6 +8,7 @@ import {
   updateMe,
   updateIdentity
 } from "../../lib/redux/actions";
+import { IoIosMail } from "react-icons/io";
 
 class LoginPage extends Component {
   constructor(props) {
@@ -56,26 +57,25 @@ class LoginPage extends Component {
                   <div className="login-form">
                     <form onSubmit={this.onLoginButton}>
                       <h4 className="modal-header-title">
-                        <FormattedMessage id="login" />
+                        <FormattedMessage id="Login" />
                       </h4>
                       <div className="form-group css">
                         <label>
-                          <FormattedMessage id="email" />
+                          <FormattedMessage id="Email" />
                         </label>
                         <div className="input-with-icon">
                           <input
                             type="text"
                             className="form-control ip"
-                            placeholder={this.props.intl.formatMessage({ id: "email" })}
+                            placeholder={this.props.intl.formatMessage({ id: "Email" })}
                             value={this.state.email}
                             onChange={this.handleChangeEmail}
                           />
-                          <i className="ti-user" />
                         </div>
                       </div>
                       <div className="form-group css">
                         <label>
-                          <FormattedMessage id="password" />
+                          <FormattedMessage id="Password" />
                         </label>
                         <div className="input-with-icon">
                           <input
@@ -85,7 +85,6 @@ class LoginPage extends Component {
                             value={this.state.password}
                             onChange={this.handleChangePass}
                           />
-                          <i className="ti-unlock" />
                         </div>
                       </div>
                       <div className="form-group css">
@@ -93,24 +92,22 @@ class LoginPage extends Component {
                           type="submit"
                           className="btn btn-primary btn-md full-width pop-login"
                         >
-                          <FormattedMessage id="login" />
+                          <FormattedMessage id="Login" />
                         </button>
                       </div>
                     </form>
                     <div className="form-group css">
                       <div className="row">
                         <div className="col-6 tx">
-                          <i className="ti-user" />
                           <Link
                           >
                             {" "}
-                            <FormattedMessage id="sign_up" />
+                            <FormattedMessage id="Sign up" />
                           </Link>
                         </div>
                         <div className="col-6 tx">
                           <Link href="#">
-                            <i className="ti-help" />
-                            <FormattedMessage id="forget_password" />{" "}
+                            <FormattedMessage id="Forget password" />{" "}
                           </Link>
                         </div>
                       </div>

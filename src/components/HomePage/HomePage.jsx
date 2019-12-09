@@ -1,18 +1,24 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import RatingHelper from './RatingHelper/RatingHelper'
+import Working from './Working'
+import Total from './Total'
+import Feedback from './Feedback'
+import Content from './Content/Content'
+import Category from './Category/Category'
 
-class HomePage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {  
+export class HomePage extends Component {
+  render () {
     return (
-      <div>
-        <h1>Hello world</h1>
+      <div id="main-wrapper">
+        <Category />
+        <RatingHelper />
+        <Content />
+        <Working />
+        <Total />
+        <Feedback />
       </div>
     )
   }
-} 
+}
 
 export default HomePage;

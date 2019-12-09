@@ -7,7 +7,6 @@ export default {
   me: null,
 
   http: null,
-  url_image: null,
   error_descriptions : '',
   is_requesting : false,
 }

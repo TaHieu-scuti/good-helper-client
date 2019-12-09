@@ -16,7 +16,6 @@ class LoginPage extends Component {
     this.state = {
       email: "",
       password: "",
-      errors: []
     };
     this.onLoginButton = this.onLoginButton.bind(this);
   }

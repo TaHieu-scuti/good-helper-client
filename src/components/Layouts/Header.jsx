@@ -91,6 +91,7 @@ class Header extends Component {
             <h2><FormattedMessage id="Let get best jobs" /></h2>
               <Search />
           </div>)}
+        
         </div>
       </div>
     );

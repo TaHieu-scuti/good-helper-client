@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { injectIntl, FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { Alert } from 'react-bootstrap'
 import {
   raiseError,
   setTokenOnHttpClient,
@@ -42,6 +43,8 @@ class LoginPage extends Component {
   }
 
   render() {
+    console.log(this.props)
+    console.log(this.props.is_error)
     return (
       <Authenticate>
         <div id="main-wrapper">
@@ -56,21 +59,9 @@ class LoginPage extends Component {
                           <FormattedMessage id="Login" />
                         </h4>
                         <div className="form-group css">
-                          {this.props.is_error && (
-                            <div style={{ margin: "auto" }}>
-                              <span
-                                style={{
-                                  color: "red",
-                                  textAlign: "center",
-                                  margin: "auto"
-                                }}
-                              >
-                                <FormattedMessage
-                                  id={this.props.error_description}
-                                />
-                              </span>
-                            </div>
-                          )}
+                          <Alert show={this.props.is_error} variant="danger">
+                            <FormattedMessage id={this.props.error_description} />
+                          </Alert>
                         </div>
                         <div className="form-group css">
                           <label>

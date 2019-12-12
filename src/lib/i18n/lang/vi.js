@@ -43,4 +43,5 @@ export default {
 	'I look for people who work very fast, they work effectively, professionally': 'Tôi tìm kiếm người làm rất nhanh, họ làm việc hiệu quả, chuyên nghiệp.',
 	'Choose jobs by category': 'Hãy chọn công việc theo danh mục',
 	'New post': 'Bài viết mới',
+	'Email or Password is incorrect': 'Tài khoản hoặc mật khấu không chính xác'
 };

@@ -43,8 +43,6 @@ class LoginPage extends Component {
   }
 
   render() {
-    console.log(this.props)
-    console.log(this.props.is_error)
     return (
       <Authenticate>
         <div id="main-wrapper">

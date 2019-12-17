@@ -47,9 +47,11 @@ export default {
 	'End time': 'Thời gian kết thúc',
 	'Salary': 'Lương',
 	'Amount member': 'Số người',
-	'Contact': 'Thông tin liên hệ',
+	'Info contact': 'Thông tin liên hệ',
 	'Markdown job': 'Lưu công việc',
 	'Job details': 'Chi tiết công việc',
 	'Description': 'Mô tả',
 	'Job name': 'Tên công việc',
+	'Email or Password is incorrect': 'Tài khoản hoặc mật khấu không chính xác',
+	'Gender' : 'Giới tính'
 };

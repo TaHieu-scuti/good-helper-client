@@ -5,6 +5,8 @@ import RAISE_ERROR from './raiseError';
 import UPDATE_IDENTITY from './updateIdentity';
 import SET_TOKEN_ON_HTTP_CLIENT from './setTokenOnHttpClient';
 import LOGOUT from './logout';
+import UPDATE_JOB from './updateJob';
+import REMOVE_JOB from './removeJob'
 
 const reducers = {
   UPDATE_ME,
@@ -12,7 +14,9 @@ const reducers = {
   RAISE_ERROR,
   UPDATE_IDENTITY,
   SET_TOKEN_ON_HTTP_CLIENT,
-  LOGOUT
+  LOGOUT,
+  UPDATE_JOB,
+  REMOVE_JOB
 }
 
 export default (state = initialState, action = {}) => {

@@ -16,7 +16,6 @@ class Header extends Component {
   }
 
   render() {
-    console.log(this.props);
     let button = (
       <div className="act-buttons">
         <NavLink to="/login" className="btn btn-info font-14">

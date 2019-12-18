@@ -5,6 +5,7 @@ import RAISE_ERROR from './raiseError';
 import UPDATE_IDENTITY from './updateIdentity';
 import SET_TOKEN_ON_HTTP_CLIENT from './setTokenOnHttpClient';
 import LOGOUT from './logout';
+import SEARCH_OUTSIDE from './searchOutside';
 
 const reducers = {
   UPDATE_ME,
@@ -13,6 +14,7 @@ const reducers = {
   UPDATE_IDENTITY,
   SET_TOKEN_ON_HTTP_CLIENT,
   LOGOUT,
+  SEARCH_OUTSIDE
 }
 
 export default (state = initialState, action = {}) => {

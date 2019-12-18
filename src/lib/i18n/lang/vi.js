@@ -53,5 +53,16 @@ export default {
 	'Description': 'Mô tả',
 	'Job name': 'Tên công việc',
 	'Email or Password is incorrect': 'Tài khoản hoặc mật khấu không chính xác',
-	'Gender' : 'Giới tính'
+	'Gender' : 'Giới tính',
+	'Start': 'Bắt đầu',
+	'Salary': 'Lương',
+	'Keyword': 'Từ khóa',
+	'Sex': 'Giới tính',
+	'Kind of work': 'Loại việc',
+	'Job searching': 'Tìm việc',
+	'Male': 'Nam',
+	'Female': 'Nữ',
+	'Urgent work': 'Việc làm cần gấp',
+	'Jobs of the day': 'Việc làm trong ngày',
+	'Long term employment': 'Việc làm dài hạn'
 };

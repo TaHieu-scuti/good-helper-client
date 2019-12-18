@@ -4,7 +4,7 @@ import { injectIntl } from "react-intl";
 const Category = (props) => {
   return (
     <div className="form-group">
-      <select className="js-states form-control" placeholder="chọn địa điểm">
+      <select className="js-states form-control" onChange={props.onChange}>
         <option>{props.intl.formatMessage({ id: "Category" })}</option>
         {props.category.map((item, idx) => {
           return (

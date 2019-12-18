@@ -7,3 +7,4 @@ export const updateIdentity = createAction('UPDATE_IDENTITY');
 export const logout = createAction('LOGOUT');
 export const updateJob = createAction('UPDATE_JOB');
 export const removeJob = createAction('REMOVE_JOB')
+export const searchOutside = createAction('SEARCH_OUTSIDE');

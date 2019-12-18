@@ -7,6 +7,7 @@ import SET_TOKEN_ON_HTTP_CLIENT from './setTokenOnHttpClient';
 import LOGOUT from './logout';
 import UPDATE_JOB from './updateJob';
 import REMOVE_JOB from './removeJob'
+import SEARCH_OUTSIDE from './searchOutside';
 
 const reducers = {
   UPDATE_ME,
@@ -16,7 +17,8 @@ const reducers = {
   SET_TOKEN_ON_HTTP_CLIENT,
   LOGOUT,
   UPDATE_JOB,
-  REMOVE_JOB
+  REMOVE_JOB,
+  SEARCH_OUTSIDE
 }
 
 export default (state = initialState, action = {}) => {

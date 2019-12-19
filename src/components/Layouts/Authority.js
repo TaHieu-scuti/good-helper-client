@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { removeJob } from "../../lib/redux/actions";
+import { removeJob, raiseError } from "../../lib/redux/actions";
 
 class Authority extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class Authority extends Component {
         return config;
       },
       function(error) {
-        // Do something with request error
+        this.props.raiseError(error);
         return Promise.reject(error);
       }
     );
@@ -31,7 +31,8 @@ const mapStateToProps = (stateStore, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    removeJob: () => dispatch(removeJob())
+    removeJob: () => dispatch(removeJob()),
+    raiseError: (error) => dispatch(raiseError(error))
   };
 };
 

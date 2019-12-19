@@ -1,4 +1,4 @@
-export default (state, {payload}) => {
+  export default (state, {payload}) => {
     let newState = Object.assign({}, state);
     newState.jobs = {
       title: '',

@@ -3,6 +3,8 @@ import { IoMdArrowForward } from "react-icons/io";
 import ListJob from "./ListJob";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
+import { Link } from "react-router-dom";
+
 
 class Content extends Component {
   constructor(props) {
@@ -36,10 +38,10 @@ class Content extends Component {
           <div className="row mt-4">
             <div className="col-lg-12 col-md-12">
               <div className="text-center">
-                <a href="grid-job.html" className="btn btn-info">
+                <Link to="/posts" className="btn btn-info">
                   <FormattedMessage id="View" />
                   <IoMdArrowForward />
-                </a>
+                  </Link>
               </div>
             </div>
           </div>

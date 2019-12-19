@@ -12,37 +12,47 @@ class ListALLJob extends Component {
     this.state = {
       activePage: 1,
       pageRangeDisplayed: 5,
-      data: []
+      data: [],
+      pagination: {}
     };
 
     this.handlePageChange = this.handlePageChange.bind(this);
   }
 
   componentDidMount() {
-    this.setState({ data: this.props.listJob.posts });
+    this.props
+      .http({
+        url: "auth/post/get",
+        method: "GET"
+      })
+      .then(res => {
+        this.setState({
+          data: res.data.response.posts,
+          pagination: res.data.response.pagination
+        });
+      });
   }
 
   handlePageChange(pageNumber) {
-    this.props.http({
-      url: "auth/post/get?page=" + pageNumber,
-      method: "GET"
-    }).then(res => {
-      this.setState({ data: res.data.response.posts });
-    });
+    this.props
+      .http({
+        url: "auth/post/get?page=" + pageNumber,
+        method: "GET"
+      })
+      .then(res => {
+        console.log(res);
+        this.setState({ data: res.data.response.posts });
+      });
 
     this.setState({ activePage: pageNumber });
   }
 
   render() {
-    console.log(this.props.listJob)
     const ListJob = this.state.data.map((item, idx) => {
       return (
         <div className="job-new-list" key={idx}>
           <div className="vc-thumb">
-            <img
-              className="img-fluid rounded-circle"
-              src={item.avatar}
-            />
+            <img className="img-fluid rounded-circle" src={item.avatar} />
           </div>
           <div className="vc-content">
             <h5 className="title">
@@ -91,19 +101,17 @@ class ListALLJob extends Component {
     return (
       <div className="col-xl-9 col-lg-8">
         <div className="row">
-          <div className="col-md-12">
-            {ListJob}
-          </div>
+          <div className="col-md-12">{ListJob}</div>
         </div>
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12">
-            {/* <Pagination
+            <Pagination
               activePage={this.state.activePage}
-              itemsCountPerPage={this.props.listJob.pagination.perPage}
-              totalItemsCount={this.props.listJob.pagination.total}
+              itemsCountPerPage={this.state.pagination.perPage}
+              totalItemsCount={this.state.pagination.total}
               pageRangeDisplayed={this.state.pageRangeDisplayed}
               onChange={this.handlePageChange}
-            /> */}
+            />
           </div>
         </div>
       </div>

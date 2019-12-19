@@ -32,7 +32,7 @@ const mapStateToProps = (stateStore, ownProps) => {
 const mapDispatchToProps = dispatch => {
   return {
     removeJob: () => dispatch(removeJob()),
-    raiseError: (error) => dispatch(raiseError(error))
+    raiseError: (error) => dispatch(raiseError(error.response.data.message))
   };
 };
 

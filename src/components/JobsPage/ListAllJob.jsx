@@ -40,10 +40,8 @@ class ListALLJob extends Component {
         method: "GET"
       })
       .then(res => {
-        console.log(res);
         this.setState({ data: res.data.response.posts });
       });
-
     this.setState({ activePage: pageNumber });
   }
 
@@ -121,9 +119,7 @@ class ListALLJob extends Component {
 
 const mapStateToProps = (stateStore, ownProps) => {
   let newState = Object.assign({}, ownProps);
-
   newState.http = stateStore.http;
-
   return newState;
 };
 

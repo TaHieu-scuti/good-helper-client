@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 
-
 class Content extends Component {
   constructor(props) {
     super(props);

@@ -38,7 +38,6 @@ class DetailJobPage extends Component {
       });
   }
   render() {
-    console.log(this.props);
     return (
       <section className="tr-single-detail gray-bg">
         <div className="container">

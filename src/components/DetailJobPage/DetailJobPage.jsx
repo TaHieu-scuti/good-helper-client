@@ -26,7 +26,13 @@ class DetailJobPage extends Component {
 
   componentDidMount() {
     this.props
-      .http("auth/detail/post/" + this.props.match.params.id)
+      .http({
+        url: "auth/detail/post",
+        method: "POST",
+        data: {
+          post_id: this.props.match.params.id
+        }
+      })
       .then(res => {
         this.setState({ jobDetail: res.data.response });
         this.props.updateJob({
@@ -131,8 +137,8 @@ class DetailJobPage extends Component {
                         <div className="icon-box-text">
                           <strong className="d-block">
                             <FormattedMessage id="Gender" />
-                            {this.state.jobDetail.gender}
                           </strong>
+                          {this.state.jobDetail.gender}
                         </div>
                       </div>
                     </li>

@@ -8,6 +8,7 @@ class Authority extends Component {
     this.props.http.interceptors.request.use(
       async config => {
         this.props.removeJob();
+        
         return config;
       },
       function(error) {

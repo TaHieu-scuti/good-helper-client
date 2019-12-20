@@ -1,7 +1,7 @@
 import HomePage from './components/HomePage';
-import LoginPage from './components/LoginPage';
-import Logout from './components/Logout';
-import SearchPage from './components/SearchPage';
+import LoginPage from './components/Auth/LoginPage';
+import Logout from './components/Auth/logout';
+import SearchPage from './components/Jobs/SearchPage';
 
 const routes = [
   { path: '/home', exact: true, name: 'Home', component: HomePage },

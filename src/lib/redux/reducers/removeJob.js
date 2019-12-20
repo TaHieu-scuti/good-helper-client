@@ -5,8 +5,7 @@ export default (state, {payload}) => {
     category: '',
     location: '',
     img: ''
-  }; 
-  newState.error_descriptions = '';
+  };
   return newState;
 }
   

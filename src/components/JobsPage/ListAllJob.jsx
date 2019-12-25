@@ -36,8 +36,11 @@ class ListALLJob extends Component {
   handlePageChange(pageNumber) {
     this.props
       .http({
-        url: "auth/post/get?page=" + pageNumber,
-        method: "GET"
+        url: "auth/post/get",
+        method: "GET",
+        params: {
+          page: pageNumber
+        }
       })
       .then(res => {
         this.setState({ data: res.data.response.posts });

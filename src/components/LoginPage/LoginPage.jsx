@@ -57,7 +57,7 @@ class LoginPage extends Component {
                           <FormattedMessage id="Login" />
                         </h4>
                         <div className="form-group css">
-                          <Alert show={this.props.is_error} variant="danger">
+                          <Alert show={this.props.is_error} style={{textAlign: "center"}} variant="danger">
                             <FormattedMessage id={this.props.error_description} />
                           </Alert>
                         </div>

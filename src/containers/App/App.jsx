@@ -4,7 +4,7 @@ import Loadable from 'react-loadable';
 import './App.scss';
 import Store from './AppStore';
 import IntlProvider from "./IntlProvider";
-import Login from "../../components/LoginPage"
+import Login from "../../components/Auth/LoginPage"
 
 const loading = () => <div className="animated fadeIn pt-3 text-center"><div className="sk-spinner sk-spinner-pulse"></div></div>;
 
@@ -14,7 +14,7 @@ const DefaultLayout = Loadable({
 })
 
 const LogoutLayout = Loadable({
-  loader: () => import('../../components/Logout'),
+  loader: () => import('../../components/Auth/logout'),
   loading
 })
 

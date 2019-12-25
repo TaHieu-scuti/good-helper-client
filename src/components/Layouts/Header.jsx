@@ -7,7 +7,7 @@ import { injectIntl, FormattedMessage } from "react-intl";
 import Search from "./../HomePage/Search/Search";
 import { IoMdArrowForward } from "react-icons/io";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import NameJob from "./../DetailJobPage/NameJob";
+import NameJob from "./../Jobs/NameJob";
 
 class Header extends Component {
   constructor(props) {

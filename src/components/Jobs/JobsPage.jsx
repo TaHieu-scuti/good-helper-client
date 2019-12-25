@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SearchAdvanced from "./../SearchPage/SearchAdvanced";
+import SearchAdvanced from "./../Jobs/SearchAdvanced";
 import ListAllJob from "./ListAllJob";
 
 class JobsPage extends Component {

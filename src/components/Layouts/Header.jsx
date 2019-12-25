@@ -7,17 +7,12 @@ import { injectIntl, FormattedMessage } from "react-intl";
 import Search from "./../HomePage/Search/Search";
 import { IoMdArrowForward } from "react-icons/io";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import NameJob from "./../Jobs/NameJob";
 
 class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.onLogoutButton = this.onLogoutButton.bind(this);
-  }
-
-  onLogoutButton(e) {
-    e.preventDefault();
-    this.props.onLogoutButton({ component: this, event: e });
   }
 
   render() {
@@ -35,12 +30,19 @@ class Header extends Component {
         <nav className="navbar navbar-expand-lg header-nav-bar">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item dropdown">
-              <NavDropdown title={this.props.me.last_name} id="nav-dropdown">
-                <NavDropdown.Item eventKey="4.1">
-                  <Link to="/logout" className="link">
-                    <FormattedMessage id="Logout" />
-                  </Link>
-                </NavDropdown.Item>
+              <NavDropdown
+                title={this.props.me.last_name}
+                id="collasible-nav-dropdown"
+              >
+                <Link to="/logout" className="link">
+                  <NavDropdown.Item
+                    href="/logout"
+                    className="log"
+                    eventKey="4.1"
+                  >
+                    <FormattedMessage className="logout" id="Logout" />
+                  </NavDropdown.Item>
+                </Link>
               </NavDropdown>
             </li>
           </ul>
@@ -105,12 +107,19 @@ class Header extends Component {
           style={{ background: "url(" + banner + ")" }}
           data-overlay={0}
         >
-          {this.props.location.pathname !== "/login" && (
+          {this.props.location.pathname !== "/login" &&
+            this.props.jobs.title.length === 0 && (
+              <div className="container">
+                <h2>
+                  <FormattedMessage id="Let get best jobs" />
+                </h2>
+                <Search />
+              </div>
+            )}
+
+          {this.props.jobs.title.length > 0 && (
             <div className="container">
-              <h2>
-                <FormattedMessage id="Let get best jobs" />
-              </h2>
-              <Search />
+              <NameJob detailJob={this.props.jobs} />
             </div>
           )}
         </div>
@@ -123,6 +132,7 @@ const mapStateToProps = (stateStore, ownProps) => {
   let newState = Object.assign({}, ownProps);
   newState.http = stateStore.http;
   newState.me = stateStore.me;
+  newState.jobs = stateStore.jobs;
   newState.is_logined = stateStore.me != null;
 
   return newState;

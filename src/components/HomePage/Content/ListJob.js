@@ -4,6 +4,7 @@ import ItemsCarousel from "react-items-carousel";
 import { IoMdArrowRoundDown } from "react-icons/io";
 import { IoMdWater } from "react-icons/io";
 import { FormattedMessage } from "react-intl";
+import { Link } from "react-router-dom";
 
 const noOfItems = 6;
 const noOfCards = 3;
@@ -26,7 +27,7 @@ export default class AutoPlayCarousel extends React.Component {
     super(props);
     this.state = {
       activeItemIndex: 0
-    }
+    };
 
     this.tick = this.tick.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -45,7 +46,7 @@ export default class AutoPlayCarousel extends React.Component {
       activeItemIndex:
         (prevState.activeItemIndex + 1) % (noOfItems - noOfCards + 1)
     }));
-  } 
+  }
 
   onChange(value) {
     this.setState({ activeItemIndex: value });
@@ -59,17 +60,17 @@ export default class AutoPlayCarousel extends React.Component {
             <div className="featured-job">
               <IoMdArrowRoundDown />
             </div>
-            <span className="job-type j-full-time"><FormattedMessage id="All the time" /></span>
+            <span className="job-type j-full-time">
+              <FormattedMessage id="All the time" />
+            </span>
             <div className="job-grid-thumb">
-              <a href="">
-                <img src={item.avatar} className="img-fluid mx-auto" alt="" />
-              </a>
+              <img src={item.avatar} className="img-fluid mx-auto" alt="" />
             </div>
             <h4 className="job-title">{item.user_name}</h4>
             <hr />
             <div className="job-grid-detail">
               <h4 className="jbc-name">
-                <a href="employer-detail.html">{item.title}</a>
+                <Link to={"job/detail/" + item.id}>{item.title}</Link>
               </h4>
               <p>
                 <IoMdWater />

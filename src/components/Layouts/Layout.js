@@ -3,6 +3,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import routes from '../../routes';
 import Header from './Header';
 import Footer from './Footer';
+import Authority from './Authority'
 
 export class Layout extends Component {
   constructor (props) {
@@ -20,6 +21,7 @@ export class Layout extends Component {
 
   render () {
     return (
+      <Authority>
       <div id="main-wrapper">
         <Header />
         <main className="main">
@@ -42,6 +44,7 @@ export class Layout extends Component {
         </main>
         <Footer />
       </div>
+      </Authority>
     )
   }
 }

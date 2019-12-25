@@ -5,8 +5,13 @@ export default {
   identity,
   // User data of who login.
   me: null,
-
   http: null,
   error_descriptions : '',
   is_requesting : false,
+  jobs: {
+    title: '',
+    category: '',
+    location: '',
+    img: ''
+  }
 }

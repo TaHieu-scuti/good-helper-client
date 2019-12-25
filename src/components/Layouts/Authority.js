@@ -8,12 +8,11 @@ class Authority extends Component {
     this.props.http.interceptors.request.use(
       async config => {
         this.props.removeJob();
-        
         return config;
       },
       function(error) {
-        this.props.raiseError(error);
-        return Promise.reject(error);
+        const message = error.response.data.message;
+        this.props.raiseError(message);
       }
     );
   }
@@ -33,7 +32,7 @@ const mapStateToProps = (stateStore, ownProps) => {
 const mapDispatchToProps = dispatch => {
   return {
     removeJob: () => dispatch(removeJob()),
-    raiseError: (error) => dispatch(raiseError(error.response.data.message))
+    raiseError: (message) => dispatch(raiseError(message))
   };
 };
 

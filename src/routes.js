@@ -5,6 +5,7 @@ import SearchPage from './components/Jobs/SearchPage';
 import DetailJobPage from './components/Jobs/DetailJobPage';
 import JobsPage from './components/Jobs/JobsPage';
 import Profile from './components/Profile/Profile';
+import EditProfile from './components/Profile/EditProfile';
 const routes = [
   { path: '/home', exact: true, name: 'Home', component: HomePage },
   { path: '/login', name: 'Login', component: LoginPage },
@@ -13,6 +14,7 @@ const routes = [
   { path: '/posts', name: 'Post', component: JobsPage },
   { path: '/job/detail/:id', name: 'DetailJob', component: DetailJobPage },
   { path: '/profile', name: 'Profile', component: Profile },
+  { path: '/edit/profile', name: 'EditProfile', component: EditProfile },
 ];
 
 export default routes;

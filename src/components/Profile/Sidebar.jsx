@@ -8,12 +8,12 @@ class Sidebar extends Component {
           <div class="dashboard-thumb">
             <div class="dashboard-th-pic">
               <img
-                src="https://www.studyphim.vn/assets/img/default-avatar.jpg"
+                src={this.props.user.avatar}
                 class="img-fluid mx-auto img-circle"
                 alt=""
               />
             </div>
-            <h4 class="mb-1">Adam Muklarial</h4>
+            <h4 class="mb-1">{this.props.user.first_name} {this.props.user.last_name}</h4>
             <span class="text-success">Web Designer</span>
           </div>
           <ul class="nav dashboard-verticle-nav">

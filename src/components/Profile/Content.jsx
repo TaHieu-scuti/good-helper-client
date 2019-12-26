@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import {
+	FaInfo,
+  } from "react-icons/fa";
  
 class Content extends Component {
     render(){
@@ -7,34 +11,41 @@ class Content extends Component {
 							<div class="tab-pane active container" id="c-profile">
 								<div class="tr-single-box">
 									<div class="tr-single-header">
-										<h3><i class="ti-home"></i> Thông tin</h3>
+										<h3><FaInfo /> Thông tin</h3>
 									</div>
 									<div class="tr-single-body">
 										<div class="row">	
 											<div class="col-lg-12 col-md-12 col-sm-12">
 												<div class="form-group">
-													<label> Họ và tên:</label>
-													User
+													<label> Họ và tên: </label>
+													{this.props.user.first_name}
 												</div>
 											</div>
 											<div class="col-lg-12 col-md-12 col-sm-12">
 												<div class="form-group">
-													<label> Email</label>
-													email@gmail.com
+													<label> Email : </label>
+													{this.props.user.email}
 												</div>
 											</div>
 											<div class="col-lg-6 col-md-6 col-sm-12">
 												<div class="form-group">
-													<label>Số điện thoại:</label>
-													0123456789
+													<label>Số điện thoại : </label>
+													{this.props.user.phone_number}
 												</div>
 											</div>
 											<div class="col-lg-6 col-md-6 col-sm-12">
 												<div class="form-group">
-													<label>Giới tính:</label>
-													Name
+													<label>Giới tính : </label>
+													{this.props.user.gender}
 												</div>
 											</div>
+
+											{/* <div class="col-lg-12 col-md-12 col-sm-12">
+												<div class="form-group">
+													<label> Số chứng minh nhân dân : </label>
+													{this.props.user.id_card_font}
+												</div>
+											</div> */}
 										</div>
 									</div>
 								</div>
@@ -44,4 +55,7 @@ class Content extends Component {
         )
     }
 }
+
+
+
 export default Content;

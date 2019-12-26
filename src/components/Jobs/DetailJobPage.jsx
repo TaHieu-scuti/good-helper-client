@@ -45,7 +45,7 @@ class DetailJobPage extends Component {
   }
   render() {
     return (
-      <section className="tr-single-detail gray-bg">
+      <section className="tr-single-detail gray-bg" style={{ background: "#f6f7fb" }}>
         <div className="container">
           <div className="row">
             <div className="col-md-8 col-sm-12 center-block">

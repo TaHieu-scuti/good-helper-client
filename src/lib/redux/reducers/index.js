@@ -8,6 +8,7 @@ import LOGOUT from './logout';
 import UPDATE_JOB from './updateJob';
 import REMOVE_JOB from './removeJob'
 import SEARCH_OUTSIDE from './searchOutside';
+import REGISTER from './register';
 
 const reducers = {
   UPDATE_ME,
@@ -18,7 +19,8 @@ const reducers = {
   LOGOUT,
   UPDATE_JOB,
   REMOVE_JOB,
-  SEARCH_OUTSIDE
+  SEARCH_OUTSIDE,
+  REGISTER
 }
 
 export default (state = initialState, action = {}) => {

@@ -63,6 +63,15 @@ class Header extends Component {
                   title={this.props.me.last_name}
                   id="collasible-nav-dropdown"
                 >
+                  <Link to="/needer/listjob" className="link">
+                    <NavDropdown.Item
+                      href="/logout"
+                      className="log"
+                      eventKey="4.1"
+                    >
+                      <FormattedMessage id="Manage job" />
+                    </NavDropdown.Item>
+                  </Link>
                   <Link to="/logout" className="link">
                     <NavDropdown.Item
                       href="/logout"
@@ -178,6 +187,7 @@ class Header extends Component {
         >
           {this.props.location.pathname !== "/login" &&
             this.props.location.pathname !== "/register" &&
+            this.props.location.pathname !== "/needer/listjob" &&
             this.props.jobs.title.length === 0 && (
               <div className="container">
                 <h2>

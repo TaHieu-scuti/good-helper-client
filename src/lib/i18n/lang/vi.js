@@ -85,5 +85,7 @@ export default {
 	'The confirm password field is required.' : 'Mật khẩu không chính xác',
 	'The role field is required.' : 'Chọn tài khoản',
 	'Update profile' : 'Bạn cần cập nhập thông tin cá nhân!',
-	'Profile page' : 'trang cá nhân'
+	'Profile page' : 'trang cá nhân',
+	'Manage job' : 'Quản lý công việc',
+	'Post job' : 'Đăng công việc',
 };

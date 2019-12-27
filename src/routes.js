@@ -6,6 +6,7 @@ import DetailJobPage from './components/Jobs/DetailJobPage';
 import JobsPage from './components/Jobs/JobsPage'
 import Register from './components/Auth/Register';
 import CheckOTP from './components/Auth/CheckOTP';
+import ListJobNeed from './components/Needer/ListPost';
 
 const routes = [
   { path: '/home', exact: true, name: 'Home', component: HomePage },
@@ -16,6 +17,7 @@ const routes = [
   { path: '/job/detail/:id', name: 'DetailJob', component: DetailJobPage },
   { path: '/register', name: 'Register', component: Register },
   { path: '/checkotp', name: 'CheckOTP', component: CheckOTP },
+  { path: '/needer/listjob', name: 'ListJobNeed', component: ListJobNeed },
 ];
 
 export default routes;

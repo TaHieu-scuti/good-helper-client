@@ -3,7 +3,9 @@ import LoginPage from './components/Auth/LoginPage';
 import Logout from './components/Auth/logout';
 import SearchPage from './components/Jobs/SearchPage';
 import DetailJobPage from './components/Jobs/DetailJobPage';
-import JobsPage from './components/Jobs/JobsPage'
+import JobsPage from './components/Jobs/JobsPage';
+import Profile from './components/Profile/Profile';
+import EditProfile from './components/Profile/EditProfile';
 import Register from './components/Auth/Register';
 import CheckOTP from './components/Auth/CheckOTP';
 
@@ -14,6 +16,8 @@ const routes = [
   { path: '/search', name: 'Search', component: SearchPage },
   { path: '/posts', name: 'Post', component: JobsPage },
   { path: '/job/detail/:id', name: 'DetailJob', component: DetailJobPage },
+  { path: '/profile', name: 'Profile', component: Profile },
+  { path: '/edit/profile', name: 'EditProfile', component: EditProfile },
   { path: '/register', name: 'Register', component: Register },
   { path: '/checkotp', name: 'CheckOTP', component: CheckOTP },
 ];

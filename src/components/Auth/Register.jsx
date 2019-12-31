@@ -99,7 +99,7 @@ class Register extends Component {
                                   />
                                 </div>
                                 <span className="text-danger">
-                                  {this.props.error_descriptions.first_name ? 
+                                  {this.props.error_descriptions.first_name ?  
                                     <FormattedMessage id="The first name field is required." />
                                     : null
                                   }

@@ -54,7 +54,6 @@ class Header extends Component {
     );
 
     if (this.props.is_logined) {
-      {this.props.me.role == 1 ?
         button = (
           <nav className="navbar navbar-expand-lg header-nav-bar">
             <ul className="navbar-nav ml-auto">
@@ -72,36 +71,13 @@ class Header extends Component {
                       <FormattedMessage className="logout" id="Logout" />
                     </NavDropdown.Item>
                   </Link>
-                </NavDropdown>
-              </li>
-            </ul>
-            <ul className="navbar-nav">
-              <li>
-                <img
-                  src={this.props.me.avatar}
-                  className="img-fluid mx-auto img-circle"
-                  style={{ width: "30px" }}
-                  alt=""
-                />
-              </li>
-            </ul>
-          </nav>
-        ) :
-        button = (
-          <nav className="navbar navbar-expand-lg header-nav-bar">
-            <ul className="navbar-nav ml-auto">
-              <li className="nav-item dropdown">
-                <NavDropdown
-                  title={this.props.me.last_name}
-                  id="collasible-nav-dropdown"
-                >
-                  <Link to="/logout" className="link">
-                    <NavDropdown.Item
-                      href="/logout"
+                  <Link to="/profile" className="link">
+                  <NavDropdown.Item
+                      href="/edit/profile"
                       className="log"
-                      eventKey="4.1"
+                      eventKey="4.2"
                     >
-                      <FormattedMessage className="logout" id="Logout" />
+                      <FormattedMessage id="Profile page" />
                     </NavDropdown.Item>
                   </Link>
                 </NavDropdown>
@@ -119,7 +95,6 @@ class Header extends Component {
             </ul>
           </nav>
         )
-      } 
     }
 
     if (this.props.location.pathname == "/checkotp") {

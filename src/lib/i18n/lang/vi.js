@@ -85,5 +85,14 @@ export default {
 	'The confirm password field is required.' : 'Mật khẩu không chính xác',
 	'The role field is required.' : 'Chọn tài khoản',
 	'Update profile' : 'Bạn cần cập nhập thông tin cá nhân!',
-	'Profile page' : 'trang cá nhân'
+	'Profile page' : 'Trang cá nhân',
+	'Number id card': 'Số chứng minh nhân dân',
+	'Avatar': 'Ảnh đại diện',
+	'Id card font': 'Ảnh CMND mặt trước',
+	'Id card backside': 'Ảnh CMND mặt sau',
+	'Personal informations': 'Thông tin cá nhân',
+	'Editting informations': 'Chỉnh sửa thông tin',
+	'Change password': 'Đổi mật khẩu',
+	'Task manager': 'Quản lý công việc',
+	'Edit profile': 'Chỉnh sửa thông tin cá nhân'
 };

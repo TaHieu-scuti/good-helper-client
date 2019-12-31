@@ -3,7 +3,6 @@ import { FaUserAlt , FaUserEdit , FaExpeditedssl ,FaFile } from "react-icons/fa"
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 
-
 class Sidebar extends Component {
   render() {
     return (

@@ -70,7 +70,6 @@ class Header extends Component {
                     >
                       <FormattedMessage className="logout" id="Logout" />
                     </NavDropdown.Item>
-                  
                   </Link>
                   <Link to="/profile" className="link">
                   <NavDropdown.Item

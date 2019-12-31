@@ -62,15 +62,6 @@ class Header extends Component {
                   title={this.props.me.last_name}
                   id="collasible-nav-dropdown"
                 >
-                  <Link to="/logout" className="link">
-                    <NavDropdown.Item
-                      href="/logout"
-                      className="log"
-                      eventKey="4.1"
-                    >
-                      <FormattedMessage className="logout" id="Logout" />
-                    </NavDropdown.Item>
-                  </Link>
                   <Link to="/profile" className="link">
                   <NavDropdown.Item
                       href="/edit/profile"
@@ -78,6 +69,15 @@ class Header extends Component {
                       eventKey="4.2"
                     >
                       <FormattedMessage id="Profile page" />
+                    </NavDropdown.Item>
+                  </Link>
+                  <Link to="/logout" className="link">
+                    <NavDropdown.Item
+                      href="/logout"
+                      className="log"
+                      eventKey="4.1"
+                    >
+                      <FormattedMessage className="logout" id="Logout" />
                     </NavDropdown.Item>
                   </Link>
                 </NavDropdown>

@@ -156,7 +156,7 @@ const mapDispatchToProps = dispatch => {
           });
         })
         .catch(error => {
-          dispatch(raiseError(error.response.data.message));
+          dispatch(raiseError(error.response.data.message)); 
         });
     }
   };

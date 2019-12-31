@@ -94,5 +94,13 @@ export default {
 	'Editting informations': 'Chỉnh sửa thông tin',
 	'Change password': 'Đổi mật khẩu',
 	'Task manager': 'Quản lý công việc',
-	'Edit profile': 'Chỉnh sửa thông tin cá nhân'
+	'Edit profile': 'Chỉnh sửa thông tin cá nhân',
+	'Old password' : 'Mật khẩu cũ',
+	'New password' : 'Mật khẩu mới',
+	'The new password must be at least 6 characters.': 'Mật khẩu mới phải có ít nhất 6 kí tự',
+	'The new password may not be greater than 15 characters.': 'Mật khẩu mới không vượt quá 15 kí tự',
+	'The new password field is required.': 'Mật khẩu mới không được để trông',
+	'The confirm password and new password must match.': 'Phải giống mật khẩu mới',
+	'The password field is required.': 'Không được để trống mật khẩu cũ',
+	'Password is incorrect': 'Mật khẩu cũ không đúng'
 };

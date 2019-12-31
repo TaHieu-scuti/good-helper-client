@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { FormattedMessage } from "react-intl";
 import { IoIosWater } from "react-icons/io";
 import { IoIosCall } from "react-icons/io";
@@ -21,6 +21,11 @@ class Footer extends Component {
   }
 
   render() {
+
+    if (this.props.location.pathname == "/checkotp") {
+      return null
+    }
+  
     return (
       <footer className="dark-footer skin-dark-footer">
         <div>
@@ -80,4 +85,4 @@ const mapStateToProps = (stateStore, ownProps) => {
   return newState;
 };
 
-export default connect(mapStateToProps)(Footer);
+export default connect(mapStateToProps)(withRouter(Footer));

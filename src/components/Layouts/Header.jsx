@@ -8,11 +8,39 @@ import Search from "./../HomePage/Search/Search";
 import { IoMdArrowForward } from "react-icons/io";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import NameJob from "./../Jobs/NameJob";
+import { Alert } from 'react-bootstrap';
+import { useState } from 'react';
+
+function AlertDismissibleExample() {
+
+  const [show, setShow] = useState(true);
+
+  if (show) {
+    return (
+      <Alert variant="warning" onClose={() => setShow(false)} dismissible style={{ height: '50px' }}>
+        <p className="text-center">
+          <FormattedMessage id="Update profile" />      
+          <Link to="/#"> <FormattedMessage id="Profile page" /></Link> 
+        </p>
+      </Alert>
+    );
+  }
+
+  return null;
+}
 
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      showModal: true,
+    };
+    this.onLogoutButton = this.onLogoutButton.bind(this);
+  }
+
+  onLogoutButton(e) {
+    e.preventDefault();
+    this.props.onLogoutButton({ component: this, event: e });
   }
 
   render() {
@@ -26,43 +54,60 @@ class Header extends Component {
     );
 
     if (this.props.is_logined) {
-      button = (
-        <nav className="navbar navbar-expand-lg header-nav-bar">
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item dropdown">
-              <NavDropdown
-                title={this.props.me.last_name}
-                id="collasible-nav-dropdown"
-              >
-                <Link to="/logout" className="link">
+        button = (
+          <nav className="navbar navbar-expand-lg header-nav-bar">
+            <ul className="navbar-nav ml-auto">
+              <li className="nav-item dropdown">
+                <NavDropdown
+                  title={this.props.me.last_name}
+                  id="collasible-nav-dropdown"
+                >
+                  <Link to="/logout" className="link">
+                    <NavDropdown.Item
+                      href="/logout"
+                      className="log"
+                      eventKey="4.1"
+                    >
+                      <FormattedMessage className="logout" id="Logout" />
+                    </NavDropdown.Item>
+                  
+                  </Link>
+                  <Link to="/profile" className="link">
                   <NavDropdown.Item
-                    href="/logout"
-                    className="log"
-                    eventKey="4.1"
-                  >
-                    <FormattedMessage className="logout" id="Logout" />
-                  </NavDropdown.Item>
-                </Link>
-              </NavDropdown>
-            </li>
-          </ul>
-          <ul className="navbar-nav">
-            <li>
-              <img
-                src={this.props.me.avatar}
-                className="img-fluid mx-auto img-circle"
-                style={{ width: "30px" }}
-                alt=""
-              />
-            </li>
-          </ul>
-        </nav>
-      );
+                      href="/edit/profile"
+                      className="log"
+                      eventKey="4.2"
+                    >
+                      <FormattedMessage id="Profile page" />
+                    </NavDropdown.Item>
+                  </Link>
+                </NavDropdown>
+              </li>
+            </ul>
+            <ul className="navbar-nav">
+              <li>
+                <img
+                  src={this.props.me.avatar}
+                  className="img-fluid mx-auto img-circle"
+                  style={{ width: "30px" }}
+                  alt=""
+                />
+              </li>
+            </ul>
+          </nav>
+        )
+    }
+
+    if (this.props.location.pathname == "/checkotp") {
+      return null
     }
 
     return (
       <div>
         <div className="topbar" id="top">
+          {this.props.me == '' ? 
+            <AlertDismissibleExample /> : null
+          }
           <div className="header exchange-logo">
             <div className="container po-relative">
               <nav className="navbar navbar-expand-lg header-nav-bar">
@@ -108,6 +153,7 @@ class Header extends Component {
           data-overlay={0}
         >
           {this.props.location.pathname !== "/login" &&
+            this.props.location.pathname !== "/register" &&
             this.props.jobs.title.length === 0 && (
               <div className="container">
                 <h2>
@@ -115,8 +161,8 @@ class Header extends Component {
                 </h2>
                 <Search />
               </div>
-            )}
-
+            )
+          }
           {this.props.jobs.title.length > 0 && (
             <div className="container">
               <NameJob detailJob={this.props.jobs} />

@@ -6,6 +6,9 @@ import DetailJobPage from './components/Jobs/DetailJobPage';
 import JobsPage from './components/Jobs/JobsPage';
 import Profile from './components/Profile/Profile';
 import EditProfile from './components/Profile/EditProfile';
+import Register from './components/Auth/Register';
+import CheckOTP from './components/Auth/CheckOTP';
+
 const routes = [
   { path: '/home', exact: true, name: 'Home', component: HomePage },
   { path: '/login', name: 'Login', component: LoginPage },
@@ -15,6 +18,8 @@ const routes = [
   { path: '/job/detail/:id', name: 'DetailJob', component: DetailJobPage },
   { path: '/profile', name: 'Profile', component: Profile },
   { path: '/edit/profile', name: 'EditProfile', component: EditProfile },
+  { path: '/register', name: 'Register', component: Register },
+  { path: '/checkotp', name: 'CheckOTP', component: CheckOTP },
 ];
 
 export default routes;

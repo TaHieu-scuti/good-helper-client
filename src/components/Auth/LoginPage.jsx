@@ -103,12 +103,12 @@ class LoginPage extends Component {
                       <div className="form-group css">
                         <div className="row">
                           <div className="col-6 tx">
-                            <Link>
+                            <Link to="/register">
                               <FormattedMessage id="Sign up" />
                             </Link>
                           </div>
                           <div className="col-6 tx">
-                            <Link href="#">
+                            <Link to="#">
                               <FormattedMessage id="Forget password" />{" "}
                             </Link>
                           </div>

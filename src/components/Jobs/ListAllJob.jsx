@@ -22,7 +22,7 @@ class ListALLJob extends Component {
   componentDidMount() {
     this.props
       .http({
-        url: "auth/post/get",
+        url: "auth/list/post",
         method: "GET"
       })
       .then(res => {
@@ -36,7 +36,7 @@ class ListALLJob extends Component {
   handlePageChange(pageNumber) {
     this.props
       .http({
-        url: "auth/post/get",
+        url: "auth/list/post",
         method: "GET",
         params: {
           page: pageNumber

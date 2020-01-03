@@ -25,8 +25,6 @@ class JobMarkdowned extends Component {
         method: "GET"
       })
       .then(res => {
-          console.log(res.data.response);
-          
         this.setState({
           data: res.data.response.posts,
           pagination: res.data.response.pagination
@@ -88,8 +86,6 @@ class JobMarkdowned extends Component {
         </div>
       );
     });
-
-    console.log(this.state);
     
     return (
       <Authenticate>
@@ -112,8 +108,8 @@ class JobMarkdowned extends Component {
                         <div className="row">
                           <div className="col-md-12">{ListJob}</div>
                         </div>
-                        <div class="row">
-                          <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div className="row">
+                          <div className="col-lg-12 col-md-12 col-sm-12">
                             <Pagination
                               activePage={this.state.activePage}
                               itemsCountPerPage={this.state.pagination.perPage}

@@ -55,7 +55,6 @@ export default {
 	'Email or Password is incorrect': 'Tài khoản hoặc mật khấu không chính xác',
 	'Gender' : 'Giới tính',
 	'Start': 'Bắt đầu',
-	'Salary': 'Lương',
 	'Keyword': 'Từ khóa',
 	'Sex': 'Giới tính',
 	'Kind of work': 'Loại việc',
@@ -94,5 +93,6 @@ export default {
 	'Editting informations': 'Chỉnh sửa thông tin',
 	'Change password': 'Đổi mật khẩu',
 	'Task manager': 'Quản lý công việc',
-	'Edit profile': 'Chỉnh sửa thông tin cá nhân'
+	'Edit profile': 'Chỉnh sửa thông tin cá nhân',
+	'Posts was markdowned': 'Công việc đã lưu'
 };

@@ -7,7 +7,7 @@ import { FormattedMessage } from "react-intl";
 import Pagination from "react-js-pagination";
 
 class JobMarkdowned extends Component {
-  constructor(props) { 
+  constructor(props) {
     super(props);
     this.state = {
       activePage: 1,
@@ -86,7 +86,7 @@ class JobMarkdowned extends Component {
         </div>
       );
     });
-    
+
     return (
       <Authenticate>
         <div id="main-wrapper">
@@ -99,8 +99,7 @@ class JobMarkdowned extends Component {
                     <div className="tr-single-box">
                       <div className="tr-single-header">
                         <h3>
-                          <i>
-                          </i>
+                          <i></i>
                           <FormattedMessage id="Posts was markdowned" />
                         </h3>
                       </div>
@@ -135,7 +134,7 @@ class JobMarkdowned extends Component {
 const mapStateToProps = (stateStore, ownProps) => {
   let newState = Object.assign({}, ownProps);
   newState.user = stateStore.me;
-  newState.http = stateStore.http
+  newState.http = stateStore.http;
   return newState;
 };
 

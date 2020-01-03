@@ -10,7 +10,6 @@ import Register from './components/Auth/Register';
 import CheckOTP from './components/Auth/CheckOTP';
 import JobHelpMarkdown from './components/Helper/JobMarkdowned';
 
-
 const routes = [
   { path: '/home', exact: true, name: 'Home', component: HomePage },
   { path: '/login', name: 'Login', component: LoginPage },

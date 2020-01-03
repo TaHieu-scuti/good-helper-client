@@ -100,11 +100,11 @@ class Header extends Component {
     if (this.props.location.pathname == "/checkotp") {
       return null
     }
-
+        
     return (
       <div>
         <div className="topbar" id="top">
-          {this.props.me == '' ? 
+          { this.props.is_logined  && !this.props.me.id_card ? 
             <AlertDismissibleExample /> : null
           }
           <div className="header exchange-logo">

@@ -8,6 +8,7 @@ import Profile from './components/Profile/Profile';
 import EditProfile from './components/Profile/EditProfile';
 import Register from './components/Auth/Register';
 import CheckOTP from './components/Auth/CheckOTP';
+import JobAppied from './components/Helper/JobApplied'
 
 const routes = [
   { path: '/home', exact: true, name: 'Home', component: HomePage },
@@ -20,6 +21,8 @@ const routes = [
   { path: '/edit/profile', name: 'EditProfile', component: EditProfile },
   { path: '/register', name: 'Register', component: Register },
   { path: '/checkotp', name: 'CheckOTP', component: CheckOTP },
+  { path: '/helper/jobappiled', name: 'jobappied', component: JobAppied },
+
 ];
 
 export default routes;

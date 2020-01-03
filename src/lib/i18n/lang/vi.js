@@ -94,5 +94,10 @@ export default {
 	'Editting informations': 'Chỉnh sửa thông tin',
 	'Change password': 'Đổi mật khẩu',
 	'Task manager': 'Quản lý công việc',
-	'Edit profile': 'Chỉnh sửa thông tin cá nhân'
+	'Edit profile': 'Chỉnh sửa thông tin cá nhân',
+	'Job Applied' : 'Các công việc đã ứng tuyển',
+	'Job markdown': 'Các công việc đã lưu',
+	'Job finished': 'Các công việc đã hoàn thành',
+	'Id card': 'Số chứng minh nhân dân',
+	'Posts was appiled': 'Các bài viết đã ứng tuyển'
 };

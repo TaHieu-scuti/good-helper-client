@@ -21,8 +21,7 @@ const routes = [
   { path: '/edit/profile', name: 'EditProfile', component: EditProfile },
   { path: '/register', name: 'Register', component: Register },
   { path: '/checkotp', name: 'CheckOTP', component: CheckOTP },
-  { path: '/helper/jobappiled', name: 'jobappied', component: JobAppied },
-
+  { path: '/helper/jobappiled', name: 'jobappied', component: JobAppied }
 ];
 
 export default routes;

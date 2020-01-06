@@ -5,7 +5,6 @@ import Sidebar from "./Sidebar";
 import Authenticate from "./Authenticate";
 import { connect } from "react-redux";
 import { raiseError } from "../../lib/redux/actions";
-import { Alert } from 'react-bootstrap'
 
 class ChangePassword extends Component {
   constructor(props) {
@@ -66,17 +65,6 @@ class ChangePassword extends Component {
                           </h3>
                         </div>
                         <div className="tr-single-body">
-                        <div className="form-group">
-                          <Alert
-                            show={this.props.error_descriptions.message}
-                            style={{ textAlign: "center" }}
-                            variant="danger"
-                          >
-                            <FormattedMessage
-                              id={this.props.error_descriptions.message}
-                            />
-                          </Alert>
-                          </div>
                           <div className="form-group">
                             <label>
                               Mật khẩu cũ <span className="text-danger">*</span>
@@ -93,6 +81,11 @@ class ChangePassword extends Component {
                               {this.props.error_descriptions.password ? (
                                 <FormattedMessage
                                   id={this.props.error_descriptions.password}
+                                />
+                              ) : null}
+                              {this.props.error_descriptions.message ? (
+                                <FormattedMessage
+                                  id={this.props.error_descriptions.message}
                                 />
                               ) : null}
                             </span>

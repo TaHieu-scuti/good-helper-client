@@ -99,5 +99,6 @@ export default {
 	'Job markdown': 'Các công việc đã lưu',
 	'Job finished': 'Các công việc đã hoàn thành',
 	'Id card': 'Số chứng minh nhân dân',
-	'Posts was appiled': 'Các bài viết đã ứng tuyển'
+	'Posts was appiled': 'Các bài viết đã ứng tuyển',
+	'Dont have the data': 'Không có dữ liệu'
 };

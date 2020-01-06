@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Sidebar from "./../Profile/Sidebar";
 import Authenticate from "./../Profile/Authenticate";
-import AuthenticateHelper from "./AuthenticateHelper"
 import { connect } from "react-redux";
 import { IoLogoUsd } from "react-icons/io";
 import { FaTrashAlt } from "react-icons/fa";
@@ -89,6 +88,23 @@ class JobApplied extends Component {
       );
     });
 
+    let data = (
+      <div className="row">
+        <h3 className="text-danger">
+        <FormattedMessage id="Dont have the data" />
+        </h3>
+      </div>
+    );
+
+    if(this.state.data.length > 0)
+    {
+      data = (
+      <div className="row">
+        <div className="col-md-12">{ListJob}</div>
+      </div>
+      )
+    }
+    
     return (
       <Authenticate>
         <div id="main-wrapper">
@@ -107,9 +123,7 @@ class JobApplied extends Component {
                         </h3>
                       </div>
                       <div className="tr-single-body">
-                        <div className="row">
-                          <div className="col-md-12">{ListJob}</div>
-                        </div>
+                        {data}
                         <div class="row">
                           <div class="col-lg-12 col-md-12 col-sm-12">
                             <Pagination

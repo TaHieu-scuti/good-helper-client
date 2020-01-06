@@ -87,6 +87,23 @@ class JobMarkdowned extends Component {
       );
     });
 
+    let data = (
+      <div className="row">
+        <span className="text-danger">
+          Không có dữ liệu
+        </span>
+      </div>
+    );
+
+    if(this.state.data)
+    {
+      data = (
+      <div className="row">
+        <div className="col-md-12">{ListJob}</div>
+      </div>
+      )
+    }
+
     return (
       <Authenticate>
         <div id="main-wrapper">
@@ -104,11 +121,9 @@ class JobMarkdowned extends Component {
                         </h3>
                       </div>
                       <div className="tr-single-body">
-                        <div className="row">
-                          <div className="col-md-12">{ListJob}</div>
-                        </div>
-                        <div className="row">
-                          <div className="col-lg-12 col-md-12 col-sm-12">
+                        {data}
+                        <div class="row">
+                          <div class="col-lg-12 col-md-12 col-sm-12">
                             <Pagination
                               activePage={this.state.activePage}
                               itemsCountPerPage={this.state.pagination.perPage}

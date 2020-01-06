@@ -102,5 +102,6 @@ export default {
 	'The new password field is required.': 'Mật khẩu mới không được để trông',
 	'The confirm password and new password must match.': 'Phải giống mật khẩu mới',
 	'The password field is required.': 'Không được để trống mật khẩu cũ',
-	'Password is incorrect': 'Mật khẩu cũ không đúng'
+	'Password is incorrect': 'Mật khẩu cũ không đúng',
+	'The password has been used before, choose another password': 'Mật khẩu không được phép giống mật khẩu cũ'
 };

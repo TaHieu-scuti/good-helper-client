@@ -4,7 +4,10 @@ import Loadable from 'react-loadable';
 import './App.scss';
 import Store from './AppStore';
 import IntlProvider from "./IntlProvider";
-import Login from "../../components/Auth/LoginPage"
+import Login from "../../components/Auth/LoginPage";
+import createHistory from "history/createBrowserHistory"
+
+export const history = createHistory()
 
 const loading = () => <div className="animated fadeIn pt-3 text-center"><div className="sk-spinner sk-spinner-pulse"></div></div>;
 
@@ -16,6 +19,10 @@ const DefaultLayout = Loadable({
 const LogoutLayout = Loadable({
   loader: () => import('../../components/Auth/logout'),
   loading
+})
+
+history.listen((location, action) => {
+  window.scrollTo(0, 0)
 })
 
 class App extends React.Component {

@@ -90,7 +90,7 @@ class JobMarkdowned extends Component {
     let data = (
       <div className="row">
         <span className="text-danger">
-          Không có dữ liệu
+        <FormattedMessage id="Don't have the data" />
         </span>
       </div>
     );

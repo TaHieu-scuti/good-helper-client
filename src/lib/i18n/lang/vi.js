@@ -99,5 +99,7 @@ export default {
 	'Job markdown': 'Các công việc đã lưu',
 	'Job finished': 'Các công việc đã hoàn thành',
 	'Id card': 'Số chứng minh nhân dân',
-	'Posts was appiled': 'Các bài viết đã ứng tuyển'
+	'Posts was appiled': 'Các bài viết đã ứng tuyển',
+	'Dont have the data': 'Không có dữ liệu',
+	'The password has been used before, choose another password': 'Mật khẩu không được trùng với mật khẩu cũ'
 };

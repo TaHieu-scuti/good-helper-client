@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FaUserAlt , FaUserEdit , FaExpeditedssl ,FaFile } from "react-icons/fa";
+import { FaUserAlt, FaUserEdit, FaExpeditedssl, FaFile } from "react-icons/fa";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 
@@ -16,28 +16,42 @@ class Sidebar extends Component {
                 alt=""
               />
             </div>
-            <h4 class="mb-1">{this.props.user.first_name} {this.props.user.last_name}</h4>
+            <h4 class="mb-1">
+              {this.props.user.first_name} {this.props.user.last_name}
+            </h4>
             <span class="text-success">Web Designer</span>
           </div>
           <ul class="nav dashboard-verticle-nav">
             <li class="nav-item">
               <a class="nav-link" href="">
-               <i><FaFile /></i> <FormattedMessage id="Task manager" />
+                <i>
+                  <FaFile />
+                </i>{" "}
+                <FormattedMessage id="Task manager" />
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" href="">
-                <i><FaUserAlt /></i><FormattedMessage id="Personal informations" />
+                <i>
+                  <FaUserAlt />
+                </i>
+                <FormattedMessage id="Personal informations" />
               </a>
             </li>
             <li class="nav-item">
-            <Link to="/edit/profile" class="nav-link active">
-                <i><FaUserEdit /></i> <FormattedMessage id="Editting informations" />
+              <Link to="/edit/profile" class="nav-link active">
+                <i>
+                  <FaUserEdit />
+                </i>{" "}
+                <FormattedMessage id="Editting informations" />
               </Link>
             </li>
             <li class="nav-item">
-            <Link to="/password/change" class="nav-link active">
-                <i><FaExpeditedssl /></i><FormattedMessage id="Change password" />
+              <Link to="/password/change" class="nav-link active">
+                <i>
+                  <FaExpeditedssl />
+                </i>
+                <FormattedMessage id="Change password" />
               </Link>
             </li>
             <li class="nav-item">

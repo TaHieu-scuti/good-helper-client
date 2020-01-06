@@ -89,13 +89,13 @@ class JobMarkdowned extends Component {
 
     let data = (
       <div className="row">
-        <span className="text-danger">
-        <FormattedMessage id="Don't have the data" />
-        </span>
+        <h3 className="text-danger">
+        <FormattedMessage id="Dont have the data" />
+        </h3>
       </div>
     );
 
-    if(this.state.data)
+    if(this.state.data.length > 0)
     {
       data = (
       <div className="row">

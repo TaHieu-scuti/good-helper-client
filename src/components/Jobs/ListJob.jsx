@@ -103,8 +103,8 @@ class ListJob extends Component {
           <div className="row">
             <div className="col-md-12">{ListJob}</div>
           </div>
-          <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12">
+          <div className="row">
+            <div className="col-lg-12 col-md-12 col-sm-12">
               <Pagination
                 activePage={this.state.activePage}
                 itemsCountPerPage={this.props.listJob.paginate.perPage}

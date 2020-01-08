@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { raiseError } from "../../lib/redux/actions";
 
-class CheckOTP extends Component {
+class CheckOTPAgain extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,7 +28,7 @@ class CheckOTP extends Component {
         url: "auth/verified",
         method: "POST",
         data: {
-          user_id: this.props.register.id,
+          user_id: this.props.user.id,
           request_id: this.state.request_id
         }
       })
@@ -46,7 +46,7 @@ class CheckOTP extends Component {
       url: "auth/send/again",
       method: "POST",
       data: {
-        user_id: this.props.register.id
+        user_id: this.props.user.id
       }
     });
   }
@@ -119,15 +119,17 @@ const mapStateToProps = (stateStore, ownProps) => {
   let newState = Object.assign({}, ownProps);
 
   newState.http = stateStore.http;
-  newState.register = stateStore.register;
   newState.user = stateStore.userCheckotp;
+  newState.is_error = stateStore.error_descriptions.length > 0;
+  newState.error_description = stateStore.error_descriptions;
 
   return newState;
 };
+
 const mapDispatchToProps = dispatch => {
   return {
     raiseError: message => dispatch(raiseError(message))
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CheckOTP);
+export default connect(mapStateToProps, mapDispatchToProps)(CheckOTPAgain);

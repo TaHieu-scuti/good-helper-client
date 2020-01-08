@@ -468,7 +468,6 @@ const mapDispatchToProps = dispatch => {
           component.props.history.push("/profile");
         })
         .catch(error => {
-          console.log(error.response.status);
           dispatch(raiseError(error.response.data.errors));
         });
     }

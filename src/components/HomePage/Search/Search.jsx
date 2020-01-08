@@ -55,9 +55,9 @@ class Search extends Component {
       event: e,
       http: this.props.http
     });
-  }
+  };
 
-  render() {
+  render() {  
     return (
       <form className="search-big-form no-border search-shadow" onSubmit={this.onSearchButton}>
         <div className="row m-0">

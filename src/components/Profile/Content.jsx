@@ -6,69 +6,118 @@ import { Link } from "react-router-dom";
 class Content extends Component {
   render() {
     return (
-      <div class="col-md-8 col-sm-12">
-        <div class="tab-pane active container" id="c-profile">
-          <div class="tr-single-box">
-            <div class="tr-single-header">
+      <div className="col-md-8 col-sm-12">
+        <div className="tab-pane active container" id="c-profile">
+          <div className="tr-single-box">
+            <div className="tr-single-header">
               <h3>
-               <i><FaInfo /></i> <FormattedMessage id="Personal informations" />
+                <i>
+                  <FaInfo />
+                </i>{" "}
+                <FormattedMessage id="Personal informations" />
               </h3>
             </div>
-            <div class="tr-single-body">
-              <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                  <div class="form-group">
-                    <label> <FormattedMessage id="First name" />: </label>
+            <div className="tr-single-body">
+              <div className="row">
+                <div className="col-lg-6 col-md-6 col-sm-6">
+                  <div className="form-group">
+                    <h5>
+                      <FormattedMessage id="First name" /> :
+                    </h5>
                     {this.props.user.first_name}
                   </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                  <div class="form-group">
-                    <label> <FormattedMessage id="Last name" />: </label>
+                <div className="col-lg-6 col-md-6 col-sm-6">
+                  <div className="form-group">
+                    <h5>
+                      <FormattedMessage id="Last name" /> :
+                    </h5>
                     {this.props.user.last_name}
                   </div>
                 </div>
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                  <div class="form-group">
-                    <label> <FormattedMessage id="Email" /> : </label>
+                <div className="col-lg-12 col-md-12 col-sm-12">
+                  <div className="form-group">
+                    <h5>
+                      <FormattedMessage id="Email" /> :
+                    </h5>
                     {this.props.user.email}
                   </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                  <div class="form-group">
-                    <label><FormattedMessage id="Phone number" /> : </label>
+                <div className="col-lg-6 col-md-6 col-sm-12">
+                  <div className="form-group">
+                    <h5>
+                      <FormattedMessage id="Phone number" /> :
+                    </h5>
                     {this.props.user.phone}
                   </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                  <div class="form-group">
-                    <label><FormattedMessage id="Gender" /> : </label>
+                <div className="col-lg-6 col-md-6 col-sm-12">
+                  <div className="form-group">
+                    <h5>
+                      <FormattedMessage id="Gender" /> :
+                    </h5>
                     {this.props.user.gender}
                   </div>
                 </div>
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                  <div class="form-group">
-                    <label> <FormattedMessage id="Id card " /> : </label>
+                <div className="col-lg-12 col-md-12 col-sm-12">
+                  <div className="form-group">
+                    <h5>
+                      <FormattedMessage id="Id card " /> :
+                    </h5>
                     {this.props.user.id_card}
                   </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                  <div class="form-group">
-                    <label> <FormattedMessage id="Id card backside" /> : </label>
-                    <img class="img-fluid mx-auto" src={this.props.user.id_card_backside} />
+                <div className="col-lg-6 col-md-6 col-sm-6">
+                  <div className="form-group">
+                    <h5>
+                      <FormattedMessage id="Id card backside" /> :
+                    </h5>
+                    {this.props.user.id_card_backside.length > 25 ? (
+                      <img
+                        className="img-fluid mx-auto"
+                        src={this.props.user.id_card_backside}
+                      />
+                    ) : (
+                      <div>
+                        <span className="text-danger">
+                          <FormattedMessage id="Update id card backside" /> :
+                        </span>
+                        <img
+                          className="img-fluid mx-auto"
+                          src="https://btnmt.onecmscdn.com/2018/01/29/the-can-cuoc.jpg"
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                  <div class="form-group">
-                    <label> <FormattedMessage id="Id card font" /> : </label>
-                    <img class="img-fluid mx-auto" src={this.props.user.id_card_font} />
+                <div className="col-lg-6 col-md-6 col-sm-6">
+                  <div className="form-group">
+                    <h5>
+                      <FormattedMessage id="Id card font" />
+                    </h5>
+                    {this.props.user.id_card_font.length > 25 ? (
+                      <img
+                        className="img-fluid mx-auto"
+                        src={this.props.user.id_card_font}
+                      />
+                    ) : (
+                      <div>
+                        <span className="text-danger">
+                          <FormattedMessage id="Update id card backside" />
+                        </span>
+                        <img
+                          className="img-fluid mx-auto"
+                          src="https://btnmt.onecmscdn.com/2018/01/29/the-can-cuoc.jpg"
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <Link to="/edit/profile" class="btn btn-info btn-md full-width">
-          <FormattedMessage id="Editting informations" />
+          <Link to="/edit/profile" className="btn btn-info btn-md full-width">
+            <FormattedMessage id="Editting informations" />
           </Link>
         </div>
       </div>

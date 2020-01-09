@@ -10,11 +10,19 @@ class Sidebar extends Component {
         <div className="dashboard-wrap">
           <div className="dashboard-thumb">
             <div className="dashboard-th-pic">
-              <img
-                src={this.props.user.avatar}
-                className="img-fluid mx-auto img-circle"
-                alt=""
-              />
+              {this.props.user.avatar ? (
+                <img
+                  src={this.props.user.avatar}
+                  className="img-fluid mx-auto img-circle"
+                  alt=""
+                />
+              ) : (
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNJJJF3UZxmQ189Jv3hkpvsymvs-g7aquSOvJos7Mn54fGEGn4&s"
+                  className="img-fluid mx-auto img-circle"
+                  alt=""
+                />
+              )}
             </div>
             <h4 className="mb-1">
               {this.props.user.first_name} {this.props.user.last_name}
@@ -50,6 +58,14 @@ class Sidebar extends Component {
               </li>
               </ul>
             ) : null}
+            <li className="nav-item">
+              <a className="nav-link" href="">
+                <i>
+                  <FaFile />
+                </i>{" "}
+                <FormattedMessage id="Task manager" />
+              </a>
+            </li>
             <li className="nav-item">
               <a className="nav-link active" href="">
                 <i>

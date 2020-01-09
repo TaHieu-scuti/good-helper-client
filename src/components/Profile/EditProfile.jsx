@@ -3,7 +3,7 @@ import Sidebar from "./Sidebar";
 import Authenticate from "./Authenticate";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
-import { raiseError , updateMe} from "../../lib/redux/actions";
+import { raiseError, updateMe } from "../../lib/redux/actions";
 import { FaEdit } from "react-icons/fa";
 
 class EditProfile extends Component {
@@ -16,12 +16,12 @@ class EditProfile extends Component {
       id_card: "",
       phone_number: "",
       gender: "",
-      avatar: '', 
-      id_card_font: '',
-      id_card_backside: '',
+      avatar: "",
+      id_card_font: "",
+      id_card_backside: "",
       avatarUrl: "",
-      IdCardFontUrl:"",
-      IdCardBackUrl:"",
+      IdCardFontUrl: "",
+      IdCardBackUrl: "",
       imageAvartarPreviewUrl: "",
       imageIdCardFontPreviewUrl: "",
       imageIdCardBackPreviewUrl: ""
@@ -129,30 +129,68 @@ class EditProfile extends Component {
 
   render() {
     let avatarPreviewUrl = this.state.imageAvartarPreviewUrl;
-    let $avatarPreview = (<img
-      src={this.state.avatarUrl}
-      class="img-fluid mx-auto"
-    />);
+    let $avatarPreview = null;
     if (avatarPreviewUrl) {
-      $avatarPreview = (<img class="img-fluid mx-auto" src={avatarPreviewUrl} />);
+      $avatarPreview = <img class="img-fluid mx-auto" src={avatarPreviewUrl} />;
+    } else if (this.state.avatarUrl.length > 26) {
+      $avatarPreview = (
+        <img src={this.state.avatarUrl} class="img-fluid mx-auto" />
+      );
+    } else {
+      $avatarPreview = (
+        <img
+          class="img-fluid mx-auto"
+          src="https://btnmt.onecmscdn.com/2018/01/29/the-can-cuoc.jpg"
+        />
+      );
     }
 
     let idCardFontPreviewUrl = this.state.imageIdCardFontPreviewUrl;
-    let idCardFontPreview = (<img
-      src={this.state.IdCardFontUrl}
-      class="img-fluid mx-auto"
-    />);
+    let idCardFontPreview = null;
     if (idCardFontPreviewUrl) {
-      idCardFontPreview = (<img class="img-fluid mx-auto" src={idCardFontPreviewUrl} />);
+      idCardFontPreview = (
+        <img class="img-fluid mx-auto" src={idCardFontPreviewUrl} />
+      );
+    } else if (this.state.IdCardFontUrl.length > 26) {
+      idCardFontPreview = (
+        <img src={this.state.IdCardFontUrl} class="img-fluid mx-auto" />
+      );
+    } else {
+      idCardFontPreview = (
+        <div>
+          <span className="text-danger">
+            <FormattedMessage id="Update id card font side" />
+          </span>
+          <img
+            class="img-fluid mx-auto"
+            src="https://btnmt.onecmscdn.com/2018/01/29/the-can-cuoc.jpg"
+          />
+        </div>
+      );
     }
 
     let idCardBackPreviewUrl = this.state.imageIdCardBackPreviewUrl;
-    let idCardBackPreview = (<img
-      src={this.state.IdCardBackUrl}
-      class="img-fluid mx-auto"
-    />);
+    let idCardBackPreview = null;
     if (idCardBackPreviewUrl) {
-      idCardBackPreview = (<img class="img-fluid mx-auto" src={idCardBackPreviewUrl} />);
+      idCardBackPreview = (
+        <img class="img-fluid mx-auto" src={idCardBackPreviewUrl} />
+      );
+    } else if (this.state.IdCardBackUrl.length > 26) {
+      idCardBackPreview = (
+        <img src={this.state.IdCardFontUrl} class="img-fluid mx-auto" />
+      );
+    } else {
+      idCardBackPreview = (
+        <div>
+          <span className="text-danger">
+            <FormattedMessage id="Update id card backside" />
+          </span>
+          <img
+            class="img-fluid mx-auto"
+            src="https://btnmt.onecmscdn.com/2018/01/29/the-can-cuoc.jpg"
+          />
+        </div>
+      );
     }
 
     return (
@@ -169,14 +207,19 @@ class EditProfile extends Component {
                         <div className="tr-single-box">
                           <div className="tr-single-header">
                             <h4>
-                             <i><FaEdit /></i><FormattedMessage id="Edit profile" />
+                              <i>
+                                <FaEdit />
+                              </i>
+                              <FormattedMessage id="Edit profile" />
                             </h4>
                           </div>
                           <div className="tr-single-body">
                             <div className="row">
                               <div className="col-lg-12 col-md-12 col-sm-12">
                                 <div className="form-group">
-                                  <label><FormattedMessage id="First name" /></label>
+                                  <label>
+                                    <FormattedMessage id="First name" />
+                                  </label>
                                   <input
                                     className="form-control"
                                     type="text"
@@ -186,15 +229,16 @@ class EditProfile extends Component {
                                   />
                                 </div>
                                 <span className="text-danger">
-                                  {this.props.error_descriptions.first_name ?  
+                                  {this.props.error_descriptions.first_name ? (
                                     <FormattedMessage id="The first name field is wrong format." />
-                                    : null
-                                  }
+                                  ) : null}
                                 </span>
                               </div>
                               <div className="col-lg-12 col-md-12 col-sm-12">
                                 <div className="form-group">
-                                  <label><FormattedMessage id="Last name" /></label>
+                                  <label>
+                                    <FormattedMessage id="Last name" />
+                                  </label>
                                   <input
                                     className="form-control"
                                     type="text"
@@ -204,10 +248,9 @@ class EditProfile extends Component {
                                   />
                                 </div>
                                 <span className="text-danger">
-                                  {this.props.error_descriptions.last_name ?  
+                                  {this.props.error_descriptions.last_name ? (
                                     <FormattedMessage id="The last name field is wrong format." />
-                                    : null
-                                  }
+                                  ) : null}
                                 </span>
                               </div>
                               <div className="col-lg-6 col-md-6 col-sm-12">
@@ -222,15 +265,16 @@ class EditProfile extends Component {
                                   />
                                 </div>
                                 <span className="text-danger">
-                                  {this.props.error_descriptions.email ?  
+                                  {this.props.error_descriptions.email ? (
                                     <FormattedMessage id="The email field is required." />
-                                    : null
-                                  }
+                                  ) : null}
                                 </span>
                               </div>
                               <div className="col-lg-6 col-md-6 col-sm-12">
                                 <div className="form-group">
-                                  <label><FormattedMessage id="Number id card" /></label>
+                                  <label>
+                                    <FormattedMessage id="Number id card" />
+                                  </label>
                                   <input
                                     className="form-control"
                                     type="number"
@@ -239,15 +283,16 @@ class EditProfile extends Component {
                                   />
                                 </div>
                                 <span className="text-danger">
-                                  {this.props.error_descriptions.id_card ?  
+                                  {this.props.error_descriptions.id_card ? (
                                     <FormattedMessage id="The Id card field is required." />
-                                    : null
-                                  }
+                                  ) : null}
                                 </span>
                               </div>
                               <div className="col-lg-6 col-md-6 col-sm-12">
                                 <div className="form-group">
-                                  <label><FormattedMessage id="Phone number" /></label>
+                                  <label>
+                                    <FormattedMessage id="Phone number" />
+                                  </label>
                                   <input
                                     readOnly
                                     className="form-control"
@@ -259,7 +304,9 @@ class EditProfile extends Component {
                               </div>
                               <div className="col-lg-6 col-md-6 col-sm-12">
                                 <div className="form-group">
-                                  <label><FormattedMessage id="Gender" /></label>
+                                  <label>
+                                    <FormattedMessage id="Gender" />
+                                  </label>
                                   <select
                                     id="appointment-service"
                                     class="form-control"
@@ -272,15 +319,16 @@ class EditProfile extends Component {
                                   </select>
                                 </div>
                                 <span className="text-danger">
-                                  {this.props.error_descriptions.gender ?  
+                                  {this.props.error_descriptions.gender ? (
                                     <FormattedMessage id="The gender field is required." />
-                                    : null
-                                  }
+                                  ) : null}
                                 </span>
                               </div>
                               <div className="col-lg-6 col-md-6 col-sm-6">
                                 <div className="form-group">
-                                  <label><FormattedMessage id="Avatar" /></label>
+                                  <label>
+                                    <FormattedMessage id="Avatar" />
+                                  </label>
                                   <div className="custom-file">
                                     <input
                                       type="file"
@@ -298,15 +346,16 @@ class EditProfile extends Component {
                                 </div>
                                 {$avatarPreview}
                                 <span className="text-danger">
-                                  {this.props.error_descriptions.avatar ?  
+                                  {this.props.error_descriptions.avatar ? (
                                     <FormattedMessage id="The avatar field is wrong format." />
-                                    : null
-                                  }
+                                  ) : null}
                                 </span>
                               </div>
                               <div className="col-lg-6 col-md-6 col-sm-6">
                                 <div className="form-group">
-                                  <label><FormattedMessage id="Id card font" /> </label>
+                                  <label>
+                                    <FormattedMessage id="Id card font" />{" "}
+                                  </label>
                                   <div className="custom-file">
                                     <input
                                       type="file"
@@ -322,17 +371,19 @@ class EditProfile extends Component {
                                     </label>
                                   </div>
                                 </div>
-                              {idCardFontPreview}
-                              <span className="text-danger">
-                                  {this.props.error_descriptions.id_card_font ?  
+                                {idCardFontPreview}
+                                <span className="text-danger">
+                                  {this.props.error_descriptions
+                                    .id_card_font ? (
                                     <FormattedMessage id="The Id card font field is wrong format." />
-                                    : null
-                                  }
+                                  ) : null}
                                 </span>
                               </div>
                               <div className="col-lg-12 col-md-12 col-sm-12">
                                 <div className="form-group">
-                                  <label><FormattedMessage id="Id card backside" /></label>
+                                  <label>
+                                    <FormattedMessage id="Id card backside" />
+                                  </label>
                                   <div className="custom-file">
                                     <input
                                       type="file"
@@ -352,12 +403,12 @@ class EditProfile extends Component {
                                 </div>
                                 {idCardBackPreview}
                                 <div>
-                                <span className="text-danger">
-                                  {this.props.error_descriptions.id_card_backside ?  
-                                    <FormattedMessage id="The Id card back field is wrong format." />
-                                    : null
-                                  }
-                                </span>
+                                  <span className="text-danger">
+                                    {this.props.error_descriptions
+                                      .id_card_backside ? (
+                                      <FormattedMessage id="The Id card back field is wrong format." />
+                                    ) : null}
+                                  </span>
                                 </div>
                               </div>
                             </div>
@@ -395,7 +446,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onEditButton: ({ component, http }) => {
       const formData = new FormData();
-      formData.append("id", component.props.user.id); 
+      formData.append("id", component.props.user.id);
       formData.append("first_name", component.state.first_name);
       formData.append("last_name", component.state.last_name);
       formData.append("email", component.state.email);

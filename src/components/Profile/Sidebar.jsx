@@ -24,38 +24,38 @@ class Sidebar extends Component {
                 />
               )}
             </div>
-            <h4 class="mb-1">
+            <h4 className="mb-1">
               {this.props.user.first_name} {this.props.user.last_name}
             </h4>
-            <span class="text-success">Web Designer</span>
+            <span className="text-success">Web Designer</span>
           </div>
-          <ul class="nav dashboard-verticle-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="">
+          <ul className="nav dashboard-verticle-nav">
+            <li className="nav-item">
+              <a className="nav-link" href="">
                 <i>
                   <FaFile />
                 </i>{" "}
                 <FormattedMessage id="Task manager" />
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="">
+            <li className="nav-item">
+              <a className="nav-link active" href="">
                 <i>
                   <FaUserAlt />
                 </i>
                 <FormattedMessage id="Personal informations" />
               </a>
             </li>
-            <li class="nav-item">
-              <Link to="/edit/profile" class="nav-link active">
+            <li className="nav-item">
+              <Link to="/edit/profile" className="nav-link active">
                 <i>
                   <FaUserEdit />
                 </i>{" "}
                 <FormattedMessage id="Editting informations" />
               </Link>
             </li>
-            <li class="nav-item">
-              <Link to="/password/change" class="nav-link active">
+            <li className="nav-item">
+              <Link to="/password/change" className="nav-link active">
                 <i>
                   <FaExpeditedssl />
                 </i>

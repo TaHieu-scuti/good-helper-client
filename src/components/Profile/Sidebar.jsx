@@ -39,12 +39,12 @@ class Sidebar extends Component {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link active" href="">
+              <Link to="/profile" className="nav-link active">
                 <i>
                   <FaUserAlt />
                 </i>
                 <FormattedMessage id="Personal informations" />
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
               <Link to="/edit/profile" className="nav-link active">

@@ -9,6 +9,7 @@ import EditProfile from './components/Profile/EditProfile';
 import Register from './components/Auth/Register';
 import CheckOTP from './components/Auth/CheckOTP';
 import CheckOTPAgain from './components/Auth/CheckOTPAgain';
+import JobFinishOfHelper from './components/Helper/JobFinishOfHelper'
 
 const routes = [
   { path: '/home', exact: true, name: 'Home', component: HomePage },
@@ -22,6 +23,7 @@ const routes = [
   { path: '/register', name: 'Register', component: Register },
   { path: '/checkotp', name: 'CheckOTP', component: CheckOTP },
   { path: '/again/checkotp', name: 'CheckOTP', component: CheckOTPAgain },
+  { path: '/post/finish', name: 'jobFinish', component: JobFinishOfHelper },
 ];
 
 export default routes;

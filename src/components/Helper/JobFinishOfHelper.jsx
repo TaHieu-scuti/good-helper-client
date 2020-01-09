@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { IoMdArrowRoundDown } from "react-icons/io";
-import { IoMdArrowForward } from "react-icons/io";
-import { IoLogoUsd } from "react-icons/io";
-import { injectIntl, FormattedMessage } from "react-intl";
-import Pagination from "react-js-pagination";
+import Sidebar from "./../Profile/Sidebar";
+import Authenticate from "./../Profile/Authenticate";
 import { connect } from "react-redux";
+import { IoLogoUsd } from "react-icons/io";
+import { FormattedMessage } from "react-intl";
+import Pagination from "react-js-pagination";
 
-class ListALLJob extends Component {
+class JobFinishOfHelper extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,14 +15,13 @@ class ListALLJob extends Component {
       data: [],
       pagination: {}
     };
-
     this.handlePageChange = this.handlePageChange.bind(this);
   }
 
   componentDidMount() {
     this.props
       .http({
-        url: "auth/list/post",
+        url: "auth/post/finish",
         method: "GET"
       })
       .then(res => {
@@ -36,7 +35,7 @@ class ListALLJob extends Component {
   handlePageChange(pageNumber) {
     this.props
       .http({
-        url: "auth/list/post",
+        url: "auth/post/finish",
         method: "GET",
         params: {
           page: pageNumber
@@ -59,9 +58,6 @@ class ListALLJob extends Component {
             <h5 className="title">
               <a href="#">{item.title}</a>
               <span className="j-full-time">{item.type}</span>
-              <a href="#" className="btn download-btn">
-                <IoMdArrowRoundDown />
-              </a>
             </h5>
             <p>{item.category}</p>
             <ul className="vc-info-list">
@@ -87,14 +83,6 @@ class ListALLJob extends Component {
             </ul>
           </div>
           <br />
-          <a
-            className="btn btn-outline-info bn-det"
-            href="#"
-            style={{ marginTop: "20px" }}
-          >
-            <FormattedMessage id="Apply" />
-            <IoMdArrowForward />
-          </a>
         </div>
       );
     });
@@ -109,35 +97,59 @@ class ListALLJob extends Component {
 
     if (this.state.data.length > 0) {
       data = (
-        <div className="row">
-          <div className="col-md-12">{ListJob}</div>
+        <div>
+          <div className="row">
+            <div className="col-md-12">{ListJob}</div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <Pagination
+                activePage={this.state.activePage}
+                itemsCountPerPage={this.state.pagination.perPage}
+                totalItemsCount={this.state.pagination.total}
+                pageRangeDisplayed={this.state.pageRangeDisplayed}
+                onChange={this.handlePageChange}
+              />
+            </div>
+          </div>
         </div>
       );
     }
 
     return (
-      <div className="col-xl-9 col-lg-8">
-        {data}
-        <div className="row">
-          <div className="col-lg-12 col-md-12 col-sm-12">
-            <Pagination
-              activePage={this.state.activePage}
-              itemsCountPerPage={this.state.pagination.perPage}
-              totalItemsCount={this.state.pagination.total}
-              pageRangeDisplayed={this.state.pageRangeDisplayed}
-              onChange={this.handlePageChange}
-            />
-          </div>
+      <Authenticate>
+        <div id="main-wrapper">
+          <section className="tr-single-detail gray-bg">
+            <div className="container">
+              <div className="row">
+                <Sidebar user={this.props.user} />
+                <div className="col-md-8 col-sm-12">
+                  <div className="tab-pane active container" id="c-profile">
+                    <div className="tr-single-box">
+                      <div className="tr-single-header">
+                        <h3>
+                          <i></i>
+                          <FormattedMessage id="Posts was finished" />
+                        </h3>
+                      </div>
+                      <div className="tr-single-body">{data}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
-      </div>
+      </Authenticate>
     );
   }
 }
 
 const mapStateToProps = (stateStore, ownProps) => {
   let newState = Object.assign({}, ownProps);
+  newState.user = stateStore.me;
   newState.http = stateStore.http;
   return newState;
 };
 
-export default connect(mapStateToProps)(injectIntl(ListALLJob));
+export default connect(mapStateToProps)(JobFinishOfHelper);

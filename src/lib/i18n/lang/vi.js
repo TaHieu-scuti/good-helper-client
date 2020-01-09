@@ -101,5 +101,6 @@ export default {
 	'The avatar may not be greater than 10240 kilobytes.' : 'Avatar khoong được quá 10MB',
 	'The id card font may not be greater than 10240 kilobytes.': 'Ảnh căn cước không được quá 10MB',
 	'The id card backside may not be greater than 10240 kilobytes.' : 'Ảnh căn cước không được quá 10MB',
-	'verification failed': 'Xác thực thất bại'
+	'verification failed': 'Xác thực thất bại',
+	'Posts was finished': 'Các công việc đã hoàn thành'
 };

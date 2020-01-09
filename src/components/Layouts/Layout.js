@@ -34,6 +34,7 @@ export class Layout extends Component {
                     path={route.path}
                     exact={route.exact}
                     name={route.name}
+                    replace 
                     render={props => <route.component {...props} />}
                   />
                 ) : null

@@ -90,18 +90,30 @@ class JobMarkdowned extends Component {
     let data = (
       <div className="row">
         <h3 className="text-danger">
-        <FormattedMessage id="Dont have the data" />
+          <FormattedMessage id="Dont have the data" />
         </h3>
       </div>
     );
 
-    if(this.state.data.length > 0)
-    {
+    if (this.state.data.length > 0) {
       data = (
-      <div className="row">
-        <div className="col-md-12">{ListJob}</div>
-      </div>
-      )
+        <div>
+          <div className="row">
+            <div className="col-md-12">{ListJob}</div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <Pagination
+                activePage={this.state.activePage}
+                itemsCountPerPage={this.state.pagination.perPage}
+                totalItemsCount={this.state.pagination.total}
+                pageRangeDisplayed={this.state.pageRangeDisplayed}
+                onChange={this.handlePageChange}
+              />
+            </div>
+          </div>
+        </div>
+      );
     }
 
     return (
@@ -120,20 +132,7 @@ class JobMarkdowned extends Component {
                           <FormattedMessage id="Posts was markdowned" />
                         </h3>
                       </div>
-                      <div className="tr-single-body">
-                        {data}
-                        <div class="row">
-                          <div class="col-lg-12 col-md-12 col-sm-12">
-                            <Pagination
-                              activePage={this.state.activePage}
-                              itemsCountPerPage={this.state.pagination.perPage}
-                              totalItemsCount={this.state.pagination.total}
-                              pageRangeDisplayed={this.state.pageRangeDisplayed}
-                              onChange={this.handlePageChange}
-                            />
-                          </div>
-                        </div>
-                      </div>
+                      <div className="tr-single-body">{data}</div>
                     </div>
                   </div>
                 </div>

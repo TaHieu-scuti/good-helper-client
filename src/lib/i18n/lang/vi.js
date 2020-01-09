@@ -101,5 +101,12 @@ export default {
 	'Id card': 'Số chứng minh nhân dân',
 	'Posts was appiled': 'Các bài viết đã ứng tuyển',
 	'Dont have the data': 'Không có dữ liệu',
-	'The password has been used before, choose another password': 'Mật khẩu không được trùng với mật khẩu cũ'
+	'The password has been used before, choose another password': 'Mật khẩu không được trùng với mật khẩu cũ',
+	'Dont have the data' : 'Không có dữ liệu',
+	'Update id card font side': 'Cập nhật ảnh mặt trước thẻ căn cước',
+	'Update id card backside': 'Cập nhật ảnh mặt sau thẻ căn cước',
+	'The avatar may not be greater than 10240 kilobytes.' : 'Avatar khoong được quá 10MB',
+	'The id card font may not be greater than 10240 kilobytes.': 'Ảnh căn cước không được quá 10MB',
+	'The id card backside may not be greater than 10240 kilobytes.' : 'Ảnh căn cước không được quá 10MB',
+	'verification failed': 'Xác thực thất bại'
 };

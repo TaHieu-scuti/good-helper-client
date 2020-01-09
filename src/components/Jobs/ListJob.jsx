@@ -14,42 +14,36 @@ class ListJob extends Component {
       pageRangeDisplayed: 5,
       title: "",
       location_id: "",
-      category_id: "",
-      data: []
+      category_id: ""
     };
 
     this.handlePageChange = this.handlePageChange.bind(this);
   }
 
-  componentDidMount() {
-    this.setState({ data: this.props.listJob.posts });
-  }
-
   handlePageChange(pageNumber) {
-    this.props.http({
-      url: "auth/search/outside?page=" + pageNumber,
-      method: "POST",
-      data: {
-        title: this.state.title,
-        location_id: this.state.location_id,
-        category_id: this.state.category_id
-      }
-    }).then(res => {
-      this.setState({ data: res.data.response.posts });
-    });
+    this.props
+      .http({
+        url: "auth/search/outside?page=" + pageNumber,
+        method: "POST",
+        data: {
+          title: this.state.title,
+          location_id: this.state.location_id,
+          category_id: this.state.category_id
+        }
+      })
+      .then(res => {
+        this.setState({ data: res.data.response.posts });
+      });
 
     this.setState({ activePage: pageNumber });
   }
 
   render() {
-    const ListJob = this.state.data.map((item, idx) => {
+    const ListJob = this.props.listJob.posts.map((item, idx) => {
       return (
         <div className="job-new-list" key={idx}>
           <div className="vc-thumb">
-            <img
-              className="img-fluid rounded-circle"
-              src={item.avatar}
-            />
+            <img className="img-fluid rounded-circle" src={item.avatar} />
           </div>
           <div className="vc-content">
             <h5 className="title">
@@ -95,26 +89,36 @@ class ListJob extends Component {
       );
     });
 
-    return (
-      <div className="col-xl-9 col-lg-8">
-        <div className="row">
-          <div className="col-md-12">
-            {ListJob}
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12">
-            <Pagination
-              activePage={this.state.activePage}
-              itemsCountPerPage={this.props.listJob.paginate.perPage}
-              totalItemsCount={this.props.listJob.paginate.total}
-              pageRangeDisplayed={this.state.pageRangeDisplayed}
-              onChange={this.handlePageChange}
-            />
-          </div>
-        </div>
+    let data = (
+      <div className="row">
+        <h3 className="text-danger">
+          <FormattedMessage id="Dont have the data" />
+        </h3>
       </div>
     );
+
+    if (this.props.listJob.posts.length > 0) {
+      data = (
+        <div>
+          <div className="row">
+            <div className="col-md-12">{ListJob}</div>
+          </div>
+          <div className="row">
+            <div className="col-lg-12 col-md-12 col-sm-12">
+              <Pagination
+                activePage={this.state.activePage}
+                itemsCountPerPage={this.props.listJob.paginate.perPage}
+                totalItemsCount={this.props.listJob.paginate.total}
+                pageRangeDisplayed={this.state.pageRangeDisplayed}
+                onChange={this.handlePageChange}
+              />
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    return <div className="col-xl-9 col-lg-8">{data}</div>;
   }
 }
 

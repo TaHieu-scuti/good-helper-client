@@ -99,11 +99,25 @@ class ListALLJob extends Component {
       );
     });
 
-    return (
-      <div className="col-xl-9 col-lg-8">
+    let data = (
+      <div className="row">
+        <h3 className="text-danger">
+          <FormattedMessage id="Dont have the data" />
+        </h3>
+      </div>
+    );
+
+    if (this.state.data.length > 0) {
+      data = (
         <div className="row">
           <div className="col-md-12">{ListJob}</div>
         </div>
+      );
+    }
+
+    return (
+      <div className="col-xl-9 col-lg-8">
+        {data}
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12">
             <Pagination

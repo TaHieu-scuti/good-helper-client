@@ -7,7 +7,7 @@ import IntlProvider from "./IntlProvider";
 import Login from "../../components/Auth/LoginPage";
 import createHistory from "history/createBrowserHistory"
 
-export const history = createHistory()
+export const history = createHistory();
 
 const loading = () => <div className="animated fadeIn pt-3 text-center"><div className="sk-spinner sk-spinner-pulse"></div></div>;
 

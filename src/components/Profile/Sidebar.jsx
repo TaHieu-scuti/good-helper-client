@@ -6,15 +6,23 @@ import { Link } from "react-router-dom";
 class Sidebar extends Component {
   render() {
     return (
-      <div class="col-md-4 col-sm-12">
-        <div class="dashboard-wrap">
-          <div class="dashboard-thumb">
-            <div class="dashboard-th-pic">
-              <img
-                src={this.props.user.avatar}
-                class="img-fluid mx-auto img-circle"
-                alt=""
-              />
+      <div className="col-md-4 col-sm-12">
+        <div className="dashboard-wrap">
+          <div className="dashboard-thumb">
+            <div className="dashboard-th-pic">
+              {this.props.user.avatar ? (
+                <img
+                  src={this.props.user.avatar}
+                  className="img-fluid mx-auto img-circle"
+                  alt=""
+                />
+              ) : (
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNJJJF3UZxmQ189Jv3hkpvsymvs-g7aquSOvJos7Mn54fGEGn4&s"
+                  className="img-fluid mx-auto img-circle"
+                  alt=""
+                />
+              )}
             </div>
             <h4 class="mb-1">
               {this.props.user.first_name} {this.props.user.last_name}
@@ -54,9 +62,9 @@ class Sidebar extends Component {
                 <FormattedMessage id="Change password" />
               </Link>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="login.html">
-                <i class="lni-exit"></i>Đăng xuất
+            <li className="nav-item">
+              <a className="nav-link" href="login.html">
+                <i className="lni-exit"></i>Đăng xuất
               </a>
             </li>
           </ul>

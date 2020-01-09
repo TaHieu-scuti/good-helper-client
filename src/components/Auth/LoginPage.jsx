@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import { injectIntl, FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Alert } from 'react-bootstrap'
+import { Alert } from "react-bootstrap";
 import {
   raiseError,
   setTokenOnHttpClient,
   updateMe,
-  updateIdentity
+  updateIdentity,
+  userCheckotp
 } from "../../lib/redux/actions";
 import Authenticate from "./Authenticate";
 
@@ -57,8 +58,14 @@ class LoginPage extends Component {
                           <FormattedMessage id="Login" />
                         </h4>
                         <div className="form-group css">
-                          <Alert show={this.props.is_error} style={{textAlign: "center"}} variant="danger">
-                            <FormattedMessage id={this.props.error_description} />
+                          <Alert
+                            show={this.props.is_error}
+                            style={{ textAlign: "center" }}
+                            variant="danger"
+                          >
+                            <FormattedMessage
+                              id={this.props.error_description}
+                            />
                           </Alert>
                         </div>
                         <div className="form-group css">
@@ -128,7 +135,6 @@ class LoginPage extends Component {
 
 const mapStateToProps = (stateStore, ownProps) => {
   let newState = Object.assign({}, ownProps);
-
   newState.error_description = stateStore.error_descriptions;
   newState.http = stateStore.http;
   newState.is_error = stateStore.error_descriptions.length > 0;
@@ -156,7 +162,12 @@ const mapDispatchToProps = dispatch => {
           });
         })
         .catch(error => {
-          dispatch(raiseError(error.response.data.message)); 
+          if (error.response.status == 422) {
+            dispatch(raiseError(error.response.data.message));
+          } else {
+            dispatch(userCheckotp(error.response.data.response));
+            component.props.history.push("/again/checkotp");
+          }
         });
     }
   };

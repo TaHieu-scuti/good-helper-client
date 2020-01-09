@@ -37,7 +37,6 @@ class Content extends Component {
                 </div>
                 <div className="col-lg-12 col-md-12 col-sm-12">
                   <div className="form-group">
-
                     <h5>
                       <FormattedMessage id="Email" /> :
                     </h5>

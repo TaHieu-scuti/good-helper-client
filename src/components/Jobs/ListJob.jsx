@@ -136,7 +136,7 @@ const mapDispatchToProps = dispatch => {
       }).then(res => {
         dispatch(searchOutside(res.data.response));
       });
-      component.setState({ activePage: pageNumber });
+        component.setState({ activePage: pageNumber });
     }
   };
 };

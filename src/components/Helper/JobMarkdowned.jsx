@@ -1,36 +1,54 @@
 import React, { Component } from "react";
-import { IoMdArrowRoundDown } from "react-icons/io";
-import { IoMdArrowForward } from "react-icons/io";
-import { IoLogoUsd } from "react-icons/io";
-import { injectIntl, FormattedMessage } from "react-intl";
-import Pagination from "react-js-pagination";
+import Sidebar from "./../Profile/Sidebar";
+import Authenticate from "./../Profile/Authenticate";
 import { connect } from "react-redux";
-import { searchOutside } from "../../lib/redux/actions";
+import { IoLogoUsd } from "react-icons/io";
+import { FormattedMessage } from "react-intl";
+import Pagination from "react-js-pagination";
 
-class ListJob extends Component {
+class JobMarkdowned extends Component {
   constructor(props) {
     super(props);
     this.state = {
       activePage: 1,
       pageRangeDisplayed: 5,
-      title: "",
-      location_id: "",
-      category_id: ""
+      data: [],
+      pagination: {}
     };
-
     this.handlePageChange = this.handlePageChange.bind(this);
   }
 
+  componentDidMount() {
+    this.props
+      .http({
+        url: "auth/book-mark/list/post/markdown",
+        method: "GET"
+      })
+      .then(res => {
+        this.setState({
+          data: res.data.response.posts,
+          pagination: res.data.response.pagination
+        });
+      });
+  }
+
   handlePageChange(pageNumber) {
-    this.props.handlePageChange({
-      component: this,
-      http: this.props.http,
-      pageNumber: pageNumber
-    });
+    this.props
+      .http({
+        url: "auth/book-mark/list/post/markdown",
+        method: "GET",
+        params: {
+          page: pageNumber
+        }
+      })
+      .then(res => {
+        this.setState({ data: res.data.response.posts });
+      });
+    this.setState({ activePage: pageNumber });
   }
 
   render() {
-    const ListJob = this.props.searchOutside.posts.map((item, idx) => {
+    const ListJob = this.state.data.map((item, idx) => {
       return (
         <div className="job-new-list" key={idx}>
           <div className="vc-thumb">
@@ -40,9 +58,6 @@ class ListJob extends Component {
             <h5 className="title">
               <a href="#">{item.title}</a>
               <span className="j-full-time">{item.type}</span>
-              <a href="#" className="btn download-btn">
-                <IoMdArrowRoundDown />
-              </a>
             </h5>
             <p>{item.category}</p>
             <ul className="vc-info-list">
@@ -68,14 +83,6 @@ class ListJob extends Component {
             </ul>
           </div>
           <br />
-          <a
-            className="btn btn-outline-info bn-det"
-            href="#"
-            style={{ marginTop: "20px" }}
-          >
-            <FormattedMessage id="Apply" />
-            <IoMdArrowForward />
-          </a>
         </div>
       );
     });
@@ -88,18 +95,18 @@ class ListJob extends Component {
       </div>
     );
 
-    if (this.props.searchOutside.posts.length > 0) {
+    if (this.state.data.length > 0) {
       data = (
         <div>
           <div className="row">
             <div className="col-md-12">{ListJob}</div>
           </div>
-          <div className="row">
-            <div className="col-lg-12 col-md-12 col-sm-12">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
               <Pagination
                 activePage={this.state.activePage}
-                itemsCountPerPage={this.props.searchOutside.paginate.perPage}
-                totalItemsCount={this.props.searchOutside.paginate.total}
+                itemsCountPerPage={this.state.pagination.perPage}
+                totalItemsCount={this.state.pagination.total}
                 pageRangeDisplayed={this.state.pageRangeDisplayed}
                 onChange={this.handlePageChange}
               />
@@ -109,39 +116,40 @@ class ListJob extends Component {
       );
     }
 
-    return <div className="col-xl-9 col-lg-8">{data}</div>;
+    return (
+      <Authenticate>
+        <div id="main-wrapper">
+          <section className="tr-single-detail gray-bg">
+            <div className="container">
+              <div className="row">
+                <Sidebar user={this.props.user} />
+                <div className="col-md-8 col-sm-12">
+                  <div className="tab-pane active container" id="c-profile">
+                    <div className="tr-single-box">
+                      <div className="tr-single-header">
+                        <h3>
+                          <i></i>
+                          <FormattedMessage id="Job markdown" />
+                        </h3>
+                      </div>
+                      <div className="tr-single-body">{data}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </Authenticate>
+    );
   }
 }
 
 const mapStateToProps = (stateStore, ownProps) => {
   let newState = Object.assign({}, ownProps);
-
+  newState.user = stateStore.me;
   newState.http = stateStore.http;
-  newState.searchOutside = stateStore.searchOutside;
-
   return newState;
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    handlePageChange: ({ component, http, pageNumber }) => {
-      http({
-        url: "auth/search/outside?page=" + pageNumber,
-        method: "POST",
-        data: {
-          title: component.state.title,
-          location_id: component.state.location_id,
-          category_id: component.state.category_id
-        }
-      }).then(res => {
-        dispatch(searchOutside(res.data.response));
-      });
-        component.setState({ activePage: pageNumber });
-    }
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(injectIntl(ListJob));
+export default connect(mapStateToProps)(JobMarkdowned);

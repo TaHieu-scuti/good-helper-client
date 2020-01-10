@@ -30,14 +30,34 @@ class Sidebar extends Component {
             <span className="text-success">Web Designer</span>
           </div>
           <ul className="nav dashboard-verticle-nav">
-            <li className="nav-item">
-              <a className="nav-link" href="">
-                <i>
+            {this.props.user.role == 2 ? (
+              <ul className="nav dashboard-verticle-nav">
+              <li className="nav-item">
+                <Link to="/helper/jobappiled" className="nav-link active">
+                  <i>
                   <FaFile />
-                </i>{" "}
-                <FormattedMessage id="Task manager" />
-              </a>
-            </li>
+                  </i>{" "}
+                  <FormattedMessage id="Job Applied" />
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/markdown/helper"  className="nav-link active">
+                  <i>
+                  <FaFile />
+                  </i>{" "}
+                  <FormattedMessage id="Job markdown" />
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link  className="nav-link active">
+                  <i>
+                  <FaFile />
+                  </i>{" "}
+                  <FormattedMessage id="Job finished" />
+                </Link>
+              </li>
+              </ul>
+            ) : null}
             <li className="nav-item">
               <Link to="/profile" className="nav-link active">
                 <i>
@@ -55,12 +75,12 @@ class Sidebar extends Component {
               </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" data-toggle="tab" href="#change-password">
+              <Link to="/password/change" className="nav-link active">
                 <i>
                   <FaExpeditedssl />
                 </i>
                 <FormattedMessage id="Change password" />
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="login.html">

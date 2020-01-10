@@ -55,12 +55,12 @@ class Sidebar extends Component {
               </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" data-toggle="tab" href="#change-password">
+              <Link to="/password/change" className="nav-link active">
                 <i>
                   <FaExpeditedssl />
                 </i>
                 <FormattedMessage id="Change password" />
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="login.html">

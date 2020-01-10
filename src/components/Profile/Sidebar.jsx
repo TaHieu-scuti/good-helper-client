@@ -49,7 +49,7 @@ class Sidebar extends Component {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link  className="nav-link active">
+                <Link to="/post/finish" className="nav-link active">
                   <i>
                   <FaFile />
                   </i>{" "}

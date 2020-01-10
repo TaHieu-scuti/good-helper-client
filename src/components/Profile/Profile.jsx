@@ -9,9 +9,9 @@ class Profile extends Component {
     return (
       <Authenticate>
         <div id="main-wrapper">
-          <section class="tr-single-detail gray-bg">
-            <div class="container">
-              <div class="row">
+          <section className="tr-single-detail gray-bg">
+            <div className="container">
+              <div className="row">
                 <Sidebar user={this.props.user}/>
                 <Content user={this.props.user} />
               </div>

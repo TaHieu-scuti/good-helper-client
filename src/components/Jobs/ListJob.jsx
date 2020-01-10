@@ -5,6 +5,7 @@ import { IoLogoUsd } from "react-icons/io";
 import { injectIntl, FormattedMessage } from "react-intl";
 import Pagination from "react-js-pagination";
 import { connect } from "react-redux";
+import { searchOutside } from "../../lib/redux/actions";
 
 class ListJob extends Component {
   constructor(props) {
@@ -21,25 +22,15 @@ class ListJob extends Component {
   }
 
   handlePageChange(pageNumber) {
-    this.props
-      .http({
-        url: "auth/search/outside?page=" + pageNumber,
-        method: "POST",
-        data: {
-          title: this.state.title,
-          location_id: this.state.location_id,
-          category_id: this.state.category_id
-        }
-      })
-      .then(res => {
-        this.setState({ data: res.data.response.posts });
-      });
-
-    this.setState({ activePage: pageNumber });
+    this.props.handlePageChange({
+      component: this,
+      http: this.props.http,
+      pageNumber: pageNumber
+    });
   }
 
   render() {
-    const ListJob = this.props.listJob.posts.map((item, idx) => {
+    const ListJob = this.props.searchOutside.posts.map((item, idx) => {
       return (
         <div className="job-new-list" key={idx}>
           <div className="vc-thumb">
@@ -97,7 +88,7 @@ class ListJob extends Component {
       </div>
     );
 
-    if (this.props.listJob.posts.length > 0) {
+    if (this.props.searchOutside.posts.length > 0) {
       data = (
         <div>
           <div className="row">
@@ -107,8 +98,8 @@ class ListJob extends Component {
             <div className="col-lg-12 col-md-12 col-sm-12">
               <Pagination
                 activePage={this.state.activePage}
-                itemsCountPerPage={this.props.listJob.paginate.perPage}
-                totalItemsCount={this.props.listJob.paginate.total}
+                itemsCountPerPage={this.props.searchOutside.paginate.perPage}
+                totalItemsCount={this.props.searchOutside.paginate.total}
                 pageRangeDisplayed={this.state.pageRangeDisplayed}
                 onChange={this.handlePageChange}
               />
@@ -126,8 +117,31 @@ const mapStateToProps = (stateStore, ownProps) => {
   let newState = Object.assign({}, ownProps);
 
   newState.http = stateStore.http;
+  newState.searchOutside = stateStore.searchOutside;
 
   return newState;
 };
 
-export default connect(mapStateToProps)(injectIntl(ListJob));
+const mapDispatchToProps = dispatch => {
+  return {
+    handlePageChange: ({ component, http, pageNumber }) => {
+      http({
+        url: "auth/search/outside?page=" + pageNumber,
+        method: "POST",
+        data: {
+          title: component.state.title,
+          location_id: component.state.location_id,
+          category_id: component.state.category_id
+        }
+      }).then(res => {
+        dispatch(searchOutside(res.data.response));
+      });
+        component.setState({ activePage: pageNumber });
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(injectIntl(ListJob));

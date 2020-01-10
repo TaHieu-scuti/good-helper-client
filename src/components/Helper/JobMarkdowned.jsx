@@ -129,7 +129,7 @@ class JobMarkdowned extends Component {
                       <div className="tr-single-header">
                         <h3>
                           <i></i>
-                          <FormattedMessage id="Posts was markdowned" />
+                          <FormattedMessage id="Job markdown" />
                         </h3>
                       </div>
                       <div className="tr-single-body">{data}</div>

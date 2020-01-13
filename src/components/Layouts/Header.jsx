@@ -107,7 +107,7 @@ class Header extends Component {
     if (this.props.location.pathname == "/checkotp") {
       return null;
     }
-
+        
     return (
       <div>
         <div className="topbar" id="top">

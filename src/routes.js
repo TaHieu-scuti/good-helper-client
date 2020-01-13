@@ -8,7 +8,9 @@ import Profile from './components/Profile/Profile';
 import EditProfile from './components/Profile/EditProfile';
 import Register from './components/Auth/Register';
 import CheckOTP from './components/Auth/CheckOTP';
-import ChangePassword from './components/Profile/ChangePassword'
+import JobHelpMarkdown from './components/Helper/JobMarkdowned';
+import JobAppied from './components/Helper/JobApplied';
+import ChangePassword from './components/Profile/ChangePassword';
 import CheckOTPAgain from './components/Auth/CheckOTPAgain';
 import AddPostOfNeeder from './components/Needer/AddNewPost'
 
@@ -23,6 +25,8 @@ const routes = [
   { path: '/edit/profile', name: 'EditProfile', component: EditProfile },
   { path: '/register', name: 'Register', component: Register },
   { path: '/checkotp', name: 'CheckOTP', component: CheckOTP },
+  { path: '/markdown/helper', name: 'markdown', component: JobHelpMarkdown },
+  { path: '/helper/jobappiled', name: 'jobappied', component: JobAppied }, 
   { path: '/password/change', name: 'ChangePassword', component: ChangePassword },
   { path: '/again/checkotp', name: 'CheckOTP', component: CheckOTPAgain },
   { path: '/add/post/needer', name: 'AddPostOfNeeder', component: AddPostOfNeeder },

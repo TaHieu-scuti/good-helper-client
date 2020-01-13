@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { IoLogoUsd } from "react-icons/io";
 import { FormattedMessage } from "react-intl";
 import Pagination from "react-js-pagination";
+import { Link } from "react-router-dom";
 
 class JobFinishOfHelper extends Component {
   constructor(props) {
@@ -56,7 +57,7 @@ class JobFinishOfHelper extends Component {
           </div>
           <div className="vc-content">
             <h5 className="title">
-              <a href="#">{item.title}</a>
+            <Link to={"/job/detail/" + item.id}>{item.title}</Link>
               <span className="j-full-time">{item.type}</span>
             </h5>
             <p>{item.category}</p>

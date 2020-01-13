@@ -467,7 +467,7 @@ const mapDispatchToProps = dispatch => {
       })
         .then(res => {
           dispatch(updateMe(res.data.response));
-          toast.success('Success Message', 'Title', {displayDuration:3000});
+          toast.success('Cập nhật thành công', 'Title', {displayDuration:3000});
           component.props.history.push("/profile");
         })
         .catch(error => {

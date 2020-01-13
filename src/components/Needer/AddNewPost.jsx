@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { FaEdit } from "react-icons/fa";
 import { FormattedMessage, injectIntl } from "react-intl";
 import { Editor } from "@tinymce/tinymce-react";
-import DateTimeField from "react-bootstrap-datetimepicker"
+import Datetime from "react-datetime";
 
 class AddNewPost extends Component {
   constructor(props) {
@@ -54,15 +54,15 @@ class AddNewPost extends Component {
     });
   };
 
-  handelSetValueStartTime = event => {
+  handelSetValueStartTime = newDate => {
     this.setState({
-      start_time: event.target.value
+      start_time: newDate
     });
   };
 
-  handelSetValueEndTime = event => {
+  handelSetValueEndTime = newDate => {
     this.setState({
-      end_time: event.target.value
+      end_time: newDate
     });
   };
 
@@ -86,12 +86,16 @@ class AddNewPost extends Component {
 
   onChangeGender = event => {
     this.setState({
-      gender : event.target.value
+      gender: event.target.value
+    });
+  };
+  onChangeType = event => {
+    this.setState({
+      type: event.target.value
     });
   };
 
   render() {
-    console.log(this.state);
     return (
       <AuthenticateNeeder>
         <div id="main-wrapper">
@@ -102,7 +106,7 @@ class AddNewPost extends Component {
                 <div className="col-md-8 col-sm-12">
                   <div className="tab-content">
                     <div className="tab-pane active container" id="profile">
-                      <form onSubmit={this.onEditButton}>
+                      <form onSubmit={this.onAddButton}>
                         <div className="tr-single-box">
                           <div className="tr-single-header">
                             <h4>
@@ -174,30 +178,6 @@ class AddNewPost extends Component {
                                     className="form-control"
                                     type="number"
                                     onChange={this.handelSetValueAmountMember}
-                                  />
-                                </div>
-                              </div>
-                              <div className="col-lg-6 col-md-6 col-sm-12">
-                                <div className="form-group">
-                                  <label>
-                                    <FormattedMessage id="Start time" />
-                                  </label>
-                                  <input
-                                    className="form-control"
-                                    type="date"
-                                    onChange={this.handelSetValueStartTime}
-                                  />
-                                </div>
-                              </div>
-                              <div className="col-lg-6 col-md-6 col-sm-12">
-                                <div className="form-group">
-                                  <label>
-                                    <FormattedMessage id="End time" />
-                                  </label>
-                                  <input
-                                    className="form-control"
-                                    type="date"
-                                    onChange={this.handelSetValueEndTime}
                                   />
                                 </div>
                               </div>
@@ -277,11 +257,58 @@ class AddNewPost extends Component {
                                   </select>
                                 </div>
                               </div>
-                              {/* <div className="col-lg-6 col-md-6 col-sm-12">
+                              <div className="col-lg-6 col-md-6 col-sm-12">
                                 <div className="form-group">
-                                  <DateTimeField/>
-                                  </div>
-                                </div> */}
+                                  <label>
+                                    <FormattedMessage id="Gender" />
+                                  </label>
+                                  <select
+                                    id="appointment-service"
+                                    className="form-control"
+                                    onChange={this.onChangeType}
+                                  >
+                                    <option value="">
+                                      {this.props.intl.formatMessage({
+                                        id: "Type"
+                                      })}
+                                    </option>
+                                    <option value="việc cần gấp">
+                                      {this.props.intl.formatMessage({
+                                        id: "Urgent work"
+                                      })}
+                                    </option>
+                                    <option value="việc làm trong ngày">
+                                      {this.props.intl.formatMessage({
+                                        id: "Jobs of the day"
+                                      })}
+                                    </option>
+                                    <option value="việc dài hạn">
+                                      {this.props.intl.formatMessage({
+                                        id: "Long term employment"
+                                      })}
+                                    </option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div className="col-lg-6 col-md-6 col-sm-12">
+                                <div className="form-group">
+                                  <label>
+                                    <FormattedMessage id="Start time" />
+                                  </label>
+                                  <Datetime 
+                                  onChange={this.handelSetValueStartTime}/>
+                                </div>
+                              </div>
+                              <div className="col-lg-6 col-md-6 col-sm-12">
+                                <div className="form-group">
+                                  <label>
+                                    <FormattedMessage id="End time" />
+                                  </label>
+                                  <Datetime
+                                  onChange={this.handelSetValueEndTime}
+                                  />
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>

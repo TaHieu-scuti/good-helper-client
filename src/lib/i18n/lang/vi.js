@@ -113,5 +113,6 @@ export default {
 	'verification failed': 'Xác thực thất bại',
 	'Title': 'Tiêu đề',
 	'Detail': 'Chi tiết',
-	'Add post': 'Thêm bài viết'
+	'Add post': 'Thêm bài viết',
+	'Type': 'Loại công việc'
 };

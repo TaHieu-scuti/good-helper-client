@@ -14,7 +14,6 @@ class AddNewPost extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: "",
       title: "",
       detail: "",
       amount_member: "",
@@ -39,29 +38,6 @@ class AddNewPost extends Component {
     this.props.http("auth/location").then(res => {
       this.setState({ location: res.data.response });
     });
-
-    this.props.http({
-        url: "auth/detail/post",
-        method: "POST",
-        data: {
-            post_id: this.props.match.params.id  
-        }
-      })
-      .then(res => {
-        this.setState({
-            id: res.data.response.id,
-            title: res.data.response.title,
-            detail: res.data.response.detail,
-            amount_member: res.data.response.amount_member,
-            price: res.data.response.price,
-            gender: res.data.response.gender,
-            start_time: res.data.response.start_time,
-            end_time: res.data.response.end_time,
-            type: res.data.response.type,
-            location_id: res.data.response.location_id,
-            category_id: res.data.response.category_id
-          });
-      })
   }
 
   handelSetValueTitle = event => {
@@ -150,7 +126,7 @@ class AddNewPost extends Component {
                               <i>
                                 <FaEdit />
                               </i>
-                              <FormattedMessage id="Edit post" />
+                              <FormattedMessage id="Add post" />
                             </h4>
                           </div>
                           <div className="tr-single-body">
@@ -167,7 +143,6 @@ class AddNewPost extends Component {
                                       id: "Title"
                                     })}
                                     onChange={this.handelSetValueTitle}
-                                    value={this.state.title}
                                   />
                                 </div>
                                 <span className="text-danger">
@@ -199,7 +174,6 @@ class AddNewPost extends Component {
                                         bullist numlist outdent indent | removeformat | help"
                                     }}
                                     onChange={this.handleEditorChange}
-                                    value={this.state.detail}
                                   />
                                 </div>
                                 <span className="text-danger">
@@ -219,7 +193,6 @@ class AddNewPost extends Component {
                                     className="form-control"
                                     type="number"
                                     onChange={this.handelSetValuePrice}
-                                    value={this.state.price}
                                   />
                                   <span className="text-danger">
                                     {this.props.error_descriptions.price ? (
@@ -239,7 +212,6 @@ class AddNewPost extends Component {
                                     className="form-control"
                                     type="number"
                                     onChange={this.handelSetValueAmountMember}
-                                    value={this.state.amount_member}
                                   />
                                   <span className="text-danger">
                                     {this.props.error_descriptions
@@ -262,7 +234,6 @@ class AddNewPost extends Component {
                                   <select
                                     className="js-states form-control"
                                     onChange={this.onChangeCategory}
-                                    value={this.state.category_id}
                                   >
                                     <option value="">
                                       {this.props.intl.formatMessage({
@@ -298,7 +269,6 @@ class AddNewPost extends Component {
                                   <select
                                     className="js-states form-control"
                                     onChange={this.onChangeLocation}
-                                    value={this.state.location_id}
                                   >
                                     <option value="">
                                       {this.props.intl.formatMessage({
@@ -335,7 +305,6 @@ class AddNewPost extends Component {
                                     id="appointment-service"
                                     className="form-control"
                                     onChange={this.onChangeGender}
-                                    value={this.state.gender}
                                   >
                                     <option value="">
                                       {this.props.intl.formatMessage({
@@ -373,7 +342,6 @@ class AddNewPost extends Component {
                                     id="appointment-service"
                                     className="form-control"
                                     onChange={this.onChangeType}
-                                    value={this.state.type}
                                   >
                                     <option value="">
                                       {this.props.intl.formatMessage({
@@ -413,7 +381,6 @@ class AddNewPost extends Component {
                                   <Datetime
                                     dateFormat="YYYY-MM-DD" timeFormat="HH:mm:ss"
                                     onChange={this.handelSetValueStartTime}
-                                    value={this.state.start_time}
                                   />
                                   <span className="text-danger">
                                     {this.props.error_descriptions
@@ -436,7 +403,6 @@ class AddNewPost extends Component {
                                   <Datetime
                                     dateFormat="YYYY-MM-DD" timeFormat="HH:mm:ss"
                                     onChange={this.handelSetValueEndTime}
-                                    value={this.state.end_time}
                                   />
                                   <span className="text-danger">
                                     {this.props.error_descriptions.end_time ? (
@@ -483,13 +449,12 @@ const mapDispatchToProps = dispatch => {
   return {
     onAddButton: ({ component, http }) => {
       http({
-        url: "auth/post/edit",
+        url: "auth/post/create",
         method: "POST",
         data: {
-          id: component.state.id,
           title: component.state.title,
           detail: component.state.detail,
-          amount_member: component.state.amount_member, 
+          amount_member: component.state.amount_member,
           price: component.state.price,
           gender: component.state.gender,
           start_time: component.state.start_time,
@@ -501,7 +466,7 @@ const mapDispatchToProps = dispatch => {
       })
       .then(res => {
           component.props.history.push("/profile");
-          toast.success('Cập nhật thành công', 'Title', {displayDuration:3000});
+          toast.success('Thêm thành công', 'Title', {displayDuration:3000});
       })
       .catch(error => {
           dispatch(raiseError(error.response.data.errors));

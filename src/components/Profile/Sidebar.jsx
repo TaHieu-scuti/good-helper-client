@@ -49,7 +49,7 @@ class Sidebar extends Component {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link  className="nav-link active">
+                <Link to="/post/finish" className="nav-link active">
                   <i>
                   <FaFile />
                   </i>{" "}
@@ -58,13 +58,25 @@ class Sidebar extends Component {
               </li>
               </ul>
             ) : null}
+            {this.props.user.role == 1 ? (
+              <ul className="nav dashboard-verticle-nav">
+              <li className="nav-item">
+                <Link to="/add/post/needer" className="nav-link active">
+                  <i>
+                  <FaFile />
+                  </i>{" "}
+                  <FormattedMessage id="Add post" />
+                </Link>
+              </li>
+              </ul>
+            ) : null}
             <li className="nav-item">
-              <a className="nav-link active" href="">
+              <Link to="/profile" className="nav-link active">
                 <i>
                   <FaUserAlt />
                 </i>
                 <FormattedMessage id="Personal informations" />
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
               <Link to="/edit/profile" className="nav-link active">

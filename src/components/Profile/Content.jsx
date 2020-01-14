@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { FaInfo } from "react-icons/fa";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
+import imageDefault from "../../assets/img/default-image.png";
 
 class Content extends Component {
   render() {
@@ -62,7 +63,7 @@ class Content extends Component {
                 <div className="col-lg-12 col-md-12 col-sm-12">
                   <div className="form-group">
                     <h5>
-                      <FormattedMessage id="Id card " /> :
+                      <FormattedMessage id="Id card" /> :
                     </h5>
                     {this.props.user.id_card}
                   </div>
@@ -84,7 +85,7 @@ class Content extends Component {
                         </span>
                         <img
                           className="img-fluid mx-auto"
-                          src="https://btnmt.onecmscdn.com/2018/01/29/the-can-cuoc.jpg"
+                          src={imageDefault}
                         />
                       </div>
                     )}
@@ -107,7 +108,7 @@ class Content extends Component {
                         </span>
                         <img
                           className="img-fluid mx-auto"
-                          src="https://btnmt.onecmscdn.com/2018/01/29/the-can-cuoc.jpg"
+                          src={imageDefault}
                         />
                       </div>
                     )}

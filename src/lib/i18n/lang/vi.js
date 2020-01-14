@@ -121,6 +121,7 @@ export default {
 	'Title': 'Tiêu đề',
 	'Detail': 'Chi tiết',
 	'Edit post': 'Sửa bài viết',
+	'Add post': 'Thêm bài viết',
 	'The title field is required.': 'Tiêu đề không được để trống',
 	'The detail field is required.': 'Chi tiết không được để trống',
 	'The price field is required.': 'Gía không được để trống',
@@ -131,5 +132,7 @@ export default {
 	'The start time field is required.': 'Thời gian bắt đầu không được để trống',
 	'The end time field is required.': 'Thời gian kết thúc không được để trống',
 	'The end time must be a date after or equal to start time.': 'Thời gian kết thức phải sau thời gian bắt đầu',
-	'The amount member may not be greater than 10.': 'Số người không được quá 10'
+	'The amount member may not be greater than 10.': 'Số người không được quá 10',
+	'Posts was finished': 'Các công việc đã hoàn thành',
+	'The Id card field is required.': 'Số cmnd không được để trống',
 };

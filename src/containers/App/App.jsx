@@ -6,6 +6,8 @@ import Store from './AppStore';
 import IntlProvider from "./IntlProvider";
 import Login from "../../components/Auth/LoginPage";
 import createHistory from "history/createBrowserHistory"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const history = createHistory();
 
@@ -37,6 +39,7 @@ class App extends React.Component {
             <Route path='/logout' name='logout' component={LogoutLayout} />
           </Switch>
         </HashRouter>
+        <ToastContainer />
       </Store>
       </IntlProvider>
     );

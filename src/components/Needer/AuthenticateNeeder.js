@@ -19,4 +19,4 @@ const mapStateToProps = (stateStore, ownProps) => {
   return newState;
 };
 
-export default connect(mapStateToProps)(AuthenticateNeeder); 
+export default connect(mapStateToProps)(AuthenticateNeeder);

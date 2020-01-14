@@ -116,5 +116,20 @@ export default {
 	'The avatar may not be greater than 10240 kilobytes.' : 'Avatar khoong được quá 10MB',
 	'The id card font may not be greater than 10240 kilobytes.': 'Ảnh căn cước không được quá 10MB',
 	'The id card backside may not be greater than 10240 kilobytes.' : 'Ảnh căn cước không được quá 10MB',
-	'verification failed': 'Xác thực thất bại'
+	'verification failed': 'Xác thực thất bại',
+	'Type': 'Loại công việc',
+	'Title': 'Tiêu đề',
+	'Detail': 'Chi tiết',
+	'Edit post': 'Sửa bài viết',
+	'The title field is required.': 'Tiêu đề không được để trống',
+	'The detail field is required.': 'Chi tiết không được để trống',
+	'The price field is required.': 'Gía không được để trống',
+	'The amount member field is required.': 'Số lượng nhân viên không được để trống',
+	'The category field is required.': 'Tiền lương không đưuọc để trống',
+	'The city field is required.': 'Địa điểm không được để trống',
+	'The type field is required.': 'Loại công việc không được để trống',
+	'The start time field is required.': 'Thời gian bắt đầu không được để trống',
+	'The end time field is required.': 'Thời gian kết thúc không được để trống',
+	'The end time must be a date after or equal to start time.': 'Thời gian kết thức phải sau thời gian bắt đầu',
+	'The amount member may not be greater than 10.': 'Số người không được quá 10'
 };

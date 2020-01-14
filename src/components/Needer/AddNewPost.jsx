@@ -59,13 +59,13 @@ class AddNewPost extends Component {
 
   handelSetValueStartTime = newDate => {
     this.setState({
-      start_time: moment(new Date(newDate)).format("YYYY-MM-DD hh:mm:ss")
+      start_time: moment(new Date(newDate)).format("YYYY-MM-DD HH:mm:ss")
     });
   };
 
   handelSetValueEndTime = newDate => {
     this.setState({
-      end_time: moment(new Date(newDate)).format("YYYY-MM-DD hh:mm:ss")
+      end_time: moment(new Date(newDate)).format("YYYY-MM-DD HH:mm:ss")
     });
   };
 
@@ -378,6 +378,7 @@ class AddNewPost extends Component {
                                     <FormattedMessage id="Start time" />
                                   </label>
                                   <Datetime
+                                    dateFormat="YYYY-MM-DD" timeFormat="HH:mm:ss"
                                     onChange={this.handelSetValueStartTime}
                                   />
                                   <span className="text-danger">
@@ -399,6 +400,7 @@ class AddNewPost extends Component {
                                     <FormattedMessage id="End time" />
                                   </label>
                                   <Datetime
+                                    dateFormat="YYYY-MM-DD" timeFormat="HH:mm:ss"
                                     onChange={this.handelSetValueEndTime}
                                   />
                                   <span className="text-danger">

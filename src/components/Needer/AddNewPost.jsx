@@ -6,6 +6,8 @@ import { FaEdit } from "react-icons/fa";
 import { FormattedMessage, injectIntl } from "react-intl";
 import { Editor } from "@tinymce/tinymce-react";
 import Datetime from "react-datetime";
+import { raiseError } from "../../lib/redux/actions";
+import moment from "moment";
 
 class AddNewPost extends Component {
   constructor(props) {
@@ -24,6 +26,7 @@ class AddNewPost extends Component {
       category: [],
       location: []
     };
+    this.onAddButton = this.onAddButton.bind(this);
   }
 
   componentDidMount() {
@@ -56,13 +59,13 @@ class AddNewPost extends Component {
 
   handelSetValueStartTime = newDate => {
     this.setState({
-      start_time: newDate
+      start_time: moment(new Date(newDate)).format("YYYY-MM-DD hh:mm:ss")
     });
   };
 
   handelSetValueEndTime = newDate => {
     this.setState({
-      end_time: newDate
+      end_time: moment(new Date(newDate)).format("YYYY-MM-DD hh:mm:ss")
     });
   };
 
@@ -94,6 +97,15 @@ class AddNewPost extends Component {
       type: event.target.value
     });
   };
+
+  onAddButton(e) {
+    e.preventDefault();
+    this.props.onAddButton({
+      component: this,
+      event: e,
+      http: this.props.http
+    });
+  }
 
   render() {
     return (
@@ -132,6 +144,13 @@ class AddNewPost extends Component {
                                     onChange={this.handelSetValueTitle}
                                   />
                                 </div>
+                                <span className="text-danger">
+                                  {this.props.error_descriptions.title ? (
+                                    <FormattedMessage
+                                      id={this.props.error_descriptions.title}
+                                    />
+                                  ) : null}
+                                </span>
                               </div>
                               <div className="col-lg-12 col-md-12 col-sm-12">
                                 <div className="form-group">
@@ -156,6 +175,13 @@ class AddNewPost extends Component {
                                     onChange={this.handleEditorChange}
                                   />
                                 </div>
+                                <span className="text-danger">
+                                  {this.props.error_descriptions.detail ? (
+                                    <FormattedMessage
+                                      id={this.props.error_descriptions.detail}
+                                    />
+                                  ) : null}
+                                </span>
                               </div>
                               <div className="col-lg-6 col-md-6 col-sm-12">
                                 <div className="form-group">
@@ -167,6 +193,13 @@ class AddNewPost extends Component {
                                     type="number"
                                     onChange={this.handelSetValuePrice}
                                   />
+                                  <span className="text-danger">
+                                    {this.props.error_descriptions.price ? (
+                                      <FormattedMessage
+                                        id={this.props.error_descriptions.price}
+                                      />
+                                    ) : null}
+                                  </span>
                                 </div>
                               </div>
                               <div className="col-lg-6 col-md-6 col-sm-12">
@@ -179,6 +212,17 @@ class AddNewPost extends Component {
                                     type="number"
                                     onChange={this.handelSetValueAmountMember}
                                   />
+                                  <span className="text-danger">
+                                    {this.props.error_descriptions
+                                      .amount_member ? (
+                                      <FormattedMessage
+                                        id={
+                                          this.props.error_descriptions
+                                            .amount_member
+                                        }
+                                      />
+                                    ) : null}
+                                  </span>
                                 </div>
                               </div>
                               <div className="col-lg-6 col-md-6 col-sm-12">
@@ -203,6 +247,17 @@ class AddNewPost extends Component {
                                       );
                                     })}
                                   </select>
+                                  <span className="text-danger">
+                                    {this.props.error_descriptions
+                                      .category_id ? (
+                                      <FormattedMessage
+                                        id={
+                                          this.props.error_descriptions
+                                            .category_id
+                                        }
+                                      />
+                                    ) : null}
+                                  </span>
                                 </div>
                               </div>
                               <div className="col-lg-6 col-md-6 col-sm-12">
@@ -227,6 +282,17 @@ class AddNewPost extends Component {
                                       );
                                     })}
                                   </select>
+                                  <span className="text-danger">
+                                    {this.props.error_descriptions
+                                      .location_id ? (
+                                      <FormattedMessage
+                                        id={
+                                          this.props.error_descriptions
+                                            .location_id
+                                        }
+                                      />
+                                    ) : null}
+                                  </span>
                                 </div>
                               </div>
                               <div className="col-lg-6 col-md-6 col-sm-12">
@@ -255,12 +321,21 @@ class AddNewPost extends Component {
                                       })}
                                     </option>
                                   </select>
+                                  <span className="text-danger">
+                                    {this.props.error_descriptions.gender ? (
+                                      <FormattedMessage
+                                        id={
+                                          this.props.error_descriptions.gender
+                                        }
+                                      />
+                                    ) : null}
+                                  </span>
                                 </div>
                               </div>
                               <div className="col-lg-6 col-md-6 col-sm-12">
                                 <div className="form-group">
                                   <label>
-                                    <FormattedMessage id="Gender" />
+                                    <FormattedMessage id="Type" />
                                   </label>
                                   <select
                                     id="appointment-service"
@@ -272,22 +347,29 @@ class AddNewPost extends Component {
                                         id: "Type"
                                       })}
                                     </option>
-                                    <option value="việc cần gấp">
+                                    <option value="Việc cần gấp">
                                       {this.props.intl.formatMessage({
                                         id: "Urgent work"
                                       })}
                                     </option>
-                                    <option value="việc làm trong ngày">
+                                    <option value="Việc trong ngày">
                                       {this.props.intl.formatMessage({
                                         id: "Jobs of the day"
                                       })}
                                     </option>
-                                    <option value="việc dài hạn">
+                                    <option value="Việc dài hạn">
                                       {this.props.intl.formatMessage({
                                         id: "Long term employment"
                                       })}
                                     </option>
                                   </select>
+                                  <span className="text-danger">
+                                    {this.props.error_descriptions.type ? (
+                                      <FormattedMessage
+                                        id={this.props.error_descriptions.type}
+                                      />
+                                    ) : null}
+                                  </span>
                                 </div>
                               </div>
                               <div className="col-lg-6 col-md-6 col-sm-12">
@@ -295,8 +377,20 @@ class AddNewPost extends Component {
                                   <label>
                                     <FormattedMessage id="Start time" />
                                   </label>
-                                  <Datetime 
-                                  onChange={this.handelSetValueStartTime}/>
+                                  <Datetime
+                                    onChange={this.handelSetValueStartTime}
+                                  />
+                                  <span className="text-danger">
+                                    {this.props.error_descriptions
+                                      .start_time ? (
+                                      <FormattedMessage
+                                        id={
+                                          this.props.error_descriptions
+                                            .start_time
+                                        }
+                                      />
+                                    ) : null}
+                                  </span>
                                 </div>
                               </div>
                               <div className="col-lg-6 col-md-6 col-sm-12">
@@ -305,8 +399,17 @@ class AddNewPost extends Component {
                                     <FormattedMessage id="End time" />
                                   </label>
                                   <Datetime
-                                  onChange={this.handelSetValueEndTime}
+                                    onChange={this.handelSetValueEndTime}
                                   />
+                                  <span className="text-danger">
+                                    {this.props.error_descriptions.end_time ? (
+                                      <FormattedMessage
+                                        id={
+                                          this.props.error_descriptions.end_time
+                                        }
+                                      />
+                                    ) : null}
+                                  </span>
                                 </div>
                               </div>
                             </div>
@@ -335,7 +438,40 @@ const mapStateToProps = (stateStore, ownProps) => {
   let newState = Object.assign({}, ownProps);
   newState.user = stateStore.me;
   newState.http = stateStore.http;
+  newState.error_descriptions = stateStore.error_descriptions;
   return newState;
 };
 
-export default connect(mapStateToProps)(injectIntl(AddNewPost));
+const mapDispatchToProps = dispatch => {
+  return {
+    onAddButton: ({ component, http }) => {
+      http({
+        url: "auth/post/create",
+        method: "POST",
+        data: {
+          title: component.state.title,
+          detail: component.state.detail,
+          amount_member: component.state.amount_member,
+          price: component.state.price,
+          gender: component.state.gender,
+          start_time: component.state.start_time,
+          end_time: component.state.end_time,
+          type: component.state.type,
+          location_id: component.state.location_id,
+          category_id: component.state.category_id
+        }
+      })
+      .then(res => {
+          component.props.history.push("/profile");
+      })
+      .catch(error => {
+          dispatch(raiseError(error.response.data.errors));
+      });
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(injectIntl(AddNewPost));

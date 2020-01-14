@@ -58,6 +58,18 @@ class Sidebar extends Component {
               </li>
               </ul>
             ) : null}
+            {this.props.user.role == 1 ? (
+              <ul className="nav dashboard-verticle-nav">
+              <li className="nav-item">
+                <Link to="/add/post/needer" className="nav-link active">
+                  <i>
+                  <FaFile />
+                  </i>{" "}
+                  <FormattedMessage id="Add post" />
+                </Link>
+              </li>
+              </ul>
+            ) : null}
             <li className="nav-item">
               <a className="nav-link active" href="">
                 <i>

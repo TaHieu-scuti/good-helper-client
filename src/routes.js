@@ -12,6 +12,7 @@ import JobHelpMarkdown from './components/Helper/JobMarkdowned';
 import JobAppied from './components/Helper/JobApplied';
 import ChangePassword from './components/Profile/ChangePassword';
 import CheckOTPAgain from './components/Auth/CheckOTPAgain';
+import JobFinishOfHelper from './components/Helper/JobFinishOfHelper'
 
 const routes = [
   { path: '/home', exact: true, name: 'Home', component: HomePage },
@@ -28,6 +29,7 @@ const routes = [
   { path: '/helper/jobappiled', name: 'jobappied', component: JobAppied }, 
   { path: '/password/change', name: 'ChangePassword', component: ChangePassword },
   { path: '/again/checkotp', name: 'CheckOTP', component: CheckOTPAgain },
+  { path: '/post/finish', name: 'jobFinish', component: JobFinishOfHelper },
 ];
 
 export default routes;

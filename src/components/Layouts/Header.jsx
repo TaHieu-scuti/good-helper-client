@@ -61,7 +61,7 @@ class Header extends Component {
     );
 
     if (this.props.is_logined) {
-      button = (
+      button = (   
         <nav className="navbar navbar-expand-lg header-nav-bar">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item dropdown">

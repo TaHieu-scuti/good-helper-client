@@ -168,7 +168,7 @@ class Header extends Component {
                 <Search />
               </div>
             )}
-          {this.props.jobs.title.length > 0 && (
+          {this.props.jobs.title.length > 0 &&(
             <div className="container">
               <NameJob detailJob={this.props.jobs} />
             </div>

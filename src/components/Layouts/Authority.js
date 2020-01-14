@@ -1,13 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { removeJob, raiseError } from "../../lib/redux/actions";
+import { removeJob, raiseError, updateJob } from "../../lib/redux/actions";
 
 class Authority extends Component {
   constructor(props) {
     super(props);
+   this.state = {
+    job: {
+      title:'',
+      category: '',
+      location:'' ,
+      img: ''
+    }
+   }
     this.props.http.interceptors.request.use(
       async config => {
         this.props.removeJob();
+        const job = this.state.job
+        this.props.updateJob(job);
         return config;
       },
       function(error) {
@@ -32,6 +42,7 @@ const mapStateToProps = (stateStore, ownProps) => {
 const mapDispatchToProps = dispatch => {
   return {
     removeJob: () => dispatch(removeJob()),
+    updateJob: (job) =>  dispatch(updateJob(job)),
     raiseError: (message) => dispatch(raiseError(message))
   };
 };

@@ -131,5 +131,7 @@ export default {
 	'The start time field is required.': 'Thời gian bắt đầu không được để trống',
 	'The end time field is required.': 'Thời gian kết thúc không được để trống',
 	'The end time must be a date after or equal to start time.': 'Thời gian kết thức phải sau thời gian bắt đầu',
-	'The amount member may not be greater than 10.': 'Số người không được quá 10'
+	'The amount member may not be greater than 10.': 'Số người không được quá 10',
+	'Posts was finished': 'Các công việc đã hoàn thành',
+	'The Id card field is required.': 'Số cmnd không được để trống',
 };

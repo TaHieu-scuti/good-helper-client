@@ -82,12 +82,7 @@ class ChangePassword extends Component {
                                 <FormattedMessage
                                   id={this.props.error_descriptions.password}
                                 />
-                              ) : null}
-                              {this.props.error_descriptions.message ? (
-                                <FormattedMessage
-                                  id={this.props.error_descriptions.message}
-                                />
-                              ) : null}
+                              ) : null} 
                             </span>
                           </div>
                           <div className="form-group">
@@ -109,6 +104,11 @@ class ChangePassword extends Component {
                                   id={
                                     this.props.error_descriptions.new_password
                                   }
+                                />
+                              ) : null}
+                              {this.props.error_descriptions.message ? (
+                                <FormattedMessage
+                                  id={this.props.error_descriptions.message}
                                 />
                               ) : null}
                             </span>

@@ -5,6 +5,8 @@ import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { raiseError, updateMe } from "../../lib/redux/actions";
 import { FaEdit } from "react-icons/fa";
+import imageDefault from "../../assets/img/default-image.png";
+import { toast } from 'react-toastify';
 
 class EditProfile extends Component {
   constructor(props) {
@@ -140,7 +142,7 @@ class EditProfile extends Component {
       $avatarPreview = (
         <img
           class="img-fluid mx-auto"
-          src="https://btnmt.onecmscdn.com/2018/01/29/the-can-cuoc.jpg"
+          src={imageDefault}
         />
       );
     }
@@ -163,7 +165,7 @@ class EditProfile extends Component {
           </span>
           <img
             class="img-fluid mx-auto"
-            src="https://btnmt.onecmscdn.com/2018/01/29/the-can-cuoc.jpg"
+            src={imageDefault}
           />
         </div>
       );
@@ -187,7 +189,7 @@ class EditProfile extends Component {
           </span>
           <img
             class="img-fluid mx-auto"
-            src="https://btnmt.onecmscdn.com/2018/01/29/the-can-cuoc.jpg"
+            src={imageDefault}
           />
         </div>
       );
@@ -309,7 +311,7 @@ class EditProfile extends Component {
                                   </label>
                                   <select
                                     id="appointment-service"
-                                    class="form-control"
+                                    className="form-control"
                                     value={this.state.gender}
                                     onChange={this.handelSetValueGender}
                                   >
@@ -465,6 +467,7 @@ const mapDispatchToProps = dispatch => {
       })
         .then(res => {
           dispatch(updateMe(res.data.response));
+          toast.success('Cập nhật thành công', 'Title', {displayDuration:3000});
           component.props.history.push("/profile");
         })
         .catch(error => {

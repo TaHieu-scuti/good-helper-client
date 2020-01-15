@@ -15,6 +15,7 @@ import {
 import { connect } from "react-redux";
 import { injectIntl, FormattedMessage } from "react-intl";
 import { updateJob } from "../../lib/redux/actions";
+import Interweave from 'interweave';
 
 class DetailJobPage extends Component {
   constructor(props) {
@@ -43,6 +44,7 @@ class DetailJobPage extends Component {
         });
       });
   }
+
   render() {
     return (
       <section className="tr-single-detail gray-bg" style={{ background: "#f6f7fb" }}>
@@ -56,7 +58,7 @@ class DetailJobPage extends Component {
                   </h3>
                 </div>
                 <div className="tr-single-body">
-                  <p>{this.state.jobDetail.detail}</p>
+                <Interweave content={this.state.jobDetail.detail} />
                 </div>
               </div>
               <a

@@ -10,24 +10,29 @@ import { raiseError } from "../../lib/redux/actions";
 import moment from "moment";
 import { toast } from 'react-toastify';
 
-class AddNewPost extends Component {
+class EditPostOfNeeder extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "",
-      detail: "",
-      amount_member: "",
-      price: "",
-      gender: "",
-      start_time: "",
-      end_time: "",
-      type: "",
-      location_id: "",
-      category_id: "",
+      post : {
+        id: "",
+        title: "",
+        detail: "",
+        amount_member: "",
+        price: "",
+        gender: "",
+        start_time: "",
+        end_time: "",
+        type: "",
+        location_id: "",
+        category_id: "",
+      },
       category: [],
       location: []
     };
     this.onAddButton = this.onAddButton.bind(this);
+    this.handelSetValue = this.handelSetValue.bind(this);
+    this.handleEditorChange = this.handleEditorChange.bind(this);
   }
 
   componentDidMount() {
@@ -38,64 +43,48 @@ class AddNewPost extends Component {
     this.props.http("auth/location").then(res => {
       this.setState({ location: res.data.response });
     });
+
+    this.props.http({
+        url: "auth/detail/post",
+        method: "POST",
+        data: {
+            post_id: this.props.match.params.id  
+        }
+      })
+      .then(res => {
+        this.setState({
+          post: {
+            id: res.data.response.id,
+            title: res.data.response.title,
+            detail: res.data.response.detail,
+            amount_member: res.data.response.amount_member,
+            price: res.data.response.price,
+            gender: res.data.response.gender,
+            start_time: res.data.response.start_time,
+            end_time: res.data.response.end_time,
+            type: res.data.response.type,
+            location_id: res.data.response.location_id,
+            category_id: res.data.response.category_id
+          }
+          });
+      })
   }
 
-  handelSetValueTitle = event => {
+  handelSetValue (event) {
     this.setState({
-      title: event.target.value
+      post: {...this.state.post, [event.target.id]: event.target.value},
     });
   };
 
-  handelSetValuePrice = event => {
+  handelSetValueTime (name, newDate) {
     this.setState({
-      price: event.target.value
+      post:{...this.state.post, [name]: moment(new Date(newDate)).format("YYYY-MM-DD HH:mm:ss")}
     });
   };
 
-  handelSetValueAmountMember = event => {
+  handleEditorChange (event) {
     this.setState({
-      amount_member: event.target.value
-    });
-  };
-
-  handelSetValueStartTime = newDate => {
-    this.setState({
-      start_time: moment(new Date(newDate)).format("YYYY-MM-DD HH:mm:ss")
-    });
-  };
-
-  handelSetValueEndTime = newDate => {
-    this.setState({
-      end_time: moment(new Date(newDate)).format("YYYY-MM-DD HH:mm:ss")
-    });
-  };
-
-  handleEditorChange = event => {
-    this.setState({
-      detail: event.target.getContent()
-    });
-  };
-
-  onChangeCategory = event => {
-    this.setState({
-      category_id: event.target.value
-    });
-  };
-
-  onChangeLocation = event => {
-    this.setState({
-      location_id: event.target.value
-    });
-  };
-
-  onChangeGender = event => {
-    this.setState({
-      gender: event.target.value
-    });
-  };
-  onChangeType = event => {
-    this.setState({
-      type: event.target.value
+      post: {...this.state.post, detail: event.target.getContent()}
     });
   };
 
@@ -126,7 +115,7 @@ class AddNewPost extends Component {
                               <i>
                                 <FaEdit />
                               </i>
-                              <FormattedMessage id="Add post" />
+                              <FormattedMessage id="Edit post" />
                             </h4>
                           </div>
                           <div className="tr-single-body">
@@ -140,9 +129,11 @@ class AddNewPost extends Component {
                                     className="form-control"
                                     type="text"
                                     placeholder={this.props.intl.formatMessage({
-                                      id: "Title"
+                                    id: "Title"
                                     })}
-                                    onChange={this.handelSetValueTitle}
+                                    onChange={this.handelSetValue}
+                                    value={this.state.post.title}
+                                    id="title"
                                   />
                                 </div>
                                 <span className="text-danger">
@@ -174,6 +165,7 @@ class AddNewPost extends Component {
                                         bullist numlist outdent indent | removeformat | help"
                                     }}
                                     onChange={this.handleEditorChange}
+                                    value={this.state.post.detail}
                                   />
                                 </div>
                                 <span className="text-danger">
@@ -192,7 +184,9 @@ class AddNewPost extends Component {
                                   <input
                                     className="form-control"
                                     type="number"
-                                    onChange={this.handelSetValuePrice}
+                                    onChange={this.handelSetValue}
+                                    value={this.state.post.price}
+                                    id = "price"
                                   />
                                   <span className="text-danger">
                                     {this.props.error_descriptions.price ? (
@@ -211,7 +205,9 @@ class AddNewPost extends Component {
                                   <input
                                     className="form-control"
                                     type="number"
-                                    onChange={this.handelSetValueAmountMember}
+                                    onChange={this.handelSetValue}
+                                    value={this.state.post.amount_member}
+                                    id = "amount_member"
                                   />
                                   <span className="text-danger">
                                     {this.props.error_descriptions
@@ -233,7 +229,9 @@ class AddNewPost extends Component {
                                   </label>
                                   <select
                                     className="js-states form-control"
-                                    onChange={this.onChangeCategory}
+                                    onChange={this.handelSetValue}
+                                    value={this.state.post.category_id}
+                                    id = "category_id"
                                   >
                                     <option value="">
                                       {this.props.intl.formatMessage({
@@ -268,7 +266,9 @@ class AddNewPost extends Component {
                                   </label>
                                   <select
                                     className="js-states form-control"
-                                    onChange={this.onChangeLocation}
+                                    onChange={this.handelSetValue}
+                                    value={this.state.post.location_id}
+                                    id="location_id"
                                   >
                                     <option value="">
                                       {this.props.intl.formatMessage({
@@ -302,9 +302,10 @@ class AddNewPost extends Component {
                                     <FormattedMessage id="Gender" />
                                   </label>
                                   <select
-                                    id="appointment-service"
+                                    id="gender"
                                     className="form-control"
-                                    onChange={this.onChangeGender}
+                                    onChange={this.handelSetValue}
+                                    value={this.state.post.gender}
                                   >
                                     <option value="">
                                       {this.props.intl.formatMessage({
@@ -339,9 +340,10 @@ class AddNewPost extends Component {
                                     <FormattedMessage id="Type" />
                                   </label>
                                   <select
-                                    id="appointment-service"
+                                    id="type"
                                     className="form-control"
-                                    onChange={this.onChangeType}
+                                    onChange={this.handelSetValue}
+                                    value={this.state.post.type}
                                   >
                                     <option value="">
                                       {this.props.intl.formatMessage({
@@ -380,7 +382,8 @@ class AddNewPost extends Component {
                                   </label>
                                   <Datetime
                                     dateFormat="YYYY-MM-DD" timeFormat="HH:mm:ss"
-                                    onChange={this.handelSetValueStartTime}
+                                    onChange={(newDate) => this.handelSetValueTime('start_time', newDate)}
+                                    value={this.state.post.start_time}
                                   />
                                   <span className="text-danger">
                                     {this.props.error_descriptions
@@ -402,7 +405,8 @@ class AddNewPost extends Component {
                                   </label>
                                   <Datetime
                                     dateFormat="YYYY-MM-DD" timeFormat="HH:mm:ss"
-                                    onChange={this.handelSetValueEndTime}
+                                    onChange={(newDate) => this.handelSetValueTime('end_time', newDate)}
+                                    value={this.state.post.end_time}
                                   />
                                   <span className="text-danger">
                                     {this.props.error_descriptions.end_time ? (
@@ -449,24 +453,25 @@ const mapDispatchToProps = dispatch => {
   return {
     onAddButton: ({ component, http }) => {
       http({
-        url: "auth/post/create",
+        url: "auth/post/edit",
         method: "POST",
         data: {
-          title: component.state.title,
-          detail: component.state.detail,
-          amount_member: component.state.amount_member,
-          price: component.state.price,
-          gender: component.state.gender,
-          start_time: component.state.start_time,
-          end_time: component.state.end_time,
-          type: component.state.type,
-          location_id: component.state.location_id,
-          category_id: component.state.category_id
+          id: component.state.post.id,
+          title: component.state.post.title,
+          detail: component.state.post.detail,
+          amount_member: component.state.post.amount_member, 
+          price: component.state.post.price,
+          gender: component.state.post.gender,
+          start_time: component.state.post.start_time,
+          end_time: component.state.post.end_time,
+          type: component.state.post.type,
+          location_id: component.state.post.location_id,
+          category_id: component.state.post.category_id
         }
       })
       .then(res => {
           component.props.history.push("/profile");
-          toast.success('Thêm thành công', 'Title', {displayDuration:3000});
+          toast.success('Cập nhật thành công', 'Title', {displayDuration:3000});
       })
       .catch(error => {
           dispatch(raiseError(error.response.data.errors));
@@ -478,4 +483,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(injectIntl(AddNewPost));
+)(injectIntl(EditPostOfNeeder));

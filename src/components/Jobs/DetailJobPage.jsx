@@ -43,6 +43,7 @@ class DetailJobPage extends Component {
         });
       });
   }
+
   render() {
     return (
       <section className="tr-single-detail gray-bg" style={{ background: "#f6f7fb" }}>
@@ -56,7 +57,7 @@ class DetailJobPage extends Component {
                   </h3>
                 </div>
                 <div className="tr-single-body">
-                  <p>{this.state.jobDetail.detail}</p>
+                  {this.state.jobDetail.detail}
                 </div>
               </div>
               <a

@@ -31,6 +31,8 @@ class EditPostOfNeeder extends Component {
       location: []
     };
     this.onAddButton = this.onAddButton.bind(this);
+    this.handelSetValue = this.handelSetValue.bind(this);
+    this.handleEditorChange = this.handleEditorChange.bind(this);
   }
 
   componentDidMount() {
@@ -68,7 +70,7 @@ class EditPostOfNeeder extends Component {
       })
   }
 
-  handelSetValue = event => {
+  handelSetValue (event) {
     this.setState({
       post: {...this.state.post, [event.target.id]: event.target.value},
     });
@@ -80,7 +82,7 @@ class EditPostOfNeeder extends Component {
     });
   };
 
-  handleEditorChange = event => {
+  handleEditorChange (event) {
     this.setState({
       post: {...this.state.post, detail: event.target.getContent()}
     });

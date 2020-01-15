@@ -12,6 +12,7 @@ import JobHelpMarkdown from './components/Helper/JobMarkdowned';
 import JobAppied from './components/Helper/JobApplied';
 import ChangePassword from './components/Profile/ChangePassword';
 import CheckOTPAgain from './components/Auth/CheckOTPAgain';
+import EditPostOfNeeder from './components/Needer/EditPostOfNeeder'
 import AddPostOfNeeder from './components/Needer/AddNewPost'
 import JobFinishOfHelper from './components/Helper/JobFinishOfHelper'
 
@@ -30,6 +31,7 @@ const routes = [
   { path: '/helper/jobappiled', name: 'jobappied', component: JobAppied }, 
   { path: '/password/change', name: 'ChangePassword', component: ChangePassword },
   { path: '/again/checkotp', name: 'CheckOTP', component: CheckOTPAgain },
+  { path: '/edit/post/:id', name: 'editPost', component: EditPostOfNeeder },
   { path: '/add/post/needer', name: 'AddPostOfNeeder', component: AddPostOfNeeder },
   { path: '/post/finish', name: 'jobFinish', component: JobFinishOfHelper },
 ];

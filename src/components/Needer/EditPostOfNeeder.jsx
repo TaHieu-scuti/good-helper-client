@@ -74,7 +74,7 @@ class EditPostOfNeeder extends Component {
     });
   };
 
-  handelSetValueTime = name => newDate => {    
+  handelSetValueTime (name, newDate) {
     this.setState({
       post:{...this.state.post, [name]: moment(new Date(newDate)).format("YYYY-MM-DD HH:mm:ss")}
     });
@@ -380,7 +380,7 @@ class EditPostOfNeeder extends Component {
                                   </label>
                                   <Datetime
                                     dateFormat="YYYY-MM-DD" timeFormat="HH:mm:ss"
-                                    onChange={this.handelSetValueTime('start_time')}
+                                    onChange={(newDate) => this.handelSetValueTime('start_time', newDate)}
                                     value={this.state.post.start_time}
                                   />
                                   <span className="text-danger">
@@ -403,7 +403,7 @@ class EditPostOfNeeder extends Component {
                                   </label>
                                   <Datetime
                                     dateFormat="YYYY-MM-DD" timeFormat="HH:mm:ss"
-                                    onChange={this.handelSetValueTime('end_time')}
+                                    onChange={(newDate) => this.handelSetValueTime('end_time', newDate)}
                                     value={this.state.post.end_time}
                                   />
                                   <span className="text-danger">

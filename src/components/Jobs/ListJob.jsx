@@ -6,6 +6,7 @@ import { injectIntl, FormattedMessage } from "react-intl";
 import Pagination from "react-js-pagination";
 import { connect } from "react-redux";
 import { searchOutside } from "../../lib/redux/actions";
+import { Link } from "react-router-dom";
 
 class ListJob extends Component {
   constructor(props) {
@@ -38,7 +39,7 @@ class ListJob extends Component {
           </div>
           <div className="vc-content">
             <h5 className="title">
-              <a href="#">{item.title}</a>
+            <Link to={"job/detail/" + item.id}>{item.title}</Link>
               <span className="j-full-time">{item.type}</span>
               <a href="#" className="btn download-btn">
                 <IoMdArrowRoundDown />

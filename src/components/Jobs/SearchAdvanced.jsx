@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { injectIntl, FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { searchOutside } from '../../lib/redux/actions';
+import { Link } from "react-router-dom";
+import createHistory from 'history/createBrowserHistory';
+
+const history = createHistory();
 
 class SearchAdvanced extends Component {
   constructor(props) {
@@ -45,10 +49,8 @@ class SearchAdvanced extends Component {
       http: this.props.http
     });
   };
-
+ 
   render() {
-    console.log(this.props);
-    
     return (
       <div className="col-xl-3 col-lg-4">
         <div className="back-brow">
@@ -232,6 +234,7 @@ const mapDispatchToProps = dispatch => {
         }
       }).then(res => {
         dispatch(searchOutside(res.data.response));
+        history.push("/advanced/search");
       })
     }
   }

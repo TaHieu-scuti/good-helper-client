@@ -454,7 +454,7 @@ const mapDispatchToProps = dispatch => {
         url: "auth/post/edit",
         method: "POST",
         data: {
-          id: component.state.id,
+          id: component.state.post.id,
           title: component.state.post.title,
           detail: component.state.post.detail,
           amount_member: component.state.post.amount_member, 

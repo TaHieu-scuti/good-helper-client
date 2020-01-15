@@ -470,7 +470,7 @@ const mapDispatchToProps = dispatch => {
         }
       })
       .then(res => {
-          component.props.history.push("/profile");
+          component.props.history.push("/needer/post");
           toast.success('Cập nhật thành công', 'Title', {displayDuration:3000});
       })
       .catch(error => {

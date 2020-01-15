@@ -135,4 +135,5 @@ export default {
 	'The amount member may not be greater than 10.': 'Số người không được quá 10',
 	'Posts was finished': 'Các công việc đã hoàn thành',
 	'The Id card field is required.': 'Số cmnd không được để trống',
+	'My post': 'Bài viết của tôi'
 };

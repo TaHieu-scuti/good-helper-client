@@ -3,5 +3,3 @@ export default (storeState, { payload }) => {
     newState.searchAdvanced = payload;
     return newState;
   };
-  
-  

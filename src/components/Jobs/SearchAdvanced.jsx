@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import { injectIntl, FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
-import { searchOutside } from '../../lib/redux/actions';
-import { Link } from "react-router-dom";
-import createHistory from 'history/createBrowserHistory';
-
-const history = createHistory();
+import { searchAdvanced } from '../../lib/redux/actions';
+import { withRouter } from 'react-router-dom';
 
 class SearchAdvanced extends Component {
   constructor(props) {
@@ -233,11 +230,11 @@ const mapDispatchToProps = dispatch => {
           type: component.state.search.type
         }
       }).then(res => {
-        dispatch(searchOutside(res.data.response));
-        history.push("/advanced/search");
+        dispatch(searchAdvanced(res.data.response));        
+        component.props.history.push("/advanced/search");
       })
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(SearchAdvanced));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(injectIntl(SearchAdvanced)));

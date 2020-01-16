@@ -5,7 +5,7 @@ import { IoLogoUsd } from "react-icons/io";
 import { injectIntl, FormattedMessage } from "react-intl";
 import Pagination from "react-js-pagination";
 import { connect } from "react-redux";
-import { searchOutside } from "../../lib/redux/actions";
+import { searchAdvanced } from "../../lib/redux/actions";
 import { Link } from "react-router-dom";
 
 class ListJobSearchAdvanced extends Component {
@@ -33,7 +33,7 @@ class ListJobSearchAdvanced extends Component {
   }
 
   render() {
-    const ListJob = this.props.searchOutside.posts.map((item, idx) => {
+    const ListJob = this.props.searchAdvanced.posts.map((item, idx) => {
       return (
         <div className="job-new-list" key={idx}>
           <div className="vc-thumb">
@@ -41,7 +41,7 @@ class ListJobSearchAdvanced extends Component {
           </div>
           <div className="vc-content">
             <h5 className="title">
-            <Link to={"job/detail/" + item.id}>{item.title}</Link>
+            <Link to={"/job/detail/" + item.id}>{item.title}</Link>
               <span className="j-full-time">{item.type}</span>
               <a href="#" className="btn download-btn">
                 <IoMdArrowRoundDown />
@@ -91,7 +91,7 @@ class ListJobSearchAdvanced extends Component {
       </div>
     );
 
-    if (this.props.searchOutside.posts.length > 0) {
+    if (this.props.searchAdvanced.posts.length > 0) {
       data = (
         <div>
           <div className="row">
@@ -101,8 +101,8 @@ class ListJobSearchAdvanced extends Component {
             <div className="col-lg-12 col-md-12 col-sm-12">
               <Pagination
                 activePage={this.state.activePage}
-                itemsCountPerPage={this.props.searchOutside.pagination.perPage}
-                totalItemsCount={this.props.searchOutside.pagination.total}
+                itemsCountPerPage={this.props.searchAdvanced.pagination.perPage}
+                totalItemsCount={this.props.searchAdvanced.pagination.total}
                 pageRangeDisplayed={this.state.pageRangeDisplayed}
                 onChange={this.handlePageChange}
               />
@@ -120,7 +120,7 @@ const mapStateToProps = (stateStore, ownProps) => {
   let newState = Object.assign({}, ownProps);
 
   newState.http = stateStore.http;
-  newState.searchOutside = stateStore.searchOutside;
+  newState.searchAdvanced = stateStore.searchAdvanced;
 
   return newState;
 };
@@ -142,7 +142,7 @@ const mapDispatchToProps = dispatch => {
           type: component.state.type
         }
       }).then(res => {
-        dispatch(searchOutside(res.data.response));
+        dispatch(searchAdvanced(res.data.response));
       });
         component.setState({ activePage: pageNumber });
     }

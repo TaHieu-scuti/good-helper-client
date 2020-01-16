@@ -10,3 +10,5 @@ export const removeJob = createAction('REMOVE_JOB')
 export const searchOutside = createAction('SEARCH_OUTSIDE');
 export const register = createAction('REGISTER');
 export const userCheckotp = createAction('USERCHECKOTP');
+export const searchAdvanced = createAction('SEARCH_ADVANCED');
+

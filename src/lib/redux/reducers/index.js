@@ -10,6 +10,7 @@ import REMOVE_JOB from './removeJob'
 import SEARCH_OUTSIDE from './searchOutside';
 import REGISTER from './register';
 import USERCHECKOTP from './userCheckOtp'
+import SEARCH_ADVANCED from './searchAdvanced';
 
 const reducers = {
   UPDATE_ME,
@@ -22,7 +23,8 @@ const reducers = {
   REMOVE_JOB,
   SEARCH_OUTSIDE,
   REGISTER,
-  USERCHECKOTP
+  USERCHECKOTP,
+  SEARCH_ADVANCED
 }
 
 export default (state = initialState, action = {}) => {

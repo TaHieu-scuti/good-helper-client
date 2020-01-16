@@ -17,7 +17,7 @@ class PostOfNeeder extends Component {
       pagination: {}
     };
     this.handlePageChange = this.handlePageChange.bind(this);
-  }
+  } 
 
   componentDidMount() {
     this.props

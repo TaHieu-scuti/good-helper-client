@@ -5,9 +5,7 @@ import { IoLogoUsd } from "react-icons/io";
 import { FormattedMessage } from "react-intl";
 import Pagination from "react-js-pagination";
 import { Link } from "react-router-dom";
-import { IoMdArrowForward } from "react-icons/io";
 import { FaEdit } from "react-icons/fa";
-
 
 class PostOfNeeder extends Component {
   constructor(props) {
@@ -54,42 +52,42 @@ class PostOfNeeder extends Component {
     const ListJob = this.state.data.map((item, idx) => {
       return (
         <div className="job-new-list" key={idx}>
-        <div className="vc-thumb">
-          <img className="img-fluid rounded-circle" src={item.avatar} />
+          <div className="vc-thumb">
+            <img className="img-fluid rounded-circle" src={item.avatar} />
+          </div>
+          <div className="vc-content">
+            <h5 className="title">
+              <Link to={"job/detail/" + item.id}>{item.title}</Link>
+              <span className="j-full-time">{item.type}</span>
+              <Link to={"/edit/post/" + item.id} cclassName="btn download-btn">
+                <FaEdit /> <FormattedMessage id="Edit" />
+              </Link>
+            </h5>
+            <p>{item.category}</p>
+            <ul className="vc-info-list">
+              <li className="list-inline-item">
+                <h5>
+                  <FormattedMessage id="Salary" />
+                </h5>
+                <IoLogoUsd />
+                {item.price}
+              </li>
+              <li className="list-inline-item">
+                <h5>
+                  <FormattedMessage id="Start" />
+                </h5>
+                {item.start_time}
+              </li>
+              <li className="list-inline-item">
+                <h5>
+                  <FormattedMessage id="Location" />
+                </h5>
+                <div className="skills">{item.location}</div>
+              </li>
+            </ul>
+          </div>
+          <br />
         </div>
-        <div className="vc-content">
-          <h5 className="title">
-            <Link to={"job/detail/" + item.id}>{item.title}</Link>
-            <span className="j-full-time">{item.type}</span>
-            <Link to={"/edit/post/" + item.id} className="btn ">
-              <FaEdit /> <FormattedMessage id="Edit" />
-            </Link>
-          </h5>
-          <p>{item.category}</p>
-          <ul className="vc-info-list">
-            <li className="list-inline-item">
-              <h5>
-                <FormattedMessage id="Salary" />
-              </h5>
-              <IoLogoUsd />
-              {item.price}
-            </li>
-            <li className="list-inline-item">
-              <h5>
-                <FormattedMessage id="Start" />
-              </h5>
-              {item.start_time}
-            </li>
-            <li className="list-inline-item">
-              <h5>
-                <FormattedMessage id="Location" />
-              </h5>
-              <div className="skills">{item.location}</div>
-            </li>
-          </ul>
-        </div>
-        <br />
-      </div>
       );
     });
 
@@ -123,28 +121,28 @@ class PostOfNeeder extends Component {
     }
 
     return (
-        <div id="main-wrapper">
-          <section className="tr-single-detail gray-bg">
-            <div className="container">
-              <div className="row">
-                <Sidebar user={this.props.user} />
-                <div className="col-md-8 col-sm-12">
-                  <div className="tab-pane active container" id="c-profile">
-                    <div className="tr-single-box">
-                      <div className="tr-single-header">
-                        <h3>
-                          <i></i>
-                          <FormattedMessage id="My post" />
-                        </h3>
-                      </div>
-                      <div className="tr-single-body">{data}</div>
+      <div id="main-wrapper">
+        <section className="tr-single-detail gray-bg">
+          <div className="container">
+            <div className="row">
+              <Sidebar user={this.props.user} />
+              <div className="col-md-8 col-sm-12">
+                <div className="tab-pane active container" id="c-profile">
+                  <div className="tr-single-box">
+                    <div className="tr-single-header">
+                      <h3>
+                        <i></i>
+                        <FormattedMessage id="My post" />
+                      </h3>
                     </div>
+                    <div className="tr-single-body">{data}</div>
                   </div>
                 </div>
               </div>
             </div>
-          </section>
-        </div>
+          </div>
+        </section>
+      </div>
     );
   }
 }

@@ -220,7 +220,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onSearchButton: ({ component, http }) => {
       http({
-        url: "/auth/filter/post", 
+        url: "auth/filter/post", 
         method: "POST",
         data: {
           title: component.state.search.title,

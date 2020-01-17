@@ -6,7 +6,7 @@ import Store from './AppStore';
 import IntlProvider from "./IntlProvider";
 import Login from "../../components/Auth/LoginPage";
 import createHistory from "history/createBrowserHistory"
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const history = createHistory();

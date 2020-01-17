@@ -15,6 +15,7 @@ import CheckOTPAgain from './components/Auth/CheckOTPAgain';
 import EditPostOfNeeder from './components/Needer/EditPostOfNeeder'
 import AddPostOfNeeder from './components/Needer/AddNewPost'
 import JobFinishOfHelper from './components/Helper/JobFinishOfHelper'
+import SearchAdvancedPage from './components/Jobs/SearchAdvancedPage'
 
 const routes = [
   { path: '/home', exact: true, name: 'Home', component: HomePage },
@@ -34,6 +35,7 @@ const routes = [
   { path: '/edit/post/:id', name: 'editPost', component: EditPostOfNeeder },
   { path: '/add/post/needer', name: 'AddPostOfNeeder', component: AddPostOfNeeder },
   { path: '/post/finish', name: 'jobFinish', component: JobFinishOfHelper },
+  { path: '/advanced/search', name: 'SearchAdvancedPage', component: SearchAdvancedPage },
 ];
 
 export default routes;

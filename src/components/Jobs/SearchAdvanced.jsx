@@ -23,11 +23,11 @@ class SearchAdvanced extends Component {
   }
 
   componentDidMount() {
-    this.props.http("auth/category").then(res => {
+    this.props.http("/auth/category").then(res => {
       this.setState({ category: res.data.response });
     });
 
-    this.props.http("auth/location").then(res => {
+    this.props.http("/auth/location").then(res => {
       this.setState({ location: res.data.response });
     });
   }
@@ -220,7 +220,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onSearchButton: ({ component, http }) => {
       http({
-        url: "auth/filter/post", 
+        url: "/auth/filter/post", 
         method: "POST",
         data: {
           title: component.state.search.title,

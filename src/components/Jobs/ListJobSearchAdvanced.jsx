@@ -14,11 +14,13 @@ class ListJobSearchAdvanced extends Component {
     this.state = {
       activePage: 1,
       pageRangeDisplayed: 5,
-      title: "",
-      location_id: "",
-      category_id: "",
-      gender: "",
-      type: ""
+      search: {
+        title: '',
+        category_id: '',
+        location_id: '',
+        type: '',
+        gender: ''
+      }
     };
 
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -135,11 +137,11 @@ const mapDispatchToProps = dispatch => {
             page: pageNumber
         },
         data: {
-          title: component.state.title,
-          location_id: component.state.location_id,
-          category_id: component.state.category_id,
-          gender: component.state.gender,
-          type: component.state.type
+          title: component.state.search.title,
+          location_id: component.state.search.location_id,
+          category_id: component.state.search.category_id,
+          gender: component.state.search.gender,
+          type: component.state.search.type
         }
       }).then(res => {
         dispatch(searchAdvanced(res.data.response));

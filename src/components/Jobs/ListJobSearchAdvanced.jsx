@@ -129,7 +129,7 @@ const mapDispatchToProps = dispatch => {
   return {
     handlePageChange: ({ component, http, pageNumber }) => {
       http({
-        url: "auth/filter/post",
+        url: "/auth/filter/post",
         method: "POST",
         params: {
             page: pageNumber

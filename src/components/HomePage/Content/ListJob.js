@@ -3,8 +3,9 @@ import styled from "styled-components";
 import ItemsCarousel from "react-items-carousel";
 import { IoMdArrowRoundDown } from "react-icons/io";
 import { IoMdWater } from "react-icons/io";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, FormattedNumber } from "react-intl";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 const noOfItems = 6;
 const noOfCards = 3;
@@ -22,7 +23,7 @@ const SlideItem = styled.div`
   margin: 5px;
 `;
 
-export default class AutoPlayCarousel extends React.Component {
+class AutoPlayCarousel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -53,6 +54,16 @@ export default class AutoPlayCarousel extends React.Component {
   }
 
   render() {
+    let Apply = (
+      <a href="" className="btn btn-outline-info btn-rounded">
+        <FormattedMessage id="Apply" />
+      </a>
+    );
+    if (this.props.me) {
+      if (this.props.me.role == 1) {
+        Apply = null;
+      }
+    }
     const carouselItems = this.props.listPost.map(item => (
       <SlideItem key={item}>
         <div className="job-grid style-1 job">
@@ -78,10 +89,10 @@ export default class AutoPlayCarousel extends React.Component {
               </p>
             </div>
             <div className="job-grid-footer">
-              <h4 className="job-price">{item.price}</h4>
-              <a href="" className="btn btn-outline-info btn-rounded">
-                <FormattedMessage id="Apply" />
-              </a>
+              <h4 className="job-price">
+                <FormattedNumber value={item.price} />
+              </h4>
+              {Apply}
             </div>
           </div>
         </div>
@@ -102,3 +113,13 @@ export default class AutoPlayCarousel extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (stateStore, ownProps) => {
+  let newState = Object.assign({}, ownProps);
+  newState.http = stateStore.http;
+  newState.me = stateStore.me;
+
+  return newState;
+};
+
+export default connect(mapStateToProps)(AutoPlayCarousel);

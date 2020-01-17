@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { IoMdArrowRoundDown } from "react-icons/io";
 import { IoMdArrowForward } from "react-icons/io";
 import { IoLogoUsd } from "react-icons/io";
-import { injectIntl, FormattedMessage } from "react-intl";
+import { injectIntl, FormattedMessage, FormattedNumber } from "react-intl";
 import Pagination from "react-js-pagination";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -50,6 +50,21 @@ class ListALLJob extends Component {
   }
 
   render() {
+    let Apply = (
+      <a
+        href=""
+        className="btn btn-outline-info btn-rounded"
+        style={{ marginTop: "20px" }}
+      >
+        <FormattedMessage id="Apply" />
+      </a>
+    );
+    if (this.props.me) {
+      if (this.props.me.role == 1) {
+        Apply = null;
+      }
+    }
+
     const ListJob = this.state.data.map((item, idx) => {
       return (
         <div className="job-new-list" key={idx}>
@@ -71,7 +86,7 @@ class ListALLJob extends Component {
                   <FormattedMessage id="Salary" />
                 </h5>
                 <IoLogoUsd />
-                {item.price}
+                <FormattedNumber value={item.price} />
               </li>
               <li className="list-inline-item">
                 <h5>
@@ -87,15 +102,8 @@ class ListALLJob extends Component {
               </li>
             </ul>
           </div>
+          {Apply}
           <br />
-          <a
-            className="btn btn-outline-info bn-det"
-            href="#"
-            style={{ marginTop: "20px" }}
-          >
-            <FormattedMessage id="Apply" />
-            <IoMdArrowForward />
-          </a>
         </div>
       );
     });
@@ -138,6 +146,7 @@ class ListALLJob extends Component {
 const mapStateToProps = (stateStore, ownProps) => {
   let newState = Object.assign({}, ownProps);
   newState.http = stateStore.http;
+  newState.me = stateStore.me;
   return newState;
 };
 

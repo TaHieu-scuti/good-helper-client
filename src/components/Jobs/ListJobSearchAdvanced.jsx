@@ -35,6 +35,22 @@ class ListJobSearchAdvanced extends Component {
   }
 
   render() {
+    let Apply = (
+      <a
+        className="btn btn-outline-info bn-det"
+        href="#"
+        style={{ marginTop: "20px" }}
+      >
+        <FormattedMessage id="Apply" />
+        <IoMdArrowForward />
+      </a>
+    );
+    if (this.props.me) {
+      if (this.props.me.role == 1) {
+        Apply = null;
+      }
+    }
+
     const ListJob = this.props.searchAdvanced.posts.map((item, idx) => {
       return (
         <div className="job-new-list" key={idx}>
@@ -73,14 +89,7 @@ class ListJobSearchAdvanced extends Component {
             </ul>
           </div>
           <br />
-          <a
-            className="btn btn-outline-info bn-det"
-            href="#"
-            style={{ marginTop: "20px" }}
-          >
-            <FormattedMessage id="Apply" />
-            <IoMdArrowForward />
-          </a>
+          {Apply}
         </div>
       );
     });
@@ -123,6 +132,7 @@ const mapStateToProps = (stateStore, ownProps) => {
 
   newState.http = stateStore.http;
   newState.searchAdvanced = stateStore.searchAdvanced;
+  newState.me = stateStore.me
 
   return newState;
 };

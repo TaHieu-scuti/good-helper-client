@@ -19,25 +19,25 @@ class Total extends Component {
           <div className="row">
             <div className="col-lg-3 col-md-3 col-sm-6">
               <div className="count-box text-center">
-                <h2 className="count">7842</h2>
+    <h2 className="count">{this.props.statistical.countPost}</h2>
                 <h5><FormattedMessage id="Work" /></h5>
               </div>
             </div>
             <div className="col-lg-3 col-md-3 col-sm-6">
               <div className="count-box text-center">
-                <h2 className="count">320</h2>
+              <h2 className="count">{this.props.statistical.countUser}</h2>
                 <h5><FormattedMessage id="User" /></h5>
               </div>
             </div>
             <div className="col-lg-3 col-md-3 col-sm-6">
               <div className="count-box text-center">
-                <h2 className="count">710</h2>
+              <h2 className="count">{this.props.statistical.prize}</h2>
                 <h5><FormattedMessage id="Prize" /></h5>
               </div>
             </div>
             <div className="col-lg-3 col-md-3 col-sm-6">
               <div className="count-box text-center">
-                <h2 className="count">10</h2>
+              <h2 className="count">{this.props.statistical.year}</h2>
                 <h5><FormattedMessage id="Year of success" /></h5>
               </div>
             </div>

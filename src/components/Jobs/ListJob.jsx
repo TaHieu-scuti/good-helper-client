@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { IoMdArrowRoundDown } from "react-icons/io";
 import { IoMdArrowForward } from "react-icons/io";
 import { IoLogoUsd } from "react-icons/io";
-import { injectIntl, FormattedMessage } from "react-intl";
+import { injectIntl, FormattedMessage, FormattedNumber } from "react-intl";
 import Pagination from "react-js-pagination";
 import { connect } from "react-redux";
 import { searchOutside } from "../../lib/redux/actions";
@@ -31,6 +31,21 @@ class ListJob extends Component {
   }
 
   render() {
+    let Apply = (
+      <a
+        className="btn btn-outline-info bn-det"
+        href="#"
+        style={{ marginTop: "20px" }}
+      >
+        <FormattedMessage id="Apply" />
+        <IoMdArrowForward />
+      </a>
+    );
+    if (this.props.me) {
+      if (this.props.me.role == 1) {
+        Apply = null;
+      }
+    }
     const ListJob = this.props.searchOutside.posts.map((item, idx) => {
       return (
         <div className="job-new-list" key={idx}>
@@ -52,7 +67,7 @@ class ListJob extends Component {
                   <FormattedMessage id="Salary" />
                 </h5>
                 <IoLogoUsd />
-                {item.price}
+                <FormattedNumber value={item.price} />
               </li>
               <li className="list-inline-item">
                 <h5>
@@ -68,15 +83,8 @@ class ListJob extends Component {
               </li>
             </ul>
           </div>
+          {Apply}
           <br />
-          <a
-            className="btn btn-outline-info bn-det"
-            href="#"
-            style={{ marginTop: "20px" }}
-          >
-            <FormattedMessage id="Apply" />
-            <IoMdArrowForward />
-          </a>
         </div>
       );
     });
@@ -119,6 +127,7 @@ const mapStateToProps = (stateStore, ownProps) => {
 
   newState.http = stateStore.http;
   newState.searchOutside = stateStore.searchOutside;
+  newState.me = stateStore;
 
   return newState;
 };
@@ -137,7 +146,7 @@ const mapDispatchToProps = dispatch => {
       }).then(res => {
         dispatch(searchOutside(res.data.response));
       });
-        component.setState({ activePage: pageNumber });
+      component.setState({ activePage: pageNumber });
     }
   };
 };

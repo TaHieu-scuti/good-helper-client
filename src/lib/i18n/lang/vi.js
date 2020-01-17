@@ -69,8 +69,8 @@ export default {
 	'Phone number' : 'Số điện thoại',
 	'Enter the password' : 'Nhập lại mật khẩu',
 	'You are' : 'Bạn là',
-	'Helper' : 'Người giúp',
-	'Needer' : 'Người cần',
+	'Helper' : 'Người tìm việc',
+	'Needer' : 'Người giao việc',
 	'Register' : 'Đăng ký',
 	'Enter the OTP code' : 'Nhập mã OTP',
 	'Accuracy' : 'Xác thực',
@@ -135,4 +135,15 @@ export default {
 	'The amount member may not be greater than 10.': 'Số người không được quá 10',
 	'Posts was finished': 'Các công việc đã hoàn thành',
 	'The Id card field is required.': 'Số cmnd không được để trống',
+	'The password must be at least 6 characters.': 'Mật khẩu phải có 6 ký tự',
+	'The confirm password and password must match.': 'xác nhận mật khẩu phải giống mật khẩu cũ',
+	'The phone number must be at least 9 characters.': 'Số điện thoại ít nhất 6 ký tự',
+	'The email must be a valid email address.': 'Không đúng định dạng email',
+	'The id card must be at least 9 characters.': 'Số CMND ít nhất 6 kí tự',
+	'The id card may not be greater than 15 characters.': 'Số CMND không quá kí tự',
+	'The id card backside must be a file of type: jpeg,  png,  jpg,  gif.': 'Ảnh phải ở định dạng: jpeg,  png,  jpg,  gif. ',
+	'The email has already been taken.' : 'Email đã tồn tại',
+	'The selected role is invalid.': 'Hãy chọn quyền',
+	'The selected genger is invalid.': 'Chọn giới tính'
 };
+ 

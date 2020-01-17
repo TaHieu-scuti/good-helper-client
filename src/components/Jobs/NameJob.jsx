@@ -22,9 +22,9 @@ class NameJob extends Component {
               <div className="tr-list-info">
                 <h4 className="mb-1">{this.props.detailJob.title}</h4>
                 <h6 className="font-14">
-                  <a href="company-detail.html" className="text-warning">
+                  <p className="text-warning">
                   <FormattedMessage id="Category" /> : {this.props.detailJob.category}
-                  </a>
+                  </p>
                 </h6>
                 <p className="mb-1">
                   <FaLocationArrow />

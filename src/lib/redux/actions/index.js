@@ -10,4 +10,7 @@ export const removeJob = createAction('REMOVE_JOB')
 export const searchOutside = createAction('SEARCH_OUTSIDE');
 export const register = createAction('REGISTER');
 export const userCheckotp = createAction('USERCHECKOTP');
+export const removeError = createAction('REMOVE_ERROR');
+export const loginError = createAction('LOGIN_ERROR');
+export const removeErrorLogin = createAction('REMOVE_LOGIN_ERROR');
 export const searchAdvanced = createAction('SEARCH_ADVANCED');

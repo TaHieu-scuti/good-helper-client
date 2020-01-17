@@ -141,6 +141,9 @@ export default {
 	'The email must be a valid email address.': 'Không đúng định dạng email',
 	'The id card must be at least 9 characters.': 'Số CMND ít nhất 6 kí tự',
 	'The id card may not be greater than 15 characters.': 'Số CMND không quá kí tự',
-	'The id card backside must be a file of type: jpeg,  png,  jpg,  gif.': 'Ảnh phải ở định dạng: jpeg,  png,  jpg,  gif. '
+	'The id card backside must be a file of type: jpeg,  png,  jpg,  gif.': 'Ảnh phải ở định dạng: jpeg,  png,  jpg,  gif. ',
+	'The email has already been taken.' : 'Email đã tồn tại',
+	'The selected role is invalid.': 'Hãy chọn quyền',
+	'The selected genger is invalid.': 'Chọn giới tính'
 };
  

@@ -16,7 +16,7 @@ class SearchPage extends Component {
       </section>
     );
   }
-}
+} 
 
 const mapStateToProps = (stateStore, ownProps) => {
   let newState = Object.assign({}, ownProps);

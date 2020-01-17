@@ -8,7 +8,8 @@ import {
   setTokenOnHttpClient,
   updateMe,
   updateIdentity,
-  userCheckotp
+  userCheckotp,
+  loginError
 } from "../../lib/redux/actions";
 import Authenticate from "./Authenticate";
 
@@ -63,9 +64,7 @@ class LoginPage extends Component {
                             style={{ textAlign: "center" }}
                             variant="danger"
                           >
-                            <FormattedMessage
-                              id={this.props.error_description}
-                            />
+                            <FormattedMessage id={this.props.error_login} />
                           </Alert>
                         </div>
                         <div className="form-group css">
@@ -135,9 +134,9 @@ class LoginPage extends Component {
 
 const mapStateToProps = (stateStore, ownProps) => {
   let newState = Object.assign({}, ownProps);
-  newState.error_description = stateStore.error_descriptions;
+  newState.error_login = stateStore.error_login;
   newState.http = stateStore.http;
-  newState.is_error = stateStore.error_descriptions.length > 0;
+  newState.is_error = stateStore.error_login.length > 0;
   return newState;
 };
 
@@ -163,7 +162,7 @@ const mapDispatchToProps = dispatch => {
         })
         .catch(error => {
           if (error.response.status == 422) {
-            dispatch(raiseError(error.response.data.message));
+            dispatch(loginError(error.response.data.message));
           } else {
             dispatch(userCheckotp(error.response.data.response));
             component.props.history.push("/again/checkotp");

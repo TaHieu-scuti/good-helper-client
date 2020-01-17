@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { raiseError, updateMe } from "../../lib/redux/actions";
 import { FaEdit } from "react-icons/fa";
 import imageDefault from "../../assets/img/default-image.png";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 class EditProfile extends Component {
   constructor(props) {
@@ -84,40 +84,45 @@ class EditProfile extends Component {
   handelSetValueAvatar = event => {
     let reader = new FileReader();
     let file = event.target.files[0];
-
-    reader.onloadend = () => {
-      this.setState({
-        avatar: file,
-        imageAvartarPreviewUrl: reader.result
-      });
-    };
-    reader.readAsDataURL(file);
+    if (file) {
+      reader.onloadend = () => {
+        this.setState({
+          avatar: file,
+          imageAvartarPreviewUrl: reader.result
+        });
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   handelSetValueIdCardFont = event => {
     let reader = new FileReader();
     let file = event.target.files[0];
 
-    reader.onloadend = () => {
-      this.setState({
-        id_card_font: file,
-        imageIdCardFontPreviewUrl: reader.result
-      });
-    };
-    reader.readAsDataURL(file);
+    if (file) {
+      reader.onloadend = () => {
+        this.setState({
+          id_card_font: file,
+          imageIdCardFontPreviewUrl: reader.result
+        });
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   handelSetValueIdCardBackside = event => {
     let reader = new FileReader();
     let file = event.target.files[0];
 
-    reader.onloadend = () => {
-      this.setState({
-        id_card_backside: file,
-        imageIdCardBackPreviewUrl: reader.result
-      });
-    };
-    reader.readAsDataURL(file);
+    if (file) {
+      reader.onloadend = () => {
+        this.setState({
+          id_card_backside: file,
+          imageIdCardBackPreviewUrl: reader.result
+        });
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   onEditButton(e) {
@@ -139,12 +144,7 @@ class EditProfile extends Component {
         <img src={this.state.avatarUrl} class="img-fluid mx-auto" />
       );
     } else {
-      $avatarPreview = (
-        <img
-          class="img-fluid mx-auto"
-          src={imageDefault}
-        />
-      );
+      $avatarPreview = <img class="img-fluid mx-auto" src={imageDefault} />;
     }
 
     let idCardFontPreviewUrl = this.state.imageIdCardFontPreviewUrl;
@@ -163,10 +163,7 @@ class EditProfile extends Component {
           <span className="text-danger">
             <FormattedMessage id="Update id card font side" />
           </span>
-          <img
-            class="img-fluid mx-auto"
-            src={imageDefault}
-          />
+          <img class="img-fluid mx-auto" src={imageDefault} />
         </div>
       );
     }
@@ -187,10 +184,7 @@ class EditProfile extends Component {
           <span className="text-danger">
             <FormattedMessage id="Update id card backside" />
           </span>
-          <img
-            class="img-fluid mx-auto"
-            src={imageDefault}
-          />
+          <img class="img-fluid mx-auto" src={imageDefault} />
         </div>
       );
     }
@@ -233,8 +227,10 @@ class EditProfile extends Component {
                                 <span className="text-danger">
                                   {this.props.error_descriptions.first_name ? (
                                     <FormattedMessage
-                                    id={this.props.error_descriptions.first_name}
-                                  />
+                                      id={
+                                        this.props.error_descriptions.first_name
+                                      }
+                                    />
                                   ) : null}
                                 </span>
                               </div>
@@ -254,8 +250,10 @@ class EditProfile extends Component {
                                 <span className="text-danger">
                                   {this.props.error_descriptions.last_name ? (
                                     <FormattedMessage
-                                    id={this.props.error_descriptions.last_name}
-                                  />
+                                      id={
+                                        this.props.error_descriptions.last_name
+                                      }
+                                    />
                                   ) : null}
                                 </span>
                               </div>
@@ -273,8 +271,8 @@ class EditProfile extends Component {
                                 <span className="text-danger">
                                   {this.props.error_descriptions.email ? (
                                     <FormattedMessage
-                                    id={this.props.error_descriptions.email}
-                                  />
+                                      id={this.props.error_descriptions.email}
+                                    />
                                   ) : null}
                                 </span>
                               </div>
@@ -293,8 +291,8 @@ class EditProfile extends Component {
                                 <span className="text-danger">
                                   {this.props.error_descriptions.id_card ? (
                                     <FormattedMessage
-                                    id={this.props.error_descriptions.id_card}
-                                  />
+                                      id={this.props.error_descriptions.id_card}
+                                    />
                                   ) : null}
                                 </span>
                               </div>
@@ -331,8 +329,8 @@ class EditProfile extends Component {
                                 <span className="text-danger">
                                   {this.props.error_descriptions.gender ? (
                                     <FormattedMessage
-                                    id={this.props.error_descriptions.gender}
-                                  />
+                                      id={this.props.error_descriptions.gender}
+                                    />
                                   ) : null}
                                 </span>
                               </div>
@@ -360,8 +358,8 @@ class EditProfile extends Component {
                                 <span className="text-danger">
                                   {this.props.error_descriptions.avatar ? (
                                     <FormattedMessage
-                                    id={this.props.error_descriptions.avatar}
-                                  />
+                                      id={this.props.error_descriptions.avatar}
+                                    />
                                   ) : null}
                                 </span>
                               </div>
@@ -389,8 +387,11 @@ class EditProfile extends Component {
                                 <span className="text-danger">
                                   {this.props.error_descriptions
                                     .id_card_font ? (
-                                      <FormattedMessage
-                                      id={this.props.error_descriptions.id_card_font}
+                                    <FormattedMessage
+                                      id={
+                                        this.props.error_descriptions
+                                          .id_card_font
+                                      }
                                     />
                                   ) : null}
                                 </span>
@@ -422,8 +423,11 @@ class EditProfile extends Component {
                                   <span className="text-danger">
                                     {this.props.error_descriptions
                                       .id_card_backside ? (
-                                        <FormattedMessage
-                                        id={this.props.error_descriptions.id_card_backside}
+                                      <FormattedMessage
+                                        id={
+                                          this.props.error_descriptions
+                                            .id_card_backside
+                                        }
                                       />
                                     ) : null}
                                   </span>
@@ -483,7 +487,9 @@ const mapDispatchToProps = dispatch => {
       })
         .then(res => {
           dispatch(updateMe(res.data.response));
-          toast.success('Cập nhật thành công', 'Title', {displayDuration:3000});
+          toast.success("Cập nhật thành công", "Title", {
+            displayDuration: 3000
+          });
           component.props.history.push("/profile");
         })
         .catch(error => {

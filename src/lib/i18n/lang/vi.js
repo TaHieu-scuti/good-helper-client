@@ -138,5 +138,9 @@ export default {
 	'The password must be at least 6 characters.': 'Mật khẩu phải có 6 ký tự',
 	'The confirm password and password must match.': 'xác nhận mật khẩu phải giống mật khẩu cũ',
 	'The phone number must be at least 9 characters.': 'Số điện thoại ít nhất 6 ký tự',
+	'The email must be a valid email address.': 'Không đúng định dạng email',
+	'The id card must be at least 9 characters.': 'Số CMND ít nhất 6 kí tự',
+	'The id card may not be greater than 15 characters.': 'Số CMND không quá kí tự',
+	'The id card backside must be a file of type: jpeg,  png,  jpg,  gif.': 'Ảnh phải ở định dạng: jpeg,  png,  jpg,  gif. '
 };
  

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { IoMdArrowRoundDown } from "react-icons/io";
 import { IoMdArrowForward } from "react-icons/io";
 import { IoLogoUsd } from "react-icons/io";
-import { injectIntl, FormattedMessage } from "react-intl";
+import { injectIntl, FormattedMessage, FormattedNumber } from "react-intl";
 import Pagination from "react-js-pagination";
 import { connect } from "react-redux";
 
@@ -70,7 +70,7 @@ class ListALLJob extends Component {
                   <FormattedMessage id="Salary" />
                 </h5>
                 <IoLogoUsd />
-                {item.price}
+                <FormattedNumber value={item.price}/>
               </li>
               <li className="list-inline-item">
                 <h5>

@@ -100,7 +100,9 @@ class Register extends Component {
                                 </div>
                                 <span className="text-danger">
                                   {this.props.error_descriptions.first_name ?  
-                                    <FormattedMessage id="The first name field is required." />
+                                    <FormattedMessage
+                                    id={this.props.error_descriptions.first_name}
+                                  />
                                     : null
                                   }
                                 </span>
@@ -120,7 +122,9 @@ class Register extends Component {
                                 </div>
                                 <span className="text-danger">
                                   {this.props.error_descriptions.email ? 
-                                    <FormattedMessage id="The email field is required." /> 
+                                    <FormattedMessage
+                                    id={this.props.error_descriptions.email}
+                                  /> 
                                     : null
                                   }
                                 </span>
@@ -140,7 +144,9 @@ class Register extends Component {
                                 </div>
                                 <span className="text-danger">
                                   {this.props.error_descriptions.password ? 
-                                    <FormattedMessage id="The password field is required." /> 
+                                    <FormattedMessage
+                                    id={this.props.error_descriptions.password}
+                                  /> 
                                     : null
                                   }
                                 </span>
@@ -156,7 +162,9 @@ class Register extends Component {
                                 </select>
                                 <span className="text-danger">
                                   {this.props.error_descriptions.gender
-                                    ? <FormattedMessage id="The gender field is required." />
+                                    ? <FormattedMessage
+                                    id={this.props.error_descriptions.gender}
+                                  />
                                     : null
                                   }
                                 </span>
@@ -178,7 +186,9 @@ class Register extends Component {
                                 </div>
                                 <span className="text-danger">
                                   {this.props.error_descriptions.last_name
-                                    ? <FormattedMessage id="The last name field is required." />
+                                    ? <FormattedMessage
+                                    id={this.props.error_descriptions.last_name}
+                                  />
                                     : null
                                   }
                                 </span>
@@ -198,7 +208,9 @@ class Register extends Component {
                                 </div>  
                                 <span className="text-danger">
                                   {this.props.error_descriptions.phone_number
-                                    ? <FormattedMessage id="The phone number field is required." />
+                                    ? <FormattedMessage
+                                    id={this.props.error_descriptions.phone_number}
+                                  />
                                     : null
                                   }
                                 </span>
@@ -218,7 +230,9 @@ class Register extends Component {
                                 </div>
                                 <span className="text-danger">
                                   {this.props.error_descriptions.re_password
-                                    ? <FormattedMessage id="The confirm password field is required." />
+                                    ? <FormattedMessage
+                                    id={this.props.error_descriptions.re_password}
+                                  />
                                     : null
                                   }
                                 </span>
@@ -234,7 +248,9 @@ class Register extends Component {
                                 </select>
                                 <span className="text-danger">
                                   {this.props.error_descriptions.role 
-                                    ? <FormattedMessage id="The role field is required." />
+                                    ? <FormattedMessage
+                                    id={this.props.error_descriptions.role}
+                                  />
                                     : null
                                   }
                                 </span>         

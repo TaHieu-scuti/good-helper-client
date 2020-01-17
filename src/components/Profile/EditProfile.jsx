@@ -232,7 +232,9 @@ class EditProfile extends Component {
                                 </div>
                                 <span className="text-danger">
                                   {this.props.error_descriptions.first_name ? (
-                                    <FormattedMessage id="The first name field is wrong format." />
+                                    <FormattedMessage
+                                    id={this.props.error_descriptions.first_name}
+                                  />
                                   ) : null}
                                 </span>
                               </div>
@@ -251,7 +253,9 @@ class EditProfile extends Component {
                                 </div>
                                 <span className="text-danger">
                                   {this.props.error_descriptions.last_name ? (
-                                    <FormattedMessage id="The last name field is wrong format." />
+                                    <FormattedMessage
+                                    id={this.props.error_descriptions.last_name}
+                                  />
                                   ) : null}
                                 </span>
                               </div>
@@ -268,7 +272,9 @@ class EditProfile extends Component {
                                 </div>
                                 <span className="text-danger">
                                   {this.props.error_descriptions.email ? (
-                                    <FormattedMessage id="The email field is required." />
+                                    <FormattedMessage
+                                    id={this.props.error_descriptions.email}
+                                  />
                                   ) : null}
                                 </span>
                               </div>
@@ -286,7 +292,9 @@ class EditProfile extends Component {
                                 </div>
                                 <span className="text-danger">
                                   {this.props.error_descriptions.id_card ? (
-                                    <FormattedMessage id="The Id card field is required." />
+                                    <FormattedMessage
+                                    id={this.props.error_descriptions.id_card}
+                                  />
                                   ) : null}
                                 </span>
                               </div>
@@ -322,7 +330,9 @@ class EditProfile extends Component {
                                 </div>
                                 <span className="text-danger">
                                   {this.props.error_descriptions.gender ? (
-                                    <FormattedMessage id="The gender field is required." />
+                                    <FormattedMessage
+                                    id={this.props.error_descriptions.gender}
+                                  />
                                   ) : null}
                                 </span>
                               </div>
@@ -349,7 +359,9 @@ class EditProfile extends Component {
                                 {$avatarPreview}
                                 <span className="text-danger">
                                   {this.props.error_descriptions.avatar ? (
-                                    <FormattedMessage id="The avatar field is wrong format." />
+                                    <FormattedMessage
+                                    id={this.props.error_descriptions.avatar}
+                                  />
                                   ) : null}
                                 </span>
                               </div>
@@ -377,7 +389,9 @@ class EditProfile extends Component {
                                 <span className="text-danger">
                                   {this.props.error_descriptions
                                     .id_card_font ? (
-                                    <FormattedMessage id="The Id card font field is wrong format." />
+                                      <FormattedMessage
+                                      id={this.props.error_descriptions.id_card_font}
+                                    />
                                   ) : null}
                                 </span>
                               </div>
@@ -408,7 +422,9 @@ class EditProfile extends Component {
                                   <span className="text-danger">
                                     {this.props.error_descriptions
                                       .id_card_backside ? (
-                                      <FormattedMessage id="The Id card back field is wrong format." />
+                                        <FormattedMessage
+                                        id={this.props.error_descriptions.id_card_backside}
+                                      />
                                     ) : null}
                                   </span>
                                 </div>

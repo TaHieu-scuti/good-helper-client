@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ItemsCarousel from "react-items-carousel";
 import { IoMdArrowRoundDown } from "react-icons/io";
 import { IoMdWater } from "react-icons/io";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, FormattedNumber } from "react-intl";
 import { Link } from "react-router-dom";
 
 const noOfItems = 6;
@@ -78,7 +78,7 @@ export default class AutoPlayCarousel extends React.Component {
               </p>
             </div>
             <div className="job-grid-footer">
-              <h4 className="job-price">{item.price}</h4>
+              <h4 className="job-price"><FormattedNumber value={item.price} /></h4>
               <a href="" className="btn btn-outline-info btn-rounded">
                 <FormattedMessage id="Apply" />
               </a>

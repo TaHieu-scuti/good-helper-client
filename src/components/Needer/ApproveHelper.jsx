@@ -7,7 +7,7 @@ import Pagination from "react-js-pagination";
 import { Link } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
 
-class PostOfNeeder extends Component {
+class ApproveHelper extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,8 +22,8 @@ class PostOfNeeder extends Component {
   componentDidMount() {
     this.props
       .http({
-        url: "/auth/post/needer/get",
-        method: "GET"
+        url: "/auth/post/needer/post",
+        method: "POST"
       })
       .then(res => {
         this.setState({
@@ -36,8 +36,8 @@ class PostOfNeeder extends Component {
   handlePageChange(pageNumber) {
     this.props
       .http({
-        url: "/auth/post/needer/get",
-        method: "GET",
+        url: "/auth/post/needer/post",
+        method: "POST",
         params: {
           page: pageNumber
         }
@@ -46,6 +46,20 @@ class PostOfNeeder extends Component {
         this.setState({ data: res.data.response.posts });
       });
     this.setState({ activePage: pageNumber });
+  }
+
+  approveHelper(post_id , user_id) {
+    this.props
+    .http({
+      url: "/auth/post/approve",
+      method: "POST",
+      data: {
+          post_id: post_id,
+          user_id: user_id
+      }
+    })
+    .then(res => {
+    });
   }
 
   render() {
@@ -154,4 +168,4 @@ const mapStateToProps = (stateStore, ownProps) => {
   return newState;
 };
 
-export default connect(mapStateToProps)(PostOfNeeder);
+export default connect(mapStateToProps)(ApproveHelper);

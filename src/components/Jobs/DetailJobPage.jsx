@@ -15,7 +15,8 @@ import {
 import { connect } from "react-redux";
 import { injectIntl, FormattedMessage } from "react-intl";
 import { updateJob } from "../../lib/redux/actions";
-import Interweave from 'interweave';
+import Interweave from "interweave";
+import { toast } from "react-toastify";
 
 class DetailJobPage extends Component {
   constructor(props) {
@@ -45,9 +46,47 @@ class DetailJobPage extends Component {
       });
   }
 
+  applyJob(post_id) {
+    if (this.props.me) { 
+      if (this.props.me.role == 2)  {
+        this.props
+          .http({
+            url: "/auth/post/apply",
+            method: "POST",
+            data: {
+              post_id: post_id
+            }
+          })
+          .then(res => {
+            toast.success("Apply thành công", "Title", {
+              displayDuration: 3000
+            });
+          })
+          .catch(error => {
+            toast.warning("Bạn đã apply", "Title", {
+              displayDuration: 3000
+            });
+          });
+      }
+      else{
+        toast.error("Bạn phải là helper", "Title", {
+          displayDuration: 3000
+        });
+      }
+    }
+    else{
+      toast.error("Hãy đăng nhập để ứng tuyển", "Title", {
+        displayDuration: 3000
+      });
+    }
+  }
+
   render() {
     return (
-      <section className="tr-single-detail gray-bg" style={{ background: "#f6f7fb" }}>
+      <section
+        className="tr-single-detail gray-bg"
+        style={{ background: "#f6f7fb" }}
+      >
         <div className="container">
           <div className="row">
             <div className="col-md-8 col-sm-12 center-block">
@@ -58,19 +97,22 @@ class DetailJobPage extends Component {
                   </h3>
                 </div>
                 <div className="tr-single-body">
-                <Interweave content={this.state.jobDetail.detail} />
+                  <Interweave content={this.state.jobDetail.detail} />
                 </div>
               </div>
-              <a
-                href="javascript:void(0)"
-                data-toggle="modal"
-                data-target="#apply"
-                className="btn btn-info mb-2 mb-5"
-                style={{ marginLeft: "42%" }}
-              >
-                {" "}
-                <FormattedMessage id="Apply" />
-              </a>
+              {!this.props.me ||
+                (this.props.me && this.props.me.role != 1 && (
+                  <button
+                  href="javascript:void(0)"
+                  data-toggle="modal"
+                  data-target="#apply"
+                  className="btn btn-info mb-2 mb-5"
+                  style={{ marginLeft: "42%" }}
+                  onClick={this.applyJob.bind(this, this.state.jobDetail.id)}
+                  >
+                    <FormattedMessage id="Apply" />
+                  </button>
+                ))}
             </div>
             {/* Sidebar Start */}
             <div className="col-md-4 col-sm-12">
@@ -213,6 +255,7 @@ class DetailJobPage extends Component {
 const mapStateToProps = (stateStore, ownProps) => {
   let newState = Object.assign({}, ownProps);
   newState.http = stateStore.http;
+  newState.me = stateStore.me;
   return newState;
 };
 

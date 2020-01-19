@@ -162,7 +162,7 @@ const mapDispatchToProps = dispatch => {
         })
         .catch(error => {
           if (error.response.status == 422) {
-            dispatch(loginError(error.response.data.message));
+            dispatch(loginError(error.response.data.message.login));
           } else {
             dispatch(userCheckotp(error.response.data.response));
             component.props.history.push("/again/checkotp");

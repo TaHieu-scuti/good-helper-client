@@ -6,6 +6,7 @@ import { injectIntl, FormattedMessage, FormattedNumber } from "react-intl";
 import Pagination from "react-js-pagination";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 class ListALLJob extends Component {
   constructor(props) {
@@ -49,22 +50,40 @@ class ListALLJob extends Component {
     this.setState({ activePage: pageNumber });
   }
 
-  render() {
-    let Apply = (
-      <a
-        href=""
-        className="btn btn-outline-info btn-rounded"
-        style={{ marginTop: "20px" }}
-      >
-        <FormattedMessage id="Apply" />
-      </a>
-    );
+  applyJob(post_id) {
     if (this.props.me) {
-      if (this.props.me.role == 1) {
-        Apply = null;
+      if (this.props.me.role == 2) {
+        this.props
+          .http({
+            url: "/auth/post/apply",
+            method: "POST",
+            data: {
+              post_id: post_id
+            }
+          })
+          .then(res => {
+            toast.success("Apply thành công", "Title", {
+              displayDuration: 3000
+            });
+          })
+          .catch(error => {
+            toast.warning("Bạn đã apply", "Title", {
+              displayDuration: 3000
+            });
+          });
+      } else {
+        toast.error("Bạn phải là helper", "Title", {
+          displayDuration: 3000
+        });
       }
+    } else {
+      toast.error("Hãy đăng nhập để ứng tuyển", "Title", {
+        displayDuration: 3000
+      });
     }
+  }
 
+  render() {
     const ListJob = this.state.data.map((item, idx) => {
       return (
         <div className="job-new-list" key={idx}>
@@ -86,7 +105,7 @@ class ListALLJob extends Component {
                   <FormattedMessage id="Salary" />
                 </h5>
                 <IoLogoUsd />
-                <FormattedNumber value={item.price} />
+                <FormattedNumber value={item.price} /> đ
               </li>
               <li className="list-inline-item">
                 <h5>
@@ -102,7 +121,18 @@ class ListALLJob extends Component {
               </li>
             </ul>
           </div>
-          {Apply}
+          {!this.props.me ||
+            (this.props.me && this.props.me.role != 1 && (
+              <button
+                className="btn btn-outline-info bn-det"
+                href="#"
+                style={{ marginTop: "20px" }}
+                onClick={this.applyJob.bind(this, item.id)}
+              >
+                <FormattedMessage id="Apply" />
+                <IoMdArrowForward />
+              </button>
+            ))}
           <br />
         </div>
       );

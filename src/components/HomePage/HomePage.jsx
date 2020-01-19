@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import RatingHelper from './RatingHelper/RatingHelper'
-import Working from './Working'
-import Total from './Total'
-import Feedback from './Feedback'
-import Content from './Content/Content'
-import Category from './Category/Category'
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import RatingHelper from "./RatingHelper/RatingHelper";
+import Working from "./Working";
+import Total from "./Total";
+import Feedback from "./Feedback";
+import Content from "./Content/Content";
+import Category from "./Category/Category";
+import { connect } from "react-redux";
 
 export class HomePage extends Component {
   constructor(props) {
@@ -24,9 +24,7 @@ export class HomePage extends Component {
       this.setState({ setting: res.data.response });
     });
   }
-  render () {
-    console.log(this.state.statistical);
-    
+  render() {
     return (
       <div id="main-wrapper">
         <Category />
@@ -34,9 +32,9 @@ export class HomePage extends Component {
         <Content />
         <Working />
         <Total statistical={this.state.statistical} />
-        <Feedback />  
+        <Feedback />
       </div>
-    )
+    );
   }
 }
 
@@ -46,5 +44,5 @@ const mapStateToProps = (stateStore, ownProps) => {
   newState.http = stateStore.http;
 
   return newState;
-}
-export default connect(mapStateToProps) (HomePage);
+};
+export default connect(mapStateToProps)(HomePage);

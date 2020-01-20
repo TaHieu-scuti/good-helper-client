@@ -28,7 +28,7 @@ class ListJobBeCanceled extends Component {
       .then(res => {
         this.setState({
           data: res.data.response.posts,
-          pagination: res.data.response.paginate 
+          pagination: res.data.response.paginate
         });
       });
   }
@@ -90,9 +90,9 @@ class ListJobBeCanceled extends Component {
 
     let data = (
       <div className="row">
-        <h3 className="text-danger">
+        <p className="text-danger" style={{ margin: "auto" }}>
           <FormattedMessage id="Dont have the data" />
-        </h3>
+        </p>
       </div>
     );
 

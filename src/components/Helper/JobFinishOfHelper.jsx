@@ -57,7 +57,7 @@ class JobFinishOfHelper extends Component {
           </div>
           <div className="vc-content">
             <h5 className="title">
-            <Link to={"/job/detail/" + item.id}>{item.title}</Link>
+              <Link to={"/job/detail/" + item.id}>{item.title}</Link>
               <span className="j-full-time">{item.type}</span>
             </h5>
             <p>{item.category}</p>
@@ -90,9 +90,9 @@ class JobFinishOfHelper extends Component {
 
     let data = (
       <div className="row">
-        <h3 className="text-danger">
+        <p className="text-danger" style={{ margin: "auto" }}>
           <FormattedMessage id="Dont have the data" />
-        </h3>
+        </p>
       </div>
     );
 

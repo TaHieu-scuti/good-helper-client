@@ -15,7 +15,8 @@ import {
 import { connect } from "react-redux";
 import { injectIntl, FormattedMessage } from "react-intl";
 import { updateJob } from "../../lib/redux/actions";
-import Interweave from 'interweave';
+import Interweave from "interweave";
+import { toast } from "react-toastify";
 
 class DetailJobPage extends Component {
   constructor(props) {
@@ -45,9 +46,91 @@ class DetailJobPage extends Component {
       });
   }
 
+  applyJob(post_id) {
+    if (!this.props.me) {
+      this.props.history.push("/login");
+      return;
+    }
+
+    if (this.props.me.role == 2) {
+      this.props
+        .http({
+          url: "/auth/post/apply",
+          method: "POST",
+          data: {
+            post_id: post_id
+          }
+        })
+        .then(res => {
+          toast.success(
+            this.props.intl.formatMessage({
+              id: "Apply successfully"
+            }),
+            "Title",
+            {
+              displayDuration: 3000
+            }
+          );
+        })
+        .catch(error => {
+          toast.warning(
+            this.props.intl.formatMessage({
+              id: "Appied"
+            }),
+            "Title",
+            {
+              displayDuration: 3000
+            }
+          );
+        });
+    }
+  }
+
+  markdownJob(post_id) {
+    if (!this.props.me) {
+      this.props.history.push("/login");
+      return;
+    }
+    if (this.props.me.role == 2) {
+      this.props
+        .http({
+          url: "/auth/book-mark/post",
+          method: "POST",
+          data: {
+            post_id: post_id
+          }
+        })
+        .then(res => {
+          toast.success(
+            this.props.intl.formatMessage({
+              id: "Save successful"
+            }),
+            "Title",
+            {
+              displayDuration: 3000
+            }
+          );
+        })
+        .catch(error => {
+          toast.warning(
+            this.props.intl.formatMessage({
+              id: "Saved"
+            }),
+            "Title",
+            {
+              displayDuration: 3000
+            }
+          );
+        });
+    }
+  }
+
   render() {
     return (
-      <section className="tr-single-detail gray-bg" style={{ background: "#f6f7fb" }}>
+      <section
+        className="tr-single-detail gray-bg"
+        style={{ background: "#f6f7fb" }}
+      >
         <div className="container">
           <div className="row">
             <div className="col-md-8 col-sm-12 center-block">
@@ -58,30 +141,39 @@ class DetailJobPage extends Component {
                   </h3>
                 </div>
                 <div className="tr-single-body">
-                <Interweave content={this.state.jobDetail.detail} />
+                  <Interweave content={this.state.jobDetail.detail} />
                 </div>
               </div>
-              <a
-                href="javascript:void(0)"
-                data-toggle="modal"
-                data-target="#apply"
-                className="btn btn-info mb-2 mb-5"
-                style={{ marginLeft: "42%" }}
-              >
-                {" "}
-                <FormattedMessage id="Apply" />
-              </a>
+              {!this.props.me ||
+                (this.props.me && this.props.me.role != 1 && (
+                  <button
+                    href="javascript:void(0)"
+                    data-toggle="modal"
+                    data-target="#apply"
+                    className="btn btn-info mb-2 mb-5"
+                    style={{ marginLeft: "42%" }}
+                    onClick={this.applyJob.bind(this, this.state.jobDetail.id)}
+                  >
+                    <FormattedMessage id="Apply" />
+                  </button>
+                ))}
             </div>
             {/* Sidebar Start */}
             <div className="col-md-4 col-sm-12">
               <div className="offer-btn-wrap mb-4">
-                <a
-                  href="markdown-job.html"
-                  className="btn btn-info btn-md full-width"
-                >
-                  <FaBookmark />
-                  <FormattedMessage id="Markdown job" />
-                </a>
+                {!this.props.me ||
+                  (this.props.me && this.props.me.role != 1 && (
+                    <button
+                      className="btn btn-info btn-md full-width"
+                      onClick={this.markdownJob.bind(
+                        this,
+                        this.state.jobDetail.id
+                      )}
+                    >
+                      <FaBookmark />
+                      <FormattedMessage id="Markdown job" />
+                    </button>
+                  ))}
               </div>
               {/* Job Overview */}
               <div className="tr-single-box">
@@ -213,6 +305,7 @@ class DetailJobPage extends Component {
 const mapStateToProps = (stateStore, ownProps) => {
   let newState = Object.assign({}, ownProps);
   newState.http = stateStore.http;
+  newState.me = stateStore.me;
   return newState;
 };
 
@@ -222,4 +315,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DetailJobPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(injectIntl(DetailJobPage));

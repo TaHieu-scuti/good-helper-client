@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import ItemsCarousel from "react-items-carousel";
 import { IoMdArrowRoundDown } from "react-icons/io";
-import { IoMdWater } from "react-icons/io";
-import { FormattedMessage, FormattedNumber } from "react-intl";
+import { FormattedMessage, FormattedNumber, injectIntl } from "react-intl";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { toast } from "react-toastify";
 
 const noOfItems = 6;
 const noOfCards = 3;
@@ -53,17 +53,47 @@ class AutoPlayCarousel extends React.Component {
     this.setState({ activeItemIndex: value });
   }
 
-  render() {
-    let Apply = (
-      <a href="" className="btn btn-outline-info btn-rounded">
-        <FormattedMessage id="Apply" />
-      </a>
-    );
-    if (this.props.me) {
-      if (this.props.me.role == 1) {
-        Apply = null;
-      }
+  applyJob(post_id) {
+    if (!this.props.me) {
+      this.props.history.push("/login");
+      return
     }
+
+    if (this.props.me.role == 2) {
+      this.props
+        .http({
+          url: "/auth/post/apply",
+          method: "POST",
+          data: {
+            post_id: post_id
+          }
+        })
+        .then(res => {
+          toast.success(
+            this.props.intl.formatMessage({
+              id: "Apply successfully"
+            }),
+            "Title",
+            {
+              displayDuration: 3000
+            }
+          );
+        })
+        .catch(error => {
+          toast.warning(
+            this.props.intl.formatMessage({
+              id: "Appied"
+            }),
+            "Title",
+            {
+              displayDuration: 3000
+            }
+          );
+        });
+    }
+  }
+
+  render() {
     const carouselItems = this.props.listPost.map(item => (
       <SlideItem key={item}>
         <div className="job-grid style-1 job">
@@ -84,15 +114,23 @@ class AutoPlayCarousel extends React.Component {
                 <Link to={"job/detail/" + item.id}>{item.title}</Link>
               </h4>
               <p>
-                <IoMdWater />
-                {item.location}
+                <FormattedMessage id="Location" /> :{item.location}
               </p>
             </div>
             <div className="job-grid-footer">
-              <h4 className="job-price">
-                <FormattedNumber value={item.price} />
-              </h4>
-              {Apply}
+              <h6 className="job-price">
+                <FormattedMessage id="Salary" /> :
+                <FormattedNumber value={item.price} /> đ
+              </h6>
+              {!this.props.me ||
+                (this.props.me && this.props.me.role != 1 && (
+                  <button
+                    className="btn btn-outline-info btn-rounded"
+                    onClick={this.applyJob.bind(this, item.id)}
+                  >
+                    <FormattedMessage id="Apply" />
+                  </button>
+                ))}
             </div>
           </div>
         </div>
@@ -122,4 +160,4 @@ const mapStateToProps = (stateStore, ownProps) => {
   return newState;
 };
 
-export default connect(mapStateToProps)(AutoPlayCarousel);
+export default connect(mapStateToProps)(injectIntl(AutoPlayCarousel));

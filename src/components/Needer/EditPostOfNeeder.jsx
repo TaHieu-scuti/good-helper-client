@@ -192,13 +192,6 @@ class EditPostOfNeeder extends Component {
                                   <label>
                                     <FormattedMessage id="Salary" />
                                   </label>
-                                  {/* <input
-                                    className="form-control"
-                                    type="number"
-                                    onChange={this.handelSetValue}
-                                    value={this.state.post.price}
-                                    id = "price"
-                                  /> */}
                                   <CurrencyFormat
                                     className="form-control"
                                     thousandSeparator={true}
@@ -498,15 +491,15 @@ const mapDispatchToProps = dispatch => {
           category_id: component.state.post.category_id
         }
       })
-        .then(res => {
-          component.props.history.push("/needer/post");
-          toast.success("Cập nhật thành công", "Title", {
-            displayDuration: 3000
-          });
-        })
-        .catch(error => {
-          dispatch(raiseError(error.response.data.errors));
+      .then(res => {
+        component.props.history.push("/needer/post");
+        toast.success("Cập nhật thành công", "Title", {
+          displayDuration: 3000
         });
+      })
+      .catch(error => {
+        dispatch(raiseError(error.response.data.errors));
+      });
     }
   };
 };

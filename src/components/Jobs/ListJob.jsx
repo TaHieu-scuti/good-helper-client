@@ -31,85 +31,82 @@ class ListJob extends Component {
     });
   }
 
-    applyJob(post_id) {
-    if (this.props.me) {
-      if (this.props.me.role == 2) {
-        this.props
-          .http({
-            url: "/auth/post/apply",
-            method: "POST",
-            data: {
-              post_id: post_id
-            }
-          })
-          .then(res => {
-            toast.success(this.props.intl.formatMessage({
+  applyJob(post_id) {
+    if (!this.props.me) {
+      this.props.history.push("/login");
+      return;
+    }
+
+    if (this.props.me.role == 2) {
+      this.props
+        .http({
+          url: "/auth/post/apply",
+          method: "POST",
+          data: {
+            post_id: post_id
+          }
+        })
+        .then(res => {
+          toast.success(
+            this.props.intl.formatMessage({
               id: "Apply successfully"
-            }), "Title", {
+            }),
+            "Title",
+            {
               displayDuration: 3000
-            });
-          })
-          .catch(error => {
-            toast.warning(this.props.intl.formatMessage({
+            }
+          );
+        })
+        .catch(error => {
+          toast.warning(
+            this.props.intl.formatMessage({
               id: "Appied"
-            }), "Title", {
+            }),
+            "Title",
+            {
               displayDuration: 3000
-            });
-          });
-      } else {
-        toast.error(this.props.intl.formatMessage({
-          id: "Let log to save"
-        }), "Title", {
-          displayDuration: 3000
+            }
+          );
         });
-      }
-    } else {
-      toast.error(this.props.intl.formatMessage({
-        id: "You have to a helper"
-      }), "Title", {
-        displayDuration: 3000
-      });
     }
   }
 
   markdownJob(post_id) {
-    if (this.props.me) {
-      if (this.props.me.role == 2) {
-        this.props
-          .http({
-            url: "/auth/book-mark/post",
-            method: "POST",
-            data: {
-              post_id: post_id
-            }
-          })
-          .then(res => {
-            toast.success(this.props.intl.formatMessage({
+    if (!this.props.me) {
+      this.props.history.push("/login");
+      return;
+    }
+    if (this.props.me.role == 2) {
+      this.props
+        .http({
+          url: "/auth/book-mark/post",
+          method: "POST",
+          data: {
+            post_id: post_id
+          }
+        })
+        .then(res => {
+          toast.success(
+            this.props.intl.formatMessage({
               id: "Save successful"
-            }), "Title", {
+            }),
+            "Title",
+            {
               displayDuration: 3000
-            });
-          })
-          .catch(error => {
-            toast.warning(this.props.intl.formatMessage({
+            }
+          );
+        })
+        .catch(error => {
+          toast.warning(
+            this.props.intl.formatMessage({
               id: "Saved"
-            }), "Title", {
+            }),
+            "Title",
+            {
               displayDuration: 3000
-            });
-          });
-      } else {
-        toast.error(this.props.intl.formatMessage({
-          id: "You have to a helper"
-        }), "Title", {
-          displayDuration: 3000
+            }
+          );
         });
-      }
-    } else {
-      toast.error(this.props.intl.formatMessage({
-        id: "Let log to save"
-      }), "Title", {
-        displayDuration: 3000
-      });
     }
   }
 

@@ -54,59 +54,42 @@ class AutoPlayCarousel extends React.Component {
   }
 
   applyJob(post_id) {
-    if (this.props.me) {
-      if (this.props.me.role == 2) {
-        this.props
-          .http({
-            url: "/auth/post/apply",
-            method: "POST",
-            data: {
-              post_id: post_id
-            }
-          })
-          .then(res => {
-            toast.success(
-              this.props.intl.formatMessage({
-                id: "Apply successfully"
-              }),
-              "Title",
-              {
-                displayDuration: 3000
-              }
-            );
-          })
-          .catch(error => {
-            toast.warning(
-              this.props.intl.formatMessage({
-                id: "Appied"
-              }),
-              "Title",
-              {
-                displayDuration: 3000
-              }
-            );
-          });
-      } else {
-        toast.error(
-          this.props.intl.formatMessage({
-            id: "Let log to save"
-          }),
-          "Title",
-          {
-            displayDuration: 3000
+    if (!this.props.me) {
+      this.props.history.push("/login");
+      return
+    }
+
+    if (this.props.me.role == 2) {
+      this.props
+        .http({
+          url: "/auth/post/apply",
+          method: "POST",
+          data: {
+            post_id: post_id
           }
-        );
-      }
-    } else {
-      toast.error(
-        this.props.intl.formatMessage({
-          id: "You have to a helper"
-        }),
-        "Title",
-        {
-          displayDuration: 3000
-        }
-      );
+        })
+        .then(res => {
+          toast.success(
+            this.props.intl.formatMessage({
+              id: "Apply successfully"
+            }),
+            "Title",
+            {
+              displayDuration: 3000
+            }
+          );
+        })
+        .catch(error => {
+          toast.warning(
+            this.props.intl.formatMessage({
+              id: "Appied"
+            }),
+            "Title",
+            {
+              displayDuration: 3000
+            }
+          );
+        });
     }
   }
 

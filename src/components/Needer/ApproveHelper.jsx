@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import Sidebar from "./../Profile/Sidebar";
 import { connect } from "react-redux";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, injectIntl } from "react-intl";
 import Pagination from "react-js-pagination";
 import { Link } from "react-router-dom";
 import { FaTimes } from "react-icons/fa";
 import { IoMdArrowForward } from "react-icons/io";
+import { toast } from "react-toastify";
 
 class ApproveHelper extends Component {
   constructor(props) {
@@ -51,23 +52,75 @@ class ApproveHelper extends Component {
     this.setState({ activePage: pageNumber });
   }
 
-  approveHelper(post_id , user_id) {
+  approveHelper(user_id) {
     this.props
     .http({
       url: "/auth/post/approve",
       method: "POST",
       data: {
-          post_id: post_id,
+          post_id: this.props.match.params.id,
           user_id: user_id
       }
     })
     .then(res => {
+      toast.success(
+        this.props.intl.formatMessage({
+          id: "Approve successfully"
+        }),
+        "Title",
+        {
+          displayDuration: 3000
+        }
+      );
+    })
+    .catch(error => {
+      toast.warning(
+        this.props.intl.formatMessage({
+          id: "Fail"
+        }),
+        "Title",
+        {
+          displayDuration: 3000
+        }
+      );
+    });
+  }
+
+  cancelHelper(user_id) {
+    this.props
+    .http({
+      url: "/auth/post/cancel/approve",
+      method: "POST",
+      data: {
+          post_id: this.props.match.params.id,
+          user_id: user_id
+      }
+    })
+    .then(res => {
+      toast.success(
+        this.props.intl.formatMessage({
+          id: "Cancel successfully"
+        }),
+        "Title",
+        {
+          displayDuration: 3000
+        }
+      );
+    })
+    .catch(error => {
+      toast.warning(
+        this.props.intl.formatMessage({
+          id: "Fail"
+        }),
+        "Title",
+        {
+          displayDuration: 3000
+        }
+      );
     });
   }
 
   render() {
-    console.log(this.props.state);
-    
     const ListUser = this.state.data.map((item, idx) => {
       return (
         <div className="job-new-list" key={idx}>
@@ -76,12 +129,15 @@ class ApproveHelper extends Component {
           </div>
           <div className="vc-content">
             <h5 className="title">
-              <Link to={"job/detail/" + item.id}>{item.last_name}</Link>
+              <Link to={"job/detail/" + item.id}>{item.first_name}  {item.last_name}</Link>
               <span className="j-full-time">{item.phone}</span>
-              <a href="#" className="btn download-btn">
+              <a 
+               className="btn download-btn"
+               onClick={this.cancelHelper.bind(this, item.id)}>
                 <FaTimes />
               </a>
             </h5>
+            <p>{item.role_name}</p>
             <ul className="vc-info-list">
               <li className="list-inline-item">
                 <h5>
@@ -98,14 +154,14 @@ class ApproveHelper extends Component {
             </ul>
           </div>
           <br />
-          <a
+          <button
             className="btn btn-outline-info bn-det"
-            href="#"
             style={{ marginTop: "20px" }}
+            onClick={this.approveHelper.bind(this, item.id)}
           >
             <FormattedMessage id="Approve" />
             <IoMdArrowForward />
-          </a>
+          </button>
         </div>
       );
     });
@@ -124,8 +180,8 @@ class ApproveHelper extends Component {
           <div className="row">
             <div className="col-md-12">{ListUser}</div>
           </div>
-          <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12">
+          <div className="row">
+            <div className="col-lg-12 col-md-12 col-sm-12">
               <Pagination
                 activePage={this.state.activePage}
                 itemsCountPerPage={this.state.pagination.perPage}
@@ -173,4 +229,4 @@ const mapStateToProps = (stateStore, ownProps) => {
   return newState;
 };
 
-export default connect(mapStateToProps)(ApproveHelper);
+export default connect(mapStateToProps)(injectIntl(ApproveHelper));

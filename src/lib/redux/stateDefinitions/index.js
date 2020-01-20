@@ -14,5 +14,7 @@ export default {
     location: '',
     img: ''
   },
-  userCheckotp: null
+  userCheckotp: null,
+  error_login: '',
+  searchAdvanced:null
 }

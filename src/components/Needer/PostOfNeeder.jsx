@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Sidebar from "./../Profile/Sidebar";
 import { connect } from "react-redux";
 import { IoLogoUsd } from "react-icons/io";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, FormattedNumber } from "react-intl";
 import Pagination from "react-js-pagination";
 import { Link } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
@@ -59,8 +59,8 @@ class PostOfNeeder extends Component {
             <h5 className="title">
               <Link to={"/approve/user/" + item.id}>{item.title}</Link>
               <span className="j-full-time">{item.type}</span>
-              <Link to={"/edit/post/" + item.id} cclassName="btn download-btn">
-                <FaEdit /> <FormattedMessage id="Edit" />
+              <Link to={"/edit/post/" + item.id} className="btn download-btn">
+                <FaEdit /> 
               </Link>
             </h5>
             <p>{item.category}</p>
@@ -70,7 +70,7 @@ class PostOfNeeder extends Component {
                   <FormattedMessage id="Salary" />
                 </h5>
                 <IoLogoUsd />
-                {item.price}
+                <FormattedNumber value={item.price} /> đ
               </li>
               <li className="list-inline-item">
                 <h5>
@@ -105,8 +105,8 @@ class PostOfNeeder extends Component {
           <div className="row">
             <div className="col-md-12">{ListJob}</div>
           </div>
-          <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12">
+          <div className="row">
+            <div className="col-lg-12 col-md-12 col-sm-12">
               <Pagination
                 activePage={this.state.activePage}
                 itemsCountPerPage={this.state.pagination.perPage}

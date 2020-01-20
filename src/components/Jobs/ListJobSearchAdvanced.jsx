@@ -5,49 +5,34 @@ import { IoLogoUsd } from "react-icons/io";
 import { injectIntl, FormattedMessage, FormattedNumber } from "react-intl";
 import Pagination from "react-js-pagination";
 import { connect } from "react-redux";
+import { searchAdvanced } from "../../lib/redux/actions";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
-class ListALLJob extends Component {
+class ListJobSearchAdvanced extends Component {
   constructor(props) {
     super(props);
     this.state = {
       activePage: 1,
       pageRangeDisplayed: 5,
-      data: [],
-      pagination: {}
+      search: {
+        title: "",
+        category_id: "",
+        location_id: "",
+        type: "",
+        gender: ""
+      }
     };
 
     this.handlePageChange = this.handlePageChange.bind(this);
   }
 
-  componentDidMount() {
-    this.props
-      .http({
-        url: "auth/list/post",
-        method: "GET"
-      })
-      .then(res => {
-        this.setState({
-          data: res.data.response.posts,
-          pagination: res.data.response.pagination
-        });
-      });
-  }
-
   handlePageChange(pageNumber) {
-    this.props
-      .http({
-        url: "auth/list/post",
-        method: "GET",
-        params: {
-          page: pageNumber
-        }
-      })
-      .then(res => {
-        this.setState({ data: res.data.response.posts });
-      });
-    this.setState({ activePage: pageNumber });
+    this.props.handlePageChange({
+      component: this,
+      http: this.props.http,
+      pageNumber: pageNumber
+    });
   }
 
   applyJob(post_id) {
@@ -130,7 +115,7 @@ class ListALLJob extends Component {
   }
 
   render() {
-    const ListJob = this.state.data.map((item, idx) => {
+    const ListJob = this.props.searchAdvanced.posts.map((item, idx) => {
       return (
         <div className="job-new-list" key={idx}>
           <div className="vc-thumb">
@@ -140,6 +125,9 @@ class ListALLJob extends Component {
             <h5 className="title">
               <Link to={"/job/detail/" + item.id}>{item.title}</Link>
               <span className="j-full-time">{item.type}</span>
+              <a href="#" className="btn download-btn">
+                <IoMdArrowRoundDown />
+              </a>
               {!this.props.me ||
                 (this.props.me && this.props.me.role != 1 && (
                   <a
@@ -173,6 +161,7 @@ class ListALLJob extends Component {
               </li>
             </ul>
           </div>
+          <br />
           {!this.props.me ||
             (this.props.me && this.props.me.role != 1 && (
               <button
@@ -185,7 +174,6 @@ class ListALLJob extends Component {
                 <IoMdArrowForward />
               </button>
             ))}
-          <br />
         </div>
       );
     });
@@ -198,38 +186,66 @@ class ListALLJob extends Component {
       </div>
     );
 
-    if (this.state.data.length > 0) {
+    if (this.props.searchAdvanced.posts.length > 0) {
       data = (
-        <div className="row">
-          <div className="col-md-12">{ListJob}</div>
+        <div>
+          <div className="row">
+            <div className="col-md-12">{ListJob}</div>
+          </div>
+          <div className="row">
+            <div className="col-lg-12 col-md-12 col-sm-12">
+              <Pagination
+                activePage={this.state.activePage}
+                itemsCountPerPage={this.props.searchAdvanced.pagination.perPage}
+                totalItemsCount={this.props.searchAdvanced.pagination.total}
+                pageRangeDisplayed={this.state.pageRangeDisplayed}
+                onChange={this.handlePageChange}
+              />
+            </div>
+          </div>
         </div>
       );
     }
 
-    return (
-      <div className="col-xl-9 col-lg-8">
-        {data}
-        <div className="row">
-          <div className="col-lg-12 col-md-12 col-sm-12">
-            <Pagination
-              activePage={this.state.activePage}
-              itemsCountPerPage={this.state.pagination.perPage}
-              totalItemsCount={this.state.pagination.total}
-              pageRangeDisplayed={this.state.pageRangeDisplayed}
-              onChange={this.handlePageChange}
-            />
-          </div>
-        </div>
-      </div>
-    );
+    return <div className="col-xl-9 col-lg-8">{data}</div>;
   }
 }
 
 const mapStateToProps = (stateStore, ownProps) => {
   let newState = Object.assign({}, ownProps);
+
   newState.http = stateStore.http;
+  newState.searchAdvanced = stateStore.searchAdvanced;
   newState.me = stateStore.me;
+
   return newState;
 };
 
-export default connect(mapStateToProps)(injectIntl(ListALLJob));
+const mapDispatchToProps = dispatch => {
+  return {
+    handlePageChange: ({ component, http, pageNumber }) => {
+      http({
+        url: "/auth/filter/post",
+        method: "POST",
+        params: {
+          page: pageNumber
+        },
+        data: {
+          title: component.state.search.title,
+          location_id: component.state.search.location_id,
+          category_id: component.state.search.category_id,
+          gender: component.state.search.gender,
+          type: component.state.search.type
+        }
+      }).then(res => {
+        dispatch(searchAdvanced(res.data.response));
+      });
+      component.setState({ activePage: pageNumber });
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(injectIntl(ListJobSearchAdvanced));

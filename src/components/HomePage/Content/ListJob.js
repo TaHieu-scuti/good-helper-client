@@ -2,9 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import ItemsCarousel from "react-items-carousel";
 import { IoMdArrowRoundDown } from "react-icons/io";
-import { IoMdWater } from "react-icons/io";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, FormattedNumber, injectIntl } from "react-intl";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { toast } from "react-toastify";
 
 const noOfItems = 6;
 const noOfCards = 3;
@@ -22,7 +23,7 @@ const SlideItem = styled.div`
   margin: 5px;
 `;
 
-export default class AutoPlayCarousel extends React.Component {
+class AutoPlayCarousel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -52,6 +53,46 @@ export default class AutoPlayCarousel extends React.Component {
     this.setState({ activeItemIndex: value });
   }
 
+  applyJob(post_id) {
+    if (!this.props.me) {
+      this.props.history.push("/login");
+      return
+    }
+
+    if (this.props.me.role == 2) {
+      this.props
+        .http({
+          url: "/auth/post/apply",
+          method: "POST",
+          data: {
+            post_id: post_id
+          }
+        })
+        .then(res => {
+          toast.success(
+            this.props.intl.formatMessage({
+              id: "Apply successfully"
+            }),
+            "Title",
+            {
+              displayDuration: 3000
+            }
+          );
+        })
+        .catch(error => {
+          toast.warning(
+            this.props.intl.formatMessage({
+              id: "Appied"
+            }),
+            "Title",
+            {
+              displayDuration: 3000
+            }
+          );
+        });
+    }
+  }
+
   render() {
     const carouselItems = this.props.listPost.map(item => (
       <SlideItem key={item}>
@@ -73,15 +114,23 @@ export default class AutoPlayCarousel extends React.Component {
                 <Link to={"job/detail/" + item.id}>{item.title}</Link>
               </h4>
               <p>
-                <IoMdWater />
-                {item.location}
+                <FormattedMessage id="Location" /> :{item.location}
               </p>
             </div>
             <div className="job-grid-footer">
-              <h4 className="job-price">{item.price}</h4>
-              <a href="" className="btn btn-outline-info btn-rounded">
-                <FormattedMessage id="Apply" />
-              </a>
+              <h6 className="job-price">
+                <FormattedMessage id="Salary" /> :
+                <FormattedNumber value={item.price} /> đ
+              </h6>
+              {!this.props.me ||
+                (this.props.me && this.props.me.role != 1 && (
+                  <button
+                    className="btn btn-outline-info btn-rounded"
+                    onClick={this.applyJob.bind(this, item.id)}
+                  >
+                    <FormattedMessage id="Apply" />
+                  </button>
+                ))}
             </div>
           </div>
         </div>
@@ -102,3 +151,13 @@ export default class AutoPlayCarousel extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (stateStore, ownProps) => {
+  let newState = Object.assign({}, ownProps);
+  newState.http = stateStore.http;
+  newState.me = stateStore.me;
+
+  return newState;
+};
+
+export default connect(mapStateToProps)(injectIntl(AutoPlayCarousel));

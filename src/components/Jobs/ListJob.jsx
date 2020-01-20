@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import { IoMdArrowRoundDown } from "react-icons/io";
 import { IoMdArrowForward } from "react-icons/io";
 import { IoLogoUsd } from "react-icons/io";
-import { injectIntl, FormattedMessage } from "react-intl";
+import { injectIntl, FormattedMessage, FormattedNumber } from "react-intl";
 import Pagination from "react-js-pagination";
 import { connect } from "react-redux";
 import { searchOutside } from "../../lib/redux/actions";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 class ListJob extends Component {
   constructor(props) {
@@ -30,6 +31,85 @@ class ListJob extends Component {
     });
   }
 
+  applyJob(post_id) {
+    if (!this.props.me) {
+      this.props.history.push("/login");
+      return;
+    }
+
+    if (this.props.me.role == 2) {
+      this.props
+        .http({
+          url: "/auth/post/apply",
+          method: "POST",
+          data: {
+            post_id: post_id
+          }
+        })
+        .then(res => {
+          toast.success(
+            this.props.intl.formatMessage({
+              id: "Apply successfully"
+            }),
+            "Title",
+            {
+              displayDuration: 3000
+            }
+          );
+        })
+        .catch(error => {
+          toast.warning(
+            this.props.intl.formatMessage({
+              id: "Appied"
+            }),
+            "Title",
+            {
+              displayDuration: 3000
+            }
+          );
+        });
+    }
+  }
+
+  markdownJob(post_id) {
+    if (!this.props.me) {
+      this.props.history.push("/login");
+      return;
+    }
+    if (this.props.me.role == 2) {
+      this.props
+        .http({
+          url: "/auth/book-mark/post",
+          method: "POST",
+          data: {
+            post_id: post_id
+          }
+        })
+        .then(res => {
+          toast.success(
+            this.props.intl.formatMessage({
+              id: "Save successful"
+            }),
+            "Title",
+            {
+              displayDuration: 3000
+            }
+          );
+        })
+        .catch(error => {
+          toast.warning(
+            this.props.intl.formatMessage({
+              id: "Saved"
+            }),
+            "Title",
+            {
+              displayDuration: 3000
+            }
+          );
+        });
+    }
+  }
+
   render() {
     const ListJob = this.props.searchOutside.posts.map((item, idx) => {
       return (
@@ -39,11 +119,17 @@ class ListJob extends Component {
           </div>
           <div className="vc-content">
             <h5 className="title">
-              <Link to={"job/detail/" + item.id}>{item.title}</Link>
+              <Link to={"/job/detail/" + item.id}>{item.title}</Link>
               <span className="j-full-time">{item.type}</span>
-              <a href="#" className="btn download-btn">
-                <IoMdArrowRoundDown />
-              </a>
+              {!this.props.me ||
+                (this.props.me && this.props.me.role != 1 && (
+                  <a
+                    className="btn download-btn"
+                    onClick={this.markdownJob.bind(this, item.id)}
+                  >
+                    <IoMdArrowRoundDown />
+                  </a>
+                ))}
             </h5>
             <p>{item.category}</p>
             <ul className="vc-info-list">
@@ -52,7 +138,7 @@ class ListJob extends Component {
                   <FormattedMessage id="Salary" />
                 </h5>
                 <IoLogoUsd />
-                {item.price}
+                <FormattedNumber value={item.price} /> đ
               </li>
               <li className="list-inline-item">
                 <h5>
@@ -68,15 +154,19 @@ class ListJob extends Component {
               </li>
             </ul>
           </div>
+          {!this.props.me ||
+            (this.props.me && this.props.me.role != 1 && (
+              <button
+                className="btn btn-outline-info bn-det"
+                href="#"
+                style={{ marginTop: "20px" }}
+                onClick={this.applyJob.bind(this, item.id)}
+              >
+                <FormattedMessage id="Apply" />
+                <IoMdArrowForward />
+              </button>
+            ))}
           <br />
-          <a
-            className="btn btn-outline-info bn-det"
-            href="#"
-            style={{ marginTop: "20px" }}
-          >
-            <FormattedMessage id="Apply" />
-            <IoMdArrowForward />
-          </a>
         </div>
       );
     });
@@ -119,6 +209,7 @@ const mapStateToProps = (stateStore, ownProps) => {
 
   newState.http = stateStore.http;
   newState.searchOutside = stateStore.searchOutside;
+  newState.me = stateStore.me;
 
   return newState;
 };
@@ -137,7 +228,7 @@ const mapDispatchToProps = dispatch => {
       }).then(res => {
         dispatch(searchOutside(res.data.response));
       });
-        component.setState({ activePage: pageNumber });
+      component.setState({ activePage: pageNumber });
     }
   };
 };

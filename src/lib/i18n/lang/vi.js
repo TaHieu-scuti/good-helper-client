@@ -150,6 +150,7 @@ export default {
 	'Let log to save': 'Hãy đăng nhập để lưu',
 	'Saved': 'Đã Lưu',
 	'Apply successfully': 'Ứng tuyển thành công',
-	'Appied': 'Đã ứng tuyển'
+	'Appied': 'Đã ứng tuyển',
+	'Posts is doing': 'Các công việc đang làm'
 };
  

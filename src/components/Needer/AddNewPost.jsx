@@ -467,13 +467,13 @@ const mapDispatchToProps = dispatch => {
           category_id: component.state.category_id
         }
       })
-        .then(res => {
-          component.props.history.push("/profile");
-          toast.success("Thêm thành công", "Title", { displayDuration: 3000 });
-        })
-        .catch(error => {
-          dispatch(raiseError(error.response.data.errors));
-        });
+      .then(res => {
+        component.props.history.push("/profile");
+        toast.success("Thêm thành công", "Title", { displayDuration: 3000 });
+      })
+      .catch(error => {
+        dispatch(raiseError(error.response.data.errors));
+      });
     }
   };
 };

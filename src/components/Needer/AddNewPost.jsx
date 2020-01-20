@@ -8,8 +8,8 @@ import { Editor } from "@tinymce/tinymce-react";
 import Datetime from "react-datetime";
 import { raiseError } from "../../lib/redux/actions";
 import moment from "moment";
-import { toast } from 'react-toastify';
-import CurrencyFormat from 'react-currency-format';
+import { toast } from "react-toastify";
+import CurrencyFormat from "react-currency-format";
 
 class AddNewPost extends Component {
   constructor(props) {
@@ -380,7 +380,8 @@ class AddNewPost extends Component {
                                     <FormattedMessage id="Start time" />
                                   </label>
                                   <Datetime
-                                    dateFormat="YYYY-MM-DD" timeFormat="HH:mm:ss"
+                                    dateFormat="YYYY-MM-DD"
+                                    timeFormat="HH:mm:ss"
                                     onChange={this.handelSetValueStartTime}
                                   />
                                   <span className="text-danger">
@@ -402,7 +403,8 @@ class AddNewPost extends Component {
                                     <FormattedMessage id="End time" />
                                   </label>
                                   <Datetime
-                                    dateFormat="YYYY-MM-DD" timeFormat="HH:mm:ss"
+                                    dateFormat="YYYY-MM-DD"
+                                    timeFormat="HH:mm:ss"
                                     onChange={this.handelSetValueEndTime}
                                   />
                                   <span className="text-danger">
@@ -465,13 +467,13 @@ const mapDispatchToProps = dispatch => {
           category_id: component.state.category_id
         }
       })
-      .then(res => {
+        .then(res => {
           component.props.history.push("/profile");
-          toast.success('Thêm thành công', 'Title', {displayDuration:3000});
-      })
-      .catch(error => {
+          toast.success("Thêm thành công", "Title", { displayDuration: 3000 });
+        })
+        .catch(error => {
           dispatch(raiseError(error.response.data.errors));
-      });
+        });
     }
   };
 };

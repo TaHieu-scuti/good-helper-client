@@ -8,14 +8,14 @@ import { Editor } from "@tinymce/tinymce-react";
 import Datetime from "react-datetime";
 import { raiseError } from "../../lib/redux/actions";
 import moment from "moment";
-import { toast } from 'react-toastify';
-import CurrencyFormat from 'react-currency-format';
+import { toast } from "react-toastify";
+import CurrencyFormat from "react-currency-format";
 
 class EditPostOfNeeder extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      post : {
+      post: {
         id: "",
         title: "",
         detail: "",
@@ -26,7 +26,7 @@ class EditPostOfNeeder extends Component {
         end_time: "",
         type: "",
         location_id: "",
-        category_id: "",
+        category_id: ""
       },
       category: [],
       location: []
@@ -45,11 +45,12 @@ class EditPostOfNeeder extends Component {
       this.setState({ location: res.data.response });
     });
 
-    this.props.http({
+    this.props
+      .http({
         url: "auth/detail/post",
         method: "POST",
         data: {
-            post_id: this.props.match.params.id  
+          post_id: this.props.match.params.id
         }
       })
       .then(res => {
@@ -67,33 +68,36 @@ class EditPostOfNeeder extends Component {
             location_id: res.data.response.location_id,
             category_id: res.data.response.category_id
           }
-          });
-      })
+        });
+      });
   }
 
-  handelSetValue (event) {
+  handelSetValue(event) {
     this.setState({
-      post: {...this.state.post, [event.target.id]: event.target.value},
+      post: { ...this.state.post, [event.target.id]: event.target.value }
     });
-  };
+  }
 
-  handelSetValueTime (name, newDate) {
+  handelSetValueTime(name, newDate) {
     this.setState({
-      post:{...this.state.post, [name]: moment(new Date(newDate)).format("YYYY-MM-DD HH:mm:ss")}
+      post: {
+        ...this.state.post,
+        [name]: moment(new Date(newDate)).format("YYYY-MM-DD HH:mm:ss")
+      }
     });
-  };
+  }
 
   handelSetValuePrice = values => {
     this.setState({
-      post: {...this.state.post, price: values.value},
+      post: { ...this.state.post, price: values.value }
     });
   };
 
-  handleEditorChange (event) {
+  handleEditorChange(event) {
     this.setState({
-      post: {...this.state.post, detail: event.target.getContent()}
+      post: { ...this.state.post, detail: event.target.getContent() }
     });
-  };
+  }
 
   onAddButton(e) {
     e.preventDefault();
@@ -136,7 +140,7 @@ class EditPostOfNeeder extends Component {
                                     className="form-control"
                                     type="text"
                                     placeholder={this.props.intl.formatMessage({
-                                    id: "Title"
+                                      id: "Title"
                                     })}
                                     onChange={this.handelSetValue}
                                     value={this.state.post.title}
@@ -220,7 +224,7 @@ class EditPostOfNeeder extends Component {
                                     type="number"
                                     onChange={this.handelSetValue}
                                     value={this.state.post.amount_member}
-                                    id = "amount_member"
+                                    id="amount_member"
                                   />
                                   <span className="text-danger">
                                     {this.props.error_descriptions
@@ -244,7 +248,7 @@ class EditPostOfNeeder extends Component {
                                     className="js-states form-control"
                                     onChange={this.handelSetValue}
                                     value={this.state.post.category_id}
-                                    id = "category_id"
+                                    id="category_id"
                                   >
                                     <option value="">
                                       {this.props.intl.formatMessage({
@@ -394,8 +398,14 @@ class EditPostOfNeeder extends Component {
                                     <FormattedMessage id="Start time" />
                                   </label>
                                   <Datetime
-                                    dateFormat="YYYY-MM-DD" timeFormat="HH:mm:ss"
-                                    onChange={(newDate) => this.handelSetValueTime('start_time', newDate)}
+                                    dateFormat="YYYY-MM-DD"
+                                    timeFormat="HH:mm:ss"
+                                    onChange={newDate =>
+                                      this.handelSetValueTime(
+                                        "start_time",
+                                        newDate
+                                      )
+                                    }
                                     value={this.state.post.start_time}
                                   />
                                   <span className="text-danger">
@@ -417,8 +427,14 @@ class EditPostOfNeeder extends Component {
                                     <FormattedMessage id="End time" />
                                   </label>
                                   <Datetime
-                                    dateFormat="YYYY-MM-DD" timeFormat="HH:mm:ss"
-                                    onChange={(newDate) => this.handelSetValueTime('end_time', newDate)}
+                                    dateFormat="YYYY-MM-DD"
+                                    timeFormat="HH:mm:ss"
+                                    onChange={newDate =>
+                                      this.handelSetValueTime(
+                                        "end_time",
+                                        newDate
+                                      )
+                                    }
                                     value={this.state.post.end_time}
                                   />
                                   <span className="text-danger">
@@ -472,7 +488,7 @@ const mapDispatchToProps = dispatch => {
           id: component.state.post.id,
           title: component.state.post.title,
           detail: component.state.post.detail,
-          amount_member: component.state.post.amount_member, 
+          amount_member: component.state.post.amount_member,
           price: component.state.post.price,
           gender: component.state.post.gender,
           start_time: component.state.post.start_time,
@@ -482,13 +498,15 @@ const mapDispatchToProps = dispatch => {
           category_id: component.state.post.category_id
         }
       })
-      .then(res => {
+        .then(res => {
           component.props.history.push("/needer/post");
-          toast.success('Cập nhật thành công', 'Title', {displayDuration:3000});
-      })
-      .catch(error => {
+          toast.success("Cập nhật thành công", "Title", {
+            displayDuration: 3000
+          });
+        })
+        .catch(error => {
           dispatch(raiseError(error.response.data.errors));
-      });
+        });
     }
   };
 };

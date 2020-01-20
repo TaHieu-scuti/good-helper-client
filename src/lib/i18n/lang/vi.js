@@ -144,6 +144,12 @@ export default {
 	'The id card backside must be a file of type: jpeg,  png,  jpg,  gif.': 'Ảnh phải ở định dạng: jpeg,  png,  jpg,  gif. ',
 	'The email has already been taken.' : 'Email đã tồn tại',
 	'The selected role is invalid.': 'Hãy chọn quyền',
-	'The selected genger is invalid.': 'Chọn giới tính'
+	'The selected genger is invalid.': 'Chọn giới tính',
+	'Save successful': 'Lưu thành công',
+	'You have to a helper': 'Bạn phải là helper',
+	'Let log to save': 'Hãy đăng nhập để lưu',
+	'Saved': 'Đã Lưu',
+	'Apply successfully': 'Ứng tuyển thành công',
+	'Appied': 'Đã ứng tuyển'
 };
  

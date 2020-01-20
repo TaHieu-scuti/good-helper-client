@@ -47,24 +47,48 @@ class ListJobSearchAdvanced extends Component {
             }
           })
           .then(res => {
-            toast.success("Apply thành công", "Title", {
-              displayDuration: 3000
-            });
+            toast.success(
+              this.props.intl.formatMessage({
+                id: "Apply successfully"
+              }),
+              "Title",
+              {
+                displayDuration: 3000
+              }
+            );
           })
           .catch(error => {
-            toast.warning("Bạn đã apply", "Title", {
-              displayDuration: 3000
-            });
+            toast.warning(
+              this.props.intl.formatMessage({
+                id: "Appied"
+              }),
+              "Title",
+              {
+                displayDuration: 3000
+              }
+            );
           });
       } else {
-        toast.error("Bạn phải là helper", "Title", {
-          displayDuration: 3000
-        });
+        toast.error(
+          this.props.intl.formatMessage({
+            id: "Let log to save"
+          }),
+          "Title",
+          {
+            displayDuration: 3000
+          }
+        );
       }
     } else {
-      toast.error("Hãy đăng nhập để ứng tuyển", "Title", {
-        displayDuration: 3000
-      });
+      toast.error(
+        this.props.intl.formatMessage({
+          id: "You have to a helper"
+        }),
+        "Title",
+        {
+          displayDuration: 3000
+        }
+      );
     }
   }
 
@@ -80,24 +104,48 @@ class ListJobSearchAdvanced extends Component {
             }
           })
           .then(res => {
-            toast.success("Lưu thành công", "Title", {
-              displayDuration: 3000
-            });
+            toast.success(
+              this.props.intl.formatMessage({
+                id: "Save successful"
+              }),
+              "Title",
+              {
+                displayDuration: 3000
+              }
+            );
           })
           .catch(error => {
-            toast.warning("Bạn đã lưu", "Title", {
-              displayDuration: 3000
-            });
+            toast.warning(
+              this.props.intl.formatMessage({
+                id: "Saved"
+              }),
+              "Title",
+              {
+                displayDuration: 3000
+              }
+            );
           });
       } else {
-        toast.error("Bạn phải là helper", "Title", {
-          displayDuration: 3000
-        });
+        toast.error(
+          this.props.intl.formatMessage({
+            id: "You have to a helper"
+          }),
+          "Title",
+          {
+            displayDuration: 3000
+          }
+        );
       }
     } else {
-      toast.error("Hãy đăng nhập để ứng tuyển", "Title", {
-        displayDuration: 3000
-      });
+      toast.error(
+        this.props.intl.formatMessage({
+          id: "Let log to save"
+        }),
+        "Title",
+        {
+          displayDuration: 3000
+        }
+      );
     }
   }
 

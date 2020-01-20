@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import ItemsCarousel from "react-items-carousel";
 import { IoMdArrowRoundDown } from "react-icons/io";
-import { FormattedMessage, FormattedNumber } from "react-intl";
+import { FormattedMessage, FormattedNumber, injectIntl } from "react-intl";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
@@ -54,8 +54,8 @@ class AutoPlayCarousel extends React.Component {
   }
 
   applyJob(post_id) {
-    if (this.props.me) { 
-      if (this.props.me.role == 2)  {
+    if (this.props.me) {
+      if (this.props.me.role == 2) {
         this.props
           .http({
             url: "/auth/post/apply",
@@ -65,26 +65,48 @@ class AutoPlayCarousel extends React.Component {
             }
           })
           .then(res => {
-            toast.success("Apply thành công", "Title", {
-              displayDuration: 3000
-            });
+            toast.success(
+              this.props.intl.formatMessage({
+                id: "Apply successfully"
+              }),
+              "Title",
+              {
+                displayDuration: 3000
+              }
+            );
           })
           .catch(error => {
-            toast.warning("Bạn đã apply", "Title", {
-              displayDuration: 3000
-            });
+            toast.warning(
+              this.props.intl.formatMessage({
+                id: "Appied"
+              }),
+              "Title",
+              {
+                displayDuration: 3000
+              }
+            );
           });
+      } else {
+        toast.error(
+          this.props.intl.formatMessage({
+            id: "Let log to save"
+          }),
+          "Title",
+          {
+            displayDuration: 3000
+          }
+        );
       }
-      else{
-        toast.error("Bạn phải là helper", "Title", {
+    } else {
+      toast.error(
+        this.props.intl.formatMessage({
+          id: "You have to a helper"
+        }),
+        "Title",
+        {
           displayDuration: 3000
-        });
-      }
-    }
-    else{
-      toast.error("Hãy đăng nhập để ứng tuyển", "Title", {
-        displayDuration: 3000
-      });
+        }
+      );
     }
   }
 
@@ -109,23 +131,23 @@ class AutoPlayCarousel extends React.Component {
                 <Link to={"job/detail/" + item.id}>{item.title}</Link>
               </h4>
               <p>
-              <FormattedMessage id="Location" /> : 
-                {item.location}
+                <FormattedMessage id="Location" /> :{item.location}
               </p>
             </div>
             <div className="job-grid-footer">
               <h6 className="job-price">
-              <FormattedMessage id="Salary" /> : 
+                <FormattedMessage id="Salary" /> :
                 <FormattedNumber value={item.price} /> đ
               </h6>
-              {!this.props.me  || (this.props.me && this.props.me.role != 1) && (
-            <button
-            className="btn btn-outline-info btn-rounded"
-            onClick= {this.applyJob.bind(this, item.id)}
-          >
-            <FormattedMessage id="Apply" />
-          </button>
-          )}
+              {!this.props.me ||
+                (this.props.me && this.props.me.role != 1 && (
+                  <button
+                    className="btn btn-outline-info btn-rounded"
+                    onClick={this.applyJob.bind(this, item.id)}
+                  >
+                    <FormattedMessage id="Apply" />
+                  </button>
+                ))}
             </div>
           </div>
         </div>
@@ -155,4 +177,4 @@ const mapStateToProps = (stateStore, ownProps) => {
   return newState;
 };
 
-export default connect(mapStateToProps)(AutoPlayCarousel);
+export default connect(mapStateToProps)(injectIntl(AutoPlayCarousel));

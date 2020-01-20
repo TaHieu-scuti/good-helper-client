@@ -30,7 +30,8 @@ class ListJob extends Component {
       pageNumber: pageNumber
     });
   }
-  applyJob(post_id) {
+
+    applyJob(post_id) {
     if (this.props.me) {
       if (this.props.me.role == 2) {
         this.props
@@ -42,22 +43,30 @@ class ListJob extends Component {
             }
           })
           .then(res => {
-            toast.success("Apply thành công", "Title", {
+            toast.success(this.props.intl.formatMessage({
+              id: "Apply successfully"
+            }), "Title", {
               displayDuration: 3000
             });
           })
           .catch(error => {
-            toast.warning("Bạn đã apply", "Title", {
+            toast.warning(this.props.intl.formatMessage({
+              id: "Appied"
+            }), "Title", {
               displayDuration: 3000
             });
           });
       } else {
-        toast.error("Bạn phải là helper", "Title", {
+        toast.error(this.props.intl.formatMessage({
+          id: "Let log to save"
+        }), "Title", {
           displayDuration: 3000
         });
       }
     } else {
-      toast.error("Hãy đăng nhập để ứng tuyển", "Title", {
+      toast.error(this.props.intl.formatMessage({
+        id: "You have to a helper"
+      }), "Title", {
         displayDuration: 3000
       });
     }
@@ -75,22 +84,30 @@ class ListJob extends Component {
             }
           })
           .then(res => {
-            toast.success("Lưu thành công", "Title", {
+            toast.success(this.props.intl.formatMessage({
+              id: "Save successful"
+            }), "Title", {
               displayDuration: 3000
             });
           })
           .catch(error => {
-            toast.warning("Bạn đã lưu", "Title", {
+            toast.warning(this.props.intl.formatMessage({
+              id: "Saved"
+            }), "Title", {
               displayDuration: 3000
             });
           });
       } else {
-        toast.error("Bạn phải là helper", "Title", {
+        toast.error(this.props.intl.formatMessage({
+          id: "You have to a helper"
+        }), "Title", {
           displayDuration: 3000
         });
       }
     } else {
-      toast.error("Hãy đăng nhập để ứng tuyển", "Title", {
+      toast.error(this.props.intl.formatMessage({
+        id: "Let log to save"
+      }), "Title", {
         displayDuration: 3000
       });
     }

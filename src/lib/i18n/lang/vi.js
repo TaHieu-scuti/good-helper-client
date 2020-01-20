@@ -150,6 +150,7 @@ export default {
 	'Let log to save': 'Hãy đăng nhập để lưu',
 	'Saved': 'Đã Lưu',
 	'Apply successfully': 'Ứng tuyển thành công',
-	'Appied': 'Đã ứng tuyển'
+	'Appied': 'Đã ứng tuyển',
+	'Posts was be canceled': 'Bài viết đã bị từ chối'
 };
  

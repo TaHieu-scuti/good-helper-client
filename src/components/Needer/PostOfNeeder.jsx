@@ -17,7 +17,7 @@ class PostOfNeeder extends Component {
       pagination: {}
     };
     this.handlePageChange = this.handlePageChange.bind(this);
-  } 
+  }
 
   componentDidMount() {
     this.props
@@ -45,7 +45,7 @@ class PostOfNeeder extends Component {
       .then(res => {
         this.setState({ data: res.data.response.posts });
       });
-    this.setState({ activePage: pageNumber });
+    this.setState({ activePage: pageNumber } );
   }
 
   render() {
@@ -60,7 +60,7 @@ class PostOfNeeder extends Component {
               <Link to={"/approve/user/" + item.id}>{item.title}</Link>
               <span className="j-full-time">{item.type}</span>
               <Link to={"/edit/post/" + item.id} className="btn download-btn">
-                <FaEdit /> 
+                <FaEdit />
               </Link>
             </h5>
             <p>{item.category}</p>

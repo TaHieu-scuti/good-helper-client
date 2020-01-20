@@ -18,7 +18,7 @@ class ApproveHelper extends Component {
       pagination: {}
     };
     this.handlePageChange = this.handlePageChange.bind(this);
-  } 
+  }
 
   componentDidMount() {
     this.props
@@ -26,7 +26,7 @@ class ApproveHelper extends Component {
         url: "/auth/post/needer/post",
         method: "POST",
         data: {
-         post_id: this.props.match.params.id
+          post_id: this.props.match.params.id
         }
       })
       .then(res => {
@@ -54,70 +54,70 @@ class ApproveHelper extends Component {
 
   approveHelper(user_id) {
     this.props
-    .http({
-      url: "/auth/post/approve",
-      method: "POST",
-      data: {
+      .http({
+        url: "/auth/post/approve",
+        method: "POST",
+        data: {
           post_id: this.props.match.params.id,
           user_id: user_id
-      }
-    })
-    .then(res => {
-      toast.success(
-        this.props.intl.formatMessage({
-          id: "Approve successfully"
-        }),
-        "Title",
-        {
-          displayDuration: 3000
         }
-      );
-    })
-    .catch(error => {
-      toast.warning(
-        this.props.intl.formatMessage({
-          id: "Fail"
-        }),
-        "Title",
-        {
-          displayDuration: 3000
-        }
-      );
-    });
+      })
+      .then(res => {
+        toast.success(
+          this.props.intl.formatMessage({
+            id: "Approve successfully"
+          }),
+          "Title",
+          {
+            displayDuration: 3000
+          }
+        );
+      })
+      .catch(error => {
+        toast.warning(
+          this.props.intl.formatMessage({
+            id: "Fail"
+          }),
+          "Title",
+          {
+            displayDuration: 3000
+          }
+        );
+      });
   }
 
   cancelHelper(user_id) {
     this.props
-    .http({
-      url: "/auth/post/cancel/approve",
-      method: "POST",
-      data: {
+      .http({
+        url: "/auth/post/cancel/approve",
+        method: "POST",
+        data: {
           post_id: this.props.match.params.id,
           user_id: user_id
-      }
-    })
-    .then(res => {
-      toast.success(
-        this.props.intl.formatMessage({
-          id: "Cancel successfully"
-        }),
-        "Title",
-        {
-          displayDuration: 3000
         }
-      );
-    })
-    .catch(error => {
-      toast.warning(
-        this.props.intl.formatMessage({
-          id: "Fail"
-        }),
-        "Title",
-        {
-          displayDuration: 3000
-        }
-      );
-    });
+      })
+      .then(res => {
+        toast.success(
+          this.props.intl.formatMessage({
+            id: "Cancel successfully"
+          }),
+          "Title",
+          {
+            displayDuration: 3000
+          }
+        );
+      })
+      .catch(error => {
+        toast.warning(
+          this.props.intl.formatMessage({
+            id: "Fail"
+          }),
+          "Title",
+          {
+            displayDuration: 3000
+          }
+        );
+      });
   }
 
   render() {
@@ -129,11 +129,14 @@ class ApproveHelper extends Component {
           </div>
           <div className="vc-content">
             <h5 className="title">
-              <Link to={"job/detail/" + item.id}>{item.first_name}  {item.last_name}</Link>
+              <Link to={"job/detail/" + item.id}>
+                {item.first_name} {item.last_name}
+              </Link>
               <span className="j-full-time">{item.phone}</span>
-              <a 
-               className="btn download-btn"
-               onClick={this.cancelHelper.bind(this, item.id)}>
+              <a
+                className="btn download-btn"
+                onClick={this.cancelHelper.bind(this, item.id)}
+              >
                 <FaTimes />
               </a>
             </h5>

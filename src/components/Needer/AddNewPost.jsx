@@ -9,6 +9,7 @@ import Datetime from "react-datetime";
 import { raiseError } from "../../lib/redux/actions";
 import moment from "moment";
 import { toast } from 'react-toastify';
+import CurrencyFormat from 'react-currency-format';
 
 class AddNewPost extends Component {
   constructor(props) {
@@ -46,9 +47,9 @@ class AddNewPost extends Component {
     });
   };
 
-  handelSetValuePrice = event => {
+  handelSetValuePrice = values => {
     this.setState({
-      price: event.target.value
+      price: values.value
     });
   };
 
@@ -189,10 +190,10 @@ class AddNewPost extends Component {
                                   <label>
                                     <FormattedMessage id="Salary" />
                                   </label>
-                                  <input
+                                  <CurrencyFormat
                                     className="form-control"
-                                    type="number"
-                                    onChange={this.handelSetValuePrice}
+                                    thousandSeparator={true}
+                                    onValueChange={this.handelSetValuePrice}
                                   />
                                   <span className="text-danger">
                                     {this.props.error_descriptions.price ? (

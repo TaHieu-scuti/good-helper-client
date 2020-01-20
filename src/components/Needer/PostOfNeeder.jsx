@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import Sidebar from "./../Profile/Sidebar";
 import { connect } from "react-redux";
 import { IoLogoUsd } from "react-icons/io";
-import { FormattedMessage, FormattedNumber } from "react-intl";
+import { FormattedMessage, FormattedNumber,injectIntl } from "react-intl";
 import Pagination from "react-js-pagination";
 import { Link } from "react-router-dom";
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaTimes } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 class PostOfNeeder extends Component {
   constructor(props) {
@@ -45,7 +46,29 @@ class PostOfNeeder extends Component {
       .then(res => {
         this.setState({ data: res.data.response.posts });
       });
-    this.setState({ activePage: pageNumber } );
+    this.setState({ activePage: pageNumber });
+  }
+
+  deletePost(post_id) {
+    this.props
+      .http({
+        url: "/auth/post/delete/",
+        method: "POST",
+        data: {
+          post_id :post_id
+        }
+      })
+      .then(res => {
+        toast.warning(
+          this.props.intl.formatMessage({
+            id: "Saved"
+          }),
+          "Title",
+          {
+            displayDuration: 3000
+          }
+        );
+      });
   }
 
   render() {
@@ -86,6 +109,12 @@ class PostOfNeeder extends Component {
               </li>
             </ul>
           </div>
+          <a
+            className="btn btn-outline-info bn-det dlt"
+            onClick={this.deletePost.bind(this, item.id)}
+          >
+            <FaTimes />
+          </a>
           <br />
         </div>
       );
@@ -93,7 +122,7 @@ class PostOfNeeder extends Component {
 
     let data = (
       <div className="row">
-        <p className="text-danger" style={{margin: "auto"}}>
+        <p className="text-danger" style={{ margin: "auto" }}>
           <FormattedMessage id="Dont have the data" />
         </p>
       </div>
@@ -154,4 +183,4 @@ const mapStateToProps = (stateStore, ownProps) => {
   return newState;
 };
 
-export default connect(mapStateToProps)(PostOfNeeder);
+export default connect(mapStateToProps)(injectIntl(PostOfNeeder));

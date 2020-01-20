@@ -4,9 +4,10 @@ import { connect } from "react-redux";
 import { FormattedMessage, injectIntl } from "react-intl";
 import Pagination from "react-js-pagination";
 import { Link } from "react-router-dom";
-import { FaTimes } from "react-icons/fa";
+import { FaTimes, FaRegCheckCircle } from "react-icons/fa";
 import { IoMdArrowForward } from "react-icons/io";
 import { toast } from "react-toastify";
+import {Card} from "react-bootstrap"
 
 class ApproveHelper extends Component {
   constructor(props) {
@@ -157,23 +158,22 @@ class ApproveHelper extends Component {
             </ul>
           </div>
           <br />
-          <button
-            className="btn btn-outline-info bn-det"
-            style={{ marginTop: "20px" }}
-            onClick={this.approveHelper.bind(this, item.id)}
-          >
-            <FormattedMessage id="Approve" />
-            <IoMdArrowForward />
-          </button>
+          
+          <a
+                 className="btn btn-outline-info bn-det"
+                onClick={this.approveHelper.bind(this, item.id)}
+              >
+                <FaTimes />
+              </a>
         </div>
       );
     });
 
     let data = (
       <div className="row">
-        <h3 className="text-danger">
+        <p className="text-danger" style={{margin: "auto"}}>
           <FormattedMessage id="Dont have the data" />
-        </h3>
+        </p>
       </div>
     );
 
@@ -203,7 +203,7 @@ class ApproveHelper extends Component {
         <section className="tr-single-detail gray-bg">
           <div className="container">
             <div className="row">
-              <Sidebar user={this.props.user} />
+              <Sidebar user={this.props.user} /> 
               <div className="col-md-8 col-sm-12">
                 <div className="tab-pane active container" id="c-profile">
                   <div className="tr-single-box">

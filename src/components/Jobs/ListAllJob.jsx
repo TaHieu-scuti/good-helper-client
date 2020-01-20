@@ -192,9 +192,9 @@ class ListALLJob extends Component {
 
     let data = (
       <div className="row">
-        <h3 className="text-danger">
+        <p className="text-danger" style={{margin: "auto"}}>
           <FormattedMessage id="Dont have the data" />
-        </h3>
+        </p>
       </div>
     );
 

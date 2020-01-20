@@ -215,6 +215,7 @@ class EditProfile extends Component {
                                 <div className="form-group">
                                   <label>
                                     <FormattedMessage id="First name" />
+                                    <span className="text-danger">*</span>
                                   </label>
                                   <input
                                     className="form-control"
@@ -232,12 +233,13 @@ class EditProfile extends Component {
                                       }
                                     />
                                   ) : null}
-                                </span>
+                                </span> 
                               </div>
                               <div className="col-lg-12 col-md-12 col-sm-12">
                                 <div className="form-group">
                                   <label>
                                     <FormattedMessage id="Last name" />
+                                    <span className="text-danger">*</span>
                                   </label>
                                   <input
                                     className="form-control"
@@ -259,7 +261,10 @@ class EditProfile extends Component {
                               </div>
                               <div className="col-lg-6 col-md-6 col-sm-12">
                                 <div className="form-group">
-                                  <label>Email</label>
+                                  <label>
+                                    Email
+                                    <span className="text-danger">*</span>
+                                  </label>
                                   <input
                                     className="form-control"
                                     type="text"
@@ -280,6 +285,7 @@ class EditProfile extends Component {
                                 <div className="form-group">
                                   <label>
                                     <FormattedMessage id="Number id card" />
+                                    <span className="text-danger">*</span>
                                   </label>
                                   <input
                                     className="form-control"
@@ -300,6 +306,7 @@ class EditProfile extends Component {
                                 <div className="form-group">
                                   <label>
                                     <FormattedMessage id="Phone number" />
+                                    <span className="text-danger">*</span>
                                   </label>
                                   <input
                                     readOnly
@@ -314,6 +321,7 @@ class EditProfile extends Component {
                                 <div className="form-group">
                                   <label>
                                     <FormattedMessage id="Gender" />
+                                    <span className="text-danger">*</span>
                                   </label>
                                   <select
                                     id="appointment-service"
@@ -338,6 +346,7 @@ class EditProfile extends Component {
                                 <div className="form-group">
                                   <label>
                                     <FormattedMessage id="Avatar" />
+                                    <span className="text-danger">*</span>
                                   </label>
                                   <div className="custom-file">
                                     <input
@@ -350,7 +359,7 @@ class EditProfile extends Component {
                                       className="custom-file-label"
                                       htmlFor="clogo"
                                     >
-                                      Choose file
+                                      Chọn 
                                     </label>
                                   </div>
                                 </div>
@@ -366,7 +375,8 @@ class EditProfile extends Component {
                               <div className="col-lg-6 col-md-6 col-sm-6">
                                 <div className="form-group">
                                   <label>
-                                    <FormattedMessage id="Id card font" />{" "}
+                                    <FormattedMessage id="Id card font" />
+                                    <span className="text-danger">*</span>
                                   </label>
                                   <div className="custom-file">
                                     <input
@@ -379,7 +389,7 @@ class EditProfile extends Component {
                                       className="custom-file-label"
                                       htmlFor="ccover"
                                     >
-                                      Choose file
+                                      Chọn
                                     </label>
                                   </div>
                                 </div>
@@ -400,6 +410,7 @@ class EditProfile extends Component {
                                 <div className="form-group">
                                   <label>
                                     <FormattedMessage id="Id card backside" />
+                                    <span className="text-danger">*</span>
                                   </label>
                                   <div className="custom-file">
                                     <input
@@ -414,7 +425,7 @@ class EditProfile extends Component {
                                       className="custom-file-label"
                                       htmlFor="ccover"
                                     >
-                                      Choose file
+                                      Chọn
                                     </label>
                                   </div>
                                 </div>

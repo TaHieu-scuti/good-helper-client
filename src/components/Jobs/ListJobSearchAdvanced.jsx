@@ -179,10 +179,12 @@ class ListJobSearchAdvanced extends Component {
     });
 
     let data = (
+      <div className="tr-single-body" style= {{height: "500px"}}>
       <div className="row">
         <p className="text-danger" style={{margin: "auto"}}>
           <FormattedMessage id="Dont have the data" />
         </p>
+      </div>
       </div>
     );
 

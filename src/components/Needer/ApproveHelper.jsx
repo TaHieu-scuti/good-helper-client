@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { FaTimes, FaRegCheckCircle } from "react-icons/fa";
 import { IoMdArrowForward } from "react-icons/io";
 import { toast } from "react-toastify";
-import {Card} from "react-bootstrap"
+import { Card } from "react-bootstrap";
 
 class ApproveHelper extends Component {
   constructor(props) {
@@ -64,6 +64,10 @@ class ApproveHelper extends Component {
         }
       })
       .then(res => {
+        this.setState({
+          data: res.data.response.users,
+          pagination: res.data.response.pagination
+        });
         toast.success(
           this.props.intl.formatMessage({
             id: "Approve successfully"
@@ -98,6 +102,10 @@ class ApproveHelper extends Component {
         }
       })
       .then(res => {
+        this.setState({
+          data: res.data.response.users,
+          pagination: res.data.response.pagination
+        });
         toast.success(
           this.props.intl.formatMessage({
             id: "Cancel successfully"
@@ -134,12 +142,12 @@ class ApproveHelper extends Component {
                 {item.first_name} {item.last_name}
               </Link>
               <span className="j-full-time">{item.phone}</span>
-              <a
-                className="btn download-btn"
+              <button
+                className="btn btn-outline-info bn-det cancel"
                 onClick={this.cancelHelper.bind(this, item.id)}
               >
                 <FaTimes />
-              </a>
+              </button>
             </h5>
             <p>{item.role_name}</p>
             <ul className="vc-info-list">
@@ -158,28 +166,30 @@ class ApproveHelper extends Component {
             </ul>
           </div>
           <br />
-          
-          <a
-                 className="btn btn-outline-info bn-det"
-                onClick={this.approveHelper.bind(this, item.id)}
-              >
-                <FaTimes />
-              </a>
+
+          <button
+            className="btn btn-outline-info bn-det dlt"
+            onClick={this.approveHelper.bind(this, item.id)}
+          >
+            <FaRegCheckCircle />
+          </button>
         </div>
       );
     });
 
     let data = (
-      <div className="row">
-        <p className="text-danger" style={{margin: "auto"}}>
-          <FormattedMessage id="Dont have the data" />
-        </p>
+      <div className="tr-single-body" style={{ height: "500px" }}>
+        <div className="row">
+          <p className="text-danger" style={{ margin: "auto" }}>
+            <FormattedMessage id="Dont have the data" />
+          </p>
+        </div>
       </div>
     );
 
     if (this.state.data.length > 0) {
       data = (
-        <div>
+        <div className="tr-single-body">
           <div className="row">
             <div className="col-md-12">{ListUser}</div>
           </div>
@@ -203,7 +213,7 @@ class ApproveHelper extends Component {
         <section className="tr-single-detail gray-bg">
           <div className="container">
             <div className="row">
-              <Sidebar user={this.props.user} /> 
+              <Sidebar user={this.props.user} />
               <div className="col-md-8 col-sm-12">
                 <div className="tab-pane active container" id="c-profile">
                   <div className="tr-single-box">
@@ -213,7 +223,7 @@ class ApproveHelper extends Component {
                         <FormattedMessage id="My post" />
                       </h3>
                     </div>
-                    <div className="tr-single-body">{data}</div>
+                    {data}
                   </div>
                 </div>
               </div>

@@ -89,21 +89,23 @@ class JobMarkdowned extends Component {
     });
 
     let data = (
+      <div className="tr-single-body" style= {{height: "500px"}}>
       <div className="row">
         <p className="text-danger" style={{margin: "auto"}}>
           <FormattedMessage id="Dont have the data" />
         </p>
       </div>
+      </div>
     );
 
     if (this.state.data.length > 0) {
       data = (
-        <div>
+        <div className="tr-single-body">
           <div className="row">
             <div className="col-md-12">{ListJob}</div>
           </div>
-          <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12">
+          <div className="row">
+            <div className="col-lg-12 col-md-12 col-sm-12">
               <Pagination
                 activePage={this.state.activePage}
                 itemsCountPerPage={this.state.pagination.perPage}

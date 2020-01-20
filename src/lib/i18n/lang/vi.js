@@ -155,6 +155,7 @@ export default {
 	'Approve successfully': 'Xác nhận thành công',
 	'Fail': 'Thất bại',
 	'Approve': 'Xác nhận',
-	'Cancel successfully': 'Hủy thành công'
+	'Cancel successfully': 'Hủy thành công',
+	'Deleted': 'Đã xóa'
 };
  

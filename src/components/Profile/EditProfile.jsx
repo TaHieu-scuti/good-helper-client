@@ -138,24 +138,24 @@ class EditProfile extends Component {
     let avatarPreviewUrl = this.state.imageAvartarPreviewUrl;
     let $avatarPreview = null;
     if (avatarPreviewUrl) {
-      $avatarPreview = <img class="img-fluid mx-auto" src={avatarPreviewUrl} />;
+      $avatarPreview = <img class="img-fluid mx-auto"  width= "300px" src={avatarPreviewUrl} />;
     } else if (this.state.avatarUrl.length > 26) {
       $avatarPreview = (
-        <img src={this.state.avatarUrl} class="img-fluid mx-auto" />
+        <img src={this.state.avatarUrl} width= "300px" style={{margin:"auto"}}class="img-fluid mx-auto" />
       );
     } else {
-      $avatarPreview = <img class="img-fluid mx-auto" src={imageDefault} />;
+      $avatarPreview = <img class="img-fluid mx-auto" width= "300px" src={imageDefault} />;
     }
 
     let idCardFontPreviewUrl = this.state.imageIdCardFontPreviewUrl;
     let idCardFontPreview = null;
     if (idCardFontPreviewUrl) {
       idCardFontPreview = (
-        <img class="img-fluid mx-auto" src={idCardFontPreviewUrl} />
+        <img class="img-fluid mx-auto" width= "300px" src={idCardFontPreviewUrl} />
       );
     } else if (this.state.IdCardFontUrl.length > 26) {
       idCardFontPreview = (
-        <img src={this.state.IdCardFontUrl} class="img-fluid mx-auto" />
+        <img src={this.state.IdCardFontUrl} width= "300px" class="img-fluid mx-auto" />
       );
     } else {
       idCardFontPreview = (
@@ -163,7 +163,7 @@ class EditProfile extends Component {
           <span className="text-danger">
             <FormattedMessage id="Update id card font side" />
           </span>
-          <img class="img-fluid mx-auto" src={imageDefault} />
+          <img class="img-fluid mx-auto" width= "300px" src={imageDefault} />
         </div>
       );
     }
@@ -172,11 +172,11 @@ class EditProfile extends Component {
     let idCardBackPreview = null;
     if (idCardBackPreviewUrl) {
       idCardBackPreview = (
-        <img class="img-fluid mx-auto" src={idCardBackPreviewUrl} />
+        <img class="img-fluid mx-auto"  width= "300px" src={idCardBackPreviewUrl} />
       );
     } else if (this.state.IdCardBackUrl.length > 26) {
       idCardBackPreview = (
-        <img src={this.state.IdCardFontUrl} class="img-fluid mx-auto" />
+        <img src={this.state.IdCardFontUrl}  width= "300px" class="img-fluid mx-auto" />
       );
     } else {
       idCardBackPreview = (
@@ -184,7 +184,7 @@ class EditProfile extends Component {
           <span className="text-danger">
             <FormattedMessage id="Update id card backside" />
           </span>
-          <img class="img-fluid mx-auto" src={imageDefault} />
+          <img class="img-fluid mx-auto"  width= "300px" src={imageDefault} />
         </div>
       );
     }
@@ -342,7 +342,7 @@ class EditProfile extends Component {
                                   ) : null}
                                 </span>
                               </div>
-                              <div className="col-lg-6 col-md-6 col-sm-6">
+                              <div className="col-lg-12 col-md-12 col-sm-12">
                                 <div className="form-group">
                                   <label>
                                     <FormattedMessage id="Avatar" />
@@ -406,7 +406,7 @@ class EditProfile extends Component {
                                   ) : null}
                                 </span>
                               </div>
-                              <div className="col-lg-12 col-md-12 col-sm-12">
+                              <div className="col-lg-6 col-md-6 col-sm-6">
                                 <div className="form-group">
                                   <label>
                                     <FormattedMessage id="Id card backside" />

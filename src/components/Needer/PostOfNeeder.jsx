@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Sidebar from "./../Profile/Sidebar";
 import { connect } from "react-redux";
 import { IoLogoUsd } from "react-icons/io";
-import { FormattedMessage, FormattedNumber,injectIntl } from "react-intl";
+import { FormattedMessage, FormattedNumber, injectIntl } from "react-intl";
 import Pagination from "react-js-pagination";
 import { Link } from "react-router-dom";
 import { FaEdit, FaTimes } from "react-icons/fa";
@@ -52,16 +52,20 @@ class PostOfNeeder extends Component {
   deletePost(post_id) {
     this.props
       .http({
-        url: "/auth/post/delete/",
+        url: "/auth/post/delete",
         method: "POST",
         data: {
-          post_id :post_id
+          id: post_id
         }
       })
       .then(res => {
-        toast.warning(
+        this.setState({
+          data: res.data.response.posts,
+          pagination: res.data.response.pagination
+        });
+        toast.success(
           this.props.intl.formatMessage({
-            id: "Saved"
+            id: "Deleted"
           }),
           "Title",
           {
@@ -82,7 +86,7 @@ class PostOfNeeder extends Component {
             <h5 className="title">
               <Link to={"/approve/user/" + item.id}>{item.title}</Link>
               <span className="j-full-time">{item.type}</span>
-              <Link to={"/edit/post/" + item.id} className="btn download-btn">
+              <Link to={"/edit/post/" + item.id} className="btn btn-outline-info bn-det cancel">
                 <FaEdit />
               </Link>
             </h5>
@@ -109,28 +113,31 @@ class PostOfNeeder extends Component {
               </li>
             </ul>
           </div>
-          <a
+          <button
             className="btn btn-outline-info bn-det dlt"
             onClick={this.deletePost.bind(this, item.id)}
           >
             <FaTimes />
-          </a>
+          </button>
+
           <br />
         </div>
       );
     });
 
     let data = (
-      <div className="row">
-        <p className="text-danger" style={{ margin: "auto" }}>
-          <FormattedMessage id="Dont have the data" />
-        </p>
+      <div className="tr-single-body" style={{ height: "500px" }}>
+        <div className="row">
+          <p className="text-danger" style={{ margin: "auto" }}>
+            <FormattedMessage id="Dont have the data" />
+          </p>
+        </div>
       </div>
     );
 
     if (this.state.data.length > 0) {
       data = (
-        <div>
+        <div className="tr-single-body">
           <div className="row">
             <div className="col-md-12">{ListJob}</div>
           </div>

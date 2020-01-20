@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import Sidebar from "./../Profile/Sidebar";
 import { connect } from "react-redux";
-import { IoLogoUsd } from "react-icons/io";
 import { FormattedMessage } from "react-intl";
 import Pagination from "react-js-pagination";
 import { Link } from "react-router-dom";
-import { FaEdit } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
+import { IoMdArrowForward } from "react-icons/io";
 
 class ApproveHelper extends Component {
   constructor(props) {
@@ -23,11 +23,14 @@ class ApproveHelper extends Component {
     this.props
       .http({
         url: "/auth/post/needer/post",
-        method: "POST"
+        method: "POST",
+        data: {
+         post_id: this.props.match.params.id
+        }
       })
       .then(res => {
         this.setState({
-          data: res.data.response.posts,
+          data: res.data.response.users,
           pagination: res.data.response.pagination
         });
       });
@@ -63,7 +66,9 @@ class ApproveHelper extends Component {
   }
 
   render() {
-    const ListJob = this.state.data.map((item, idx) => {
+    console.log(this.props.state);
+    
+    const ListUser = this.state.data.map((item, idx) => {
       return (
         <div className="job-new-list" key={idx}>
           <div className="vc-thumb">
@@ -71,36 +76,36 @@ class ApproveHelper extends Component {
           </div>
           <div className="vc-content">
             <h5 className="title">
-              <Link to={"job/detail/" + item.id}>{item.title}</Link>
-              <span className="j-full-time">{item.type}</span>
-              <Link to={"/edit/post/" + item.id} cclassName="btn download-btn">
-                <FaEdit /> <FormattedMessage id="Edit" />
-              </Link>
+              <Link to={"job/detail/" + item.id}>{item.last_name}</Link>
+              <span className="j-full-time">{item.phone}</span>
+              <a href="#" className="btn download-btn">
+                <FaTimes />
+              </a>
             </h5>
-            <p>{item.category}</p>
             <ul className="vc-info-list">
               <li className="list-inline-item">
                 <h5>
-                  <FormattedMessage id="Salary" />
+                  <FormattedMessage id="Email" />
                 </h5>
-                <IoLogoUsd />
-                {item.price}
+                {item.email}
               </li>
               <li className="list-inline-item">
                 <h5>
-                  <FormattedMessage id="Start" />
+                  <FormattedMessage id="Gender" />
                 </h5>
-                {item.start_time}
-              </li>
-              <li className="list-inline-item">
-                <h5>
-                  <FormattedMessage id="Location" />
-                </h5>
-                <div className="skills">{item.location}</div>
+                {item.gender}
               </li>
             </ul>
           </div>
           <br />
+          <a
+            className="btn btn-outline-info bn-det"
+            href="#"
+            style={{ marginTop: "20px" }}
+          >
+            <FormattedMessage id="Approve" />
+            <IoMdArrowForward />
+          </a>
         </div>
       );
     });
@@ -117,7 +122,7 @@ class ApproveHelper extends Component {
       data = (
         <div>
           <div className="row">
-            <div className="col-md-12">{ListJob}</div>
+            <div className="col-md-12">{ListUser}</div>
           </div>
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">

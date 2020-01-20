@@ -16,6 +16,7 @@ import EditPostOfNeeder from './components/Needer/EditPostOfNeeder'
 import AddPostOfNeeder from './components/Needer/AddNewPost'
 import JobFinishOfHelper from './components/Helper/JobFinishOfHelper'
 import PostOfNeeder from './components/Needer/PostOfNeeder'
+import ApproveHelper from './components/Needer/ApproveHelper'
 
 const routes = [
   { path: '/home', exact: true, name: 'Home', component: HomePage },
@@ -36,6 +37,7 @@ const routes = [
   { path: '/add/post/needer', name: 'AddPostOfNeeder', component: AddPostOfNeeder },
   { path: '/post/finish', name: 'jobFinish', component: JobFinishOfHelper },
   { path: '/needer/post', name: 'PostOfNeeder', component: PostOfNeeder },
+  { path: '/approve/user/:id', name: 'approveUser', component: ApproveHelper },
 ];
 
 export default routes;

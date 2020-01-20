@@ -57,7 +57,7 @@ class PostOfNeeder extends Component {
           </div>
           <div className="vc-content">
             <h5 className="title">
-              <Link to={"job/detail/" + item.id}>{item.title}</Link>
+              <Link to={"/approve/user/" + item.id}>{item.title}</Link>
               <span className="j-full-time">{item.type}</span>
               <Link to={"/edit/post/" + item.id} cclassName="btn download-btn">
                 <FaEdit /> <FormattedMessage id="Edit" />

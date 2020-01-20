@@ -83,6 +83,39 @@ class ListALLJob extends Component {
     }
   }
 
+  markdownJob(post_id) {
+    if (this.props.me) {
+      if (this.props.me.role == 2) {
+        this.props
+          .http({
+            url: "/auth/book-mark/post",
+            method: "POST",
+            data: {
+              post_id: post_id
+            }
+          })
+          .then(res => {
+            toast.success("Lưu thành công", "Title", {
+              displayDuration: 3000
+            });
+          })
+          .catch(error => {
+            toast.warning("Bạn đã lưu", "Title", {
+              displayDuration: 3000
+            });
+          });
+      } else {
+        toast.error("Bạn phải là helper", "Title", {
+          displayDuration: 3000
+        });
+      }
+    } else {
+      toast.error("Hãy đăng nhập để ứng tuyển", "Title", {
+        displayDuration: 3000
+      });
+    }
+  }
+
   render() {
     const ListJob = this.state.data.map((item, idx) => {
       return (
@@ -94,9 +127,15 @@ class ListALLJob extends Component {
             <h5 className="title">
               <Link to={"/job/detail/" + item.id}>{item.title}</Link>
               <span className="j-full-time">{item.type}</span>
-              <a href="#" className="btn download-btn">
-                <IoMdArrowRoundDown />
-              </a>
+              {!this.props.me ||
+                (this.props.me && this.props.me.role != 1 && (
+                  <a
+                    className="btn download-btn"
+                    onClick={this.markdownJob.bind(this, item.id)}
+                  >
+                    <IoMdArrowRoundDown />
+                  </a>
+                ))}
             </h5>
             <p>{item.category}</p>
             <ul className="vc-info-list">

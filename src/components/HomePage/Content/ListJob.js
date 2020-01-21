@@ -140,6 +140,14 @@ class AutoPlayCarousel extends React.Component {
                     <FormattedMessage id="Apply" />
                   </button>
                 ))}
+                {!this.props.me ||
+                (this.props.me && this.props.me.role != 1 && item.is_apply == 1 && (
+                  <button
+                    className="btn btn-outline-info btn-rounded nut"
+                  >
+                    <FormattedMessage id="Applied" />
+                  </button>
+                ))}
             </div>
           </div>
         </div>

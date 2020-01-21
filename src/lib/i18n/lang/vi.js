@@ -154,6 +154,7 @@ export default {
 	'Appied': 'Đã ứng tuyển',
 	'Posts was be canceled': 'Bài viết đã bị từ chối',
 	'Status: Appling' : 'Trạng thái:  Appling',
+	'Unmark successfully': 'Bỏ lưu thành công',
 	'Posts is doing': 'Các công việc đang làm',
 	'Approve successfully': 'Xác nhận thành công',
 	'Fail': 'Thất bại',

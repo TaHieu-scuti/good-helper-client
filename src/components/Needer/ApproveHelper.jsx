@@ -138,7 +138,7 @@ class ApproveHelper extends Component {
           </div>
           <div className="vc-content">
             <h5 className="title">
-              <Link to={"job/detail/" + item.id}>
+              <Link style={{textDecoration: "none"}}>
                 {item.first_name} {item.last_name}
               </Link>
               <span className="j-full-time">{item.phone}</span>

@@ -165,6 +165,8 @@ export default {
 	'Edit': 'Sửa',
 	'Cancel': 'Từ chối',
 	'Approve': 'Chấp nhận',
-	'Save': 'Lưu'
+	'Save': 'Lưu',
+	'User is doing': 'Những người đang làm',
+	'User applied': 'Những người đã ứng tuyển'
 };
  

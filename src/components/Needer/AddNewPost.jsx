@@ -8,7 +8,8 @@ import { Editor } from "@tinymce/tinymce-react";
 import Datetime from "react-datetime";
 import { raiseError } from "../../lib/redux/actions";
 import moment from "moment";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
+import CurrencyFormat from "react-currency-format";
 
 class AddNewPost extends Component {
   constructor(props) {
@@ -46,9 +47,9 @@ class AddNewPost extends Component {
     });
   };
 
-  handelSetValuePrice = event => {
+  handelSetValuePrice = values => {
     this.setState({
-      price: event.target.value
+      price: values.value
     });
   };
 
@@ -189,10 +190,10 @@ class AddNewPost extends Component {
                                   <label>
                                     <FormattedMessage id="Salary" />
                                   </label>
-                                  <input
+                                  <CurrencyFormat
                                     className="form-control"
-                                    type="number"
-                                    onChange={this.handelSetValuePrice}
+                                    thousandSeparator={true}
+                                    onValueChange={this.handelSetValuePrice}
                                   />
                                   <span className="text-danger">
                                     {this.props.error_descriptions.price ? (
@@ -379,7 +380,8 @@ class AddNewPost extends Component {
                                     <FormattedMessage id="Start time" />
                                   </label>
                                   <Datetime
-                                    dateFormat="YYYY-MM-DD" timeFormat="HH:mm:ss"
+                                    dateFormat="YYYY-MM-DD"
+                                    timeFormat="HH:mm:ss"
                                     onChange={this.handelSetValueStartTime}
                                   />
                                   <span className="text-danger">
@@ -401,7 +403,8 @@ class AddNewPost extends Component {
                                     <FormattedMessage id="End time" />
                                   </label>
                                   <Datetime
-                                    dateFormat="YYYY-MM-DD" timeFormat="HH:mm:ss"
+                                    dateFormat="YYYY-MM-DD"
+                                    timeFormat="HH:mm:ss"
                                     onChange={this.handelSetValueEndTime}
                                   />
                                   <span className="text-danger">
@@ -465,11 +468,11 @@ const mapDispatchToProps = dispatch => {
         }
       })
       .then(res => {
-          component.props.history.push("/profile");
-          toast.success('Thêm thành công', 'Title', {displayDuration:3000});
+        component.props.history.push("/profile");
+        toast.success("Thêm thành công", "Title", { displayDuration: 3000 });
       })
       .catch(error => {
-          dispatch(raiseError(error.response.data.errors));
+        dispatch(raiseError(error.response.data.errors));
       });
     }
   };

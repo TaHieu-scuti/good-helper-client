@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import { searchAdvanced } from "../../lib/redux/actions";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { FaBookmark } from "react-icons/fa";
 
 class ListJobSearchAdvanced extends Component {
   constructor(props) {
@@ -131,10 +132,10 @@ class ListJobSearchAdvanced extends Component {
               {!this.props.me ||
                 (this.props.me && this.props.me.role != 1 && (
                   <button
-                    className="btn download-btn"
+                    className="btn btn-outline-info bn-det cancel"
                     onClick={this.markdownJob.bind(this, item.id)}
                   >
-                    <IoMdArrowRoundDown />
+                    <FaBookmark />
                   </button>
                 ))}
             </h5>

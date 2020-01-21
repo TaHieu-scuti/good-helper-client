@@ -58,9 +58,11 @@ class JobApplied extends Component {
           <div className="vc-content">
             <h5 className="title">
               <Link to={"/job/detail/" + item.id}>{item.title}</Link>
-              <span className="j-full-time">{item.type}</span>
+              <span className="j-full-time">
+                <FormattedMessage id="Status: Appling" />
+              </span>
             </h5>
-            <p><FormattedMessage id="Status: Appling" /></p>
+            <p>{item.type}</p>
             <ul className="vc-info-list">
               <li className="list-inline-item">
                 <h5>

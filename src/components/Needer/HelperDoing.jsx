@@ -30,8 +30,6 @@ class ApproveHelper extends Component {
         }
       })
       .then(res => {
-        console.log(res.data.response);
-
         this.setState({
           data: res.data.response.users,
           pagination: res.data.response.pagination

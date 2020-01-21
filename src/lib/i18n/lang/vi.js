@@ -151,6 +151,7 @@ export default {
 	'Saved': 'Đã Lưu',
 	'Apply successfully': 'Ứng tuyển thành công',
 	'Appied': 'Đã ứng tuyển',
-	'Posts was be canceled': 'Bài viết đã bị từ chối'
+	'Posts was be canceled': 'Bài viết đã bị từ chối',
+	'Status: Appling' : 'Trạng thái Appling'
 };
  

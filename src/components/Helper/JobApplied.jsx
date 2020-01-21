@@ -60,7 +60,7 @@ class JobApplied extends Component {
               <Link to={"/job/detail/" + item.id}>{item.title}</Link>
               <span className="j-full-time">{item.type}</span>
             </h5>
-            <p>{item.category}</p>
+            <p><FormattedMessage id="Status: Appling" /></p>
             <ul className="vc-info-list">
               <li className="list-inline-item">
                 <h5>

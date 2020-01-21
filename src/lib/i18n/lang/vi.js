@@ -165,6 +165,7 @@ export default {
 	'Edit': 'Sửa',
 	'Cancel': 'Từ chối',
 	'Approve': 'Chấp nhận',
-	'Save': 'Lưu'
+	'Save': 'Lưu',
+	'You have to update your information': 'Bạn phải cập nhật thông tin cá nhân để lưu hoặc ứng tuyển'
 };
  

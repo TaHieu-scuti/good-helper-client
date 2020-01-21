@@ -52,6 +52,19 @@ class DetailJobPage extends Component {
       return;
     }
 
+    if (!this.props.me.id_card) {
+      toast.error(
+        this.props.intl.formatMessage({
+          id: "You have to update your information"
+        }),
+        "Title",
+        {
+          displayDuration: 3000
+        }
+      );
+      return;
+    }
+
     if (this.props.me.role == 2) {
       this.props
         .http({
@@ -91,6 +104,20 @@ class DetailJobPage extends Component {
       this.props.history.push("/login");
       return;
     }
+
+    if (!this.props.me.id_card) {
+      toast.error(
+        this.props.intl.formatMessage({
+          id: "You have to update your information"
+        }),
+        "Title",
+        {
+          displayDuration: 3000
+        }
+      );
+      return;
+    }
+
     if (this.props.me.role == 2) {
       this.props
         .http({
@@ -193,7 +220,8 @@ class DetailJobPage extends Component {
                           <strong className="d-block">
                             <FormattedMessage id="Salary" />
                           </strong>
-                          <FormattedNumber value={this.state.jobDetail.price} /> đ
+                          <FormattedNumber value={this.state.jobDetail.price} />{" "}
+                          đ
                         </div>
                       </div>
                     </li>

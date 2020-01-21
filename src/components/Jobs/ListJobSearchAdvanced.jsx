@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { IoMdArrowRoundDown } from "react-icons/io";
 import { IoMdArrowForward } from "react-icons/io";
 import { IoLogoUsd } from "react-icons/io";
 import { injectIntl, FormattedMessage, FormattedNumber } from "react-intl";
@@ -42,6 +41,19 @@ class ListJobSearchAdvanced extends Component {
       return;
     }
 
+    if (!this.props.me.id_card) {
+      toast.error(
+        this.props.intl.formatMessage({
+          id: "You have to update your information"
+        }),
+        "Title",
+        {
+          displayDuration: 3000
+        }
+      );
+      return;
+    }
+
     if (this.props.me.role == 2) {
       this.props
         .http({
@@ -81,6 +93,20 @@ class ListJobSearchAdvanced extends Component {
       this.props.history.push("/login");
       return;
     }
+
+    if (!this.props.me.id_card) {
+      toast.error(
+        this.props.intl.formatMessage({
+          id: "You have to update your information"
+        }),
+        "Title",
+        {
+          displayDuration: 3000
+        }
+      );
+      return;
+    }
+
     if (this.props.me.role == 2) {
       this.props
         .http({
@@ -126,9 +152,6 @@ class ListJobSearchAdvanced extends Component {
             <h5 className="title">
               <Link to={"/job/detail/" + item.id}>{item.title}</Link>
               <span className="j-full-time">{item.type}</span>
-              <a href="#" className="btn download-btn">
-                <IoMdArrowRoundDown />
-              </a>
               {!this.props.me ||
                 (this.props.me && this.props.me.role != 1 && (
                   <button

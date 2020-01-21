@@ -38,6 +38,19 @@ class ListJob extends Component {
       return;
     }
 
+    if (!this.props.me.id_card) {
+      toast.error(
+        this.props.intl.formatMessage({
+          id: "You have to update your information"
+        }),
+        "Title",
+        {
+          displayDuration: 3000
+        }
+      );
+      return;
+    }
+
     if (this.props.me.role == 2) {
       this.props
         .http({
@@ -77,6 +90,20 @@ class ListJob extends Component {
       this.props.history.push("/login");
       return;
     }
+
+    if (!this.props.me.id_card) {
+      toast.error(
+        this.props.intl.formatMessage({
+          id: "You have to update your information"
+        }),
+        "Title",
+        {
+          displayDuration: 3000
+        }
+      );
+      return;
+    }
+
     if (this.props.me.role == 2) {
       this.props
         .http({

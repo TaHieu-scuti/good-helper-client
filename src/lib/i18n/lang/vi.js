@@ -166,6 +166,8 @@ export default {
 	'Cancel': 'Từ chối',
 	'Approve': 'Chấp nhận',
 	'Save': 'Lưu',
+	'User is doing': 'Những người đang làm',
+	'User applied': 'Những người đã ứng tuyển',
 	'You have to update your information': 'Bạn phải cập nhật thông tin cá nhân để lưu hoặc ứng tuyển',
 	'Applied' : 'Đã ứng tuyển',
 	'Saved': 'Đã lưu'

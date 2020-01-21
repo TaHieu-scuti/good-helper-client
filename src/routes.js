@@ -20,6 +20,7 @@ import ApproveHelper from './components/Needer/ApproveHelper'
 import SearchAdvancedPage from './components/Jobs/SearchAdvancedPage'
 import ListJobBeCanceled from './components/Helper/ListJobBeCanceled'
 import JobDoing from './components/Helper/JobDoing'
+import HelperDoing from './components/Needer/HelperDoing'
 
 const routes = [
   { path: '/home', exact: true, name: 'Home', component: HomePage },
@@ -44,6 +45,7 @@ const routes = [
   { path: '/advanced/search', name: 'SearchAdvancedPage', component: SearchAdvancedPage },
   { path: '/post/cancel', name: 'ListJobBeCanceled', component: ListJobBeCanceled },
   { path: '/post/doing', name: 'JobDoing', component: JobDoing },
+  { path: '/user/doing/:id', name: 'HelperDoing', component: HelperDoing },
 ];
 
 export default routes;

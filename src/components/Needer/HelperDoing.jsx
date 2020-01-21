@@ -3,7 +3,7 @@ import Sidebar from "./../Profile/Sidebar";
 import { connect } from "react-redux";
 import { FormattedMessage, injectIntl } from "react-intl";
 import Pagination from "react-js-pagination";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FaTimes, FaRegCheckCircle } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { Nav } from "react-bootstrap";
@@ -23,7 +23,7 @@ class ApproveHelper extends Component {
   componentDidMount() {
     this.props
       .http({
-        url: "/auth/post/needer/post",
+        url: "/auth/post/user/doing ",
         method: "POST",
         data: {
           post_id: this.props.match.params.id
@@ -52,82 +52,6 @@ class ApproveHelper extends Component {
     this.setState({ activePage: pageNumber });
   }
 
-  approveHelper(user_id) {
-    this.props
-      .http({
-        url: "/auth/post/approve",
-        method: "POST",
-        data: {
-          post_id: this.props.match.params.id,
-          user_id: user_id
-        }
-      })
-      .then(res => {
-        this.setState({
-          data: res.data.response.users,
-          pagination: res.data.response.pagination
-        });
-        toast.success(
-          this.props.intl.formatMessage({
-            id: "Approve successfully"
-          }),
-          "Title",
-          {
-            displayDuration: 3000
-          }
-        );
-      })
-      .catch(error => {
-        toast.warning(
-          this.props.intl.formatMessage({
-            id: "Fail"
-          }),
-          "Title",
-          {
-            displayDuration: 3000
-          }
-        );
-      });
-  }
-
-  cancelHelper(user_id) {
-    this.props
-      .http({
-        url: "/auth/post/cancel/approve",
-        method: "POST",
-        data: {
-          post_id: this.props.match.params.id,
-          user_id: user_id
-        }
-      })
-      .then(res => {
-        this.setState({
-          data: res.data.response.users,
-          pagination: res.data.response.pagination
-        });
-        toast.success(
-          this.props.intl.formatMessage({
-            id: "Cancel successfully"
-          }),
-          "Title",
-          {
-            displayDuration: 3000
-          }
-        );
-      })
-      .catch(error => {
-        toast.warning(
-          this.props.intl.formatMessage({
-            id: "Fail"
-          }),
-          "Title",
-          {
-            displayDuration: 3000
-          }
-        );
-      });
-  }
-
   render() {
     const ListUser = this.state.data.map((item, idx) => {
       return (
@@ -141,17 +65,6 @@ class ApproveHelper extends Component {
                 {item.first_name} {item.last_name}
               </Link>
               <span className="j-full-time">{item.phone}</span>
-              <button
-                className="btn btn-outline-info bn-det cancel"
-                onClick={this.cancelHelper.bind(this, item.id)}
-                data-toggle="tooltip"
-                data-placement="right"
-                title={this.props.intl.formatMessage({
-                  id: "Cancel"
-                })}
-              >
-                <FaTimes />
-              </button>
             </h5>
             <p>{item.role_name}</p>
             <ul className="vc-info-list">
@@ -170,18 +83,6 @@ class ApproveHelper extends Component {
             </ul>
           </div>
           <br />
-
-          <button
-            className="btn btn-outline-info bn-det dlt"
-            onClick={this.approveHelper.bind(this, item.id)}
-            data-toggle="tooltip"
-            data-placement="right"
-            title={this.props.intl.formatMessage({
-              id: "Approve"
-            })}
-          >
-            <FaRegCheckCircle />
-          </button>
         </div>
       );
     });
@@ -229,7 +130,7 @@ class ApproveHelper extends Component {
                     <div className="tr-single-header">
                       <h3>
                         <i></i>
-                        <FormattedMessage id="User applied" />
+                        <FormattedMessage id="User is doing" />
                       </h3>
                     </div>
                     <div className="tr-single-header">
@@ -239,7 +140,7 @@ class ApproveHelper extends Component {
                             <Link
                               to={"/approve/user/" + this.props.match.params.id}
                             >
-                              <FormattedMessage id="User applied" />
+                              Những người ứng tuyển
                             </Link>
                           </Nav.Link>
                         </Nav.Item>
@@ -248,7 +149,7 @@ class ApproveHelper extends Component {
                             <Link
                               to={"/user/doing/" + this.props.match.params.id}
                             >
-                              <FormattedMessage id="User is doing" />
+                              Những người đang làm
                             </Link>
                           </Nav.Link>
                         </Nav.Item>

@@ -153,7 +153,7 @@ export default {
 	'Apply successfully': 'Ứng tuyển thành công',
 	'Appied': 'Đã ứng tuyển',
 	'Posts was be canceled': 'Bài viết đã bị từ chối',
-	'Status: Appling' : 'Trạng thái:  Appling',
+	'Status: Appling' : 'Trạng thái:  Đang chờ ứng tuyển',
 	'Unmark successfully': 'Bỏ lưu thành công',
 	'Posts is doing': 'Các công việc đang làm',
 	'Approve successfully': 'Xác nhận thành công',
@@ -165,6 +165,9 @@ export default {
 	'Edit': 'Sửa',
 	'Cancel': 'Từ chối',
 	'Approve': 'Chấp nhận',
-	'Save': 'Lưu'
+	'Save': 'Lưu',
+	'You have to update your information': 'Bạn phải cập nhật thông tin cá nhân để lưu hoặc ứng tuyển',
+	'Applied' : 'Đã ứng tuyển',
+	'Saved': 'Đã lưu'
 };
  

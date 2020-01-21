@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { IoMdArrowRoundDown } from "react-icons/io";
 import { IoMdArrowForward } from "react-icons/io";
 import { IoLogoUsd } from "react-icons/io";
 import { injectIntl, FormattedMessage, FormattedNumber } from "react-intl";
@@ -42,6 +41,19 @@ class ListJobSearchAdvanced extends Component {
       return;
     }
 
+    if (!this.props.me.id_card) {
+      toast.error(
+        this.props.intl.formatMessage({
+          id: "You have to update your information"
+        }),
+        "Title",
+        {
+          displayDuration: 3000
+        }
+      );
+      return;
+    }
+
     if (this.props.me.role == 2) {
       this.props
         .http({
@@ -52,6 +64,11 @@ class ListJobSearchAdvanced extends Component {
           }
         })
         .then(res => {
+          this.props.handlePageChange({
+            component: this,
+            http: this.props.http,
+            pageNumber: this.state.activePage
+          });
           toast.success(
             this.props.intl.formatMessage({
               id: "Apply successfully"
@@ -81,6 +98,20 @@ class ListJobSearchAdvanced extends Component {
       this.props.history.push("/login");
       return;
     }
+
+    if (!this.props.me.id_card) {
+      toast.error(
+        this.props.intl.formatMessage({
+          id: "You have to update your information"
+        }),
+        "Title",
+        {
+          displayDuration: 3000
+        }
+      );
+      return;
+    }
+
     if (this.props.me.role == 2) {
       this.props
         .http({
@@ -91,6 +122,11 @@ class ListJobSearchAdvanced extends Component {
           }
         })
         .then(res => {
+          this.props.handlePageChange({
+            component: this,
+            http: this.props.http,
+            pageNumber: this.state.activePage
+          });
           toast.success(
             this.props.intl.formatMessage({
               id: "Save successful"
@@ -126,23 +162,53 @@ class ListJobSearchAdvanced extends Component {
             <h5 className="title">
               <Link to={"/job/detail/" + item.id}>{item.title}</Link>
               <span className="j-full-time">{item.type}</span>
-              <a href="#" className="btn download-btn">
-                <IoMdArrowRoundDown />
-              </a>
               {!this.props.me ||
-                (this.props.me && this.props.me.role != 1 && (
-                  <button
-                    className="btn btn-outline-info bn-det cancel"
-                    onClick={this.markdownJob.bind(this, item.id)}
-                    data-toggle="tooltip"
-                    data-placement="right"
-                    title={this.props.intl.formatMessage({
-                      id: "Save"
-                    })}
-                  >
-                    <FaBookmark />
-                  </button>
-                ))}
+                (this.props.me &&
+                  this.props.me.role != 1 &&
+                  item.is_bookmark == 0 && (
+                    <button
+                      className="btn btn-outline-info bn-det cancel"
+                      onClick={this.markdownJob.bind(this, item.id)}
+                      data-toggle="tooltip"
+                      data-placement="right"
+                      title={this.props.intl.formatMessage({
+                        id: "Save"
+                      })}
+                    >
+                      <FaBookmark />
+                    </button>
+                  ))}
+                  {!this.props.me ||
+                    (this.props.me &&
+                      this.props.me.role != 1 &&
+                      item.is_bookmark == 1 && (
+                        <button
+                          className="btn btn-outline-info bn-det nut"
+                          style={{
+                            marginTop: "-30px"
+                          }}
+                          title={this.props.intl.formatMessage({
+                            id: "Saved"
+                          })}
+                        >
+                          <FaBookmark />
+                        </button>
+                      ))}
+                  {!this.props.me ||
+                    (this.props.me &&
+                      this.props.me.role != 1 &&
+                      item.is_bookmark == 1 && (
+                        <div
+                          className="btn btn-outline-info bn-det cancel"
+                          data-toggle="tooltip"
+                          data-placement="right"
+                          title={this.props.intl.formatMessage({
+                            id: "Saved"
+                          })}
+                        >
+                          <FaBookmark />
+                        </div>
+                      ))}
             </h5>
             <p>{item.category}</p>
             <ul className="vc-info-list">
@@ -169,7 +235,7 @@ class ListJobSearchAdvanced extends Component {
           </div>
           <br />
           {!this.props.me ||
-            (this.props.me && this.props.me.role != 1 && (
+            (this.props.me && this.props.me.role != 1 && item.is_apply == 0 && (
               <button
                 className="btn btn-outline-info bn-det"
                 href="#"
@@ -179,6 +245,16 @@ class ListJobSearchAdvanced extends Component {
                 <FormattedMessage id="Apply" />
                 <IoMdArrowForward />
               </button>
+            ))}
+
+          {!this.props.me ||
+            (this.props.me && this.props.me.role != 1 && item.is_apply == 1 && (
+              <div
+                className="btn btn-outline-info bn-det nut"
+                style={{ marginTop: "20px" }}
+              >
+                <FormattedMessage id="Applied" />
+              </div>
             ))}
         </div>
       );

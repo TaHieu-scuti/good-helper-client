@@ -26,7 +26,7 @@ class AddNewPost extends Component {
       location_id: "",
       category_id: "",
       category: [],
-      location: []
+      location: [],
     };
     this.onAddButton = this.onAddButton.bind(this);
   }

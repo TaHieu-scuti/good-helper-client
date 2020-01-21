@@ -160,6 +160,11 @@ export default {
 	'Fail': 'Thất bại',
 	'Approve': 'Xác nhận',
 	'Cancel successfully': 'Hủy thành công',
-	'Deleted': 'Đã xóa'
+	'Deleted': 'Đã xóa',
+	'Delete': 'Xóa',
+	'Edit': 'Sửa',
+	'Cancel': 'Từ chối',
+	'Approve': 'Chấp nhận',
+	'Save': 'Lưu'
 };
  

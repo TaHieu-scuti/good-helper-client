@@ -86,7 +86,15 @@ class PostOfNeeder extends Component {
             <h5 className="title">
               <Link to={"/approve/user/" + item.id}>{item.title}</Link>
               <span className="j-full-time">{item.type}</span>
-              <Link to={"/edit/post/" + item.id} className="btn btn-outline-info bn-det cancel">
+              <Link
+                to={"/edit/post/" + item.id}
+                className="btn btn-outline-info bn-det cancel"
+                data-toggle="tooltip"
+                data-placement="right"
+                title={this.props.intl.formatMessage({
+                  id: "Edit"
+                })}
+              >
                 <FaEdit />
               </Link>
             </h5>
@@ -116,6 +124,11 @@ class PostOfNeeder extends Component {
           <button
             className="btn btn-outline-info bn-det dlt"
             onClick={this.deletePost.bind(this, item.id)}
+            data-toggle="tooltip"
+            data-placement="right"
+            title={this.props.intl.formatMessage({
+              id: "Delete"
+            })}
           >
             <FaTimes />
           </button>

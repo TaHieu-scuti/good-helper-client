@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import { searchAdvanced } from "../../lib/redux/actions";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { FaBookmark } from "react-icons/fa";
 
 class ListJobSearchAdvanced extends Component {
   constructor(props) {
@@ -130,12 +131,17 @@ class ListJobSearchAdvanced extends Component {
               </a>
               {!this.props.me ||
                 (this.props.me && this.props.me.role != 1 && (
-                  <a
-                    className="btn download-btn"
+                  <button
+                    className="btn btn-outline-info bn-det cancel"
                     onClick={this.markdownJob.bind(this, item.id)}
+                    data-toggle="tooltip"
+                    data-placement="right"
+                    title={this.props.intl.formatMessage({
+                      id: "Save"
+                    })}
                   >
-                    <IoMdArrowRoundDown />
-                  </a>
+                    <FaBookmark />
+                  </button>
                 ))}
             </h5>
             <p>{item.category}</p>
@@ -179,12 +185,12 @@ class ListJobSearchAdvanced extends Component {
     });
 
     let data = (
-      <div className="tr-single-body" style= {{height: "500px"}}>
-      <div className="row">
-        <p className="text-danger" style={{margin: "auto"}}>
-          <FormattedMessage id="Dont have the data" />
-        </p>
-      </div>
+      <div className="tr-single-body" style={{ height: "500px" }}>
+        <div className="row">
+          <p className="text-danger" style={{ margin: "auto" }}>
+            <FormattedMessage id="Dont have the data" />
+          </p>
+        </div>
       </div>
     );
 

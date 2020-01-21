@@ -138,13 +138,18 @@ class ApproveHelper extends Component {
           </div>
           <div className="vc-content">
             <h5 className="title">
-              <Link to={"job/detail/" + item.id}>
+              <Link style={{textDecoration: "none"}}>
                 {item.first_name} {item.last_name}
               </Link>
               <span className="j-full-time">{item.phone}</span>
               <button
                 className="btn btn-outline-info bn-det cancel"
                 onClick={this.cancelHelper.bind(this, item.id)}
+                data-toggle="tooltip"
+                data-placement="right"
+                title={this.props.intl.formatMessage({
+                  id: "Cancel"
+                })}
               >
                 <FaTimes />
               </button>
@@ -170,6 +175,11 @@ class ApproveHelper extends Component {
           <button
             className="btn btn-outline-info bn-det dlt"
             onClick={this.approveHelper.bind(this, item.id)}
+            data-toggle="tooltip"
+            data-placement="right"
+            title={this.props.intl.formatMessage({
+              id: "Approve"
+            })}
           >
             <FaRegCheckCircle />
           </button>

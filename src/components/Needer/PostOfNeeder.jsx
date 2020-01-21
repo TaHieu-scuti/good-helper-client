@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import Sidebar from "./../Profile/Sidebar";
-import Authenticate from "./../Profile/Authenticate";
 import { connect } from "react-redux";
 import { IoLogoUsd } from "react-icons/io";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, FormattedNumber, injectIntl } from "react-intl";
 import Pagination from "react-js-pagination";
 import { Link } from "react-router-dom";
+import { FaEdit, FaTimes } from "react-icons/fa";
+import { toast } from "react-toastify";
 
-class JobMarkdowned extends Component {
+class PostOfNeeder extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,7 +23,7 @@ class JobMarkdowned extends Component {
   componentDidMount() {
     this.props
       .http({
-        url: "auth/book-mark/list/post/markdown",
+        url: "/auth/post/needer/get",
         method: "GET"
       })
       .then(res => {
@@ -36,7 +37,7 @@ class JobMarkdowned extends Component {
   handlePageChange(pageNumber) {
     this.props
       .http({
-        url: "auth/book-mark/list/post/markdown",
+        url: "/auth/post/needer/get",
         method: "GET",
         params: {
           page: pageNumber
@@ -48,6 +49,32 @@ class JobMarkdowned extends Component {
     this.setState({ activePage: pageNumber });
   }
 
+  deletePost(post_id) {
+    this.props
+      .http({
+        url: "/auth/post/delete",
+        method: "POST",
+        data: {
+          id: post_id
+        }
+      })
+      .then(res => {
+        this.setState({
+          data: res.data.response.posts,
+          pagination: res.data.response.pagination
+        });
+        toast.success(
+          this.props.intl.formatMessage({
+            id: "Deleted"
+          }),
+          "Title",
+          {
+            displayDuration: 3000
+          }
+        );
+      });
+  }
+
   render() {
     const ListJob = this.state.data.map((item, idx) => {
       return (
@@ -57,8 +84,11 @@ class JobMarkdowned extends Component {
           </div>
           <div className="vc-content">
             <h5 className="title">
-              <Link to={"/job/detail/" + item.id}>{item.title}</Link>
+              <Link to={"/approve/user/" + item.id}>{item.title}</Link>
               <span className="j-full-time">{item.type}</span>
+              <Link to={"/edit/post/" + item.id} className="btn btn-outline-info bn-det cancel">
+                <FaEdit />
+              </Link>
             </h5>
             <p>{item.category}</p>
             <ul className="vc-info-list">
@@ -67,7 +97,7 @@ class JobMarkdowned extends Component {
                   <FormattedMessage id="Salary" />
                 </h5>
                 <IoLogoUsd />
-                {item.price}
+                <FormattedNumber value={item.price} /> đ
               </li>
               <li className="list-inline-item">
                 <h5>
@@ -83,18 +113,25 @@ class JobMarkdowned extends Component {
               </li>
             </ul>
           </div>
+          <button
+            className="btn btn-outline-info bn-det dlt"
+            onClick={this.deletePost.bind(this, item.id)}
+          >
+            <FaTimes />
+          </button>
+
           <br />
         </div>
       );
     });
 
     let data = (
-      <div className="tr-single-body" style= {{height: "500px"}}>
-      <div className="row">
-        <p className="text-danger" style={{margin: "auto"}}>
-          <FormattedMessage id="Dont have the data" />
-        </p>
-      </div>
+      <div className="tr-single-body" style={{ height: "500px" }}>
+        <div className="row">
+          <p className="text-danger" style={{ margin: "auto" }}>
+            <FormattedMessage id="Dont have the data" />
+          </p>
+        </div>
       </div>
     );
 
@@ -120,30 +157,28 @@ class JobMarkdowned extends Component {
     }
 
     return (
-      <Authenticate>
-        <div id="main-wrapper">
-          <section className="tr-single-detail gray-bg">
-            <div className="container">
-              <div className="row">
-                <Sidebar user={this.props.user} />
-                <div className="col-md-8 col-sm-12">
-                  <div className="tab-pane active container" id="c-profile">
-                    <div className="tr-single-box">
-                      <div className="tr-single-header">
-                        <h3>
-                          <i></i>
-                          <FormattedMessage id="Job markdown" />
-                        </h3>
-                      </div>
-                      <div className="tr-single-body">{data}</div>
+      <div id="main-wrapper">
+        <section className="tr-single-detail gray-bg">
+          <div className="container">
+            <div className="row">
+              <Sidebar user={this.props.user} />
+              <div className="col-md-8 col-sm-12">
+                <div className="tab-pane active container" id="c-profile">
+                  <div className="tr-single-box">
+                    <div className="tr-single-header">
+                      <h3>
+                        <i></i>
+                        <FormattedMessage id="My post" />
+                      </h3>
                     </div>
+                    <div className="tr-single-body">{data}</div>
                   </div>
                 </div>
               </div>
             </div>
-          </section>
-        </div>
-      </Authenticate>
+          </div>
+        </section>
+      </div>
     );
   }
 }
@@ -155,4 +190,4 @@ const mapStateToProps = (stateStore, ownProps) => {
   return newState;
 };
 
-export default connect(mapStateToProps)(JobMarkdowned);
+export default connect(mapStateToProps)(injectIntl(PostOfNeeder));

@@ -13,7 +13,7 @@ import {
   FaBookOpen
 } from "react-icons/fa";
 import { connect } from "react-redux";
-import { injectIntl, FormattedMessage } from "react-intl";
+import { injectIntl, FormattedMessage, FormattedNumber } from "react-intl";
 import { updateJob } from "../../lib/redux/actions";
 import Interweave from "interweave";
 import { toast } from "react-toastify";
@@ -193,7 +193,7 @@ class DetailJobPage extends Component {
                           <strong className="d-block">
                             <FormattedMessage id="Salary" />
                           </strong>
-                          {this.state.jobDetail.price}
+                          <FormattedNumber value={this.state.jobDetail.price} /> đ
                         </div>
                       </div>
                     </li>

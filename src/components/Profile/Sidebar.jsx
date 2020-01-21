@@ -68,6 +68,14 @@ class Sidebar extends Component {
                   <FormattedMessage id="Add post" />
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link to="/needer/post" className="nav-link active">
+                  <i>
+                  <FaFile />
+                  </i>
+                  <FormattedMessage id="My post" />
+                </Link>
+              </li>
               </ul>
             ) : null}
             <li className="nav-item">

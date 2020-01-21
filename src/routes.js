@@ -18,7 +18,6 @@ import JobFinishOfHelper from './components/Helper/JobFinishOfHelper'
 import SearchAdvancedPage from './components/Jobs/SearchAdvancedPage'
 import ListJobBeCanceled from './components/Helper/ListJobBeCanceled'
 
-
 const routes = [
   { path: '/home', exact: true, name: 'Home', component: HomePage },
   { path: '/login', name: 'Login', component: LoginPage },

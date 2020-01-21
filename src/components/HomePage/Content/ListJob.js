@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import ItemsCarousel from "react-items-carousel";
-import { IoMdArrowRoundDown } from "react-icons/io";
 import { FormattedMessage, FormattedNumber, injectIntl } from "react-intl";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -56,7 +55,20 @@ class AutoPlayCarousel extends React.Component {
   applyJob(post_id) {
     if (!this.props.me) {
       this.props.history.push("/login");
-      return
+      return;
+    }
+
+    if (!this.props.me.id_card) {
+      toast.error(
+        this.props.intl.formatMessage({
+          id: "You have to update your information"
+        }),
+        "Title",
+        {
+          displayDuration: 3000
+        }
+      );
+      return;
     }
 
     if (this.props.me.role == 2) {
@@ -98,9 +110,6 @@ class AutoPlayCarousel extends React.Component {
       <SlideItem key={item}>
         <div className="job-grid style-1 job">
           <div className="job-grid-wrap" style={{ height: "400px" }}>
-            <div className="featured-job">
-              <IoMdArrowRoundDown />
-            </div>
             <span className="job-type j-full-time">
               <FormattedMessage id="All the time" />
             </span>
@@ -119,16 +128,24 @@ class AutoPlayCarousel extends React.Component {
             </div>
             <div className="job-grid-footer">
               <h6 className="job-price">
-                <FormattedMessage id="Salary" /> :
+                <FormattedMessage id="Salary" />  :  {" "}
                 <FormattedNumber value={item.price} /> đ
               </h6>
               {!this.props.me ||
-                (this.props.me && this.props.me.role != 1 && (
+                (this.props.me && this.props.me.role != 1 && item.is_apply == 0 && (
                   <button
                     className="btn btn-outline-info btn-rounded"
                     onClick={this.applyJob.bind(this, item.id)}
                   >
                     <FormattedMessage id="Apply" />
+                  </button>
+                ))}
+                {!this.props.me ||
+                (this.props.me && this.props.me.role != 1 && item.is_apply == 1 && (
+                  <button
+                    className="btn btn-outline-info btn-rounded nut"
+                  >
+                    <FormattedMessage id="Applied" />
                   </button>
                 ))}
             </div>

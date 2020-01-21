@@ -52,6 +52,19 @@ class DetailJobPage extends Component {
       return;
     }
 
+    if (!this.props.me.id_card) {
+      toast.error(
+        this.props.intl.formatMessage({
+          id: "You have to update your information"
+        }),
+        "Title",
+        {
+          displayDuration: 3000
+        }
+      );
+      return;
+    }
+
     if (this.props.me.role == 2) {
       this.props
         .http({
@@ -62,6 +75,13 @@ class DetailJobPage extends Component {
           }
         })
         .then(res => {
+          this.setState({ jobDetail: res.data.response });
+          this.props.updateJob({
+            title: res.data.response.title,
+            category: res.data.response.category,
+            location: res.data.response.location,
+            img: res.data.response.avatar
+          });
           toast.success(
             this.props.intl.formatMessage({
               id: "Apply successfully"
@@ -91,6 +111,20 @@ class DetailJobPage extends Component {
       this.props.history.push("/login");
       return;
     }
+
+    if (!this.props.me.id_card) {
+      toast.error(
+        this.props.intl.formatMessage({
+          id: "You have to update your information"
+        }),
+        "Title",
+        {
+          displayDuration: 3000
+        }
+      );
+      return;
+    }
+
     if (this.props.me.role == 2) {
       this.props
         .http({
@@ -101,6 +135,13 @@ class DetailJobPage extends Component {
           }
         })
         .then(res => {
+          this.setState({ jobDetail: res.data.response });
+          this.props.updateJob({
+            title: res.data.response.title,
+            category: res.data.response.category,
+            location: res.data.response.location,
+            img: res.data.response.avatar
+          });
           toast.success(
             this.props.intl.formatMessage({
               id: "Save successful"
@@ -145,7 +186,7 @@ class DetailJobPage extends Component {
                 </div>
               </div>
               {!this.props.me ||
-                (this.props.me && this.props.me.role != 1 && (
+                (this.props.me && this.props.me.role != 1 && this.state.jobDetail.is_apply == 0  && (
                   <button
                     href="javascript:void(0)"
                     data-toggle="modal"
@@ -157,23 +198,44 @@ class DetailJobPage extends Component {
                     <FormattedMessage id="Apply" />
                   </button>
                 ))}
+                {!this.props.me ||
+                (this.props.me && this.props.me.role != 1 && this.state.jobDetail.is_apply == 1 && (
+                  <p
+                    className="btn btn-info mb-2 mb-5 nut"
+                    style={{ marginLeft: "42%" }}
+                  >
+                    <FormattedMessage id="Applied" />
+                  </p>
+                ))}
             </div>
             {/* Sidebar Start */}
             <div className="col-md-4 col-sm-12">
               <div className="offer-btn-wrap mb-4">
                 {!this.props.me ||
-                  (this.props.me && this.props.me.role != 1 && (
-                    <button
-                      className="btn btn-info btn-md full-width"
-                      onClick={this.markdownJob.bind(
-                        this,
-                        this.state.jobDetail.id
-                      )}
-                    >
-                      <FaBookmark />
-                      <FormattedMessage id="Markdown job" />
-                    </button>
-                  ))}
+                  (this.props.me &&
+                    this.props.me.role != 1 &&
+                    this.state.jobDetail.is_bookmark == 0 && (
+                      <button
+                        className="btn btn-info btn-md full-width"
+                        onClick={this.markdownJob.bind(
+                          this,
+                          this.state.jobDetail.id
+                        )}
+                      >
+                        <FaBookmark />
+                        <FormattedMessage id="Markdown job" />
+                      </button>
+                    ))}
+
+                {!this.props.me ||
+                  (this.props.me &&
+                    this.props.me.role != 1 &&
+                    this.state.jobDetail.is_bookmark == 1 && (
+                      <button className="btn btn-info btn-md full-width">
+                        <FaBookmark />
+                        <FormattedMessage id="Saved" />
+                      </button>
+                    ))}
               </div>
               {/* Job Overview */}
               <div className="tr-single-box">
@@ -193,7 +255,8 @@ class DetailJobPage extends Component {
                           <strong className="d-block">
                             <FormattedMessage id="Salary" />
                           </strong>
-                          <FormattedNumber value={this.state.jobDetail.price} /> đ
+                          <FormattedNumber value={this.state.jobDetail.price} />{" "}
+                          đ
                         </div>
                       </div>
                     </li>

@@ -57,6 +57,19 @@ class ListALLJob extends Component {
       return;
     }
 
+    if (!this.props.me.id_card) {
+      toast.error(
+        this.props.intl.formatMessage({
+          id: "You have to update your information"
+        }),
+        "Title",
+        {
+          displayDuration: 3000
+        }
+      );
+      return;
+    }
+
     if (this.props.me.role == 2) {
       this.props
         .http({
@@ -67,6 +80,17 @@ class ListALLJob extends Component {
           }
         })
         .then(res => {
+          this.props
+            .http({
+              url: "auth/list/post",
+              method: "GET"
+            })
+            .then(res => {
+              this.setState({
+                data: res.data.response.posts,
+                pagination: res.data.response.pagination
+              });
+            });
           toast.success(
             this.props.intl.formatMessage({
               id: "Apply successfully"
@@ -96,6 +120,20 @@ class ListALLJob extends Component {
       this.props.history.push("/login");
       return;
     }
+
+    if (!this.props.me.id_card) {
+      toast.error(
+        this.props.intl.formatMessage({
+          id: "You have to update your information"
+        }),
+        "Title",
+        {
+          displayDuration: 3000
+        }
+      );
+      return;
+    }
+
     if (this.props.me.role == 2) {
       this.props
         .http({
@@ -106,6 +144,17 @@ class ListALLJob extends Component {
           }
         })
         .then(res => {
+          this.props
+            .http({
+              url: "auth/list/post",
+              method: "GET"
+            })
+            .then(res => {
+              this.setState({
+                data: res.data.response.posts,
+                pagination: res.data.response.pagination
+              });
+            });
           toast.success(
             this.props.intl.formatMessage({
               id: "Save successful"
@@ -142,19 +191,37 @@ class ListALLJob extends Component {
               <Link to={"/job/detail/" + item.id}>{item.title}</Link>
               <span className="j-full-time">{item.type}</span>
               {!this.props.me ||
-                (this.props.me && this.props.me.role != 1 && (
-                  <button
-                    className="btn btn-outline-info bn-det cancel"
-                    onClick={this.markdownJob.bind(this, item.id)}
-                    data-toggle="tooltip"
-                    data-placement="right"
-                    title={this.props.intl.formatMessage({
-                      id: "Save"
-                    })}
-                  >
-                    <FaBookmark />
-                  </button>
-                ))}
+                (this.props.me &&
+                  this.props.me.role != 1 &&
+                  item.is_bookmark == 0 && (
+                    <button
+                      className="btn btn-outline-info bn-det cancel"
+                      onClick={this.markdownJob.bind(this, item.id)}
+                      data-toggle="tooltip"
+                      data-placement="right"
+                      title={this.props.intl.formatMessage({
+                        id: "Save"
+                      })}
+                    >
+                      <FaBookmark />
+                    </button>
+                  ))}
+              {!this.props.me ||
+                (this.props.me &&
+                  this.props.me.role != 1 &&
+                  item.is_bookmark == 1 && (
+                    <button
+                      className="btn btn-outline-info bn-det nut"
+                      style={{
+                        marginTop: "-30px"
+                      }}
+                      title={this.props.intl.formatMessage({
+                        id: "Saved"
+                      })}
+                    >
+                      <FaBookmark />
+                    </button>
+                  ))}
             </h5>
             <p>{item.category}</p>
             <ul className="vc-info-list">
@@ -180,7 +247,7 @@ class ListALLJob extends Component {
             </ul>
           </div>
           {!this.props.me ||
-            (this.props.me && this.props.me.role != 1 && (
+            (this.props.me && this.props.me.role != 1 && item.is_apply == 0 && (
               <button
                 className="btn btn-outline-info bn-det"
                 href="#"
@@ -190,6 +257,16 @@ class ListALLJob extends Component {
                 <FormattedMessage id="Apply" />
                 <IoMdArrowForward />
               </button>
+            ))}
+
+          {!this.props.me ||
+            (this.props.me && this.props.me.role != 1 && item.is_apply == 1 && (
+              <div
+                className="btn btn-outline-info bn-det nut"
+                style={{ marginTop: "20px" }}
+              >
+                <FormattedMessage id="Applied" />
+              </div>
             ))}
           <br />
         </div>

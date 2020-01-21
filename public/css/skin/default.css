@@ -28,8 +28,8 @@
 .blue-skin .featured-category ul li a:hover, .blue-skin .featured-category ul li a:focus,
 .blue-skin .select2-container--default .select2-results__option--highlighted[aria-selected],
 .blue-skin .candidate-grid:hover .btn.download-btn, .blue-skin .candidate-grid:focus .btn.download-btn{
-	background:#3a5bbc !important;
-	background-color:#3a5bbc !important;
+	background:#3a5bbc ;
+	background-color:#3a5bbc;
 }
 
 .blue-skin .theme-cl,

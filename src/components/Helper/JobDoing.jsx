@@ -89,10 +89,12 @@ class JobDoing extends Component {
     });
 
     let data = (
-      <div className="row">
-        <h3 className="text-danger">
-          <FormattedMessage id="Dont have the data" />
-        </h3>
+      <div className="tr-single-body" style={{ height: "500px" }}>
+        <div className="row">
+          <p className="text-danger" style={{ margin: "auto" }}>
+            <FormattedMessage id="Dont have the data" />
+          </p>
+        </div>
       </div>
     );
 

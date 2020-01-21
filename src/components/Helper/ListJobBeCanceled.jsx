@@ -7,7 +7,7 @@ import { FormattedMessage } from "react-intl";
 import Pagination from "react-js-pagination";
 import { Link } from "react-router-dom";
 
-class JobFinishOfHelper extends Component {
+class ListJobBeCanceled extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,13 +22,13 @@ class JobFinishOfHelper extends Component {
   componentDidMount() {
     this.props
       .http({
-        url: "auth/post/finish",
+        url: "/auth/post/list/unselect",
         method: "GET"
       })
       .then(res => {
         this.setState({
           data: res.data.response.posts,
-          pagination: res.data.response.pagination
+          pagination: res.data.response.paginate
         });
       });
   }
@@ -36,7 +36,7 @@ class JobFinishOfHelper extends Component {
   handlePageChange(pageNumber) {
     this.props
       .http({
-        url: "auth/post/finish",
+        url: "/auth/post/list/unselect",
         method: "GET",
         params: {
           page: pageNumber
@@ -100,12 +100,12 @@ class JobFinishOfHelper extends Component {
 
     if (this.state.data.length > 0) {
       data = (
-        <div className="tr-single-body">
+        <div>
           <div className="row">
             <div className="col-md-12">{ListJob}</div>
           </div>
-          <div className="row">
-            <div className="col-lg-12 col-md-12 col-sm-12">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
               <Pagination
                 activePage={this.state.activePage}
                 itemsCountPerPage={this.state.pagination.perPage}
@@ -132,7 +132,7 @@ class JobFinishOfHelper extends Component {
                       <div className="tr-single-header">
                         <h3>
                           <i></i>
-                          <FormattedMessage id="Posts was finished" />
+                          <FormattedMessage id="Posts was be canceled" />
                         </h3>
                       </div>
                       <div className="tr-single-body">{data}</div>
@@ -155,4 +155,4 @@ const mapStateToProps = (stateStore, ownProps) => {
   return newState;
 };
 
-export default connect(mapStateToProps)(JobFinishOfHelper);
+export default connect(mapStateToProps)(ListJobBeCanceled);

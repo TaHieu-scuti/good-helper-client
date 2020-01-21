@@ -57,10 +57,12 @@ class JobApplied extends Component {
           </div>
           <div className="vc-content">
             <h5 className="title">
-            <Link to={"/job/detail/" + item.id}>{item.title}</Link>
-              <span className="j-full-time">{item.type}</span>
+              <Link to={"/job/detail/" + item.id}>{item.title}</Link>
+              <span className="j-full-time">
+                <FormattedMessage id="Status: Appling" />
+              </span>
             </h5>
-            <p>{item.category}</p>
+            <p>{item.type}</p>
             <ul className="vc-info-list">
               <li className="list-inline-item">
                 <h5>
@@ -89,12 +91,12 @@ class JobApplied extends Component {
     });
 
     let data = (
-      <div className="tr-single-body" style= {{height: "500px"}}>
-      <div className="row">
-        <p className="text-danger" style={{margin: "auto"}}>
-          <FormattedMessage id="Dont have the data" />
-        </p>
-      </div>
+      <div className="tr-single-body" style={{ height: "500px" }}>
+        <div className="row">
+          <p className="text-danger" style={{ margin: "auto" }}>
+            <FormattedMessage id="Dont have the data" />
+          </p>
+        </div>
       </div>
     );
 

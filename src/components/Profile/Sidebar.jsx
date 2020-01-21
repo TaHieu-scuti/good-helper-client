@@ -57,6 +57,14 @@ class Sidebar extends Component {
                   </Link>
                 </li>
                 <li className="nav-item">
+                  <Link to="/post/cancel" className="nav-link active">
+                    <i>
+                      <FaFile />
+                    </i>{" "}
+                    <FormattedMessage id="Posts was be canceled" />
+                  </Link>
+                </li>
+                <li className="nav-item">
                   <Link to="/post/finish" className="nav-link active">
                     <i>
                       <FaFile />

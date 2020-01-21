@@ -153,6 +153,7 @@ export default {
 	'Apply successfully': 'Ứng tuyển thành công',
 	'Appied': 'Đã ứng tuyển',
 	'Unmark successfully': 'Bỏ lưu thành công',
+	'Posts is doing': 'Các công việc đang làm',
 	'Approve successfully': 'Xác nhận thành công',
 	'Fail': 'Thất bại',
 	'Approve': 'Xác nhận',

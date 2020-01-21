@@ -135,6 +135,7 @@ export default {
 	'The amount member may not be greater than 10.': 'Số người không được quá 10',
 	'Posts was finished': 'Các công việc đã hoàn thành',
 	'The Id card field is required.': 'Số cmnd không được để trống',
+	'My post': 'Bài viết của tôi',
 	'The password must be at least 6 characters.': 'Mật khẩu phải có 6 ký tự',
 	'The confirm password and password must match.': 'xác nhận mật khẩu phải giống mật khẩu cũ',
 	'The phone number must be at least 9 characters.': 'Số điện thoại ít nhất 6 ký tự',
@@ -150,6 +151,11 @@ export default {
 	'Let log to save': 'Hãy đăng nhập để lưu',
 	'Saved': 'Đã Lưu',
 	'Apply successfully': 'Ứng tuyển thành công',
-	'Appied': 'Đã ứng tuyển'
+	'Appied': 'Đã ứng tuyển',
+	'Approve successfully': 'Xác nhận thành công',
+	'Fail': 'Thất bại',
+	'Approve': 'Xác nhận',
+	'Cancel successfully': 'Hủy thành công',
+	'Deleted': 'Đã xóa'
 };
  

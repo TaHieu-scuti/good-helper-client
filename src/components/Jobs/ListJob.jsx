@@ -127,6 +127,11 @@ class ListJob extends Component {
                   <button
                     className="btn btn-outline-info bn-det cancel"
                     onClick={this.markdownJob.bind(this, item.id)}
+                    data-toggle="tooltip"
+                    data-placement="right"
+                    title={this.props.intl.formatMessage({
+                      id: "Save"
+                    })}
                   >
                     <FaBookmark />
                   </button>
@@ -174,7 +179,7 @@ class ListJob extends Component {
 
     let data = (
       <div className="row">
-        <p className="text-danger" style={{margin: "auto"}}>
+        <p className="text-danger" style={{ margin: "auto" }}>
           <FormattedMessage id="Dont have the data" />
         </p>
       </div>

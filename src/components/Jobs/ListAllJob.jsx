@@ -146,6 +146,11 @@ class ListALLJob extends Component {
                   <button
                     className="btn btn-outline-info bn-det cancel"
                     onClick={this.markdownJob.bind(this, item.id)}
+                    data-toggle="tooltip"
+                    data-placement="right"
+                    title={this.props.intl.formatMessage({
+                      id: "Save"
+                    })}
                   >
                     <FaBookmark />
                   </button>

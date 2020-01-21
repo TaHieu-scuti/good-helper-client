@@ -145,6 +145,11 @@ class ApproveHelper extends Component {
               <button
                 className="btn btn-outline-info bn-det cancel"
                 onClick={this.cancelHelper.bind(this, item.id)}
+                data-toggle="tooltip"
+                data-placement="right"
+                title={this.props.intl.formatMessage({
+                  id: "Cancel"
+                })}
               >
                 <FaTimes />
               </button>
@@ -170,6 +175,11 @@ class ApproveHelper extends Component {
           <button
             className="btn btn-outline-info bn-det dlt"
             onClick={this.approveHelper.bind(this, item.id)}
+            data-toggle="tooltip"
+            data-placement="right"
+            title={this.props.intl.formatMessage({
+              id: "Approve"
+            })}
           >
             <FaRegCheckCircle />
           </button>

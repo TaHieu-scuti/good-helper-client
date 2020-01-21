@@ -134,6 +134,11 @@ class ListJobSearchAdvanced extends Component {
                   <button
                     className="btn btn-outline-info bn-det cancel"
                     onClick={this.markdownJob.bind(this, item.id)}
+                    data-toggle="tooltip"
+                    data-placement="right"
+                    title={this.props.intl.formatMessage({
+                      id: "Save"
+                    })}
                   >
                     <FaBookmark />
                   </button>
@@ -180,12 +185,12 @@ class ListJobSearchAdvanced extends Component {
     });
 
     let data = (
-      <div className="tr-single-body" style= {{height: "500px"}}>
-      <div className="row">
-        <p className="text-danger" style={{margin: "auto"}}>
-          <FormattedMessage id="Dont have the data" />
-        </p>
-      </div>
+      <div className="tr-single-body" style={{ height: "500px" }}>
+        <div className="row">
+          <p className="text-danger" style={{ margin: "auto" }}>
+            <FormattedMessage id="Dont have the data" />
+          </p>
+        </div>
       </div>
     );
 

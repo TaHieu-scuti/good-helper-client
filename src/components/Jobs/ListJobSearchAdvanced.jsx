@@ -130,12 +130,12 @@ class ListJobSearchAdvanced extends Component {
               </a>
               {!this.props.me ||
                 (this.props.me && this.props.me.role != 1 && (
-                  <a
+                  <button
                     className="btn download-btn"
                     onClick={this.markdownJob.bind(this, item.id)}
                   >
                     <IoMdArrowRoundDown />
-                  </a>
+                  </button>
                 ))}
             </h5>
             <p>{item.category}</p>

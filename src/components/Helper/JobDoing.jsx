@@ -28,7 +28,7 @@ class JobDoing extends Component {
       .then(res => {
         this.setState({
           data: res.data.response.posts,
-          pagination: res.data.response.paginate 
+          pagination: res.data.response.pagination 
         });
       });
   }

@@ -3,9 +3,11 @@ import Sidebar from "./../Profile/Sidebar";
 import Authenticate from "./../Profile/Authenticate";
 import { connect } from "react-redux";
 import { IoLogoUsd } from "react-icons/io";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage,injectIntl } from "react-intl";
 import Pagination from "react-js-pagination";
 import { Link } from "react-router-dom";
+import { FaTimes } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 class JobMarkdowned extends Component {
   constructor(props) {
@@ -48,6 +50,32 @@ class JobMarkdowned extends Component {
     this.setState({ activePage: pageNumber });
   }
 
+  unMarkdown(post_id){
+    this.props
+      .http({
+        url: "auth/book-mark/unmark",
+        method: "POST",
+        data: {
+          post_id: post_id
+        }
+      })
+      .then(res => {
+        this.setState({
+          data: res.data.response.posts,
+          pagination: res.data.response.pagination
+        });
+        toast.success(
+          this.props.intl.formatMessage({
+            id: "Unmark successfully"
+          }),
+          "Title",
+          {
+            displayDuration: 3000
+          }
+        );
+      });
+  }
+
   render() {
     const ListJob = this.state.data.map((item, idx) => {
       return (
@@ -57,9 +85,15 @@ class JobMarkdowned extends Component {
           </div>
           <div className="vc-content">
             <h5 className="title">
-            <Link to={"/job/detail/" + item.id}>{item.title}</Link>
+              <Link to={"/job/detail/" + item.id}>{item.title}</Link>
               <span className="j-full-time">{item.type}</span>
             </h5>
+            <button
+              className="btn btn-outline-info bn-det cancel"
+              onClick={this.unMarkdown.bind(this, item.id)}
+            >
+              <FaTimes />
+            </button>
             <p>{item.category}</p>
             <ul className="vc-info-list">
               <li className="list-inline-item">
@@ -155,4 +189,4 @@ const mapStateToProps = (stateStore, ownProps) => {
   return newState;
 };
 
-export default connect(mapStateToProps)(JobMarkdowned);
+export default connect(mapStateToProps)(injectIntl(JobMarkdowned));

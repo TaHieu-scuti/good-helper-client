@@ -7,7 +7,7 @@ import { FormattedMessage } from "react-intl";
 import Pagination from "react-js-pagination";
 import { Link } from "react-router-dom";
 
-class ListJobBeCanceled extends Component {
+class JobDoing extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,13 +22,13 @@ class ListJobBeCanceled extends Component {
   componentDidMount() {
     this.props
       .http({
-        url: "/auth/post/list/unselect",
+        url: "/auth/post/list/post/doing",
         method: "GET"
       })
       .then(res => {
         this.setState({
           data: res.data.response.posts,
-          pagination: res.data.response.paginate
+          pagination: res.data.response.paginate 
         });
       });
   }
@@ -36,7 +36,7 @@ class ListJobBeCanceled extends Component {
   handlePageChange(pageNumber) {
     this.props
       .http({
-        url: "/auth/post/list/unselect",
+        url: "/auth/post/list/post/doing",
         method: "GET",
         params: {
           page: pageNumber
@@ -132,7 +132,7 @@ class ListJobBeCanceled extends Component {
                       <div className="tr-single-header">
                         <h3>
                           <i></i>
-                          <FormattedMessage id="Posts was be canceled" />
+                          <FormattedMessage id="Posts is doing" />
                         </h3>
                       </div>
                       <div className="tr-single-body">{data}</div>
@@ -155,4 +155,4 @@ const mapStateToProps = (stateStore, ownProps) => {
   return newState;
 };
 
-export default connect(mapStateToProps)(ListJobBeCanceled);
+export default connect(mapStateToProps)(JobDoing);

@@ -120,6 +120,7 @@ const mapStateToProps = (stateStore, ownProps) => {
 
   newState.http = stateStore.http;
   newState.register = stateStore.register;
+  newState.is_error = stateStore.error_descriptions.length > 0;
   newState.user = stateStore.userCheckotp;
 
   return newState;

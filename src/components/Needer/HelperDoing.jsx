@@ -8,7 +8,7 @@ import { FaTimes, FaRegCheckCircle } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { Nav } from "react-bootstrap";
 
-class ApproveHelper extends Component {
+class HelperDoing extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,8 +40,11 @@ class ApproveHelper extends Component {
   handlePageChange(pageNumber) {
     this.props
       .http({
-        url: "/auth/post/needer/post",
+        url: "/auth/post/user/doing",
         method: "POST",
+        data: {
+          post_id: this.props.match.params.id
+        },
         params: {
           page: pageNumber
         }
@@ -134,22 +137,24 @@ class ApproveHelper extends Component {
                       </h3>
                     </div>
                     <div className="tr-single-header">
-                      <Nav variant="tabs" defaultActiveKey="/home">
+                    <Nav variant="tabs" defaultActiveKey="/home">
                         <Nav.Item>
-                          <Nav.Link>
+                          <Nav.Link className="smallnav">
                             <Link
+                              className="smallnav"
                               to={"/approve/user/" + this.props.match.params.id}
                             >
-                              Những người ứng tuyển
+                              <FormattedMessage id="User applied" />
                             </Link>
                           </Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                          <Nav.Link>
+                          <Nav.Link className="smallnav">
                             <Link
+                              className="smallnav"
                               to={"/user/doing/" + this.props.match.params.id}
                             >
-                              Những người đang làm
+                              <FormattedMessage id="User is doing" />
                             </Link>
                           </Nav.Link>
                         </Nav.Item>
@@ -174,4 +179,4 @@ const mapStateToProps = (stateStore, ownProps) => {
   return newState;
 };
 
-export default connect(mapStateToProps)(injectIntl(ApproveHelper));
+export default connect(mapStateToProps)(injectIntl(HelperDoing));

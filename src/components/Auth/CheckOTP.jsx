@@ -78,7 +78,7 @@ class CheckOTP extends Component {
                             {this.props.is_error ? (
                               <span className="text-danger">
                                 <FormattedMessage
-                                  id={this.props.error_description}
+                                  id="verification failed"
                                 />
                               </span>
                             ) : null}

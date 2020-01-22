@@ -235,8 +235,9 @@ class ApproveHelper extends Component {
                     <div className="tr-single-header">
                       <Nav variant="tabs" defaultActiveKey="/home">
                         <Nav.Item>
-                          <Nav.Link>
+                          <Nav.Link className="smallnav">
                             <Link
+                              className="smallnav"
                               to={"/approve/user/" + this.props.match.params.id}
                             >
                               <FormattedMessage id="User applied" />
@@ -244,8 +245,9 @@ class ApproveHelper extends Component {
                           </Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                          <Nav.Link>
+                          <Nav.Link className="smallnav">
                             <Link
+                              className="smallnav"
                               to={"/user/doing/" + this.props.match.params.id}
                             >
                               <FormattedMessage id="User is doing" />

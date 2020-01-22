@@ -68,20 +68,30 @@ class DetailJobPage extends Component {
     if (this.props.me.role == 2) {
       this.props
         .http({
-          url: "/auth/post/apply",
+          url: "auth/detail/post",
           method: "POST",
           data: {
-            post_id: post_id
+            post_id: this.props.match.params.id
           }
         })
         .then(res => {
-          this.setState({ jobDetail: res.data.response });
-          this.props.updateJob({
-            title: res.data.response.title,
-            category: res.data.response.category,
-            location: res.data.response.location,
-            img: res.data.response.avatar
-          });
+          this.props
+            .http({
+              url: "auth/detail/post",
+              method: "POST",
+              data: {
+                post_id: this.props.match.params.id
+              }
+            })
+            .then(res => {
+              this.setState({ jobDetail: res.data.response });
+              this.props.updateJob({
+                title: res.data.response.title,
+                category: res.data.response.category,
+                location: res.data.response.location,
+                img: res.data.response.avatar
+              });
+            });
           toast.success(
             this.props.intl.formatMessage({
               id: "Apply successfully"
@@ -135,13 +145,23 @@ class DetailJobPage extends Component {
           }
         })
         .then(res => {
-          this.setState({ jobDetail: res.data.response });
-          this.props.updateJob({
-            title: res.data.response.title,
-            category: res.data.response.category,
-            location: res.data.response.location,
-            img: res.data.response.avatar
-          });
+          this.props
+            .http({
+              url: "auth/detail/post",
+              method: "POST",
+              data: {
+                post_id: this.props.match.params.id
+              }
+            })
+            .then(res => {
+              this.setState({ jobDetail: res.data.response });
+              this.props.updateJob({
+                title: res.data.response.title,
+                category: res.data.response.category,
+                location: res.data.response.location,
+                img: res.data.response.avatar
+              });
+            });
           toast.success(
             this.props.intl.formatMessage({
               id: "Save successful"
@@ -186,27 +206,34 @@ class DetailJobPage extends Component {
                 </div>
               </div>
               {!this.props.me ||
-                (this.props.me && this.props.me.role != 1 && this.state.jobDetail.is_apply == 0  && (
-                  <button
-                    href="javascript:void(0)"
-                    data-toggle="modal"
-                    data-target="#apply"
-                    className="btn btn-info mb-2 mb-5"
-                    style={{ marginLeft: "42%" }}
-                    onClick={this.applyJob.bind(this, this.state.jobDetail.id)}
-                  >
-                    <FormattedMessage id="Apply" />
-                  </button>
-                ))}
-                {!this.props.me ||
-                (this.props.me && this.props.me.role != 1 && this.state.jobDetail.is_apply == 1 && (
-                  <p
-                    className="btn btn-info mb-2 mb-5 nut"
-                    style={{ marginLeft: "42%" }}
-                  >
-                    <FormattedMessage id="Applied" />
-                  </p>
-                ))}
+                (this.props.me &&
+                  this.props.me.role != 1 &&
+                  this.state.jobDetail.is_apply == 0 && (
+                    <button
+                      href="javascript:void(0)"
+                      data-toggle="modal"
+                      data-target="#apply"
+                      className="btn btn-info mb-2 mb-5"
+                      style={{ marginLeft: "42%" }}
+                      onClick={this.applyJob.bind(
+                        this,
+                        this.state.jobDetail.id
+                      )}
+                    >
+                      <FormattedMessage id="Apply" />
+                    </button>
+                  ))}
+              {!this.props.me ||
+                (this.props.me &&
+                  this.props.me.role != 1 &&
+                  this.state.jobDetail.is_apply == 1 && (
+                    <p
+                      className="btn btn-info mb-2 mb-5 nut"
+                      style={{ marginLeft: "42%" }}
+                    >
+                      <FormattedMessage id="Applied" />
+                    </p>
+                  ))}
             </div>
             {/* Sidebar Start */}
             <div className="col-md-4 col-sm-12">

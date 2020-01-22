@@ -66,12 +66,12 @@ class DetailJobPage extends Component {
     }
 
     if (this.props.me.role == 2) {
-      this.props
+     this.props
         .http({
-          url: "auth/detail/post",
+          url: "/auth/post/apply",
           method: "POST",
           data: {
-            post_id: this.props.match.params.id
+            post_id: post_id
           }
         })
         .then(res => {

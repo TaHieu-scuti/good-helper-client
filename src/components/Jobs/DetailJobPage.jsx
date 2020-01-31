@@ -17,12 +17,25 @@ import { injectIntl, FormattedMessage, FormattedNumber } from "react-intl";
 import { updateJob } from "../../lib/redux/actions";
 import Interweave from "interweave";
 import { toast } from "react-toastify";
+import moment from "moment";
+import 'moment/locale/vi'
+moment.locale('vi')
 
 class DetailJobPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      jobDetail: []
+      jobDetail: {
+        detail: '',
+        price: '',
+        start_time: '',
+        end_time: '',
+        gender: '',
+        amount_member: '',
+        phone_number: '',
+        location: '',
+        email: ''
+      }
     };
   }
 
@@ -36,7 +49,18 @@ class DetailJobPage extends Component {
         }
       })
       .then(res => {
-        this.setState({ jobDetail: res.data.response });
+        this.setState({ 
+          jobDetail:{
+            detail: res.data.response.detail,
+            price: res.data.response.price,
+            start_time: moment(new Date(res.data.response.start_time)).lang('vi').format('LLL'),
+            end_time: moment(new Date(res.data.response.end_time)).format('LLL'),
+            gender: res.data.response.gender,
+            amount_member: res.data.response.amount_member,
+            phone_number: res.data.response.phone_number,
+            location: res.data.response.location,
+            email: res.data.response.email
+          }  });
         this.props.updateJob({
           title: res.data.response.title,
           category: res.data.response.category,
@@ -65,7 +89,7 @@ class DetailJobPage extends Component {
       return;
     }
 
-    if (this.props.me.role == 2) {
+    if (this.props.me.role === 2) {
      this.props
         .http({
           url: "/auth/post/apply",
@@ -135,7 +159,7 @@ class DetailJobPage extends Component {
       return;
     }
 
-    if (this.props.me.role == 2) {
+    if (this.props.me.role === 2) {
       this.props
         .http({
           url: "/auth/book-mark/post",
@@ -207,8 +231,8 @@ class DetailJobPage extends Component {
               </div>
               {!this.props.me ||
                 (this.props.me &&
-                  this.props.me.role != 1 &&
-                  this.state.jobDetail.is_apply == 0 && (
+                  this.props.me.role !== 1 &&
+                  this.state.jobDetail.is_apply === 0 && (
                     <button
                       href="javascript:void(0)"
                       data-toggle="modal"
@@ -225,8 +249,8 @@ class DetailJobPage extends Component {
                   ))}
               {!this.props.me ||
                 (this.props.me &&
-                  this.props.me.role != 1 &&
-                  this.state.jobDetail.is_apply == 1 && (
+                  this.props.me.role !== 1 &&
+                  this.state.jobDetail.is_apply === 1 && (
                     <p
                       className="btn btn-info mb-2 mb-5 nut"
                       style={{ marginLeft: "42%" }}
@@ -240,8 +264,8 @@ class DetailJobPage extends Component {
               <div className="offer-btn-wrap mb-4">
                 {!this.props.me ||
                   (this.props.me &&
-                    this.props.me.role != 1 &&
-                    this.state.jobDetail.is_bookmark == 0 && (
+                    this.props.me.role !== 1 &&
+                    this.state.jobDetail.is_bookmark === 0 && (
                       <button
                         className="btn btn-info btn-md full-width"
                         onClick={this.markdownJob.bind(
@@ -256,8 +280,8 @@ class DetailJobPage extends Component {
 
                 {!this.props.me ||
                   (this.props.me &&
-                    this.props.me.role != 1 &&
-                    this.state.jobDetail.is_bookmark == 1 && (
+                    this.props.me.role !== 1 &&
+                    this.state.jobDetail.is_bookmark === 1 && (
                       <button className="btn btn-info btn-md full-width">
                         <FaBookmark />
                         <FormattedMessage id="Saved" />
@@ -283,7 +307,7 @@ class DetailJobPage extends Component {
                             <FormattedMessage id="Salary" />
                           </strong>
                           <FormattedNumber value={this.state.jobDetail.price} />{" "}
-                          đ
+                          VND
                         </div>
                       </div>
                     </li>

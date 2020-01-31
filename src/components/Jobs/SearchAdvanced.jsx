@@ -173,7 +173,7 @@ class SearchAdvanced extends Component {
                     >
                       <FormattedMessage id="Male" />
                     </label>
-                  </li>
+                  </li> 
                   <li>
                     <input
                       id="checkbox-j2"

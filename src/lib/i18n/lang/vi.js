@@ -120,8 +120,8 @@ export default {
 	'Type': 'Loại công việc',
 	'Title': 'Tiêu đề',
 	'Detail': 'Chi tiết',
-	'Edit post': 'Sửa bài viết',
-	'Add post': 'Thêm bài viết',
+	'Edit post': 'Sửa công việc',
+	'Add job': 'Thêm công việc',
 	'The title field is required.': 'Tiêu đề không được để trống',
 	'The detail field is required.': 'Chi tiết không được để trống',
 	'The price field is required.': 'Gía không được để trống',
@@ -135,7 +135,7 @@ export default {
 	'The amount member may not be greater than 10.': 'Số người không được quá 10',
 	'Posts was finished': 'Các công việc đã hoàn thành',
 	'The Id card field is required.': 'Số cmnd không được để trống',
-	'My post': 'Bài viết của tôi',
+	'My job': 'Công việc của tôi',
 	'The password must be at least 6 characters.': 'Mật khẩu phải có 6 ký tự',
 	'The confirm password and password must match.': 'xác nhận mật khẩu phải giống mật khẩu cũ',
 	'The phone number must be at least 9 characters.': 'Số điện thoại ít nhất 6 ký tự',
@@ -170,6 +170,8 @@ export default {
 	'User applied': 'Những người đã ứng tuyển',
 	'You have to update your information': 'Bạn phải cập nhật thông tin cá nhân để lưu hoặc ứng tuyển',
 	'Applied' : 'Đã ứng tuyển',
-	'Saved': 'Đã lưu'
+	'Saved': 'Đã lưu',
+	'Login successful': 'Đăng nhập thành công',
+	'Message will be sent to you in 5 minutes, you can receive calls or messages': 'Tin nhắn sẽ gửi tới bạn trong vòng 5 phút , bạn có thể nhận được cuộc gọi hoặc tin nhắn'
 };
  

@@ -81,7 +81,7 @@ class Sidebar extends Component {
                     <i>
                       <FaFile />
                     </i>{" "}
-                    <FormattedMessage id="Add post" />
+                    <FormattedMessage id="Add job" />
                   </Link>
                 </li>
                 <li className="nav-item">
@@ -89,7 +89,7 @@ class Sidebar extends Component {
                     <i>
                       <FaFile />
                     </i>
-                    <FormattedMessage id="My post" />
+                    <FormattedMessage id="My job" />
                   </Link>
                 </li>
               </ul>

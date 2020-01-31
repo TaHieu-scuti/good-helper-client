@@ -66,6 +66,8 @@ class CheckOTPAgain extends Component {
                           <label>
                             <FormattedMessage id="Enter the OTP code" />{" "}
                             <span className="text-danger">*</span>
+                            <br/>
+                            <span className="text-danger"  style={{ textAlign: "center" }}><FormattedMessage id="Message will be sent to you in 5 minutes, you can receive calls or messages" /></span>
                           </label>
                           <div className="input-with-icon">
                             <input

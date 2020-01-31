@@ -4362,7 +4362,6 @@ button.owl-prev, button.owl-next {
     text-align: left;
     align-items: center;
     width: 100%;
-    margin-top: 3rem;
 }
 .job-grid-footer .job-price {
     flex: 1;

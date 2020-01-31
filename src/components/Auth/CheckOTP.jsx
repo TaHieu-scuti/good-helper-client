@@ -4,7 +4,6 @@ import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { raiseError } from "../../lib/redux/actions";
-
 class CheckOTP extends Component {
   constructor(props) {
     super(props);
@@ -67,6 +66,8 @@ class CheckOTP extends Component {
                             <FormattedMessage id="Enter the OTP code" />{" "}
                             <span className="text-danger">*</span>
                           </label>
+                          <br/>
+                          <span className="text-danger"  style={{ textAlign: "center" }}><FormattedMessage id="Message will be sent to you in 5 minutes, you can receive calls or messages" /></span>        
                           <div className="input-with-icon">
                             <input
                               type="text"

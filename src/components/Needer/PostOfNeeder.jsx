@@ -181,7 +181,7 @@ class PostOfNeeder extends Component {
                     <div className="tr-single-header">
                       <h3>
                         <i></i>
-                        <FormattedMessage id="My post" />
+                        <FormattedMessage id="My job" />
                       </h3>
                     </div>
                     <div className="tr-single-body">{data}</div>

@@ -12,6 +12,7 @@ import {
   loginError
 } from "../../lib/redux/actions";
 import Authenticate from "./Authenticate";
+import { toast } from "react-toastify";
 
 class LoginPage extends Component {
   constructor(props) {
@@ -159,6 +160,15 @@ const mapDispatchToProps = dispatch => {
           }).then(({ data }) => {
             dispatch(updateMe(data.response));
           });
+          toast.success(
+            component.props.intl.formatMessage({
+              id: "Login successful"
+            }),
+            "Title",
+            {
+              displayDuration: 3000
+            }
+          )
         })
         .catch(error => {
           if (error.response.status == 422) {

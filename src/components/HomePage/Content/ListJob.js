@@ -71,7 +71,7 @@ class AutoPlayCarousel extends React.Component {
       return;
     }
 
-    if (this.props.me.role == 2) {
+    if (this.props.me.role === 2) {
       this.props
         .http({
           url: "/auth/post/apply",
@@ -125,6 +125,9 @@ class AutoPlayCarousel extends React.Component {
               <p>
                 <FormattedMessage id="Location" /> :{item.location}
               </p>
+              <p>
+                <FormattedMessage id="End time" /> : {item.end_time}
+              </p>
             </div>
             <div className="job-grid-footer">
               <h6 className="job-price">
@@ -132,7 +135,7 @@ class AutoPlayCarousel extends React.Component {
                 <FormattedNumber value={item.price} /> đ
               </h6>
               {!this.props.me ||
-                (this.props.me && this.props.me.role != 1 && item.is_apply == 0 && (
+                (this.props.me && this.props.me.role !== 1 && item.is_apply === 0 && (
                   <button
                     className="btn btn-outline-info btn-rounded"
                     onClick={this.applyJob.bind(this, item.id)}
@@ -141,7 +144,7 @@ class AutoPlayCarousel extends React.Component {
                   </button>
                 ))}
                 {!this.props.me ||
-                (this.props.me && this.props.me.role != 1 && item.is_apply == 1 && (
+                (this.props.me && this.props.me.role !== 1 && item.is_apply === 1 && (
                   <button
                     className="btn btn-outline-info btn-rounded nut"
                   >

@@ -178,37 +178,37 @@ class ListJobSearchAdvanced extends Component {
                       <FaBookmark />
                     </button>
                   ))}
-                  {!this.props.me ||
-                    (this.props.me &&
-                      this.props.me.role != 1 &&
-                      item.is_bookmark == 1 && (
-                        <button
-                          className="btn btn-outline-info bn-det nut"
-                          style={{
-                            marginTop: "-30px"
-                          }}
-                          title={this.props.intl.formatMessage({
-                            id: "Saved"
-                          })}
-                        >
-                          <FaBookmark />
-                        </button>
-                      ))}
-                  {!this.props.me ||
-                    (this.props.me &&
-                      this.props.me.role != 1 &&
-                      item.is_bookmark == 1 && (
-                        <div
-                          className="btn btn-outline-info bn-det cancel"
-                          data-toggle="tooltip"
-                          data-placement="right"
-                          title={this.props.intl.formatMessage({
-                            id: "Saved"
-                          })}
-                        >
-                          <FaBookmark />
-                        </div>
-                      ))}
+              {!this.props.me ||
+                (this.props.me &&
+                  this.props.me.role !== 1 &&
+                  item.is_bookmark === 1 && (
+                    <button
+                      className="btn btn-outline-info bn-det nut"
+                      style={{
+                        marginTop: "-30px"
+                      }}
+                      title={this.props.intl.formatMessage({
+                        id: "Saved"
+                      })}
+                    >
+                      <FaBookmark />
+                    </button>
+                  ))}
+              {!this.props.me ||
+                (this.props.me &&
+                  this.props.me.role !== 1 &&
+                  item.is_bookmark === 1 && (
+                    <div
+                      className="btn btn-outline-info bn-det cancel"
+                      data-toggle="tooltip"
+                      data-placement="right"
+                      title={this.props.intl.formatMessage({
+                        id: "Saved"
+                      })}
+                    >
+                      <FaBookmark />
+                    </div>
+                  ))}
             </h5>
             <p>{item.category}</p>
             <ul className="vc-info-list">
@@ -217,13 +217,13 @@ class ListJobSearchAdvanced extends Component {
                   <FormattedMessage id="Salary" />
                 </h5>
                 <IoLogoUsd />
-                <FormattedNumber value={item.price} /> đ
+                <FormattedNumber value={item.price} /> VND
               </li>
               <li className="list-inline-item">
                 <h5>
-                  <FormattedMessage id="Start" />
+                  <FormattedMessage id="End time" />
                 </h5>
-                {item.start_time}
+                {item.end_time}
               </li>
               <li className="list-inline-item">
                 <h5>
@@ -235,7 +235,7 @@ class ListJobSearchAdvanced extends Component {
           </div>
           <br />
           {!this.props.me ||
-            (this.props.me && this.props.me.role != 1 && item.is_apply == 0 && (
+            (this.props.me && this.props.me.role !== 1 && item.is_apply === 0 && (
               <button
                 className="btn btn-outline-info bn-det"
                 href="#"
@@ -248,7 +248,7 @@ class ListJobSearchAdvanced extends Component {
             ))}
 
           {!this.props.me ||
-            (this.props.me && this.props.me.role != 1 && item.is_apply == 1 && (
+            (this.props.me && this.props.me.role !== 1 && item.is_apply === 1 && (
               <div
                 className="btn btn-outline-info bn-det nut"
                 style={{ marginTop: "20px" }}

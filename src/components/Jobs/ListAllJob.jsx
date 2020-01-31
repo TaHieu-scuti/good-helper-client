@@ -230,13 +230,13 @@ class ListALLJob extends Component {
                   <FormattedMessage id="Salary" />
                 </h5>
                 <IoLogoUsd />
-                <FormattedNumber value={item.price} /> đ
+                <FormattedNumber value={item.price} /> VND
               </li>
               <li className="list-inline-item">
                 <h5>
-                  <FormattedMessage id="Start" />
+                  <FormattedMessage id="End time" />
                 </h5>
-                {item.start_time}
+                {item.end_time}
               </li>
               <li className="list-inline-item">
                 <h5>

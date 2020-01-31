@@ -180,8 +180,8 @@ class ListJobSearchAdvanced extends Component {
                   ))}
               {!this.props.me ||
                 (this.props.me &&
-                  this.props.me.role != 1 &&
-                  item.is_bookmark == 1 && (
+                  this.props.me.role !== 1 &&
+                  item.is_bookmark === 1 && (
                     <button
                       className="btn btn-outline-info bn-det nut"
                       style={{
@@ -196,8 +196,8 @@ class ListJobSearchAdvanced extends Component {
                   ))}
               {!this.props.me ||
                 (this.props.me &&
-                  this.props.me.role != 1 &&
-                  item.is_bookmark == 1 && (
+                  this.props.me.role !== 1 &&
+                  item.is_bookmark === 1 && (
                     <div
                       className="btn btn-outline-info bn-det cancel"
                       data-toggle="tooltip"
@@ -235,7 +235,7 @@ class ListJobSearchAdvanced extends Component {
           </div>
           <br />
           {!this.props.me ||
-            (this.props.me && this.props.me.role != 1 && item.is_apply == 0 && (
+            (this.props.me && this.props.me.role !== 1 && item.is_apply === 0 && (
               <button
                 className="btn btn-outline-info bn-det"
                 href="#"
@@ -248,7 +248,7 @@ class ListJobSearchAdvanced extends Component {
             ))}
 
           {!this.props.me ||
-            (this.props.me && this.props.me.role != 1 && item.is_apply == 1 && (
+            (this.props.me && this.props.me.role !== 1 && item.is_apply === 1 && (
               <div
                 className="btn btn-outline-info bn-det nut"
                 style={{ marginTop: "20px" }}

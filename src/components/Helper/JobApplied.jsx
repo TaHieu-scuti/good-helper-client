@@ -3,9 +3,14 @@ import Sidebar from "./../Profile/Sidebar";
 import Authenticate from "./../Profile/Authenticate";
 import { connect } from "react-redux";
 import { IoLogoUsd } from "react-icons/io";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, injectIntl } from "react-intl";
 import Pagination from "react-js-pagination";
 import { Link } from "react-router-dom";
+import { Tabs, Tab } from "react-bootstrap";
+import JobDoing from "./JobDoing";
+import JobMarkdowned from "./JobMarkdowned";
+import ListJobBeCanceled from "./ListJobBeCanceled";
+import JobFinishOfHelper from "./JobFinishOfHelper";
 
 class JobApplied extends Component {
   constructor(props) {
@@ -134,10 +139,50 @@ class JobApplied extends Component {
                       <div className="tr-single-header">
                         <h3>
                           <i></i>
-                          <FormattedMessage id="Posts was appiled" />
+                          <FormattedMessage id="My job" />
                         </h3>
                       </div>
-                      <div className="tr-single-body">{data}</div>
+                      <Tabs
+                        defaultActiveKey="appied"
+                        id="uncontrolled-tab-example"
+                        className="tabjob"
+                      >
+                        <Tab eventKey="appied" title="Đã ứng tuyển">
+                          {data}
+                        </Tab>
+                        <Tab
+                          eventKey="jobdoing"
+                          title={this.props.intl.formatMessage({
+                            id: "Doing"
+                          })}
+                        >
+                          <JobDoing />
+                        </Tab>
+                        <Tab
+                          eventKey="saved"
+                          title={this.props.intl.formatMessage({
+                            id: "Saved"
+                          })}
+                        >
+                          <JobMarkdowned />
+                        </Tab>
+                        <Tab
+                          eventKey="cancel"
+                          title={this.props.intl.formatMessage({
+                            id: "Be cancel"
+                          })}
+                        >
+                          <ListJobBeCanceled />
+                        </Tab>
+                        <Tab
+                          eventKey="finish"
+                          title={this.props.intl.formatMessage({
+                            id: "Finish"
+                          })}
+                        >
+                          <JobFinishOfHelper />
+                        </Tab>
+                      </Tabs>
                     </div>
                   </div>
                 </div>
@@ -157,4 +202,4 @@ const mapStateToProps = (stateStore, ownProps) => {
   return newState;
 };
 
-export default connect(mapStateToProps)(JobApplied);
+export default connect(mapStateToProps)(injectIntl(JobApplied));

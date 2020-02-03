@@ -9,7 +9,6 @@ import {
   updateMe,
   updateIdentity,
   userCheckotp,
-  loginError
 } from "../../lib/redux/actions";
 import Authenticate from "./Authenticate";
 import { toast } from "react-toastify";
@@ -135,9 +134,9 @@ class LoginPage extends Component {
 
 const mapStateToProps = (stateStore, ownProps) => {
   let newState = Object.assign({}, ownProps);
-  newState.error_login = stateStore.error_login;
+  newState.error_login = stateStore.error_descriptions;
   newState.http = stateStore.http;
-  newState.is_error = stateStore.error_login.length > 0;
+  newState.is_error = stateStore.error_descriptions.length > 0;
   return newState;
 };
 
@@ -172,7 +171,7 @@ const mapDispatchToProps = dispatch => {
         })
         .catch(error => {
           if (error.response.status == 422) {
-            dispatch(loginError(error.response.data.message.login));
+            dispatch(raiseError(error.response.data.message.login));
           } else {
             dispatch(userCheckotp(error.response.data.response));
             component.props.history.push("/again/checkotp");

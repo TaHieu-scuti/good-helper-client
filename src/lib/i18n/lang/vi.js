@@ -168,6 +168,9 @@ export default {
 	'You have to update your information': 'Bạn phải cập nhật thông tin cá nhân để lưu hoặc ứng tuyển',
 	'Applied' : 'Đã ứng tuyển',
 	'Login successful': 'Đăng nhập thành công',
-	'Message will be sent to you in 5 minutes, you can receive calls or messages': 'Tin nhắn sẽ gửi tới bạn trong vòng 5 phút , bạn có thể nhận được cuộc gọi hoặc tin nhắn'
+	'Message will be sent to you in 5 minutes, you can receive calls or messages': 'Tin nhắn sẽ gửi tới bạn trong vòng 5 phút , bạn có thể nhận được cuộc gọi hoặc tin nhắn',
+	'Be cancel': 'Bị từ chối',
+	'Doing': 'Đang làm',
+	'Finish': 'Đã hoàn thành'
 };
  

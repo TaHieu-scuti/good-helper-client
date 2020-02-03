@@ -28,7 +28,7 @@ class JobDoing extends Component {
       .then(res => {
         this.setState({
           data: res.data.response.posts,
-          pagination: res.data.response.pagination 
+          pagination: res.data.response.pagination
         });
       });
   }
@@ -121,28 +121,7 @@ class JobDoing extends Component {
 
     return (
       <Authenticate>
-        <div id="main-wrapper">
-          <section className="tr-single-detail gray-bg">
-            <div className="container">
-              <div className="row">
-                <Sidebar user={this.props.user} />
-                <div className="col-md-8 col-sm-12">
-                  <div className="tab-pane active container" id="c-profile">
-                    <div className="tr-single-box">
-                      <div className="tr-single-header">
-                        <h3>
-                          <i></i>
-                          <FormattedMessage id="Posts is doing" />
-                        </h3>
-                      </div>
-                      <div className="tr-single-body">{data}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
+        <div className="tr-single-body">{data}</div>
       </Authenticate>
     );
   }

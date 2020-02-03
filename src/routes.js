@@ -34,17 +34,14 @@ const routes = [
   { path: '/register', name: 'Register', component: Register },
   { path: '/checkotp', name: 'CheckOTP', component: CheckOTP },
   { path: '/markdown/helper', name: 'markdown', component: JobHelpMarkdown },
-  { path: '/helper/jobappiled', name: 'jobappied', component: JobAppied }, 
+  { path: '/helper/posts', name: 'jobappied', component: JobAppied }, 
   { path: '/password/change', name: 'ChangePassword', component: ChangePassword },
   { path: '/again/checkotp', name: 'CheckOTP', component: CheckOTPAgain },
   { path: '/edit/post/:id', name: 'editPost', component: EditPostOfNeeder },
   { path: '/add/post/needer', name: 'AddPostOfNeeder', component: AddPostOfNeeder },
-  { path: '/post/finish', name: 'jobFinish', component: JobFinishOfHelper },
   { path: '/needer/post', name: 'PostOfNeeder', component: PostOfNeeder },
   { path: '/approve/user/:id', name: 'approveUser', component: ApproveHelper },
   { path: '/advanced/search', name: 'SearchAdvancedPage', component: SearchAdvancedPage },
-  { path: '/post/cancel', name: 'ListJobBeCanceled', component: ListJobBeCanceled },
-  { path: '/post/doing', name: 'JobDoing', component: JobDoing },
   { path: '/user/doing/:id', name: 'HelperDoing', component: HelperDoing },
 ];
 

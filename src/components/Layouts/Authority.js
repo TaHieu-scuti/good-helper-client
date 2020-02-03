@@ -30,8 +30,7 @@ class Authority extends Component {
         return config;
       },
       function(error) {
-        const message = error.response.data.message;
-        this.props.raiseError(message);
+        return Promise.reject(error);
       }
     );
     this.props.http.interceptors.response.use(
@@ -41,8 +40,8 @@ class Authority extends Component {
         return response;
       },
       function(error) {
-        const message = error.response.data.message;
-        this.props.raiseError(message);
+        this.setState({ is_loading: false });
+        return Promise.reject(error);
       }
     );
   }

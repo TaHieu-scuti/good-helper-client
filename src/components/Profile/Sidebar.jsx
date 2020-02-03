@@ -31,48 +31,14 @@ class Sidebar extends Component {
           </div>
           <ul className="nav dashboard-verticle-nav">
             {this.props.user.role == 2 ? (
-              <ul className="nav dashboard-verticle-nav">
                 <li className="nav-item">
-                  <Link to="/helper/jobappiled" className="nav-link active">
+                  <Link to="/helper/posts" className="nav-link active">
                     <i>
                       <FaFile />
                     </i>{" "}
-                    <FormattedMessage id="Job Applied" />
+                    <FormattedMessage id="My job" />
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <Link to="/post/doing" className="nav-link active">
-                    <i>
-                      <FaFile />
-                    </i>{" "}
-                    <FormattedMessage id="Posts is doing" />
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/markdown/helper" className="nav-link active">
-                    <i>
-                      <FaFile />
-                    </i>{" "}
-                    <FormattedMessage id="Job markdown" />
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/post/cancel" className="nav-link active">
-                    <i>
-                      <FaFile />
-                    </i>{" "}
-                    <FormattedMessage id="Posts was be canceled" />
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/post/finish" className="nav-link active">
-                    <i>
-                      <FaFile />
-                    </i>{" "}
-                    <FormattedMessage id="Job finished" />
-                  </Link>
-                </li>
-              </ul>
             ) : null}
             {this.props.user.role == 1 ? (
               <ul className="nav dashboard-verticle-nav">

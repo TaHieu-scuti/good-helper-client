@@ -11,7 +11,6 @@ import SEARCH_OUTSIDE from './searchOutside';
 import REGISTER from './register';
 import USERCHECKOTP from './userCheckOtp';
 import REMOVE_ERROR from './removeError';
-import LOGIN_ERROR from './loginError';
 import SEARCH_ADVANCED from './searchAdvanced';
 
 const reducers = {
@@ -27,7 +26,6 @@ const reducers = {
   REGISTER,
   USERCHECKOTP,
   REMOVE_ERROR,
-  LOGIN_ERROR,
   SEARCH_ADVANCED
 }
 

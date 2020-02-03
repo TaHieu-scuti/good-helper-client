@@ -15,6 +15,5 @@ export default {
     img: ''
   },
   userCheckotp: null,
-  error_login: '',
   searchAdvanced:null
 }

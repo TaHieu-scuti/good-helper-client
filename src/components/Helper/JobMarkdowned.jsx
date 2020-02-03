@@ -3,7 +3,7 @@ import Sidebar from "./../Profile/Sidebar";
 import Authenticate from "./../Profile/Authenticate";
 import { connect } from "react-redux";
 import { IoLogoUsd } from "react-icons/io";
-import { FormattedMessage,injectIntl } from "react-intl";
+import { FormattedMessage, injectIntl } from "react-intl";
 import Pagination from "react-js-pagination";
 import { Link } from "react-router-dom";
 import { FaTimes } from "react-icons/fa";
@@ -50,7 +50,7 @@ class JobMarkdowned extends Component {
     this.setState({ activePage: pageNumber });
   }
 
-  unMarkdown(post_id){
+  unMarkdown(post_id) {
     this.props
       .http({
         url: "auth/book-mark/unmark",
@@ -123,12 +123,12 @@ class JobMarkdowned extends Component {
     });
 
     let data = (
-      <div className="tr-single-body" style= {{height: "500px"}}>
-      <div className="row">
-        <p className="text-danger" style={{margin: "auto"}}>
-          <FormattedMessage id="Dont have the data" />
-        </p>
-      </div>
+      <div className="tr-single-body" style={{ height: "500px" }}>
+        <div className="row">
+          <p className="text-danger" style={{ margin: "auto" }}>
+            <FormattedMessage id="Dont have the data" />
+          </p>
+        </div>
       </div>
     );
 
@@ -155,28 +155,7 @@ class JobMarkdowned extends Component {
 
     return (
       <Authenticate>
-        <div id="main-wrapper">
-          <section className="tr-single-detail gray-bg">
-            <div className="container">
-              <div className="row">
-                <Sidebar user={this.props.user} />
-                <div className="col-md-8 col-sm-12">
-                  <div className="tab-pane active container" id="c-profile">
-                    <div className="tr-single-box">
-                      <div className="tr-single-header">
-                        <h3>
-                          <i></i>
-                          <FormattedMessage id="Job markdown" />
-                        </h3>
-                      </div>
-                      <div className="tr-single-body">{data}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
+        <div className="tr-single-body">{data}</div>
       </Authenticate>
     );
   }

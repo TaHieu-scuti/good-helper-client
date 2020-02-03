@@ -11,14 +11,18 @@ class Authority extends Component {
       category: '',
       location:'' ,
       img: ''
-    }
+    },
+    is_loading: false
    }
     this.props.http.interceptors.request.use(
       async config => {
         this.props.removeJob();
         const job = this.state.job
         this.props.updateJob(job);
-        this.props.removeError()
+        this.props.removeError();
+        // this.setState({is_loading: 'đang load'})
+        console.log("load");
+        
         return config;
       },
       function(error) {
@@ -26,6 +30,13 @@ class Authority extends Component {
         this.props.raiseError(message);
       }
     );
+    this.props.http.interceptors.response.use(function (response) {
+        console.log("xong");
+        
+      return response;
+    }, function (error) {
+      return Promise.reject(error);
+    });
   }
 
   render() {

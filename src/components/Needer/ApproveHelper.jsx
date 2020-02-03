@@ -7,6 +7,8 @@ import { Link, NavLink } from "react-router-dom";
 import { FaTimes, FaRegCheckCircle } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { Nav } from "react-bootstrap";
+import HelperDoing from "./HelperDoing";
+import { Tabs, Tab } from "react-bootstrap";
 
 class ApproveHelper extends Component {
   constructor(props) {
@@ -225,38 +227,35 @@ class ApproveHelper extends Component {
               <Sidebar user={this.props.user} />
               <div className="col-md-8 col-sm-12">
                 <div className="tab-pane active container" id="c-profile">
-                  <div className="tr-single-box">
+                  <div className="tr-single-box navbar_job">
                     <div className="tr-single-header">
                       <h3>
                         <i></i>
                         <FormattedMessage id="User applied" />
                       </h3>
                     </div>
-                    <div className="tr-single-header">
-                      <Nav variant="tabs" defaultActiveKey="/home">
-                        <Nav.Item>
-                          <Nav.Link className="smallnav">
-                            <Link
-                              className="smallnav"
-                              to={"/approve/user/" + this.props.match.params.id}
-                            >
-                              <FormattedMessage id="User applied" />
-                            </Link>
-                          </Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                          <Nav.Link className="smallnav">
-                            <Link
-                              className="smallnav"
-                              to={"/user/doing/" + this.props.match.params.id}
-                            >
-                              <FormattedMessage id="User is doing" />
-                            </Link>
-                          </Nav.Link>
-                        </Nav.Item>
-                      </Nav>
-                    </div>
-                    {data}
+                    <Tabs
+                      defaultActiveKey="appied"
+                      id="uncontrolled-tab-example"
+                      className="tabuser"
+                    >
+                      <Tab
+                        eventKey="appied"
+                        title={this.props.intl.formatMessage({
+                          id: "Applied"
+                        })}
+                      >
+                        {data}
+                      </Tab>
+                      <Tab
+                        eventKey="jobdoing"
+                        title={this.props.intl.formatMessage({
+                          id: "Doing"
+                        })}
+                      >
+                        <HelperDoing id={this.props.match.params.id} />
+                      </Tab>
+                    </Tabs>
                   </div>
                 </div>
               </div>

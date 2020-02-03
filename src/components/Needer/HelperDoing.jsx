@@ -26,7 +26,7 @@ class HelperDoing extends Component {
         url: "/auth/post/user/doing ",
         method: "POST",
         data: {
-          post_id: this.props.match.params.id
+          post_id: this.props.id
         }
       })
       .then(res => {
@@ -121,54 +121,7 @@ class HelperDoing extends Component {
       );
     }
 
-    return (
-      <div id="main-wrapper">
-        <section className="tr-single-detail gray-bg">
-          <div className="container">
-            <div className="row">
-              <Sidebar user={this.props.user} />
-              <div className="col-md-8 col-sm-12">
-                <div className="tab-pane active container" id="c-profile">
-                  <div className="tr-single-box">
-                    <div className="tr-single-header">
-                      <h3>
-                        <i></i>
-                        <FormattedMessage id="User is doing" />
-                      </h3>
-                    </div>
-                    <div className="tr-single-header">
-                    <Nav variant="tabs" defaultActiveKey="/home">
-                        <Nav.Item>
-                          <Nav.Link className="smallnav">
-                            <Link
-                              className="smallnav"
-                              to={"/approve/user/" + this.props.match.params.id}
-                            >
-                              <FormattedMessage id="User applied" />
-                            </Link>
-                          </Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                          <Nav.Link className="smallnav">
-                            <Link
-                              className="smallnav"
-                              to={"/user/doing/" + this.props.match.params.id}
-                            >
-                              <FormattedMessage id="User is doing" />
-                            </Link>
-                          </Nav.Link>
-                        </Nav.Item>
-                      </Nav>
-                    </div>
-                    {data}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-    );
+    return <div>{data}</div>;
   }
 }
 

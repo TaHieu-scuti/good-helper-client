@@ -135,7 +135,7 @@ class JobApplied extends Component {
                 <Sidebar user={this.props.user} />
                 <div className="col-md-8 col-sm-12">
                   <div className="tab-pane active container" id="c-profile">
-                    <div className="tr-single-box">
+                    <div className="tr-single-box navbar_profile">
                       <div className="tr-single-header">
                         <h3>
                           <i></i>

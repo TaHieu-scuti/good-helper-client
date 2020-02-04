@@ -27,7 +27,7 @@ class CheckOTP extends Component {
         url: "auth/verified",
         method: "POST",
         data: {
-          user_id: this.props.register.id,
+          email: this.props.register.email,
           request_id: this.state.request_id
         }
       })
@@ -45,7 +45,7 @@ class CheckOTP extends Component {
       url: "auth/send/again",
       method: "POST",
       data: {
-        user_id: this.props.register.id
+        email: this.props.register.email
       }
     });
   }
@@ -66,8 +66,13 @@ class CheckOTP extends Component {
                             <FormattedMessage id="Enter the OTP code" />{" "}
                             <span className="text-danger">*</span>
                           </label>
-                          <br/>
-                          <span className="text-danger"  style={{ textAlign: "center" }}><FormattedMessage id="Message will be sent to you in 5 minutes, you can receive calls or messages" /></span>        
+                          <br />
+                          <span
+                            className="text-danger"
+                            style={{ textAlign: "center" }}
+                          >
+                            <FormattedMessage id="Message will be sent to you in 5 minutes, you can receive calls or messages" />
+                          </span>
                           <div className="input-with-icon">
                             <input
                               type="text"
@@ -78,9 +83,7 @@ class CheckOTP extends Component {
                             />
                             {this.props.is_error ? (
                               <span className="text-danger">
-                                <FormattedMessage
-                                  id="verification failed"
-                                />
+                                <FormattedMessage id="verification failed" />
                               </span>
                             ) : null}
                           </div>

@@ -25,21 +25,13 @@ class DetailJobPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      jobDetail: {
-        detail: "",
-        price: "",
-        start_time: "",
-        end_time: "",
-        gender: "",
-        amount_member: "",
-        phone_number: "",
-        location: "",
-        email: "",
-        is_apply: "",
-        is_bookmark: ""
-      }
+      jobDetail: ""
     };
+    this.onHandleJob = this.onHandleJob.bind(this);
   }
+
+  applyEndpoint = "/auth/post/apply";
+  markdownEndpoint = "/auth/book-mark/post";
 
   componentDidMount() {
     this.props
@@ -52,24 +44,7 @@ class DetailJobPage extends Component {
       })
       .then(res => {
         this.setState({
-          jobDetail: {
-            id: res.data.response.id,
-            detail: res.data.response.detail,
-            price: res.data.response.price,
-            start_time: moment(new Date(res.data.response.start_time))
-              .lang("vi")
-              .format("LLL"),
-            end_time: moment(new Date(res.data.response.end_time)).format(
-              "LLL"
-            ),
-            gender: res.data.response.gender,
-            amount_member: res.data.response.amount_member,
-            phone_number: res.data.response.phone_number,
-            location: res.data.response.location,
-            email: res.data.response.email,
-            is_apply: res.data.response.is_apply,
-            is_bookmark: res.data.response.is_bookmark
-          }
+          jobDetail: res.data.response
         });
         this.props.updateJob({
           title: res.data.response.title,
@@ -80,7 +55,9 @@ class DetailJobPage extends Component {
       });
   }
 
-  applyJob(post_id) {
+  onHandleJob(post_id, path, messageSuccess, messageError) {
+    console.log(messageSuccess);
+    
     if (!this.props.me) {
       this.props.history.push("/login");
       return;
@@ -102,95 +79,7 @@ class DetailJobPage extends Component {
     if (this.props.me.role === 2) {
       this.props
         .http({
-          url: "/auth/post/apply",
-          method: "POST",
-          data: {
-            post_id: post_id
-          }
-        })
-        .then(res => {
-          this.props.http({
-              url: "auth/detail/post",
-              method: "POST",
-              data: {
-                post_id: this.props.match.params.id
-              }
-            })
-            .then(res => {
-              this.setState({
-                jobDetail: {
-                  id: res.data.response.id,
-                  detail: res.data.response.detail,
-                  price: res.data.response.price,
-                  start_time: moment(new Date(res.data.response.start_time))
-                    .lang("vi")
-                    .format("LLL"),
-                  end_time: moment(new Date(res.data.response.end_time)).format(
-                    "LLL"
-                  ),
-                  gender: res.data.response.gender,
-                  amount_member: res.data.response.amount_member,
-                  phone_number: res.data.response.phone_number,
-                  location: res.data.response.location,
-                  email: res.data.response.email,
-                  is_apply: res.data.response.is_apply,
-                  is_bookmark: res.data.response.is_bookmark
-                }
-              });
-              this.props.updateJob({
-                title: res.data.response.title,
-                category: res.data.response.category,
-                location: res.data.response.location,
-                img: res.data.response.avatar
-              });
-            });
-          toast.success(
-            this.props.intl.formatMessage({
-              id: "Apply successfully"
-            }),
-            "Title",
-            {
-              displayDuration: 3000
-            }
-          );
-        })
-        .catch(error => {
-          toast.warning(
-            this.props.intl.formatMessage({
-              id: "Appied"
-            }),
-            "Title",
-            {
-              displayDuration: 3000
-            }
-          );
-        });
-    }
-  }
-
-  markdownJob(post_id) {
-    if (!this.props.me) {
-      this.props.history.push("/login");
-      return;
-    }
-
-    if (!this.props.me.id_card) {
-      toast.error(
-        this.props.intl.formatMessage({
-          id: "You have to update your information"
-        }),
-        "Title",
-        {
-          displayDuration: 3000
-        }
-      );
-      return;
-    }
-
-    if (this.props.me.role === 2) {
-      this.props
-        .http({
-          url: "/auth/book-mark/post",
+          url: path,
           method: "POST",
           data: {
             post_id: post_id
@@ -207,24 +96,7 @@ class DetailJobPage extends Component {
             })
             .then(res => {
               this.setState({
-                jobDetail: {
-                  id: res.data.response.id,
-                  detail: res.data.response.detail,
-                  price: res.data.response.price,
-                  start_time: moment(new Date(res.data.response.start_time))
-                    .lang("vi")
-                    .format("LLL"),
-                  end_time: moment(new Date(res.data.response.end_time)).format(
-                    "LLL"
-                  ),
-                  gender: res.data.response.gender,
-                  amount_member: res.data.response.amount_member,
-                  phone_number: res.data.response.phone_number,
-                  location: res.data.response.location,
-                  email: res.data.response.email,
-                  is_apply: res.data.response.is_apply,
-                  is_bookmark: res.data.response.is_bookmark
-                }
+                jobDetail: res.data.response
               });
               this.props.updateJob({
                 title: res.data.response.title,
@@ -235,7 +107,7 @@ class DetailJobPage extends Component {
             });
           toast.success(
             this.props.intl.formatMessage({
-              id: "Save successful"
+              id: messageSuccess
             }),
             "Title",
             {
@@ -246,7 +118,7 @@ class DetailJobPage extends Component {
         .catch(error => {
           toast.warning(
             this.props.intl.formatMessage({
-              id: "Saved"
+              id: messageError
             }),
             "Title",
             {
@@ -285,7 +157,17 @@ class DetailJobPage extends Component {
                     data-target="#apply"
                     className="btn btn-info mb-2 mb-5"
                     style={{ marginLeft: "42%" }}
-                    onClick={this.applyJob.bind(this, this.state.jobDetail.id)}
+                    onClick={(
+                      messageSuccess = 'Apply successfully',
+                      messageError = 'Applied'
+                    ) =>
+                      this.onHandleJob(
+                        this.state.jobDetail.id,
+                        this.applyEndpoint,
+                        messageSuccess,
+                        messageError
+                      )
+                    }
                   >
                     <FormattedMessage id="Apply" />
                   </button>
@@ -309,11 +191,19 @@ class DetailJobPage extends Component {
                   this.state.jobDetail.is_bookmark === 0 && (
                     <button
                       className="btn btn-info btn-md full-width"
-                      onClick={this.markdownJob.bind(
-                        this,
-                        this.state.jobDetail.id
-                      )}
+                      onClick={(
+                        messageSuccess = "Save successful",
+                        messageError = "Saved"
+                      ) =>
+                        this.onHandleJob(
+                          this.state.jobDetail.id,
+                          this.markdownEndpoint,
+                          messageSuccess,
+                          messageError
+                        )
+                      }
                     >
+                      >
                       <FaBookmark />
                       <FormattedMessage id="Markdown job" />
                     </button>
@@ -360,7 +250,9 @@ class DetailJobPage extends Component {
                           <strong className="d-block">
                             <FormattedMessage id="Start time" />
                           </strong>
-                          {this.state.jobDetail.start_time}
+                          {moment(new Date(this.state.jobDetail.start_time))
+                            .lang("vi")
+                            .format("LLL")}
                         </div>
                       </div>
                     </li>
@@ -373,7 +265,9 @@ class DetailJobPage extends Component {
                           <strong className="d-block">
                             <FormattedMessage id="End time" />
                           </strong>
-                          {this.state.jobDetail.end_time}
+                          {moment(new Date(this.state.jobDetail.end_time))
+                            .lang("vi")
+                            .format("LLL")}
                         </div>
                       </div>
                     </li>

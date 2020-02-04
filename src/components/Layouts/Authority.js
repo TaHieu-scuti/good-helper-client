@@ -10,7 +10,6 @@ class Authority extends Component {
       async config => {
         const is_request = true;
         this.props.isRequest(is_request);
-        this.props.raiseError("");
 
         return config;
       },
@@ -62,7 +61,6 @@ const mapStateToProps = (stateStore, ownProps) => {
 const mapDispatchToProps = dispatch => {
   return {
     isRequest: is_request => dispatch(isRequest(is_request)),
-    raiseError: () => dispatch(raiseError(""))
   };
 };
 

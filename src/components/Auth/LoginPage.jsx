@@ -65,7 +65,7 @@ class LoginPage extends Component {
                             style={{ textAlign: "center" }}
                             variant="danger"
                           >
-                            <FormattedMessage id={this.props.error_login} />
+                            <FormattedMessage id={this.props.is_error ? this.props.error_login : 'Some default message' }/>
                           </Alert>
                         </div>
                         <div className="form-group css">
@@ -171,12 +171,10 @@ const mapDispatchToProps = dispatch => {
           )
         })
         .catch(error => {
-          console.log(error.response);
-          
           if (error.response && error.response.status == 422) {
             dispatch(raiseError(error.response.data.message.login));
           } else {
-            // dispatch(userCheckotp(error.response.data.response));
+            dispatch(userCheckotp(error.response.data.response));
             component.props.history.push("/again/checkotp");
           }
           dispatch(isRequest(false))

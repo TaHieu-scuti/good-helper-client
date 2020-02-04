@@ -1,21 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {
-  isRequest,
-  raiseError
-} from "../../lib/redux/actions";
+import { isRequest, raiseError } from "../../lib/redux/actions";
 
 class Authority extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
     this.props.http.interceptors.request.use(
       async config => {
-
         const is_request = true;
         this.props.isRequest(is_request);
-        this.props.raiseError('')
+        this.props.raiseError("");
 
         return config;
       },
@@ -40,13 +35,13 @@ class Authority extends Component {
     return (
       <div>
         {this.props.is_request && (
-          <div class="loading">
-            <div class="sk-wave">
-              <div class="sk-wave-rect"></div>
-              <div class="sk-wave-rect"></div>
-              <div class="sk-wave-rect"></div>
-              <div class="sk-wave-rect"></div>
-              <div class="sk-wave-rect"></div>
+          <div className="loading">
+            <div className="sk-wave">
+              <div className="sk-wave-rect"></div>
+              <div className="sk-wave-rect"></div>
+              <div className="sk-wave-rect"></div>
+              <div className="sk-wave-rect"></div>
+              <div className="sk-wave-rect"></div>
             </div>
           </div>
         )}
@@ -59,7 +54,7 @@ class Authority extends Component {
 const mapStateToProps = (stateStore, ownProps) => {
   let newState = Object.assign({}, ownProps);
   newState.http = stateStore.http;
-  newState.is_request = stateStore.is_requesting
+  newState.is_request = stateStore.is_requesting;
 
   return newState;
 };
@@ -67,7 +62,7 @@ const mapStateToProps = (stateStore, ownProps) => {
 const mapDispatchToProps = dispatch => {
   return {
     isRequest: is_request => dispatch(isRequest(is_request)),
-    raiseError: () => dispatch(raiseError(''))
+    raiseError: () => dispatch(raiseError(""))
   };
 };
 

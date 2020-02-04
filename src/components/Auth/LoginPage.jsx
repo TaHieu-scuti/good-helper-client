@@ -9,7 +9,7 @@ import {
   updateMe,
   updateIdentity,
   userCheckotp,
-  loginError
+  isRequest
 } from "../../lib/redux/actions";
 import Authenticate from "./Authenticate";
 import { toast } from "react-toastify";
@@ -65,7 +65,13 @@ class LoginPage extends Component {
                             style={{ textAlign: "center" }}
                             variant="danger"
                           >
-                            <FormattedMessage id={this.props.error_login} />
+                            <FormattedMessage
+                              id={
+                                this.props.is_error
+                                  ? this.props.error_login
+                                  : "Some default message"
+                              }
+                            />
                           </Alert>
                         </div>
                         <div className="form-group css">
@@ -135,9 +141,9 @@ class LoginPage extends Component {
 
 const mapStateToProps = (stateStore, ownProps) => {
   let newState = Object.assign({}, ownProps);
-  newState.error_login = stateStore.error_login;
+  newState.error_login = stateStore.error_descriptions;
   newState.http = stateStore.http;
-  newState.is_error = stateStore.error_login.length > 0;
+  newState.is_error = stateStore.error_descriptions.length > 0;
   return newState;
 };
 
@@ -168,15 +174,16 @@ const mapDispatchToProps = dispatch => {
             {
               displayDuration: 3000
             }
-          )
+          );
         })
         .catch(error => {
-          if (error.response.status == 422) {
-            dispatch(loginError(error.response.data.message.login));
+          if (error.response && error.response.status == 422) {
+            dispatch(raiseError(error.response.data.message.login));
           } else {
-            dispatch(userCheckotp(error.response.data.response));
+            dispatch(userCheckotp(component.state.email));
             component.props.history.push("/again/checkotp");
           }
+          dispatch(isRequest(false));
         });
     }
   };

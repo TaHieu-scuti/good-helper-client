@@ -28,7 +28,7 @@ class CheckOTPAgain extends Component {
         url: "auth/verified",
         method: "POST",
         data: {
-          user_id: this.props.user.id,
+          email: this.props.email,
           request_id: this.state.request_id
         }
       })
@@ -46,7 +46,7 @@ class CheckOTPAgain extends Component {
       url: "auth/send/again",
       method: "POST",
       data: {
-        user_id: this.props.user.id
+        email: this.props.email
       }
     });
   }
@@ -66,8 +66,13 @@ class CheckOTPAgain extends Component {
                           <label>
                             <FormattedMessage id="Enter the OTP code" />{" "}
                             <span className="text-danger">*</span>
-                            <br/>
-                            <span className="text-danger"  style={{ textAlign: "center" }}><FormattedMessage id="Message will be sent to you in 5 minutes, you can receive calls or messages" /></span>
+                            <br />
+                            <span
+                              className="text-danger"
+                              style={{ textAlign: "center" }}
+                            >
+                              <FormattedMessage id="Message will be sent to you in 5 minutes, you can receive calls or messages" />
+                            </span>
                           </label>
                           <div className="input-with-icon">
                             <input
@@ -121,7 +126,7 @@ const mapStateToProps = (stateStore, ownProps) => {
   let newState = Object.assign({}, ownProps);
 
   newState.http = stateStore.http;
-  newState.user = stateStore.userCheckotp;
+  newState.email = stateStore.userCheckotp;
   newState.is_error = stateStore.error_descriptions.length > 0;
   newState.error_description = stateStore.error_descriptions;
 

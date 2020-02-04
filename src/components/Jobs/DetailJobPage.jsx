@@ -18,23 +18,25 @@ import { updateJob } from "../../lib/redux/actions";
 import Interweave from "interweave";
 import { toast } from "react-toastify";
 import moment from "moment";
-import 'moment/locale/vi'
-moment.locale('vi')
+import "moment/locale/vi";
+moment.locale("vi");
 
 class DetailJobPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       jobDetail: {
-        detail: '',
-        price: '',
-        start_time: '',
-        end_time: '',
-        gender: '',
-        amount_member: '',
-        phone_number: '',
-        location: '',
-        email: ''
+        detail: "",
+        price: "",
+        start_time: "",
+        end_time: "",
+        gender: "",
+        amount_member: "",
+        phone_number: "",
+        location: "",
+        email: "",
+        is_apply: "",
+        is_bookmark: ""
       }
     };
   }
@@ -49,18 +51,26 @@ class DetailJobPage extends Component {
         }
       })
       .then(res => {
-        this.setState({ 
-          jobDetail:{
+        this.setState({
+          jobDetail: {
+            id: res.data.response.id,
             detail: res.data.response.detail,
             price: res.data.response.price,
-            start_time: moment(new Date(res.data.response.start_time)).lang('vi').format('LLL'),
-            end_time: moment(new Date(res.data.response.end_time)).format('LLL'),
+            start_time: moment(new Date(res.data.response.start_time))
+              .lang("vi")
+              .format("LLL"),
+            end_time: moment(new Date(res.data.response.end_time)).format(
+              "LLL"
+            ),
             gender: res.data.response.gender,
             amount_member: res.data.response.amount_member,
             phone_number: res.data.response.phone_number,
             location: res.data.response.location,
-            email: res.data.response.email
-          }  });
+            email: res.data.response.email,
+            is_apply: res.data.response.is_apply,
+            is_bookmark: res.data.response.is_bookmark
+          }
+        });
         this.props.updateJob({
           title: res.data.response.title,
           category: res.data.response.category,
@@ -90,7 +100,7 @@ class DetailJobPage extends Component {
     }
 
     if (this.props.me.role === 2) {
-     this.props
+      this.props
         .http({
           url: "/auth/post/apply",
           method: "POST",
@@ -99,8 +109,7 @@ class DetailJobPage extends Component {
           }
         })
         .then(res => {
-          this.props
-            .http({
+          this.props.http({
               url: "auth/detail/post",
               method: "POST",
               data: {
@@ -108,7 +117,26 @@ class DetailJobPage extends Component {
               }
             })
             .then(res => {
-              this.setState({ jobDetail: res.data.response });
+              this.setState({
+                jobDetail: {
+                  id: res.data.response.id,
+                  detail: res.data.response.detail,
+                  price: res.data.response.price,
+                  start_time: moment(new Date(res.data.response.start_time))
+                    .lang("vi")
+                    .format("LLL"),
+                  end_time: moment(new Date(res.data.response.end_time)).format(
+                    "LLL"
+                  ),
+                  gender: res.data.response.gender,
+                  amount_member: res.data.response.amount_member,
+                  phone_number: res.data.response.phone_number,
+                  location: res.data.response.location,
+                  email: res.data.response.email,
+                  is_apply: res.data.response.is_apply,
+                  is_bookmark: res.data.response.is_bookmark
+                }
+              });
               this.props.updateJob({
                 title: res.data.response.title,
                 category: res.data.response.category,
@@ -178,7 +206,26 @@ class DetailJobPage extends Component {
               }
             })
             .then(res => {
-              this.setState({ jobDetail: res.data.response });
+              this.setState({
+                jobDetail: {
+                  id: res.data.response.id,
+                  detail: res.data.response.detail,
+                  price: res.data.response.price,
+                  start_time: moment(new Date(res.data.response.start_time))
+                    .lang("vi")
+                    .format("LLL"),
+                  end_time: moment(new Date(res.data.response.end_time)).format(
+                    "LLL"
+                  ),
+                  gender: res.data.response.gender,
+                  amount_member: res.data.response.amount_member,
+                  phone_number: res.data.response.phone_number,
+                  location: res.data.response.location,
+                  email: res.data.response.email,
+                  is_apply: res.data.response.is_apply,
+                  is_bookmark: res.data.response.is_bookmark
+                }
+              });
               this.props.updateJob({
                 title: res.data.response.title,
                 category: res.data.response.category,
@@ -229,64 +276,57 @@ class DetailJobPage extends Component {
                   <Interweave content={this.state.jobDetail.detail} />
                 </div>
               </div>
-              {!this.props.me ||
-                (this.props.me &&
-                  this.props.me.role !== 1 &&
-                  this.state.jobDetail.is_apply === 0 && (
-                    <button
-                      href="javascript:void(0)"
-                      data-toggle="modal"
-                      data-target="#apply"
-                      className="btn btn-info mb-2 mb-5"
-                      style={{ marginLeft: "42%" }}
-                      onClick={this.applyJob.bind(
-                        this,
-                        this.state.jobDetail.id
-                      )}
-                    >
-                      <FormattedMessage id="Apply" />
-                    </button>
-                  ))}
-              {!this.props.me ||
-                (this.props.me &&
-                  this.props.me.role !== 1 &&
-                  this.state.jobDetail.is_apply === 1 && (
-                    <p
-                      className="btn btn-info mb-2 mb-5 nut"
-                      style={{ marginLeft: "42%" }}
-                    >
-                      <FormattedMessage id="Applied" />
-                    </p>
-                  ))}
+              {this.props.me &&
+                this.props.me.role !== 1 &&
+                this.state.jobDetail.is_apply === 0 && (
+                  <button
+                    href="javascript:void(0)"
+                    data-toggle="modal"
+                    data-target="#apply"
+                    className="btn btn-info mb-2 mb-5"
+                    style={{ marginLeft: "42%" }}
+                    onClick={this.applyJob.bind(this, this.state.jobDetail.id)}
+                  >
+                    <FormattedMessage id="Apply" />
+                  </button>
+                )}
+              {this.props.me &&
+                this.props.me.role !== 1 &&
+                this.state.jobDetail.is_apply === 1 && (
+                  <p
+                    className="btn btn-info mb-2 mb-5 nut"
+                    style={{ marginLeft: "42%" }}
+                  >
+                    <FormattedMessage id="Applied" />
+                  </p>
+                )}
             </div>
             {/* Sidebar Start */}
             <div className="col-md-4 col-sm-12">
               <div className="offer-btn-wrap mb-4">
-                {!this.props.me ||
-                  (this.props.me &&
-                    this.props.me.role !== 1 &&
-                    this.state.jobDetail.is_bookmark === 0 && (
-                      <button
-                        className="btn btn-info btn-md full-width"
-                        onClick={this.markdownJob.bind(
-                          this,
-                          this.state.jobDetail.id
-                        )}
-                      >
-                        <FaBookmark />
-                        <FormattedMessage id="Markdown job" />
-                      </button>
-                    ))}
+                {this.props.me &&
+                  this.props.me.role !== 1 &&
+                  this.state.jobDetail.is_bookmark === 0 && (
+                    <button
+                      className="btn btn-info btn-md full-width"
+                      onClick={this.markdownJob.bind(
+                        this,
+                        this.state.jobDetail.id
+                      )}
+                    >
+                      <FaBookmark />
+                      <FormattedMessage id="Markdown job" />
+                    </button>
+                  )}
 
-                {!this.props.me ||
-                  (this.props.me &&
-                    this.props.me.role !== 1 &&
-                    this.state.jobDetail.is_bookmark === 1 && (
-                      <button className="btn btn-info btn-md full-width">
-                        <FaBookmark />
-                        <FormattedMessage id="Saved" />
-                      </button>
-                    ))}
+                {this.props.me &&
+                  this.props.me.role !== 1 &&
+                  this.state.jobDetail.is_bookmark === 1 && (
+                    <button className="btn btn-info btn-md full-width">
+                      <FaBookmark />
+                      <FormattedMessage id="Saved" />
+                    </button>
+                  )}
               </div>
               {/* Job Overview */}
               <div className="tr-single-box">
@@ -390,9 +430,18 @@ class DetailJobPage extends Component {
                         <div className="icon-box-round">
                           <FaPhone />
                         </div>
-                        <div className="icon-box-text">
-                          {this.state.jobDetail.phone_number}
-                        </div>
+                        {this.props.me &&
+                        this.props.me.role !== 1 &&
+                        this.state.jobDetail.is_apply === 1 ? (
+                          <div className="icon-box-text">
+                            {this.state.jobDetail.phone_number}
+                          </div>
+                        ) : (
+                          <span className="text-danger">
+                            {" "}
+                            <FormattedMessage id="Apply to contact" />
+                          </span>
+                        )}
                       </div>
                     </li>
                     <li>
@@ -400,9 +449,18 @@ class DetailJobPage extends Component {
                         <div className="icon-box-round">
                           <FaEnvelope />
                         </div>
-                        <div className="icon-box-text">
-                          {this.state.jobDetail.email}
-                        </div>
+                        {this.props.me &&
+                        this.props.me.role !== 1 &&
+                        this.state.jobDetail.is_apply === 1 ? (
+                          <div className="icon-box-text">
+                            {this.state.jobDetail.email}
+                          </div>
+                        ) : (
+                          <span className="text-danger">
+                            {" "}
+                            <FormattedMessage id="Apply to contact" />
+                          </span>
+                        )}
                       </div>
                     </li>
                   </ul>

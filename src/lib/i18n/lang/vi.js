@@ -171,6 +171,7 @@ export default {
 	'Message will be sent to you in 5 minutes, you can receive calls or messages': 'Tin nhắn sẽ gửi tới bạn trong vòng 5 phút , bạn có thể nhận được cuộc gọi hoặc tin nhắn',
 	'Be cancel': 'Bị từ chối',
 	'Doing': 'Đang làm',
-	'Finish': 'Đã hoàn thành'
+	'Finish': 'Đã hoàn thành',
+	'Apply to contact': 'Hãy ứng tuyển để liên hệ'
 };
  

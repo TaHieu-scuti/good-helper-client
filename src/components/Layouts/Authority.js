@@ -1,31 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
-  removeJob,
-  raiseError,
-  updateJob,
-  removeError
+  isRequest,
+  raiseError
 } from "../../lib/redux/actions";
 
 class Authority extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      job: {
-        title: "",
-        category: "",
-        location: "",
-        img: ""
-      },
-      is_loading: false
     };
     this.props.http.interceptors.request.use(
       async config => {
-        this.props.removeJob();
-        const job = this.state.job;
-        this.props.updateJob(job);
-        this.props.removeError();
-        this.setState({ is_loading: true });
+
+        const is_request = true;
+        this.props.isRequest(is_request);
+        this.props.raiseError('')
 
         return config;
       },
@@ -35,12 +25,12 @@ class Authority extends Component {
     );
     this.props.http.interceptors.response.use(
       async response => {
-        this.setState({ is_loading: false });
+        const is_request = false;
+        this.props.isRequest(is_request);
 
         return response;
       },
       function(error) {
-        this.setState({ is_loading: false });
         return Promise.reject(error);
       }
     );
@@ -49,7 +39,7 @@ class Authority extends Component {
   render() {
     return (
       <div>
-        {this.state.is_loading && (
+        {this.props.is_request && (
           <div class="loading">
             <div class="sk-wave">
               <div class="sk-wave-rect"></div>
@@ -69,15 +59,15 @@ class Authority extends Component {
 const mapStateToProps = (stateStore, ownProps) => {
   let newState = Object.assign({}, ownProps);
   newState.http = stateStore.http;
+  newState.is_request = stateStore.is_requesting
 
   return newState;
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    removeJob: () => dispatch(removeJob()),
-    updateJob: job => dispatch(updateJob(job)),
-    removeError: () => dispatch(removeError(""))
+    isRequest: is_request => dispatch(isRequest(is_request)),
+    raiseError: () => dispatch(raiseError(''))
   };
 };
 

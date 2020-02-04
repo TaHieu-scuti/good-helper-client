@@ -9,6 +9,7 @@ import {
   updateMe,
   updateIdentity,
   userCheckotp,
+  isRequest
 } from "../../lib/redux/actions";
 import Authenticate from "./Authenticate";
 import { toast } from "react-toastify";
@@ -170,12 +171,15 @@ const mapDispatchToProps = dispatch => {
           )
         })
         .catch(error => {
-          if (error.response.status == 422) {
+          console.log(error.response);
+          
+          if (error.response && error.response.status == 422) {
             dispatch(raiseError(error.response.data.message.login));
           } else {
-            dispatch(userCheckotp(error.response.data.response));
+            // dispatch(userCheckotp(error.response.data.response));
             component.props.history.push("/again/checkotp");
           }
+          dispatch(isRequest(false))
         });
     }
   };

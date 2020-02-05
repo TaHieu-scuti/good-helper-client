@@ -55,9 +55,7 @@ class DetailJobPage extends Component {
       });
   }
 
-  onHandleJob(post_id, path, messageSuccess, messageError) {
-    console.log(messageSuccess);
-    
+  onHandleJob(e, post_id, path, messageSuccess, messageError) {
     if (!this.props.me) {
       this.props.history.push("/login");
       return;
@@ -158,10 +156,12 @@ class DetailJobPage extends Component {
                     className="btn btn-info mb-2 mb-5"
                     style={{ marginLeft: "42%" }}
                     onClick={(
-                      messageSuccess = 'Apply successfully',
-                      messageError = 'Applied'
+                      event,
+                      messageSuccess = "Apply successfully",
+                      messageError = "Applied"
                     ) =>
                       this.onHandleJob(
+                        event,
                         this.state.jobDetail.id,
                         this.applyEndpoint,
                         messageSuccess,
@@ -192,10 +192,12 @@ class DetailJobPage extends Component {
                     <button
                       className="btn btn-info btn-md full-width"
                       onClick={(
+                        event,
                         messageSuccess = "Save successful",
                         messageError = "Saved"
                       ) =>
                         this.onHandleJob(
+                          event,
                           this.state.jobDetail.id,
                           this.markdownEndpoint,
                           messageSuccess,
@@ -203,7 +205,6 @@ class DetailJobPage extends Component {
                         )
                       }
                     >
-                      >
                       <FaBookmark />
                       <FormattedMessage id="Markdown job" />
                     </button>

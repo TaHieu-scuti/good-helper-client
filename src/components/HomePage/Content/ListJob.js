@@ -131,26 +131,35 @@ class AutoPlayCarousel extends React.Component {
             </div>
             <div className="job-grid-footer">
               <h6 className="job-price">
-                <FormattedMessage id="Salary" />  :  {" "}
+                <FormattedMessage id="Salary" /> :{" "}
                 <FormattedNumber value={item.price} /> đ
               </h6>
               {!this.props.me ||
-                (this.props.me && this.props.me.role !== 1 && item.is_apply === 0 && (
-                  <button
-                    className="btn btn-outline-info btn-rounded"
-                    onClick={this.applyJob.bind(this, item.id)}
-                  >
-                    <FormattedMessage id="Apply" />
+                (this.props.me &&
+                  this.props.me.role !== 1 &&
+                  item.is_apply === 0 && (
+                    <button
+                      className="btn btn-outline-info btn-rounded"
+                      onClick={this.applyJob.bind(this, item.id)}
+                    >
+                      <FormattedMessage id="Apply" />
+                    </button>
+                  ))}
+              {!this.props.me ||
+                (this.props.me &&
+                  this.props.me.role !== 1 &&
+                  item.is_apply === 1 && (
+                    <button className="btn btn-outline-info btn-rounded nut">
+                      <FormattedMessage id="Applied" />
+                    </button>
+                  ))}
+              {!this.props.me || (this.props.me && this.props.me.role === 1) ? (
+                <Link to={"job/detail/" + item.id}>
+                  <button className="btn btn-outline-info btn-rounded">
+                    <FormattedMessage id="Detail" />
                   </button>
-                ))}
-                {!this.props.me ||
-                (this.props.me && this.props.me.role !== 1 && item.is_apply === 1 && (
-                  <button
-                    className="btn btn-outline-info btn-rounded nut"
-                  >
-                    <FormattedMessage id="Applied" />
-                  </button>
-                ))}
+                </Link>
+              ) : null}
             </div>
           </div>
         </div>

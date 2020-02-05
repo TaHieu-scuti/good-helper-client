@@ -1,22 +1,23 @@
-import React, { Component } from 'react';
-import { createStore, applyMiddleware, compose } from 'redux';
-import { Provider } from 'react-redux';
-import storage from 'redux-persist/es/storage';
-import {persistReducer, persistStore} from 'redux-persist';
-import {PersistGate} from 'redux-persist/integration/react';
-import { setHttpClient, setTokenOnHttpClient } from '../../lib/redux/actions';
-import reducers from '../../lib/redux/reducers';
-import axios from 'axios';
+import React, { Component } from "react";
+import { createStore, applyMiddleware, compose } from "redux";
+import { Provider } from "react-redux";
+import storage from "redux-persist/es/storage";
+import { persistReducer, persistStore } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
+import { setHttpClient, setTokenOnHttpClient } from "../../lib/redux/actions";
+import reducers from "../../lib/redux/reducers";
+import axios from "axios";
 
 class Store extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+    const composeEnhancer =
+      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
     this.store = createStore(
-      persistReducer({key: 'persistedStore', storage}, reducers),
-      composeEnhancer(applyMiddleware(this.subscriber)),
+      persistReducer({ key: "persistedStore", storage }, reducers),
+      composeEnhancer(applyMiddleware(this.subscriber))
     );
     /**
      * Instance of Axios
@@ -24,7 +25,7 @@ class Store extends Component {
      * @type {AxiosInstance}
      */
     const http = axios.create({
-      baseURL: 'http://3.15.37.125/api',
+      baseURL: "http://3.15.37.125/api"
     });
 
     this.store.dispatch(setHttpClient(http));
@@ -42,7 +43,7 @@ class Store extends Component {
        * Here is before dispatch.
        */
       const returnValue = next(action);
-      
+
       return returnValue;
     };
   }
@@ -54,8 +55,8 @@ class Store extends Component {
           {this.props.children}
         </PersistGate>
       </Provider>
-    )
+    );
   }
 }
 
-export default Store
+export default Store;

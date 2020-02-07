@@ -40,7 +40,7 @@ class Sidebar extends Component {
                   </Link>
                 </li>
             ) : null}
-            {this.props.user.role == 1 ? (
+            {this.props.user.role === 1 ? (
               <ul className="nav dashboard-verticle-nav">
                 <li className="nav-item">
                   <Link to="/add/post/needer" className="nav-link active">

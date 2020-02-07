@@ -6,7 +6,7 @@ import { FaEdit } from "react-icons/fa";
 import { FormattedMessage, injectIntl } from "react-intl";
 import { Editor } from "@tinymce/tinymce-react";
 import Datetime from "react-datetime";
-import { raiseError } from "../../lib/redux/actions";
+import { raiseError,isRequest } from "../../lib/redux/actions";
 import moment from "moment";
 import { toast } from "react-toastify";
 import CurrencyFormat from "react-currency-format";
@@ -499,6 +499,7 @@ const mapDispatchToProps = dispatch => {
       })
       .catch(error => {
         dispatch(raiseError(error.response.data.errors));
+        dispatch(isRequest(false))
       });
     }
   };

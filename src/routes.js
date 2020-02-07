@@ -21,6 +21,7 @@ import SearchAdvancedPage from './components/Jobs/SearchAdvancedPage'
 import ListJobBeCanceled from './components/Helper/ListJobBeCanceled'
 import JobDoing from './components/Helper/JobDoing'
 import HelperDoing from './components/Needer/HelperDoing'
+import DetailHelper from './components/Helper/DetailHelper'
 
 const routes = [
   { path: '/home', exact: true, name: 'Home', component: HomePage },
@@ -43,6 +44,7 @@ const routes = [
   { path: '/approve/user/:id', name: 'approveUser', component: ApproveHelper },
   { path: '/advanced/search', name: 'SearchAdvancedPage', component: SearchAdvancedPage },
   { path: '/user/doing/:id', name: 'HelperDoing', component: HelperDoing },
+  { path: '/helper/detail/:id', name: 'DetailHelper', component: DetailHelper },
 ];
 
 export default routes;

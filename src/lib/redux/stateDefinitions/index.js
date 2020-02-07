@@ -15,5 +15,10 @@ export default {
     img: ''
   },
   userCheckotp: null,
-  searchAdvanced:null
+  searchAdvanced:null,
+  detail_helper: {
+    first_name: '',
+    last_name: '',
+    avatar: ''
+  }
 }

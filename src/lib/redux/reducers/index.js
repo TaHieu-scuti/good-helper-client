@@ -11,6 +11,7 @@ import REGISTER from './register';
 import USERCHECKOTP from './userCheckOtp';
 import SEARCH_ADVANCED from './searchAdvanced';
 import IS_REQUEST from './IsRequest';
+import DETAIL_HELPER from './DetailHelper';
 
 const reducers = {
   UPDATE_ME,
@@ -24,7 +25,8 @@ const reducers = {
   REGISTER,
   USERCHECKOTP,
   SEARCH_ADVANCED,
-  IS_REQUEST
+  IS_REQUEST,
+  DETAIL_HELPER
 }
 
 export default (state = initialState, action = {}) => {

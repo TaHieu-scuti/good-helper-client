@@ -12,3 +12,4 @@ export const userCheckotp = createAction('USERCHECKOTP');
 export const removeErrorLogin = createAction('REMOVE_LOGIN_ERROR');
 export const searchAdvanced = createAction('SEARCH_ADVANCED');
 export const isRequest = createAction('IS_REQUEST');
+export const detailHelper = createAction('DETAIL_HELPER');

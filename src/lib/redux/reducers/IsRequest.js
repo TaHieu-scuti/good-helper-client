@@ -8,7 +8,13 @@ export default (state, { payload }) => {
       location: "",
       img: ""
     };
-  }
+    newState.detail_helper = {
+      first_name: '',
+      last_name: '',
+      avatar: ''
+    }
+  };
+  
   newState.is_requesting = payload;
   return newState;
 };

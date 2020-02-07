@@ -172,6 +172,7 @@ export default {
 	'Be cancel': 'Bị từ chối',
 	'Doing': 'Đang làm',
 	'Finish': 'Đã hoàn thành',
-	'Apply to contact': 'Hãy ứng tuyển để liên hệ'
+	'Apply to contact': 'Hãy ứng tuyển để liên hệ',
+	'Helper details': 'Chi tiết người tìm việc'
 };
  

@@ -61,7 +61,7 @@ class Header extends Component {
     );
 
     if (this.props.is_logined) {
-      button = (   
+      button = (
         <nav className="navbar navbar-expand-lg header-nav-bar">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item dropdown">
@@ -107,7 +107,7 @@ class Header extends Component {
     if (this.props.location.pathname == "/checkotp") {
       return null;
     }
-        
+
     return (
       <div>
         <div className="topbar" id="top">
@@ -160,7 +160,8 @@ class Header extends Component {
         >
           {this.props.location.pathname !== "/login" &&
             this.props.location.pathname !== "/register" &&
-            this.props.jobs.title.length === 0 && (
+            this.props.jobs.title.length === 0 &&
+            this.props.detail_helper.first_name.length === 0 && (
               <div className="container">
                 <h2>
                   <FormattedMessage id="Let get best jobs" />
@@ -168,11 +169,38 @@ class Header extends Component {
                 <Search />
               </div>
             )}
-          {this.props.jobs.title.length > 0 &&(
+          {this.props.jobs.title.length > 0 && (
             <div className="container">
               <NameJob detailJob={this.props.jobs} />
             </div>
           )}
+          {this.props.jobs.title.length === 0 &&
+            this.props.detail_helper.first_name.length > 0 && (
+              <div className="container">
+                <div className="container">
+                  <div className="row m-0 align-items-end detail-swap">
+                    <div className="tr-list-wrap namejob">
+                      <div className="tr-list-detail">
+                        <div className="tr-list-thumb">
+                          <img
+                            src={this.props.detail_helper.avatar}
+                            className="ima img-responsive"
+                            alt=""
+                          />
+                        </div>
+                        <div className="tr-list-info">
+                          <h4 className="mb-1">
+                            {this.props.detail_helper.first_name +
+                              this.props.detail_helper.last_name}
+                          </h4>
+                          <h6 className="font-14"></h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
         </div>
       </div>
     );
@@ -185,6 +213,7 @@ const mapStateToProps = (stateStore, ownProps) => {
   newState.me = stateStore.me;
   newState.jobs = stateStore.jobs;
   newState.is_logined = stateStore.me != null;
+  newState.detail_helper = stateStore.detail_helper;
 
   return newState;
 };

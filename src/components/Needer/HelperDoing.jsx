@@ -64,7 +64,10 @@ class HelperDoing extends Component {
           </div>
           <div className="vc-content">
             <h5 className="title">
-              <Link style={{ textDecoration: "none" }}>
+              <Link
+                to={"helper/detail/" + item.id}
+                style={{ textDecoration: "none" }}
+              >
                 {item.first_name} {item.last_name}
               </Link>
               <span className="j-full-time">{item.phone}</span>

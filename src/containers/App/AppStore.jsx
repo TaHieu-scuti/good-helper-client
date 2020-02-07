@@ -25,7 +25,7 @@ class Store extends Component {
      * @type {AxiosInstance}
      */
     const http = axios.create({
-      baseURL: "http://3.15.37.125/api"
+      baseURL: "https://api.nhanviec.vn/api"
     });
 
     this.store.dispatch(setHttpClient(http));

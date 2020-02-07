@@ -3,7 +3,7 @@ import Authenticate from "./Authenticate";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { raiseError } from "../../lib/redux/actions";
+import { raiseError, isRequest } from "../../lib/redux/actions";
 class CheckOTP extends Component {
   constructor(props) {
     super(props);
@@ -37,6 +37,7 @@ class CheckOTP extends Component {
       .catch(error => {
         const message = error.response.data.message;
         this.props.raiseError(message);
+        this.props.isRequest(false);
       });
   }
 
@@ -131,7 +132,8 @@ const mapStateToProps = (stateStore, ownProps) => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    raiseError: message => dispatch(raiseError(message))
+    raiseError: message => dispatch(raiseError(message)),
+    isRequest: () => dispatch(isRequest(false))
   };
 };
 

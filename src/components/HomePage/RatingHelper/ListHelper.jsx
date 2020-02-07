@@ -1,5 +1,6 @@
-import React from 'react';
+import React from "react";
 import { IoMdCheckmark } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const ListHelper = props => {
   return (
@@ -19,9 +20,9 @@ const ListHelper = props => {
                     <IoMdCheckmark />
                   </div>
                 </div>
-                <span className="can-post">
-                  {item.user_name}
-                </span>
+                <h4 className="jbc-name" style={{ fontSize: "16px" }}>
+                  <Link to={"helper/detail/" + item.id}>{item.user_name}</Link>
+                </h4>
                 <div className="best-candidate-info">
                   <div className="year-exp">
                     <span>
